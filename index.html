@@ -27,7 +27,37 @@
         }
         return gk_fileData[filename] || "";
         }
-        </script><!DOCTYPE html>
+        </script><script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row =>
+                    row.some(cell => cell !== '' && cell !== null && cell !== undefined)
+                );
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+</script>
+<!DOCTYPE html>
 <html lang="yue-HK">
 <head>
     <meta charset="UTF-8">
@@ -78,6 +108,18 @@
         body { display: flex; flex-direction: column; min-height: 100vh; }
         main { flex: 1; }
         footer { flex-shrink: 0; }
+        /* Custom Dropdown Styling */
+        .language-dropdown {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19 9l-7 7-7-7' /%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0.75rem center;
+            background-size: 1em;
+            padding-right: 2rem;
+        }
+        .language-dropdown:focus {
+            outline: none;
+        }
     </style>
 </head>
 <body class="bg-gradient-to-b from-blue-50 to-white text-gray-800">
@@ -89,11 +131,13 @@
             </button>
             <img src="lyreco-logo.png" alt="Lyreco Hong Kong Logo" class="h-10">
         </div>
-        <div class="flex space-x-2">
-            <button id="lang-en" class="lang-btn px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800 hover:bg-blue-200 transition">English</button>
-            <button id="lang-zh-TW" class="lang-btn px-3 py-1 rounded-full text-sm font-medium bg-gray-100 text-gray-800 hover:bg-gray-200 transition">繁體中文</button>
-            <button id="lang-zh-CN" class="lang-btn px-3 py-1 rounded-full text-sm font-medium bg-gray-100 text-gray-800 hover:bg-gray-200 transition">简体中文</button>
-            <button id="lang-yue-HK" class="lang-btn px-3 py-1 rounded-full text-sm font-medium bg-gray-100 text-gray-800 hover:bg-gray-200 transition">廣東話 (香港)</button>
+        <div class="flex items-center">
+            <select id="language-selector" class="language-dropdown px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800 hover:bg-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-500 transition" aria-label="Select Language">
+                <option value="en">English</option>
+                <option value="zh-TW">繁體中文</option>
+                <option value="zh-CN">简体中文</option>
+                <option value="yue-HK" selected>廣東話 (香港)</option>
+            </select>
         </div>
     </header>
 
@@ -186,7 +230,7 @@
                     <p id="cheque-address" class="text-gray-600 mb-2"></p>
                     <p id="cheque-note" class="text-gray-600 mb-4"></p>
                     <div class="text-center">
-                        <img src="cheque-sample.png" alt="Sample Cheque for Lyreco Hong Kong Payment" class="w-64 h-auto mx-auto mb-4">
+                        <img src="cheque-sample.png" alt="Sample Cheque for Lyreco Hong Kong Payment - Payable to Lyreco (Hong Kong) Company Limited" class="w-64 h-auto mx-auto mb-4">
                         <p class="text-gray-600 italic mb-4">Sample cheque for illustrative purposes only</p>
                         <p>
                             <a id="download-pdf-cheque" href="https://www.lyreco.com/group/hongkong/system/files/media-files/2021-04/Payment%20Methods.pdf" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline" title="Download Lyreco Hong Kong Payment Methods PDF"></a>
@@ -295,12 +339,12 @@
                 <div class="flex flex-col sm:flex-row justify-center gap-6">
                     <div class="flex-1">
                         <p class="font-medium">Charles Chan</p>
-                        <p><i class="fas fa-envelope mr-2"></i><a href="mailto:charles.chan@lyreco.com" class="text-blue-200 hover:underline">charles.chan@lyreco.com</a></p>
+                        <p><i class="fas fa-envelope mr-2"></i><a href="/cdn-cgi/l/email-protection#bf9c979e8d939a8cd19c979e91bf93868d9a9c90d19c9092" class="text-blue-200 hover:underline"><span class="__cf_email__" data-cfemail="a0c3c8c1d2ccc5d38ec3c8c1cee0ccd9d2c5c3cf8ec3cfcd">[email&#160;protected]</span></a></p>
                         <p><i class="fas fa-phone mr-2"></i><a href="tel:+85267779473" class="text-blue-200 hover:underline">+852 6777 9473</a></p>
                     </div>
                     <div class="flex-1">
                         <p class="font-medium">Michael Koo</p>
-                        <p><i class="fas fa-envelope mr-2"></i><a href="mailto:michael.koo@lyreco.com" class="text-blue-200 hover:underline">michael.koo@lyreco.com</a></p>
+                        <p><i class="fas fa-envelope mr-2"></i><a href="/cdn-cgi/l/email-protection#7a171319121b1f16541115153a1603081f191554191517" class="text-blue-200 hover:underline"><span class="__cf_email__" data-cfemail="eac7c3c9c2cbcfc684c1c5c5eac6d3d8cfc9c584c9c5c7">[email&#160;protected]</span></a></p>
                         <p><i class="fas fa-phone mr-2"></i><a href="tel:+85267770676" class="text-blue-200 hover:underline">+852 6777 0676</a></p>
                     </div>
                 </div>
@@ -308,6 +352,7 @@
         </div>
     </footer>
 
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
     <script>
         const translations = {
             "en": {
@@ -556,6 +601,7 @@
             }
         };
 
+        // Language Selection
         function setLanguage(lang) {
             const texts = translations[lang];
             Object.keys(texts).forEach(id => {
@@ -565,22 +611,18 @@
                     if (id.includes('title')) element.classList.add('fade-in');
                 }
             });
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.remove('bg-blue-100', 'text-blue-800');
-                btn.classList.add('bg-gray-100', 'text-gray-800');
-            });
-            document.getElementById(`lang-${lang}`).classList.remove('bg-gray-100', 'text-gray-800');
-            document.getElementById(`lang-${lang}`).classList.add('bg-blue-100', 'text-blue-800');
-
+            // Update dropdown selection
+            document.getElementById('language-selector').value = lang;
             // Update HTML lang attribute for SEO
             document.documentElement.lang = lang === 'en' ? 'en' : lang === 'zh-TW' ? 'zh-Hant-HK' : lang === 'zh-CN' ? 'zh-Hans-CN' : 'yue-HK';
         }
 
-        document.getElementById('lang-en').addEventListener('click', () => setLanguage('en'));
-        document.getElementById('lang-zh-TW').addEventListener('click', () => setLanguage('zh-TW'));
-        document.getElementById('lang-zh-CN').addEventListener('click', () => setLanguage('zh-CN'));
-        document.getElementById('lang-yue-HK').addEventListener('click', () => setLanguage('yue-HK'));
+        // Event Listener for Dropdown
+        document.getElementById('language-selector').addEventListener('change', (e) => {
+            setLanguage(e.target.value);
+        });
 
+        // Set Initial Language
         setLanguage('yue-HK');
 
         // Sidebar Toggle for Mobile
@@ -615,5 +657,6 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
     </script>
+    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9315f4860bec455e',t:'MTc0NDgzMDMzNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsThroughTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
 </body>
 </html>
