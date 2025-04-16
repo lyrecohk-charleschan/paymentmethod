@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Methods - Lyreco</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="bg-white p-8 rounded-lg shadow-lg max-w-4xl w-full">
+        <!-- Header with Lyreco Logo Placeholder -->
+        <div class="text-center mb-6">
+            <img src="lyreco-logo.png" alt="Lyreco Logo" class="h-12 mx-auto mb-4">
+            <h1 class="text-3xl font-bold text-gray-800">Payment Methods</h1>
+            <p class="text-gray-600 mt-2">You may settle your account by one of the flexible and convenient methods listed below.</p>
+        </div>
+
+        <!-- PayMe Section -->
+        <div class="mb-8 border-l-4 border-red-500 pl-4">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4">PayMe - Scan & Pay (For COD Customers Only)</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <h3 class="text-xl font-medium text-gray-700 mb-2">Step 1: Open PayMe App</h3>
+                    <p class="text-gray-600 mb-2">Open the PayMe app, swipe left to open the scanner, and scan the PayCode below:</p>
+                    <img src="payme-qr-code.png" alt="PayMe QR Code" class="w-40 h-40 mx-auto mt-4 border-2 border-red-500">
+                    <p class="text-gray-600 text-center mt-2 italic">Scan this QR code with PayMe</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-medium text-gray-700 mb-2">Step 2: Enter Amount & Order Number</h3>
+                    <p class="text-gray-600 mb-2">Enter the AMOUNT, then click Next.</p>
+                    <p class="text-gray-600 mb-2">Enter the ORDER NO, then click Pay to proceed with the payment to Lyreco.</p>
+                    <p class="text-gray-600 italic">Example: Order No. XXXXXXXX</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Local CHATS -->
+        <div class="mb-8">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4">Payment by Local CHATS</h2>
+            <p class="text-gray-600 mb-2">The most popular payment method is to process payment via electronic banking system using your office computer.</p>
+            <p class="text-gray-600"><strong>Bank Account:</strong> 004-728325-001 (HSBC)</p>
+            <p class="text-gray-600"><strong>Note:</strong> Please indicate invoice details and your customer account number during the transfer.</p>
+        </div>
+
+        <!-- Autopay (Direct Debit) -->
+        <div class="mb-8">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4">Autopay - Direct Debit</h2>
+            <p class="text-gray-600 mb-2">A time-saving and convenient method to avoid late payments.</p>
+            <p class="text-gray-600 mb-2">Request an authorization form by contacting us at (852) 29462285 or (852) 29462287, or download it from <a href="http://www.lyreco.com.hk/form/autopay.pdf" class="text-blue-600 hover:underline" target="_blank">our website</a>.</p>
+        </div>
+
+        <!-- ATM Payment -->
+        <div class="mb-8">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4">Payment by ATM</h2>
+            <p class="text-gray-600 mb-2">Make your payment at any nearby HSBC ATM machine.</p>
+            <p class="text-gray-600"><strong>Bank Account:</strong> 004-728325-001 (HSBC)</p>
+        </div>
+
+        <!-- Cheque Payment -->
+        <div class="mb-8">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4">Cheque Payment by Mail</h2>
+            <p class="text-gray-600 mb-2">Send a crossed cheque payable to "Lyreco (Hong Kong) Company Limited" to:</p>
+            <p class="text-gray-600">16th Floor, 78 Hung To Road, Kwun Tong, Kowloon, Hong Kong</p>
+            <p class="text-gray-600"><strong>Note:</strong> Do not send cash or issue post-dated cheques.</p>
+        </div>
+
+        <!-- Telegraphic Transfer -->
+        <div class="mb-8">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4">Telegraphic Transfer</h2>
+            <p class="text-gray-600 mb-2">For overseas customers, please transfer to:</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                    <p class="text-gray-600"><strong>Bank Name:</strong></p>
+                    <p class="text-gray-800">The Hongkong and Shanghai Banking Corporation Limited</p>
+                </div>
+                <div>
+                    <p class="text-gray-600"><strong>Bank Address:</strong></p>
+                    <p class="text-gray-800">306-316 King's Road, North Point, Hong Kong</p>
+                </div>
+                <div>
+                    <p class="text-gray-600"><strong>Account Name:</strong></p>
+                    <p class="text-gray-800">Lyreco (Hong Kong) Company Limited</p>
+                </div>
+                <div>
+                    <p class="text-gray-600"><strong>Account No.:</strong></p>
+                    <p class="text-gray-800">004-728325-001 (HKD)</p>
+                </div>
+                <div>
+                    <p class="text-gray-600"><strong>Bank Code:</strong></p>
+                    <p class="text-gray-800">004</p>
+                </div>
+                <div>
+                    <p class="text-gray-600"><strong>SWIFT Code:</strong></p>
+                    <p class="text-gray-800">HSBCHKHHHKH</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- FPS -->
+        <div class="mb-8">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4">FPS</h2>
+            <p class="text-gray-600"><strong>FPS ID:</strong> 112461512 (HKD)</p>
+        </div>
+
+        <!-- Other Payment Options -->
+        <div class="mb-8">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4">Other Payment Options</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                    <p class="text-gray-600"><strong>Cheque:</strong></p>
+                    <p class="text-gray-800">Send a crossed cheque as described above.</p>
+                </div>
+                <div>
+                    <p class="text-gray-600"><strong>Bank Transfer:</strong></p>
+                    <p class="text-gray-800">Use Local CHATS, ATM, or Telegraphic Transfer as described above.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Payment Details Submission -->
+        <div class="mb-8">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4">Submitting Payment Details</h2>
+            <p class="text-gray-600 mb-2">To ensure accurate and up-to-date recording, please send your payment details and customer account number via:</p>
+            <ul class="list-disc pl-6 text-gray-600">
+                <li>Mail: Lyreco (Hong Kong) Co. Ltd, 16th Floor, 78 Hung To Road, Kwun Tong, Kowloon</li>
+                <li>Fax: (852) 26677910</li>
+                <li>Email: <a href="mailto:ar.hk@lyreco.com" class="text-blue-600 hover:underline">ar.hk@lyreco.com</a></li>
+            </ul>
+        </div>
+
+        <!-- Contact Information -->
+        <div class="text-center">
+            <p class="text-gray-600 mb-2">For any questions, contact us at (852) 29462285 or (852) 29462287.</p>
+            <p class="text-gray-600">Thank you for your cooperation!</p>
+        </div>
+
+        <!-- Footer -->
+        <footer class="mt-8 text-center text-gray-600 border-t pt-4">
+            <p>Tel: 2946 2233 | W: <a href="https://www.lyreco.com.hk" class="text-blue-600 hover:underline" target="_blank">www.lyreco.com.hk</a></p>
+        </footer>
+    </div>
+</body>
+</html>
