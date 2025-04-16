@@ -5,139 +5,432 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Payment Methods - Lyreco</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+        .card { transition: transform 0.3s ease; }
+        .card:hover { transform: scale(1.03); }
+        .sticky-header { position: sticky; top: 0; z-index: 50; }
+        .sidebar { transition: transform 0.3s ease; }
+        .sidebar-hidden { transform: translateX(-100%); }
+        .fade-in { animation: fadeIn 0.5s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @media (max-width: 640px) {
+            .sidebar { position: fixed; top: 0; left: 0; height: 100%; z-index: 100; }
+            .sidebar-hidden { transform: translateX(-100%); }
+        }
+    </style>
 </head>
-<body class="bg-gray-100 flex items-center justify-center min-h-screen">
-    <div class="bg-white p-8 rounded-lg shadow-lg max-w-4xl w-full">
-        <!-- Header with Lyreco Logo Placeholder -->
-        <div class="text-center mb-6">
-            <img src="lyreco-logo.png" alt="Lyreco Logo" class="h-12 mx-auto mb-4">
-            <h1 class="text-3xl font-bold text-gray-800">Payment Methods</h1>
-            <p class="text-gray-600 mt-2">You may settle your account by one of the flexible and convenient methods listed below.</p>
+<body class="bg-gradient-to-b from-blue-50 to-white text-gray-800">
+    <!-- Sticky Header -->
+    <header class="sticky-header bg-white shadow-md py-4 px-6 flex justify-between items-center">
+        <div class="flex items-center space-x-4">
+            <button id="menu-toggle" class="sm:hidden text-2xl focus:outline-none">
+                <i class="fas fa-bars"></i>
+            </button>
+            <img src="lyreco-logo.png" alt="Lyreco Logo" class="h-10">
         </div>
-
-        <!-- PayMe Section -->
-        <div class="mb-8 border-l-4 border-red-500 pl-4">
-            <h2 class="text-2xl font-semibold text-gray-700 mb-4">PayMe - Scan & Pay (For COD Customers Only)</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                    <h3 class="text-xl font-medium text-gray-700 mb-2">Step 1: Open PayMe App</h3>
-                    <p class="text-gray-600 mb-2">Open the PayMe app, swipe left to open the scanner, and scan the PayCode below:</p>
-                    <img src="payme-qr-code.png" alt="PayMe QR Code" class="w-40 h-40 mx-auto mt-4 border-2 border-red-500">
-                    <p class="text-gray-600 text-center mt-2 italic">Scan this QR code with PayMe</p>
-                </div>
-                <div>
-                    <h3 class="text-xl font-medium text-gray-700 mb-2">Step 2: Enter Amount & Order Number</h3>
-                    <p class="text-gray-600 mb-2">Enter the AMOUNT, then click Next.</p>
-                    <p class="text-gray-600 mb-2">Enter the ORDER NO, then click Pay to proceed with the payment to Lyreco.</p>
-                    <p class="text-gray-600 italic">Example: Order No. XXXXXXXX</p>
-                </div>
-            </div>
+        <div class="flex space-x-2">
+            <button id="lang-en" class="lang-btn px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800 hover:bg-blue-200 transition">English</button>
+            <button id="lang-zh-TW" class="lang-btn px-3 py-1 rounded-full text-sm font-medium bg-gray-100 text-gray-800 hover:bg-gray-200 transition">繁體中文</button>
+            <button id="lang-zh-CN" class="lang-btn px-3 py-1 rounded-full text-sm font-medium bg-gray-100 text-gray-800 hover:bg-gray-200 transition">简体中文</button>
         </div>
+    </header>
 
-        <!-- Local CHATS -->
-        <div class="mb-8">
-            <h2 class="text-2xl font-semibold text-gray-700 mb-4">Payment by Local CHATS</h2>
-            <p class="text-gray-600 mb-2">The most popular payment method is to process payment via electronic banking system using your office computer.</p>
-            <p class="text-gray-600"><strong>Bank Account:</strong> 004-728325-001 (HSBC)</p>
-            <p class="text-gray-600"><strong>Note:</strong> Please indicate invoice details and your customer account number during the transfer.</p>
-        </div>
-
-        <!-- Autopay (Direct Debit) -->
-        <div class="mb-8">
-            <h2 class="text-2xl font-semibold text-gray-700 mb-4">Autopay - Direct Debit</h2>
-            <p class="text-gray-600 mb-2">A time-saving and convenient method to avoid late payments.</p>
-            <p class="text-gray-600 mb-2">Request an authorization form by contacting us at (852) 29462285 or (852) 29462287, or download it from <a href="http://www.lyreco.com.hk/form/autopay.pdf" class="text-blue-600 hover:underline" target="_blank">our website</a>.</p>
-        </div>
-
-        <!-- ATM Payment -->
-        <div class="mb-8">
-            <h2 class="text-2xl font-semibold text-gray-700 mb-4">Payment by ATM</h2>
-            <p class="text-gray-600 mb-2">Make your payment at any nearby HSBC ATM machine.</p>
-            <p class="text-gray-600"><strong>Bank Account:</strong> 004-728325-001 (HSBC)</p>
-        </div>
-
-        <!-- Cheque Payment -->
-        <div class="mb-8">
-            <h2 class="text-2xl font-semibold text-gray-700 mb-4">Cheque Payment by Mail</h2>
-            <p class="text-gray-600 mb-2">Send a crossed cheque payable to "Lyreco (Hong Kong) Company Limited" to:</p>
-            <p class="text-gray-600">16th Floor, 78 Hung To Road, Kwun Tong, Kowloon, Hong Kong</p>
-            <p class="text-gray-600"><strong>Note:</strong> Do not send cash or issue post-dated cheques.</p>
-        </div>
-
-        <!-- Telegraphic Transfer -->
-        <div class="mb-8">
-            <h2 class="text-2xl font-semibold text-gray-700 mb-4">Telegraphic Transfer</h2>
-            <p class="text-gray-600 mb-2">For overseas customers, please transfer to:</p>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                    <p class="text-gray-600"><strong>Bank Name:</strong></p>
-                    <p class="text-gray-800">The Hongkong and Shanghai Banking Corporation Limited</p>
-                </div>
-                <div>
-                    <p class="text-gray-600"><strong>Bank Address:</strong></p>
-                    <p class="text-gray-800">306-316 King's Road, North Point, Hong Kong</p>
-                </div>
-                <div>
-                    <p class="text-gray-600"><strong>Account Name:</strong></p>
-                    <p class="text-gray-800">Lyreco (Hong Kong) Company Limited</p>
-                </div>
-                <div>
-                    <p class="text-gray-600"><strong>Account No.:</strong></p>
-                    <p class="text-gray-800">004-728325-001 (HKD)</p>
-                </div>
-                <div>
-                    <p class="text-gray-600"><strong>Bank Code:</strong></p>
-                    <p class="text-gray-800">004</p>
-                </div>
-                <div>
-                    <p class="text-gray-600"><strong>SWIFT Code:</strong></p>
-                    <p class="text-gray-800">HSBCHKHHHKH</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- FPS -->
-        <div class="mb-8">
-            <h2 class="text-2xl font-semibold text-gray-700 mb-4">FPS</h2>
-            <p class="text-gray-600"><strong>FPS ID:</strong> 112461512 (HKD)</p>
-        </div>
-
-        <!-- Other Payment Options -->
-        <div class="mb-8">
-            <h2 class="text-2xl font-semibold text-gray-700 mb-4">Other Payment Options</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                    <p class="text-gray-600"><strong>Cheque:</strong></p>
-                    <p class="text-gray-800">Send a crossed cheque as described above.</p>
-                </div>
-                <div>
-                    <p class="text-gray-600"><strong>Bank Transfer:</strong></p>
-                    <p class="text-gray-800">Use Local CHATS, ATM, or Telegraphic Transfer as described above.</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Payment Details Submission -->
-        <div class="mb-8">
-            <h2 class="text-2xl font-semibold text-gray-700 mb-4">Submitting Payment Details</h2>
-            <p class="text-gray-600 mb-2">To ensure accurate and up-to-date recording, please send your payment details and customer account number via:</p>
-            <ul class="list-disc pl-6 text-gray-600">
-                <li>Mail: Lyreco (Hong Kong) Co. Ltd, 16th Floor, 78 Hung To Road, Kwun Tong, Kowloon</li>
-                <li>Fax: (852) 26677910</li>
-                <li>Email: <a href="mailto:ar.hk@lyreco.com" class="text-blue-600 hover:underline">ar.hk@lyreco.com</a></li>
+    <!-- Sidebar Navigation -->
+    <nav id="sidebar" class="sidebar sm:w-64 w-56 bg-white shadow-lg sm:block hidden sm:translate-x-0">
+        <div class="p-6">
+            <h2 id="nav-title" class="text-xl font-bold text-blue-800 mb-4"></h2>
+            <ul class="space-y-2">
+                <li><a href="#payme" class="nav-link block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-800 rounded"><i class="fas fa-qrcode mr-2"></i><span id="nav-payme"></span></a></li>
+                <li><a href="#chats" class="nav-link block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-800 rounded"><i class="fas fa-desktop mr-2"></i><span id="nav-chats"></span></a></li>
+                <li><a href="#autopay" class="nav-link block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-800 rounded"><i class="fas fa-credit-card mr-2"></i><span id="nav-autopay"></span></a></li>
+                <li><a href="#atm" class="nav-link block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-800 rounded"><i class="fas fa-university mr-2"></i><span id="nav-atm"></span></a></li>
+                <li><a href="#cheque" class="nav-link block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-800 rounded"><i class="fas fa-money-check mr-2"></i><span id="nav-cheque"></span></a></li>
+                <li><a href="#telegraphic" class="nav-link block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-800 rounded"><i class="fas fa-globe mr-2"></i><span id="nav-telegraphic"></span></a></li>
+                <li><a href="#fps" class="nav-link block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-800 rounded"><i class="fas fa-mobile-alt mr-2"></i><span id="nav-fps"></span></a></li>
+                <li><a href="#other-options" class="nav-link block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-800 rounded"><i class="fas fa-ellipsis-h mr-2"></i><span id="nav-other-options"></span></a></li>
+                <li><a href="#submission" class="nav-link block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-800 rounded"><i class="fas fa-envelope mr-2"></i><span id="nav-submission"></span></a></li>
             </ul>
         </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="sm:ml-64 p-8 max-w-4xl mx-auto">
+        <h1 id="main-title" class="text-4xl font-bold text-blue-800 mb-4 text-center fade-in"></h1>
+        <p id="main-subtitle" class="text-gray-600 text-center mb-12 fade-in"></p>
+
+        <!-- PayMe Section -->
+        <section id="payme" class="mb-12">
+            <div class="card bg-white p-6 rounded-lg shadow-md">
+                <h2 id="payme-title" class="text-2xl font-semibold text-blue-800 mb-4 flex items-center"><i class="fas fa-qrcode mr-3 text-red-500"></i><span></span></h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="text-center">
+                        <h3 id="payme-step1-title" class="text-xl font-medium text-gray-700 mb-2"></h3>
+                        <p id="payme-step1-desc" class="text-gray-600 mb-4"></p>
+                        <img src="payme-qr-code.png" alt="PayMe QR Code" class="w-40 h-40 mx-auto border-2 border-red-500 rounded">
+                        <p id="payme-qr-note" class="text-gray-600 italic mt-2"></p>
+                    </div>
+                    <div>
+                        <h3 id="payme-step2-title" class="text-xl font-medium text-gray-700 mb-2"></h3>
+                        <p id="payme-step2-desc1" class="text-gray-600 mb-2"></p>
+                        <p id="payme-step2-desc2" class="text-gray-600 mb-2"></p>
+                        <p id="payme-step2-note" class="text-gray-600 italic"></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Local CHATS -->
+        <section id="chats" class="mb-12">
+            <div class="card bg-white p-6 rounded-lg shadow-md">
+                <h2 id="chats-title" class="text-2xl font-semibold text-blue-800 mb-4 flex items-center"><i class="fas fa-desktop mr-3 text-blue-500"></i><span></span></h2>
+                <p id="chats-desc" class="text-gray-600 mb-2"></p>
+                <p id="chats-account" class="text-gray-600 mb-2"></p>
+                <p id="chats-note" class="text-gray-600"></p>
+            </div>
+        </section>
+
+        <!-- Autopay (Direct Debit) -->
+        <section id="autopay" class="mb-12">
+            <div class="card bg-white p-6 rounded-lg shadow-md">
+                <h2 id="autopay-title" class="text-2xl font-semibold text-blue-800 mb-4 flex items-center"><i class="fas fa-credit-card mr-3 text-blue-500"></i><span></span></h2>
+                <p id="autopay-desc" class="text-gray-600 mb-2"></p>
+                <p id="autopay-contact" class="text-gray-600"></p>
+            </div>
+        </section>
+
+        <!-- ATM Payment -->
+        <section id="atm" class="mb-12">
+            <div class="card bg-white p-6 rounded-lg shadow-md">
+                <h2 id="atm-title" class="text-2xl font-semibold text-blue-800 mb-4 flex items-center"><i class="fas fa-university mr-3 text-blue-500"></i><span></span></h2>
+                <p id="atm-desc" class="text-gray-600 mb-2"></p>
+                <p id="atm-account" class="text-gray-600"></p>
+            </div>
+        </section>
+
+        <!-- Cheque Payment -->
+        <section id="cheque" class="mb-12">
+            <div class="card bg-white p-6 rounded-lg shadow-md">
+                <h2 id="cheque-title" class="text-2xl font-semibold text-blue-800 mb-4 flex items-center"><i class="fas fa-money-check mr-3 text-blue-500"></i><span></span></h2>
+                <p id="cheque-desc" class="text-gray-600 mb-2"></p>
+                <p id="cheque-address" class="text-gray-600 mb-2"></p>
+                <p id="cheque-note" class="text-gray-600"></p>
+            </div>
+        </section>
+
+        <!-- Telegraphic Transfer -->
+        <section id="telegraphic" class="mb-12">
+            <div class="card bg-white p-6 rounded-lg shadow-md">
+                <h2 id="telegraphic-title" class="text-2xl font-semibold text-blue-800 mb-4 flex items-center"><i class="fas fa-globe mr-3 text-blue-500"></i><span></span></h2>
+                <p id="telegraphic-desc" class="text-gray-600 mb-4"></p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <p class="text-gray-600"><strong id="telegraphic-bank-name-label"></strong></p>
+                        <p class="text-gray-800">The Hongkong and Shanghai Banking Corporation Limited</p>
+                    </div>
+                    <div>
+                        <p class="text-gray-600"><strong id="telegraphic-bank-address-label"></strong></p>
+                        <p class="text-gray-800">306-316 King's Road, North Point, Hong Kong</p>
+                    </div>
+                    <div>
+                        <p class="text-gray-600"><strong id="telegraphic-account-name-label"></strong></p>
+                        <p class="text-gray-800">Lyreco (Hong Kong) Company Limited</p>
+                    </div>
+                    <div>
+                        <p class="text-gray-600"><strong id="telegraphic-account-no-label"></strong></p>
+                        <p class="text-gray-800">004-728325-001 (HKD)</p>
+                    </div>
+                    <div>
+                        <p class="text-gray-600"><strong id="telegraphic-bank-code-label"></strong></p>
+                        <p class="text-gray-800">004</p>
+                    </div>
+                    <div>
+                        <p class="text-gray-600"><strong id="telegraphic-swift-code-label"></strong></p>
+                        <p class="text-gray-800">HSBCHKHHHKH</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FPS -->
+        <section id="fps" class="mb-12">
+            <div class="card bg-white p-6 rounded-lg shadow-md">
+                <h2 id="fps-title" class="text-2xl font-semibold text-blue-800 mb-4 flex items-center"><i class="fas fa-mobile-alt mr-3 text-blue-500"></i><span></span></h2>
+                <p id="fps-id" class="text-gray-600"></p>
+            </div>
+        </section>
+
+        <!-- Other Payment Options -->
+        <section id="other-options" class="mb-12">
+            <div class="card bg-white p-6 rounded-lg shadow-md">
+                <h2 id="other-options-title" class="text-2xl font-semibold text-blue-800 mb-4 flex items-center"><i class="fas fa-ellipsis-h mr-3 text-blue-500"></i><span></span></h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <p class="text-gray-600"><strong id="other-options-cheque-label"></strong></p>
+                        <p id="other-options-cheque-desc" class="text-gray-800"></p>
+                    </div>
+                    <div>
+                        <p class="text-gray-600"><strong id="other-options-bank-transfer-label"></strong></p>
+                        <p id="other-options-bank-transfer-desc" class="text-gray-800"></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Payment Details Submission -->
+        <section id="submission" class="mb-12">
+            <div class="card bg-white p-6 rounded-lg shadow-md">
+                <h2 id="submission-title" class="text-2xl font-semibold text-blue-800 mb-4 flex items-center"><i class="fas fa-envelope mr-3 text-blue-500"></i><span></span></h2>
+                <p id="submission-desc" class="text-gray-600 mb-4"></p>
+                <ul class="list-disc pl-6 text-gray-600">
+                    <li id="submission-mail"></li>
+                    <li id="submission-fax"></li>
+                    <li id="submission-email"></li>
+                </ul>
+            </div>
+        </section>
 
         <!-- Contact Information -->
-        <div class="text-center">
-            <p class="text-gray-600 mb-2">For any questions, contact us at (852) 29462285 or (852) 29462287.</p>
-            <p class="text-gray-600">Thank you for your cooperation!</p>
+        <div class="text-center mb-12">
+            <p id="contact-info" class="text-gray-600 mb-2"></p>
+            <p id="thank-you" class="text-gray-600"></p>
         </div>
 
-        <!-- Footer -->
-        <footer class="mt-8 text-center text-gray-600 border-t pt-4">
-            <p>Tel: 2946 2233 | W: <a href="https://www.lyreco.com.hk" class="text-blue-600 hover:underline" target="_blank">www.lyreco.com.hk</a></p>
-        </footer>
-    </div>
-</body>
-</html>
+        <!-- Back to Top Button -->
+        <button id="back-to-top" class="fixed bottom-6 right-6 bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 transition hidden">
+            <i class="fas fa-arrow-up"></i>
+        </button>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-blue-800 text-white py-6 text-center">
+        <p>Tel: 2946 2233 | W: <a href="https://www.lyreco.com.hk" class="text-blue-200 hover:underline" target="_blank">www.lyreco.com.hk</a></p>
+    </footer>
+
+    <script>
+        const translations = {
+            "en": {
+                "main-title": "Payment Methods",
+                "main-subtitle": "Choose a convenient method to settle your account.",
+                "nav-title": "Navigation",
+                "nav-payme": "PayMe",
+                "nav-chats": "Local CHATS",
+                "nav-autopay": "Autopay",
+                "nav-atm": "ATM Payment",
+                "nav-cheque": "Cheque Payment",
+                "nav-telegraphic": "Telegraphic Transfer",
+                "nav-fps": "FPS",
+                "nav-other-options": "Other Options",
+                "nav-submission": "Submit Details",
+                "payme-title": "PayMe - Scan & Pay (For COD Customers Only)",
+                "payme-step1-title": "Step 1: Open PayMe App",
+                "payme-step1-desc": "Open the PayMe app, swipe left to open the scanner, and scan the PayCode below:",
+                "payme-qr-note": "Scan this QR code with PayMe",
+                "payme-step2-title": "Step 2: Enter Amount & Order Number",
+                "payme-step2-desc1": "Enter the AMOUNT, then click Next.",
+                "payme-step2-desc2": "Enter the ORDER NO, then click Pay to proceed with the payment to Lyreco.",
+                "payme-step2-note": "Example: Order No. XXXXXXXX",
+                "chats-title": "Payment by Local CHATS",
+                "chats-desc": "The most popular payment method is to process payment via electronic banking system using your office computer.",
+                "chats-account": "<strong>Bank Account:</strong> 004-728325-001 (HSBC)",
+                "chats-note": "<strong>Note:</strong> Please indicate invoice details and your customer account number during the transfer.",
+                "autopay-title": "Autopay - Direct Debit",
+                "autopay-desc": "A time-saving and convenient method to avoid late payments.",
+                "autopay-contact": "Request an authorization form by contacting us at (852) 29462285 or (852) 29462287, or download it from <a href='http://www.lyreco.com.hk/form/autopay.pdf' class='text-blue-600 hover:underline' target='_blank'>our website</a>.",
+                "atm-title": "Payment by ATM",
+                "atm-desc": "Make your payment at any nearby HSBC ATM machine.",
+                "atm-account": "<strong>Bank Account:</strong> 004-728325-001 (HSBC)",
+                "cheque-title": "Cheque Payment by Mail",
+                "cheque-desc": "Send a crossed cheque payable to \"Lyreco (Hong Kong) Company Limited\" to:",
+                "cheque-address": "16th Floor, 78 Hung To Road, Kwun Tong, Kowloon, Hong Kong",
+                "cheque-note": "<strong>Note:</strong> Do not send cash or issue post-dated cheques.",
+                "telegraphic-title": "Telegraphic Transfer",
+                "telegraphic-desc": "For overseas customers, please transfer to:",
+                "telegraphic-bank-name-label": "Bank Name:",
+                "telegraphic-bank-address-label": "Bank Address:",
+                "telegraphic-account-name-label": "Account Name:",
+                "telegraphic-account-no-label": "Account No.:",
+                "telegraphic-bank-code-label": "Bank Code:",
+                "telegraphic-swift-code-label": "SWIFT Code:",
+                "fps-title": "FPS",
+                "fps-id": "<strong>FPS ID:</strong> 112461512 (HKD)",
+                "other-options-title": "Other Payment Options",
+                "other-options-cheque-label": "Cheque:",
+                "other-options-cheque-desc": "Send a crossed cheque as described above.",
+                "other-options-bank-transfer-label": "Bank Transfer:",
+                "other-options-bank-transfer-desc": "Use Local CHATS, ATM, or Telegraphic Transfer as described above.",
+                "submission-title": "Submitting Payment Details",
+                "submission-desc": "To ensure accurate and up-to-date recording, please send your payment details and customer account number via:",
+                "submission-mail": "Mail: Lyreco (Hong Kong) Co. Ltd, 16th Floor, 78 Hung To Road, Kwun Tong, Kowloon",
+                "submission-fax": "Fax: (852) 26677910",
+                "submission-email": "Email: <a href='mailto:ar.hk@lyreco.com' class='text-blue-600 hover:underline'>ar.hk@lyreco.com</a>",
+                "contact-info": "For any questions, contact us at (852) 29462285 or (852) 29462287.",
+                "thank-you": "Thank you for your cooperation!"
+            },
+            "zh-TW": {
+                "main-title": "付款方式",
+                "main-subtitle": "選擇一種方便的方式來結算您的賬戶。",
+                "nav-title": "導航",
+                "nav-payme": "PayMe",
+                "nav-chats": "本地 CHATS",
+                "nav-autopay": "自動轉賬",
+                "nav-atm": "自動櫃員機付款",
+                "nav-cheque": "支票付款",
+                "nav-telegraphic": "電匯轉賬",
+                "nav-fps": "轉數快",
+                "nav-other-options": "其他選項",
+                "nav-submission": "提交詳情",
+                "payme-title": "PayMe - 掃碼付款（僅限貨到付款客戶）",
+                "payme-step1-title": "步驟 1：開啟 PayMe 應用程式",
+                "payme-step1-desc": "開啟 PayMe 應用程式，向左滑動以開啟掃描器，然後掃描下面的 PayCode：",
+                "payme-qr-note": "使用 PayMe 掃描此 QR 碼",
+                "payme-step2-title": "步驟 2：輸入金額及訂單號碼",
+                "payme-step2-desc1": "輸入金額，然後點擊下一步。",
+                "payme-step2-desc2": "輸入訂單號碼，然後點擊付款以完成向 Lyreco 的付款。",
+                "payme-step2-note": "範例：訂單號碼 XXXXXXXX",
+                "chats-title": "本地 CHATS 付款",
+                "chats-desc": "最受歡迎的付款方式是通過辦公室電腦使用電子銀行系統進行付款。",
+                "chats-account": "<strong>銀行賬戶：</strong> 004-728325-001 (匯豐銀行)",
+                "chats-note": "<strong>注意：</strong> 請在轉賬時註明發票詳情及您的客戶賬戶號碼。",
+                "autopay-title": "自動轉賬 - 直接扣款",
+                "autopay-desc": "一種省時且方便的方法，避免延遲付款。",
+                "autopay-contact": "請致電 (852) 29462285 或 (852) 29462287 索取授權表格，或從<a href='http://www.lyreco.com.hk/form/autopay.pdf' class='text-blue-600 hover:underline' target='_blank'>我們的網站</a>直接下載。",
+                "atm-title": "自動櫃員機付款",
+                "atm-desc": "您可以在任何附近的匯豐自動櫃員機進行付款。",
+                "atm-account": "<strong>銀行賬戶：</strong> 004-728325-001 (匯豐銀行)",
+                "cheque-title": "支票郵寄付款",
+                "cheque-desc": "請將劃線支票寄至「Lyreco (Hong Kong) Company Limited」，地址為：",
+                "cheque-address": "香港九龍觀塘鴻圖道78號16樓",
+                "cheque-note": "<strong>注意：</strong> 請勿寄送現金或發出遠期支票。",
+                "telegraphic-title": "電匯轉賬",
+                "telegraphic-desc": "海外客戶請轉賬至：",
+                "telegraphic-bank-name-label": "銀行名稱：",
+                "telegraphic-bank-address-label": "銀行地址：",
+                "telegraphic-account-name-label": "賬戶名稱：",
+                "telegraphic-account-no-label": "賬戶號碼：",
+                "telegraphic-bank-code-label": "銀行代碼：",
+                "telegraphic-swift-code-label": "SWIFT 代碼：",
+                "fps-title": "轉數快 (FPS)",
+                "fps-id": "<strong>FPS ID：</strong> 112461512 (港幣)",
+                "other-options-title": "其他付款選項",
+                "other-options-cheque-label": "支票：",
+                "other-options-cheque-desc": "請按上述方式寄送劃線支票。",
+                "other-options-bank-transfer-label": "銀行轉賬：",
+                "other-options-bank-transfer-desc": "使用本地 CHATS、自動櫃員機或電匯轉賬，如上所述。",
+                "submission-title": "提交付款詳情",
+                "submission-desc": "為確保您的付款記錄準確及時，請通過以下方式提交您的付款詳情及客戶賬戶號碼：",
+                "submission-mail": "郵寄：香港九龍觀塘鴻圖道78號16樓 利豐客(香港)有限公司",
+                "submission-fax": "傳真：(852) 26677910",
+                "submission-email": "電郵：<a href='mailto:ar.hk@lyreco.com' class='text-blue-600 hover:underline'>ar.hk@lyreco.com</a>",
+                "contact-info": "如有任何疑問，請致電 (852) 29462285 或 (852) 29462287 聯繫我們。",
+                "thank-you": "多謝您的合作！"
+            },
+            "zh-CN": {
+                "main-title": "付款方式",
+                "main-subtitle": "选择一种方便的方式来结算您的账户。",
+                "nav-title": "导航",
+                "nav-payme": "PayMe",
+                "nav-chats": "本地 CHATS",
+                "nav-autopay": "自动转账",
+                "nav-atm": "自动柜员机付款",
+                "nav-cheque": "支票付款",
+                "nav-telegraphic": "电汇转账",
+                "nav-fps": "转数快",
+                "nav-other-options": "其他选项",
+                "nav-submission": "提交详情",
+                "payme-title": "PayMe - 扫码付款（仅限货到付款客户）",
+                "payme-step1-title": "步骤 1：开启 PayMe 应用程序",
+                "payme-step1-desc": "开启 PayMe 应用程序，向左滑动以开启扫描器，然后扫描下面的 PayCode：",
+                "payme-qr-note": "使用 PayMe 扫描此 QR 码",
+                "payme-step2-title": "步骤 2：输入金额及订单号码",
+                "payme-step2-desc1": "输入金额，然后点击下一步。",
+                "payme-step2-desc2": "输入订单号码，然后点击付款以完成向 Lyreco 的付款。",
+                "payme-step2-note": "范例：订单号码 XXXXXXXX",
+                "chats-title": "本地 CHATS 付款",
+                "chats-desc": "最受欢迎的付款方式是通过办公室电脑使用电子银行系统进行付款。",
+                "chats-account": "<strong>银行账户：</strong> 004-728325-001 (汇丰银行)",
+                "chats-note": "<strong>注意：</strong> 请在转账时注明发票详情及您的客户账户号码。",
+                "autopay-title": "自动转账 - 直接扣款",
+                "autopay-desc": "一种省时且方便的方法，避免延迟付款。",
+                "autopay-contact": "请致电 (852) 29462285 或 (852) 29462287 索取授权表格，或从<a href='http://www.lyreco.com.hk/form/autopay.pdf' class='text-blue-600 hover:underline' target='_blank'>我们的网站</a>直接下载。",
+                "atm-title": "自动柜员机付款",
+                "atm-desc": "您可以在任何附近的汇丰自动柜员机进行付款。",
+                "atm-account": "<strong>银行账户：</strong> 004-728325-001 (汇丰银行)",
+                "cheque-title": "支票邮寄付款",
+                "cheque-desc": "请将划线支票寄至“Lyreco (Hong Kong) Company Limited”，地址为：",
+                "cheque-address": "香港九龙观塘鸿图道78号16楼",
+                "cheque-note": "<strong>注意：</strong> 请勿寄送现金或发出远期支票。",
+                "telegraphic-title": "电汇转账",
+                "telegraphic-desc": "海外客户请转账至：",
+                "telegraphic-bank-name-label": "银行名称：",
+                "telegraphic-bank-address-label": "银行地址：",
+                "telegraphic-account-name-label": "账户名称：",
+                "telegraphic-account-no-label": "账户号码：",
+                "telegraphic-bank-code-label": "银行代码：",
+                "telegraphic-swift-code-label": "SWIFT 代码：",
+                "fps-title": "转数快 (FPS)",
+                "fps-id": "<strong>FPS ID：</strong> 112461512 (港币)",
+                "other-options-title": "其他付款选项",
+                "other-options-cheque-label": "支票：",
+                "other-options-cheque-desc": "请按上述方式寄送划线支票。",
+                "other-options-bank-transfer-label": "银行转账：",
+                "other-options-bank-transfer-desc": "使用本地 CHATS、自动柜员机或电汇转账，如上所述。",
+                "submission-title": "提交付款详情",
+                "submission-desc": "为确保您的付款记录准确及时，请通过以下方式提交您的付款详情及客户账户号码：",
+                "submission-mail": "邮寄：香港九龙观塘鸿图道78号16楼 利丰客(香港)有限公司",
+                "submission-fax": "传真：(852) 26677910",
+                "submission-email": "电邮：<a href='mailto:ar.hk@lyreco.com' class='text-blue-600 hover:underline'>ar.hk@lyreco.com</a>",
+                "contact-info": "如有任何疑问，请致电 (852) 29462285 或 (852) 29462287 联系我们。",
+                "thank-you": "多谢您的合作！"
+            }
+        };
+
+        function setLanguage(lang) {
+            const texts = translations[lang];
+            Object.keys(texts).forEach(id => {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.innerHTML = texts[id];
+                    if (id.includes('title')) element.classList.add('fade-in');
+                }
+            });
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('bg-blue-100', 'text-blue-800');
+                btn.classList.add('bg-gray-100', 'text-gray-800');
+            });
+            document.getElementById(`lang-${lang}`).classList.remove('bg-gray-100', 'text-gray-800');
+            document.getElementById(`lang-${lang}`).classList.add('bg-blue-100', 'text-blue-800');
+        }
+
+        document.getElementById('lang-en').addEventListener('click', () => setLanguage('en'));
+        document.getElementById('lang-zh-TW').addEventListener('click', () => setLanguage('zh-TW'));
+        document.getElementById('lang-zh-CN').addEventListener('click', () => setLanguage('zh-CN'));
+
+        setLanguage('en');
+
+        // Sidebar Toggle for Mobile
+        const sidebar = document.getElementById('sidebar');
+        document.getElementById('menu-toggle').addEventListener('click', () => {
+            sidebar.classList.toggle('sidebar-hidden');
+        });
+
+        // Smooth Scrolling for Navigation Links
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href').substring(1);
+                const targetSection = document.getElementById(targetId);
+                targetSection.scrollIntoView({ behavior: 'smooth' });
+                if (window.innerWidth < 640) {
+                    sidebar.classList.add('sidebar-hidden');
+                }
+            });
+        });
+
+        // Back to Top Button
+        const backToTop = document.getElementById('back-to-top');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTop.classList.remove('hidden');
+            } else {
+                backToTop.class
