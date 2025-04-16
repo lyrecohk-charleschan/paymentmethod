@@ -47,11 +47,14 @@
             .sidebar { position: fixed; top: 0; left: 0; height: 100%; z-index: 100; }
             .sidebar-hidden { transform: translateX(-100%); }
         }
+        body { display: flex; flex-direction: column; min-height: 100vh; }
+        main { flex: 1; }
+        footer { flex-shrink: 0; }
     </style>
 </head>
 <body class="bg-gradient-to-b from-blue-50 to-white text-gray-800">
     <!-- Sticky Header -->
-    <header class="sticky-header bg-white shadow-md py-4 px-6 flex justify-between items-center">
+    <header class="sticky-header bg-white shadow-md py-4 px-6 flex justify-between items-center z-50">
         <div class="flex items-center space-x-4">
             <button id="menu-toggle" class="sm:hidden text-2xl focus:outline-none">
                 <i class="fas fa-bars"></i>
@@ -65,246 +68,177 @@
         </div>
     </header>
 
-    <!-- Sidebar Navigation -->
-    <nav id="sidebar" class="sidebar sm:w-64 w-56 bg-white shadow-lg sm:block hidden sm:translate-x-0">
-        <div class="p-6">
-            <h2 id="nav-title" class="text-xl font-bold text-blue-800 mb-4"></h2>
-            <ul class="space-y-2">
-                <li><a href="#payme" class="nav-link block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-800 rounded"><i class="fas fa-qrcode mr-2"></i><span id="nav-payme"></span></a></li>
-                <li><a href="#chats" class="nav-link block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-800 rounded"><i class="fas fa-desktop mr-2"></i><span id="nav-chats"></span></a></li>
-                <li><a href="#autopay" class="nav-link block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-800 rounded"><i class="fas fa-credit-card mr-2"></i><span id="nav-autopay"></span></a></li>
-                <li><a href="#atm" class="nav-link block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-800 rounded"><i class="fas fa-university mr-2"></i><span id="nav-atm"></span></a></li>
-                <li><a href="#cheque" class="nav-link block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-800 rounded"><i class="fas fa-money-check mr-2"></i><span id="nav-cheque"></span></a></li>
-                <li><a href="#telegraphic" class="nav-link block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-800 rounded"><i class="fas fa-globe mr-2"></i><span id="nav-telegraphic"></span></a></li>
-                <li><a href="#fps" class="nav-link block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-800 rounded"><i class="fas fa-mobile-alt mr-2"></i><span id="nav-fps"></span></a></li>
-                <li><a href="#other-options" class="nav-link block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-800 rounded"><i class="fas fa-ellipsis-h mr-2"></i><span id="nav-other-options"></span></a></li>
-                <li><a href="#submission" class="nav-link block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-800 rounded"><i class="fas fa-envelope mr-2"></i><span id="nav-submission"></span></a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <!-- Main Content -->
-    <main class="sm:ml-64 p-8 max-w-4xl mx-auto">
-        <h1 id="main-title" class="text-4xl font-bold text-blue-800 mb-4 text-center fade-in"></h1>
-        <p id="main-subtitle" class="text-gray-600 text-center mb-12 fade-in"></p>
-
-        <!-- PayMe Section -->
-        <section id="payme" class="mb-12">
-            <div class="card bg-white p-6 rounded-lg shadow-md">
-                <h2 id="payme-title" class="text-2xl font-semibold text-blue-800 mb-4 flex items-center"><i class="fas fa-qrcode mr-3 text-red-500"></i><span></span></h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="text-center">
-                        <h3 id="payme Congregate all sections into one cohesive HTML file with complete translations and JavaScript functionality. Ensure there are no blank or missing content sections. Retain the modern UI/UX design with Tailwind CSS, Font Awesome icons, sticky header, sidebar navigation, smooth scrolling, and "Back to Top" button. Verify that all translations for English, Traditional Chinese (繁體), and Simplified Chinese (簡體) are accurate and complete.
-
-Here’s the complete `index.html` with all fixes applied:
-
-<xaiArtifact artifact_id="39cb7f00-c515-44b9-afaf-eb7622910f5b" artifact_version_id="27699e75-23df-4bf4-bb03-f18335c4b2ab" title="index.html" contentType="text/html">
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Payment Methods - Lyreco</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-    <style>
-        .card { transition: transform 0.3s ease; }
-        .card:hover { transform: scale(1.03); }
-        .sticky-header { position: sticky; top: 0; z-index: 50; }
-        .sidebar { transition: transform 0.3s ease; }
-        .sidebar-hidden { transform: translateX(-100%); }
-        .fade-in { animation: fadeIn 0.5s ease-in; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @media (max-width: 640px) {
-            .sidebar { position: fixed; top: 0; left: 0; height: 100%; z-index: 100; }
-            .sidebar-hidden { transform: translateX(-100%); }
-        }
-    </style>
-</head>
-<body class="bg-gradient-to-b from-blue-50 to-white text-gray-800">
-    <!-- Sticky Header -->
-    <header class="sticky-header bg-white shadow-md py-4 px-6 flex justify-between items-center">
-        <div class="flex items-center space-x-4">
-            <button id="menu-toggle" class="sm:hidden text-2xl focus:outline-none">
-                <i class="fas fa-bars"></i>
-            </button>
-            <img src="lyreco-logo.png" alt="Lyreco Logo" class="h-10">
-        </div>
-        <div class="flex space-x-2">
-            <button id="lang-en" class="lang-btn px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800 hover:bg-blue-200 transition">English</button>
-            <button id="lang-zh-TW" class="lang-btn px-3 py-1 rounded-full text-sm font-medium bg-gray-100 text-gray-800 hover:bg-gray-200 transition">繁體中文</button>
-            <button id="lang-zh-CN" class="lang-btn px-3 py-1 rounded-full text-sm font-medium bg-gray-100 text-gray-800 hover:bg-gray-200 transition">简体中文</button>
-        </div>
-    </header>
-
-    <!-- Sidebar Navigation -->
-    <nav id="sidebar" class="sidebar sm:w-64 w-56 bg-white shadow-lg sm:block hidden sm:translate-x-0">
-        <div class="p-6">
-            <h2 id="nav-title" class="text-xl font-bold text-blue-800 mb-4"></h2>
-            <ul class="space-y-2">
-                <li><a href="#payme" class="nav-link block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-800 rounded"><i class="fas fa-qrcode mr-2"></i><span id="nav-payme"></span></a></li>
-                <li><a href="#chats" class="nav-link block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-800 rounded"><i class="fas fa-desktop mr-2"></i><span id="nav-chats"></span></a></li>
-                <li><a href="#autopay" class="nav-link block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-800 rounded"><i class="fas fa-credit-card mr-2"></i><span id="nav-autopay"></span></a></li>
-                <li><a href="#atm" class="nav-link block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-800 rounded"><i class="fas fa-university mr-2"></i><span id="nav-atm"></span></a></li>
-                <li><a href="#cheque" class="nav-link block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-800 rounded"><i class="fas fa-money-check mr-2"></i><span id="nav-cheque"></span></a></li>
-                <li><a href="#telegraphic" class="nav-link block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-800 rounded"><i class="fas fa-globe mr-2"></i><span id="nav-telegraphic"></span></a></li>
-                <li><a href="#fps" class="nav-link block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-800 rounded"><i class="fas fa-mobile-alt mr-2"></i><span id="nav-fps"></span></a></li>
-                <li><a href="#other-options" class="nav-link block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-800 rounded"><i class="fas fa-ellipsis-h mr-2"></i><span id="nav-other-options"></span></a></li>
-                <li><a href="#submission" class="nav-link block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-800 rounded"><i class="fas fa-envelope mr-2"></i><span id="nav-submission"></span></a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <!-- Main Content -->
-    <main class="sm:ml-64 p-8 max-w-4xl mx-auto">
-        <h1 id="main-title" class="text-4xl font-bold text-blue-800 mb-4 text-center fade-in"></h1>
-        <p id="main-subtitle" class="text-gray-600 text-center mb-12 fade-in"></p>
-
-        <!-- PayMe Section -->
-        <section id="payme" class="mb-12">
-            <div class="card bg-white p-6 rounded-lg shadow-md">
-                <h2 id="payme-title" class="text-2xl font-semibold text-blue-800 mb-4 flex items-center"><i class="fas fa-qrcode mr-3 text-red-500"></i><span></span></h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="text-center">
-                        <h3 id="payme-step1-title" class="text-xl font-medium text-gray-700 mb-2"></h3>
-                        <p id="payme-step1-desc" class="text-gray-600 mb-4"></p>
-                        <img src="payme-qr-code.png" alt="PayMe QR Code" class="w-40 h-40 mx-auto border-2 border-red-500 rounded">
-                        <p id="payme-qr-note" class="text-gray-600 italic mt-2"></p>
-                    </div>
-                    <div>
-                        <h3 id="payme-step2-title" class="text-xl font-medium text-gray-700 mb-2"></h3>
-                        <p id="payme-step2-desc1" class="text-gray-600 mb-2"></p>
-                        <p id="payme-step2-desc2" class="text-gray-600 mb-2"></p>
-                        <p id="payme-step2-note" class="text-gray-600 italic"></p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Local CHATS -->
-        <section id="chats" class="mb-12">
-            <div class="card bg-white p-6 rounded-lg shadow-md">
-                <h2 id="chats-title" class="text-2xl font-semibold text-blue-800 mb-4 flex items-center"><i class="fas fa-desktop mr-3 text-blue-500"></i><span></span></h2>
-                <p id="chats-desc" class="text-gray-600 mb-2"></p>
-                <p id="chats-account" class="text-gray-600 mb-2"></p>
-                <p id="chats-note" class="text-gray-600"></p>
-            </div>
-        </section>
-
-        <!-- Autopay (Direct Debit) -->
-        <section id="autopay" class="mb-12">
-            <div class="card bg-white p-6 rounded-lg shadow-md">
-                <h2 id="autopay-title" class="text-2xl font-semibold text-blue-800 mb-4 flex items-center"><i class="fas fa-credit-card mr-3 text-blue-500"></i><span></span></h2>
-                <p id="autopay-desc" class="text-gray-600 mb-2"></p>
-                <p id="autopay-contact" class="text-gray-600"></p>
-            </div>
-        </section>
-
-        <!-- ATM Payment -->
-        <section id="atm" class="mb-12">
-            <div class="card bg-white p-6 rounded-lg shadow-md">
-                <h2 id="atm-title" class="text-2xl font-semibold text-blue-800 mb-4 flex items-center"><i class="fas fa-university mr-3 text-blue-500"></i><span></span></h2>
-                <p id="atm-desc" class="text-gray-600 mb-2"></p>
-                <p id="atm-account" class="text-gray-600"></p>
-            </div>
-        </section>
-
-        <!-- Cheque Payment -->
-        <section id="cheque" class="mb-12">
-            <div class="card bg-white p-6 rounded-lg shadow-md">
-                <h2 id="cheque-title" class="text-2xl font-semibold text-blue-800 mb-4 flex items-center"><i class="fas fa-money-check mr-3 text-blue-500"></i><span></span></h2>
-                <p id="cheque-desc" class="text-gray-600 mb-2"></p>
-                <p id="cheque-address" class="text-gray-600 mb-2"></p>
-                <p id="cheque-note" class="text-gray-600"></p>
-            </div>
-        </section>
-
-        <!-- Telegraphic Transfer -->
-        <section id="telegraphic" class="mb-12">
-            <div class="card bg-white p-6 rounded-lg shadow-md">
-                <h2 id="telegraphic-title" class="text-2xl font-semibold text-blue-800 mb-4 flex items-center"><i class="fas fa-globe mr-3 text-blue-500"></i><span></span></h2>
-                <p id="telegraphic-desc" class="text-gray-600 mb-4"></p>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                        <p class="text-gray-600"><strong id="telegraphic-bank-name-label"></strong></p>
-                        <p class="text-gray-800">The Hongkong and Shanghai Banking Corporation Limited</p>
-                    </div>
-                    <div>
-                        <p class="text-gray-600"><strong id="telegraphic-bank-address-label"></strong></p>
-                        <p class="text-gray-800">306-316 King's Road, North Point, Hong Kong</p>
-                    </div>
-                    <div>
-                        <p class="text-gray-600"><strong id="telegraphic-account-name-label"></strong></p>
-                        <p class="text-gray-800">Lyreco (Hong Kong) Company Limited</p>
-                    </div>
-                    <div>
-                        <p class="text-gray-600"><strong id="telegraphic-account-no-label"></strong></p>
-                        <p class="text-gray-800">004-728325-001 (HKD)</p>
-                    </div>
-                    <div>
-                        <p class="text-gray-600"><strong id="telegraphic-bank-code-label"></strong></p>
-                        <p class="text-gray-800">004</p>
-                    </div>
-                    <div>
-                        <p class="text-gray-600"><strong id="telegraphic-swift-code-label"></strong></p>
-                        <p class="text-gray-800">HSBCHKHHHKH</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- FPS -->
-        <section id="fps" class="mb-12">
-            <div class="card bg-white p-6 rounded-lg shadow-md">
-                <h2 id="fps-title" class="text-2xl font-semibold text-blue-800 mb-4 flex items-center"><i class="fas fa-mobile-alt mr-3 text-blue-500"></i><span></span></h2>
-                <p id="fps-id" class="text-gray-600"></p>
-            </div>
-        </section>
-
-        <!-- Other Payment Options -->
-        <section id="other-options" class="mb-12">
-            <div class="card bg-white p-6 rounded-lg shadow-md">
-                <h2 id="other-options-title" class="text-2xl font-semibold text-blue-800 mb-4 flex items-center"><i class="fas fa-ellipsis-h mr-3 text-blue-500"></i><span></span></h2>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                        <p class="text-gray-600"><strong id="other-options-cheque-label"></strong></p>
-                        <p id="other-options-cheque-desc" class="text-gray-800"></p>
-                    </div>
-                    <div>
-                        <p class="text-gray-600"><strong id="other-options-bank-transfer-label"></strong></p>
-                        <p id="other-options-bank-transfer-desc" class="text-gray-800"></p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Payment Details Submission -->
-        <section id="submission" class="mb-12">
-            <div class="card bg-white p-6 rounded-lg shadow-md">
-                <h2 id="submission-title" class="text-2xl font-semibold text-blue-800 mb-4 flex items-center"><i class="fas fa-envelope mr-3 text-blue-500"></i><span></span></h2>
-                <p id="submission-desc" class="text-gray-600 mb-4"></p>
-                <ul class="list-disc pl-6 text-gray-600">
-                    <li id="submission-mail"></li>
-                    <li id="submission-fax"></li>
-                    <li id="submission-email"></li>
+    <!-- Main Layout with Sidebar and Content -->
+    <div class="flex flex-1">
+        <!-- Sidebar Navigation -->
+        <nav id="sidebar" class="sidebar sm:w-64 w-56 bg-white shadow-lg sm:block hidden sm:translate-x-0">
+            <div class="p-6">
+                <h2 id="nav-title" class="text-xl font-bold text-blue-800 mb-4"></h2>
+                <ul class="space-y-2">
+                    <li><a href="#payme" class="nav-link block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-800 rounded"><i class="fas fa-qrcode mr-2"></i><span id="nav-payme"></span></a></li>
+                    <li><a href="#chats" class="nav-link block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-800 rounded"><i class="fas fa-desktop mr-2"></i><span id="nav-chats"></span></a></li>
+                    <li><a href="#autopay" class="nav-link block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-800 rounded"><i class="fas fa-credit-card mr-2"></i><span id="nav-autopay"></span></a></li>
+                    <li><a href="#atm" class="nav-link block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-800 rounded"><i class="fas fa-university mr-2"></i><span id="nav-atm"></span></a></li>
+                    <li><a href="#cheque" class="nav-link block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-800 rounded"><i class="fas fa-money-check mr-2"></i><span id="nav-cheque"></span></a></li>
+                    <li><a href="#telegraphic" class="nav-link block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-800 rounded"><i class="fas fa-globe mr-2"></i><span id="nav-telegraphic"></span></a></li>
+                    <li><a href="#fps" class="nav-link block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-800 rounded"><i class="fas fa-mobile-alt mr-2"></i><span id="nav-fps"></span></a></li>
+                    <li><a href="#other-options" class="nav-link block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-800 rounded"><i class="fas fa-ellipsis-h mr-2"></i><span id="nav-other-options"></span></a></li>
+                    <li><a href="#submission" class="nav-link block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-800 rounded"><i class="fas fa-envelope mr-2"></i><span id="nav-submission"></span></a></li>
                 </ul>
             </div>
-        </section>
+        </nav>
 
-        <!-- Contact Information -->
-        <div class="text-center mb-12">
-            <p id="contact-info" class="text-gray-600 mb-2"></p>
-            <p id="thank-you" class="text-gray-600"></p>
-        </div>
+        <!-- Main Content -->
+        <main class="flex-1 p-8 max-w-4xl mx-auto w-full">
+            <h1 id="main-title" class="text-4xl font-bold text-blue-800 mb-4 text-center fade-in"></h1>
+            <p id="main-subtitle" class="text-gray-600 text-center mb-12 fade-in"></p>
 
-        <!-- Back to Top Button -->
-        <button id="back-to-top" class="fixed bottom-6 right-6 bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 transition hidden">
-            <i class="fas fa-arrow-up"></i>
-        </button>
-    </main>
+            <!-- PayMe Section -->
+            <section id="payme" class="mb-12">
+                <div class="card bg-white p-6 rounded-lg shadow-md">
+                    <h2 id="payme-title" class="text-2xl font-semibold text-blue-800 mb-4 flex items-center"><i class="fas fa-qrcode mr-3 text-red-500"></i><span></span></h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="text-center">
+                            <h3 id="payme-step1-title" class="text-xl font-medium text-gray-700 mb-2"></h3>
+                            <p id="payme-step1-desc" class="text-gray-600 mb-4"></p>
+                            <img src="payme-qr-code.png" alt="PayMe QR Code" class="w-40 h-40 mx-auto border-2 border-red-500 rounded">
+                            <p id="payme-qr-note" class="text-gray-600 italic mt-2"></p>
+                        </div>
+                        <div>
+                            <h3 id="payme-step2-title" class="text-xl font-medium text-gray-700 mb-2"></h3>
+                            <p id="payme-step2-desc1" class="text-gray-600 mb-2"></p>
+                            <p id="payme-step2-desc2" class="text-gray-600 mb-2"></p>
+                            <p id="payme-step2-note" class="text-gray-600 italic"></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Local CHATS -->
+            <section id="chats" class="mb-12">
+                <div class="card bg-white p-6 rounded-lg shadow-md">
+                    <h2 id="chats-title" class="text-2xl font-semibold text-blue-800 mb-4 flex items-center"><i class="fas fa-desktop mr-3 text-blue-500"></i><span></span></h2>
+                    <p id="chats-desc" class="text-gray-600 mb-2"></p>
+                    <p id="chats-account" class="text-gray-600 mb-2"></p>
+                    <p id="chats-note" class="text-gray-600"></p>
+                </div>
+            </section>
+
+            <!-- Autopay (Direct Debit) -->
+            <section id="autopay" class="mb-12">
+                <div class="card bg-white p-6 rounded-lg shadow-md">
+                    <h2 id="autopay-title" class="text-2xl font-semibold text-blue-800 mb-4 flex items-center"><i class="fas fa-credit-card mr-3 text-blue-500"></i><span></span></h2>
+                    <p id="autopay-desc" class="text-gray-600 mb-2"></p>
+                    <p id="autopay-contact" class="text-gray-600"></p>
+                </div>
+            </section>
+
+            <!-- ATM Payment -->
+            <section id="atm" class="mb-12">
+                <div class="card bg-white p-6 rounded-lg shadow-md">
+                    <h2 id="atm-title" class="text-2xl font-semibold text-blue-800 mb-4 flex items-center"><i class="fas fa-university mr-3 text-blue-500"></i><span></span></h2>
+                    <p id="atm-desc" class="text-gray-600 mb-2"></p>
+                    <p id="atm-account" class="text-gray-600"></p>
+                </div>
+            </section>
+
+            <!-- Cheque Payment -->
+            <section id="cheque" class="mb-12">
+                <div class="card bg-white p-6 rounded-lg shadow-md">
+                    <h2 id="cheque-title" class="text-2xl font-semibold text-blue-800 mb-4 flex items-center"><i class="fas fa-money-check mr-3 text-blue-500"></i><span></span></h2>
+                    <p id="cheque-desc" class="text-gray-600 mb-2"></p>
+                    <p id="cheque-address" class="text-gray-600 mb-2"></p>
+                    <p id="cheque-note" class="text-gray-600"></p>
+                </div>
+            </section>
+
+            <!-- Telegraphic Transfer -->
+            <section id="telegraphic" class="mb-12">
+                <div class="card bg-white p-6 rounded-lg shadow-md">
+                    <h2 id="telegraphic-title" class="text-2xl font-semibold text-blue-800 mb-4 flex items-center"><i class="fas fa-globe mr-3 text-blue-500"></i><span></span></h2>
+                    <p id="telegraphic-desc" class="text-gray-600 mb-4"></p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <p class="text-gray-600"><strong id="telegraphic-bank-name-label"></strong></p>
+                            <p class="text-gray-800">The Hongkong and Shanghai Banking Corporation Limited</p>
+                        </div>
+                        <div>
+                            <p class="text-gray-600"><strong id="telegraphic-bank-address-label"></strong></p>
+                            <p class="text-gray-800">306-316 King's Road, North Point, Hong Kong</p>
+                        </div>
+                        <div>
+                            <p class="text-gray-600"><strong id="telegraphic-account-name-label"></strong></p>
+                            <p class="text-gray-800">Lyreco (Hong Kong) Company Limited</p>
+                        </div>
+                        <div>
+                            <p class="text-gray-600"><strong id="telegraphic-account-no-label"></strong></p>
+                            <p class="text-gray-800">004-728325-001 (HKD)</p>
+                        </div>
+                        <div>
+                            <p class="text-gray-600"><strong id="telegraphic-bank-code-label"></strong></p>
+                            <p class="text-gray-800">004</p>
+                        </div>
+                        <div>
+                            <p class="text-gray-600"><strong id="telegraphic-swift-code-label"></strong></p>
+                            <p class="text-gray-800">HSBCHKHHHKH</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FPS -->
+            <section id="fps" class="mb-12">
+                <div class="card bg-white p-6 rounded-lg shadow-md">
+                    <h2 id="fps-title" class="text-2xl font-semibold text-blue-800 mb-4 flex items-center"><i class="fas fa-mobile-alt mr-3 text-blue-500"></i><span></span></h2>
+                    <p id="fps-id" class="text-gray-600"></p>
+                </div>
+            </section>
+
+            <!-- Other Payment Options -->
+            <section id="other-options" class="mb-12">
+                <div class="card bg-white p-6 rounded-lg shadow-md">
+                    <h2 id="other-options-title" class="text-2xl font-semibold text-blue-800 mb-4 flex items-center"><i class="fas fa-ellipsis-h mr-3 text-blue-500"></i><span></span></h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <p class="text-gray-600"><strong id="other-options-cheque-label"></strong></p>
+                            <p id="other-options-cheque-desc" class="text-gray-800"></p>
+                        </div>
+                        <div>
+                            <p class="text-gray-600"><strong id="other-options-bank-transfer-label"></strong></p>
+                            <p id="other-options-bank-transfer-desc" class="text-gray-800"></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Payment Details Submission -->
+            <section id="submission" class="mb-12">
+                <div class="card bg-white p-6 rounded-lg shadow-md">
+                    <h2 id="submission-title" class="text-2xl font-semibold text-blue-800 mb-4 flex items-center"><i class="fas fa-envelope mr-3 text-blue-500"></i><span></span></h2>
+                    <p id="submission-desc" class="text-gray-600 mb-4"></p>
+                    <ul class="list-disc pl-6 text-gray-600">
+                        <li id="submission-mail"></li>
+                        <li id="submission-fax"></li>
+                        <li id="submission-email"></li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Contact Information -->
+            <div class="text-center mb-12">
+                <p id="contact-info" class="text-gray-600 mb-2"></p>
+                <p id="thank-you" class="text-gray-600"></p>
+            </div>
+
+            <!-- Back to Top Button -->
+            <button id="back-to-top" class="fixed bottom-6 right-6 bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 transition hidden">
+                <i class="fas fa-arrow-up"></i>
+            </button>
+        </main>
+    </div>
 
     <!-- Footer -->
-    <footer class="bg-blue-800 text-white py-6 text-center">
+    <footer class="bg-blue-800 text-white py-6 text-center w-full">
         <p>Tel: 2946 2233 | W: <a href="https://www.lyreco.com.hk" class="text-blue-200 hover:underline" target="_blank">www.lyreco.com.hk</a></p>
     </footer>
 
