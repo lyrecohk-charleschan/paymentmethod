@@ -1,6 +1,4 @@
-由於你提供咗一個 `index.html` 文件，但未有相應嘅 `README.md` 文件，我會根據你提供嘅內容同上下文，幫你起草一個簡潔嘅 GitHub `README.md` 總結，介紹你嘅項目（假設係 Lyreco Hong Kong 付款方法網頁）。以下係建議嘅內容：
 
----
 
 # Lyreco Hong Kong Payment Methods
 
