@@ -41,11 +41,4 @@ Feel free to submit issues or pull requests for improvements. Contributions to e
 - **Michael Koo**: michael.koo@lyreco.com | +852 6777 0676
 - General Support: (852) 2946 2233 | [www.lyreco.com.hk](https://www.lyreco.com.hk)
 
----
-
-### 注意事項
-- 請將 `<your-username>` 同 `<repo-name>` 替換為你嘅 GitHub 用戶名同倉庫名稱。
-- 如果你有特定許可證（例如 MIT 或 Apache），請喺 `License` 部分填寫；否則可刪除呢個部分。
-- 如果你想加入更多細節（例如安裝依賴、開發指南等），請話我知，我可以幫你擴展！
-
-將以上內容複製到你嘅 `README.md` 文件中，然後推送至 GitHub 倉庫。
+-
