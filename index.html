@@ -28,13 +28,41 @@
         return gk_fileData[filename] || "";
         }
         </script><!DOCTYPE html>
-<html lang="en">
+<html lang="yue-HK">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Payment Methods - Lyreco</title>
+    <!-- SEO Meta Tags -->
+    <title>Lyreco Hong Kong Payment Methods - PayMe, FPS, CHATS, Cheque</title>
+    <meta name="description" content="Explore Lyreco Hong Kong payment methods including PayMe, FPS, CHATS, Autopay, ATM, Cheque, and Telegraphic Transfer. Convenient and secure payment options for your business in Hong Kong.">
+    <meta name="keywords" content="Lyreco Hong Kong, payment methods, PayMe, FPS, CHATS, Autopay, ATM payment, cheque payment, telegraphic transfer, Hong Kong business payment">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Lyreco Hong Kong">
+
+    <!-- Open Graph Meta Tags for Social Media -->
+    <meta property="og:title" content="Lyreco Hong Kong Payment Methods - PayMe, FPS, CHATS, Cheque">
+    <meta property="og:description" content="Discover convenient payment methods for Lyreco Hong Kong including PayMe, FPS, CHATS, Autopay, ATM, Cheque, and Telegraphic Transfer.">
+    <meta property="og:image" content="https://<your-username>.github.io/<repo-name>/lyreco-logo.png">
+    <meta property="og:url" content="https://<your-username>.github.io/<repo-name>/">
+    <meta property="og:type" content="website">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Lyreco Hong Kong Payment Methods - PayMe, FPS, CHATS, Cheque">
+    <meta name="twitter:description" content="Discover convenient payment methods for Lyreco Hong Kong including PayMe, FPS, CHATS, Autopay, ATM, Cheque, and Telegraphic Transfer.">
+    <meta name="twitter:image" content="https://<your-username>.github.io/<repo-name>/lyreco-logo.png">
+
+    <!-- Hreflang for Multilingual SEO -->
+    <link rel="alternate" hreflang="en" href="https://<your-username>.github.io/<repo-name>/?lang=en">
+    <link rel="alternate" hreflang="zh-Hant-HK" href="https://<your-username>.github.io/<repo-name>/?lang=zh-TW">
+    <link rel="alternate" hreflang="zh-Hans-CN" href="https://<your-username>.github.io/<repo-name>/?lang=zh-CN">
+    <link rel="alternate" hreflang="yue-HK" href="https://<your-username>.github.io/<repo-name>/?lang=yue-HK">
+    <link rel="alternate" hreflang="x-default" href="https://<your-username>.github.io/<repo-name>/">
+
+    <!-- External Scripts -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
     <style>
         .card { transition: transform 0.3s ease; }
         .card:hover { transform: scale(1.03); }
@@ -59,12 +87,13 @@
             <button id="menu-toggle" class="sm:hidden text-2xl focus:outline-none">
                 <i class="fas fa-bars"></i>
             </button>
-            <img src="lyreco-logo.png" alt="Lyreco Logo" class="h-10">
+            <img src="lyreco-logo.png" alt="Lyreco Hong Kong Logo" class="h-10">
         </div>
         <div class="flex space-x-2">
             <button id="lang-en" class="lang-btn px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800 hover:bg-blue-200 transition">English</button>
             <button id="lang-zh-TW" class="lang-btn px-3 py-1 rounded-full text-sm font-medium bg-gray-100 text-gray-800 hover:bg-gray-200 transition">繁體中文</button>
             <button id="lang-zh-CN" class="lang-btn px-3 py-1 rounded-full text-sm font-medium bg-gray-100 text-gray-800 hover:bg-gray-200 transition">简体中文</button>
+            <button id="lang-yue-HK" class="lang-btn px-3 py-1 rounded-full text-sm font-medium bg-gray-100 text-gray-800 hover:bg-gray-200 transition">廣東話 (香港)</button>
         </div>
     </header>
 
@@ -101,7 +130,7 @@
                         <div class="text-center">
                             <h3 id="payme-step1-title" class="text-xl font-medium text-gray-700 mb-2"></h3>
                             <p id="payme-step1-desc" class="text-gray-600 mb-4"></p>
-                            <img src="payme-qr-code.png" alt="PayMe QR Code" class="w-40 h-40 mx-auto border-2 border-red-500 rounded">
+                            <img src="payme-qr-code.png" alt="PayMe QR Code for Lyreco Hong Kong Payment" class="w-40 h-40 mx-auto border-2 border-red-500 rounded">
                             <p id="payme-qr-note" class="text-gray-600 italic mt-2"></p>
                         </div>
                         <div>
@@ -436,6 +465,64 @@
                 "submission-email": "电邮：<a href='mailto:ar.hk@lyreco.com' class='text-blue-600 hover:underline'>ar.hk@lyreco.com</a>",
                 "contact-info": "如有任何疑问，请致电 (852) 29462285 或 (852) 29462287 联系我们。",
                 "thank-you": "多谢您的合作！"
+            },
+            "yue-HK": {
+                "main-title": "畀錢方法",
+                "main-subtitle": "揀一個方便嘅方法嚟結算你嘅賬戶。",
+                "nav-title": "導覽",
+                "nav-payme": "PayMe",
+                "nav-chats": "本地 CHATS",
+                "nav-autopay": "自動轉賬",
+                "nav-atm": "自動櫃員機畀錢",
+                "nav-cheque": "支票畀錢",
+                "nav-telegraphic": "電匯轉賬",
+                "nav-fps": "轉數快",
+                "nav-other-options": "其他選擇",
+                "nav-submission": "交資料",
+                "payme-title": "PayMe - 掃碼畀錢（只限貨到付款客戶）",
+                "payme-step1-title": "步驟 1：開 PayMe 應用程式",
+                "payme-step1-desc": "開 PayMe 應用程式，向左掃開掃描器，掃下面嘅 PayCode：",
+                "payme-qr-note": "用 PayMe 掃呢個 QR 碼",
+                "payme-step2-title": "步驟 2：輸入金額同訂單號碼",
+                "payme-step2-desc1": "輸入金額，然後按下一步。",
+                "payme-step2-desc2": "輸入訂單號碼，然後按畀錢，完成畀 Lyreco 嘅付款。",
+                "payme-step2-note": "例子：訂單號碼 XXXXXXXX",
+                "chats-title": "本地 CHATS 畀錢",
+                "chats-desc": "最受歡迎嘅畀錢方法係用你辦公室電腦嘅電子銀行系統嚟畀錢。",
+                "chats-account": "<strong>銀行戶口：</strong> 004-728325-001 (匯豐銀行)",
+                "chats-note": "<strong>注意：</strong> 轉賬時請寫上發票詳情同你嘅客戶戶口號碼。",
+                "autopay-title": "自動轉賬 - 直接扣款",
+                "autopay-desc": "一個慳時間又方便嘅方法，唔使擔心遲咗畀錢。",
+                "autopay-contact": "打 (852) 29462285 或 (852) 29462287 攞授權表格，或者喺<a href='http://www.lyreco.com.hk/form/autopay.pdf' class='text-blue-600 hover:underline' target='_blank'>我哋網站</a>直接下載。",
+                "atm-title": "自動櫃員機畀錢",
+                "atm-desc": "喺附近嘅匯豐自動櫃員機畀錢。",
+                "atm-account": "<strong>銀行戶口：</strong> 004-728325-001 (匯豐銀行)",
+                "cheque-title": "支票郵寄畀錢",
+                "cheque-desc": "將劃線支票寄去「Lyreco (Hong Kong) Company Limited」，地址係：",
+                "cheque-address": "香港九龍觀塘鴻圖道78號16樓",
+                "cheque-note": "<strong>注意：</strong> 唔好寄現金或者用遠期支票。",
+                "telegraphic-title": "電匯轉賬",
+                "telegraphic-desc": "海外客戶請轉賬去：",
+                "telegraphic-bank-name-label": "銀行名稱：",
+                "telegraphic-bank-address-label": "銀行地址：",
+                "telegraphic-account-name-label": "戶口名稱：",
+                "telegraphic-account-no-label": "戶口號碼：",
+                "telegraphic-bank-code-label": "銀行代碼：",
+                "telegraphic-swift-code-label": "SWIFT 代碼：",
+                "fps-title": "轉數快 (FPS)",
+                "fps-id": "<strong>FPS ID：</strong> 112461512 (港幣)",
+                "other-options-title": "其他畀錢選擇",
+                "other-options-cheque-label": "支票：",
+                "other-options-cheque-desc": "按上面講嘅方法寄劃線支票。",
+                "other-options-bank-transfer-label": "銀行轉賬：",
+                "other-options-bank-transfer-desc": "用本地 CHATS、自動櫃員機或者電匯轉賬，如上面講述。",
+                "submission-title": "交畀錢詳情",
+                "submission-desc": "為咗確保你嘅付款記錄準確同更新，請用以下方法交你嘅付款詳情同客戶戶口號碼：",
+                "submission-mail": "郵寄：香港九龍觀塘鴻圖道78號16樓 利來客(香港)有限公司",
+                "submission-fax": "傳真：(852) 26677910",
+                "submission-email": "電郵：<a href='mailto:ar.hk@lyreco.com' class='text-blue-600 hover:underline'>ar.hk@lyreco.com</a>",
+                "contact-info": "有咩問題，隨時打 (852) 29462285 或 (852) 29462287 搵我哋。",
+                "thank-you": "多謝你嘅支持！"
             }
         };
 
@@ -454,13 +541,17 @@
             });
             document.getElementById(`lang-${lang}`).classList.remove('bg-gray-100', 'text-gray-800');
             document.getElementById(`lang-${lang}`).classList.add('bg-blue-100', 'text-blue-800');
+
+            // Update HTML lang attribute for SEO
+            document.documentElement.lang = lang === 'en' ? 'en' : lang === 'zh-TW' ? 'zh-Hant-HK' : lang === 'zh-CN' ? 'zh-Hans-CN' : 'yue-HK';
         }
 
         document.getElementById('lang-en').addEventListener('click', () => setLanguage('en'));
         document.getElementById('lang-zh-TW').addEventListener('click', () => setLanguage('zh-TW'));
         document.getElementById('lang-zh-CN').addEventListener('click', () => setLanguage('zh-CN'));
+        document.getElementById('lang-yue-HK').addEventListener('click', () => setLanguage('yue-HK'));
 
-        setLanguage('en');
+        setLanguage('yue-HK');
 
         // Sidebar Toggle for Mobile
         const sidebar = document.getElementById('sidebar');
