@@ -175,6 +175,18 @@
     function generatePDF() {
       const { jsPDF } = window.jspdf;
       const doc = new jsPDF();
+      const pageHeight = 297; // A4 height in mm
+      const margin = 10; // 10mm margin
+      const maxY = pageHeight - margin; // Max y position before new page
+
+      // Helper function to check for page overflow
+      function checkPageOverflow(currentY, addHeight) {
+        if (currentY + addHeight > maxY) {
+          doc.addPage();
+          return 10; // Reset y to top of new page
+        }
+        return currentY;
+      }
 
       // Collect form data
       const companyName = document.getElementById('companyName').value || 'N/A';
@@ -216,57 +228,65 @@
       y += 20;
 
       // Section: Company Details
-      doc.setFontSize(14);
+      y = checkPageOverflow(y, 60);
+      doc.setFontSize(13);
       doc.text('Company Details', 10, y);
       doc.setLineWidth(0.5);
       doc.line(10, y + 2, 60, y + 2);
-      y += 10;
-      doc.setFontSize(12);
+      y += 8;
+      doc.setFontSize(11);
       doc.text(`Company Name: ${companyName}`, 10, y);
-      y += 7;
+      y += 6;
       doc.text(`Account No.: ${accountNo}`, 10, y);
-      y += 7;
+      y += 6;
       doc.text(`Contact Person: ${contactPerson}`, 10, y);
-      y += 7;
+      y += 6;
       doc.text(`Telephone: ${telephone}`, 10, y);
-      y += 7;
+      y += 6;
       doc.text(`Fax: ${fax}`, 10, y);
-      y += 7;
+      y += 6;
       doc.text(`Sales Rep. / Code: ${salesRep}`, 10, y);
-      y += 10;
+      y += 8;
 
       // Section: Invoice Details
-      doc.setFontSize(14);
+      y = checkPageOverflow(y, 30);
+      doc.setFontSize(13);
       doc.text('Invoice Details', 10, y);
       doc.line(10, y + 2, 60, y + 2);
-      y += 10;
-      doc.setFontSize(12);
+      y += 8;
+      doc.setFontSize(11);
       doc.text(`Invoice No.: ${invoiceNo}`, 10, y);
-      y += 7;
+      y += 6;
       doc.text(`Invoice Date: ${invoiceDate}`, 10, y);
-      y += 10;
+      y += 8;
 
       // Section: Notes
-      doc.setFontSize(14);
+      y = checkPageOverflow(y, 50);
+      doc.setFontSize(13);
       doc.text('Notes', 10, y);
       doc.line(10, y + 2, 30, y + 2);
-      y += 10;
-      doc.setFontSize(12);
+      y += 8;
+      doc.setFontSize(11);
       doc.text('Reason for Credit Adjustment:', 10, y);
-      y += 7;
+      y += 6;
+      const reasonHeight = doc.getTextDimensions(reason, { maxWidth: 90 }).h;
+      y = checkPageOverflow(y, reasonHeight + 10);
       doc.text(reason, 10, y, { maxWidth: 90 });
-      y += doc.getTextDimensions(reason, { maxWidth: 90 }).h + 5;
+      y += reasonHeight + 4;
       doc.text('Follow-up Action by CSO:', 10, y);
-      y += 7;
+      y += 6;
+      const followUpHeight = doc.getTextDimensions(followUp, { maxWidth: 90 }).h;
+      y = checkPageOverflow(y, followUpHeight + 10);
       doc.text(followUp, 10, y, { maxWidth: 90 });
-      y += doc.getTextDimensions(followUp, { maxWidth: 90 }).h + 10;
+      y += followUpHeight + 8;
 
       // Section: Items
-      doc.setFontSize(14);
+      y = checkPageOverflow(y, 30 + items.length * 7);
+      doc.setFontSize(13);
       doc.text('Items', 10, y);
       doc.line(10, y + 2, 30, y + 2);
-      y += 10;
-      doc.setFontSize(12);
+      y += 8;
+      doc.setFontSize(11);
       const headers = ['SAP Code', 'Inv. Price', 'Off. Price', 'Adj. Amt', 'Qty', 'Amount'];
       const widths = [40, 30, 30, 30, 20, 30];
       let x = 10;
@@ -274,12 +294,13 @@
         doc.text(header, x, y);
         x += widths[i];
       });
-      y += 7;
+      y += 6;
       doc.setLineWidth(0.2);
       doc.line(10, y, 190, y);
-      y += 5;
+      y += 4;
 
       items.forEach(item => {
+        y = checkPageOverflow(y, 7); // Check for each row
         x = 10;
         doc.text(item.sapCode, x, y);
         x += widths[0];
@@ -292,27 +313,29 @@
         doc.text(item.quantity, x, y);
         x += widths[4];
         doc.text(item.amount, x, y);
-        y += 7;
+        y += 6;
         doc.line(10, y - 2, 190, y - 2);
       });
 
-      y += 5;
-      doc.setFontSize(12);
+      y += 4;
+      y = checkPageOverflow(y, 10);
+      doc.setFontSize(11);
       doc.text(`Total Amount: ${totalAmount}`, 10, y);
-      y += 10;
+      y += 8;
 
       // Section: Approval
-      doc.setFontSize(14);
+      y = checkPageOverflow(y, 40);
+      doc.setFontSize(13);
       doc.text('Approval', 10, y);
       doc.line(10, y + 2, 40, y + 2);
-      y += 10;
-      doc.setFontSize(12);
+      y += 8;
+      doc.setFontSize(11);
       doc.text(`Requested By: ${requestedBy}`, 10, y);
-      y += 7;
+      y += 6;
       doc.text(`Date: ${requestDate}`, 10, y);
-      y += 7;
+      y += 6;
       doc.text(`CSO: ${cso}`, 10, y);
-      y += 7;
+      y += 6;
       doc.text(`CSO Date: ${csoDate}`, 10, y);
 
       // Save PDF
