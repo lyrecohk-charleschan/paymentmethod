@@ -2,6 +2,9 @@
         var gk_isXlsx = false;
         var gk_xlsxFileLookup = {};
         var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
         function loadFileData(filename) {
         if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
             try {
@@ -12,12 +15,19 @@
                 // Convert sheet to JSON to filter blank rows
                 var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
                 // Filter out blank rows (rows where all cells are empty, null, or undefined)
-                var filteredData = jsonData.filter(row =>
-                    row.some(cell => cell !== '' && cell !== null && cell !== undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
                 );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
 
                 // Convert filtered JSON back to CSV
-                var csv = XLSX.utils.aoa_to_sheet(filteredData); // Create a new sheet from filtered array of arrays
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
                 csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
                 return csv;
             } catch (e) {
@@ -92,7 +102,7 @@
     </style>
 </head>
 <body class="bg-gradient-to-b from-blue-50 to-white text-gray-800">
-    <!-- Sticky Header -->
+    <!-- sticky header -->
     <header class="sticky-header bg-white shadow-md py-4 px-6 flex justify-between items-center z-50">
         <div class="flex items-center space-x-4">
             <button id="menu-toggle" class="sm:hidden text-2xl focus:outline-none">
@@ -110,9 +120,9 @@
         </div>
     </header>
 
-    <!-- Main Layout with Sidebar and Content -->
+    <!-- main layout with sidebar and content -->
     <div class="flex flex-1">
-        <!-- Sidebar Navigation -->
+        <!-- sidebar navigation -->
         <nav id="sidebar" class="sidebar sm:w-64 w-56 bg-white shadow-lg sm:block hidden sm:translate-x-0">
             <div class="p-6">
                 <h2 id="nav-title" class="text-xl font-bold text-blue-800 mb-4"></h2>
@@ -126,11 +136,12 @@
                     <li><a href="#fps" class="nav-link block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-800 rounded"><i class="fas fa-mobile-alt mr-2"></i><span id="nav-fps"></span></a></li>
                     <li><a href="#other-options" class="nav-link block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-800 rounded"><i class="fas fa-ellipsis-h mr-2"></i><span id="nav-other-options"></span></a></li>
                     <li><a href="#submission" class="nav-link block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-800 rounded"><i class="fas fa-envelope mr-2"></i><span id="nav-submission"></span></a></li>
+                    <li><a href="#submit-form" class="nav-link block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-800 rounded"><i class="fas fa-upload mr-2"></i><span id="nav-submit-form"></span></a></li>
                 </ul>
             </div>
         </nav>
 
-        <!-- Main Content -->
+        <!-- main content -->
         <main class="flex-1 p-8 max-w-4xl mx-auto w-full">
             <h1 id="main-title" class="text-4xl font-bold text-blue-800 mb-4 text-center fade-in"></h1>
             <p id="main-subtitle" class="text-gray-600 text-center mb-4 fade-in"></p>
@@ -284,6 +295,32 @@
                 </div>
             </section>
 
+            <!-- Submit Form Section -->
+            <section id="submit-form" class="mb-12">
+                <div class="card bg-white p-6 rounded-lg shadow-md">
+                    <h2 id="submit-form-title" class="text-2xl font-semibold text-blue-800 mb-4 flex items-center">
+                        <i class="fas fa-upload mr-3 text-blue-500"></i><span></span>
+                    </h2>
+                    <p id="submit-form-desc" class="text-gray-600 mb-4"></p>
+                    <div class="space-y-4">
+                        <div>
+                            <label for="account-number" id="account-number-label" class="block text-gray-700 font-medium mb-1"></label>
+                            <input type="text" id="account-number" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter your account number">
+                        </div>
+                        <div>
+                            <label for="company-name" id="company-name-label" class="block text-gray-700 font-medium mb-1"></label>
+                            <input type="text" id="company-name" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Enter your company name">
+                        </div>
+                        <div>
+                            <label for="file-upload" id="file-upload-label" class="block text-gray-700 font-medium mb-1"></label>
+                            <input type="file" id="file-upload" accept=".jpg,.jpeg,.png,.pdf" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <p id="file-upload-note" class="text-gray-600 text-sm mt-1"></p>
+                        </div>
+                        <button id="submit-button" class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition focus:outline-none focus:ring-2 focus:ring-blue-500"></button>
+                    </div>
+                </div>
+            </section>
+
             <!-- Contact Information -->
             <div class="text-center mb-12">
                 <p id="contact-info" class="text-gray-600 mb-2"></p>
@@ -297,7 +334,7 @@
         </main>
     </div>
 
-    <!-- Footer -->
+    <!-- footer -->
     <footer class="bg-blue-800 text-white py-6 text-center w-full">
         <div class="max-w-4xl mx-auto px-4">
             <p class="mb-4">Tel: 2946 2233 | W: <a href="https://www.lyreco.com.hk" class="text-blue-200 hover:underline" target="_blank">www.lyreco.com.hk</a></p>
@@ -337,6 +374,7 @@
                 "nav-fps": "FPS",
                 "nav-other-options": "Other Options",
                 "nav-submission": "Submit Details",
+                "nav-submit-form": "Upload Form",
                 "payme-title": "PayMe - Scan & Pay (For COD Customers Only)",
                 "payme-step1-title": "Step 1: Open PayMe App",
                 "payme-step1-desc": "Open the PayMe app, swipe left to open the scanner, and scan the PayCode below:",
@@ -381,6 +419,13 @@
                 "submission-mail": "Mail: Lyreco (Hong Kong) Co. Ltd, 16th Floor, 78 Hung To Road, Kwun Tong, Kowloon",
                 "submission-fax": "Fax: (852) 26677910",
                 "submission-email": "Email: <a href='mailto:ar.hk@lyreco.com' class='text-blue-600 hover:underline'>ar.hk@lyreco.com</a>",
+                "submit-form-title": "Upload Payment Details",
+                "submit-form-desc": "Fill in the details below and attach a file (JPG, PNG, or PDF) to submit your payment details directly.",
+                "account-number-label": "Account Number:",
+                "company-name-label": "Company Name:",
+                "file-upload-label": "Upload File:",
+                "file-upload-note": "Accepted formats: JPG, PNG, PDF",
+                "submit-button": "Submit Details",
                 "contact-info": "For any questions, contact us at (852) 29462285 or (852) 29462287.",
                 "thank-you": "Thank you for your cooperation!"
             },
@@ -398,6 +443,7 @@
                 "nav-fps": "轉數快",
                 "nav-other-options": "其他選項",
                 "nav-submission": "提交詳情",
+                "nav-submit-form": "上傳表格",
                 "payme-title": "PayMe - 掃碼付款（僅限貨到付款客戶）",
                 "payme-step1-title": "步驟 1：開啟 PayMe 應用程式",
                 "payme-step1-desc": "開啟 PayMe 應用程式，向左滑動以開啟掃描器，然後掃描下面的 PayCode：",
@@ -442,6 +488,13 @@
                 "submission-mail": "郵寄：香港九龍觀塘鴻圖道78號16樓 利來客(香港)有限公司",
                 "submission-fax": "傳真：(852) 26677910",
                 "submission-email": "電郵：<a href='mailto:ar.hk@lyreco.com' class='text-blue-600 hover:underline'>ar.hk@lyreco.com</a>",
+                "submit-form-title": "上傳付款詳情",
+                "submit-form-desc": "請填寫以下資料並上傳文件（JPG、PNG 或 PDF），以直接提交您的付款詳情。",
+                "account-number-label": "賬戶號碼：",
+                "company-name-label": "公司名稱：",
+                "file-upload-label": "上傳文件：",
+                "file-upload-note": "接受格式：JPG、PNG、PDF",
+                "submit-button": "提交詳情",
                 "contact-info": "如有任何疑問，請致電 (852) 29462285 或 (852) 29462287 聯繫我們。",
                 "thank-you": "多謝您的合作！"
             },
@@ -459,6 +512,7 @@
                 "nav-fps": "转数快",
                 "nav-other-options": "其他选项",
                 "nav-submission": "提交详情",
+                "nav-submit-form": "上传表格",
                 "payme-title": "PayMe - 扫码付款（仅限货到付款客户）",
                 "payme-step1-title": "步骤 1：开启 PayMe 应用程序",
                 "payme-step1-desc": "开启 PayMe 应用程序，向左滑动以开启扫描器，然后扫描下面的 PayCode：",
@@ -503,6 +557,13 @@
                 "submission-mail": "邮寄：香港九龙观塘鸿图道78号16楼 利来客(香港)有限公司",
                 "submission-fax": "传真：(852) 26677910",
                 "submission-email": "电邮：<a href='mailto:ar.hk@lyreco.com' class='text-blue-600 hover:underline'>ar.hk@lyreco.com</a>",
+                "submit-form-title": "上传付款详情",
+                "submit-form-desc": "请填写以下资料并上传文件（JPG、PNG 或 PDF），以直接提交您的付款详情。",
+                "account-number-label": "账户号码：",
+                "company-name-label": "公司名称：",
+                "file-upload-label": "上传文件：",
+                "file-upload-note": "接受格式：JPG、PNG、PDF",
+                "submit-button": "提交详情",
                 "contact-info": "如有任何疑问，请致电 (852) 29462285 或 (852) 29462287 联系我们。",
                 "thank-you": "多谢您的合作！"
             },
@@ -520,6 +581,7 @@
                 "nav-fps": "轉數快",
                 "nav-other-options": "其他選擇",
                 "nav-submission": "交資料",
+                "nav-submit-form": "上傳表格",
                 "payme-title": "PayMe - 掃碼付款（只限貨到付款客戶）",
                 "payme-step1-title": "步驟 1：開 PayMe 應用程式",
                 "payme-step1-desc": "開 PayMe 應用程式，向左掃開掃描器，掃下面嘅 PayCode：",
@@ -564,6 +626,13 @@
                 "submission-mail": "郵寄：香港九龍觀塘鴻圖道78號16樓 利來客(香港)有限公司",
                 "submission-fax": "傳真：(852) 26677910",
                 "submission-email": "電郵：<a href='mailto:ar.hk@lyreco.com' class='text-blue-600 hover:underline'>ar.hk@lyreco.com</a>",
+                "submit-form-title": "上傳付款詳情",
+                "submit-form-desc": "請填寫下面嘅資料同上傳文件（JPG、PNG 或 PDF），直接提交你嘅付款詳情。",
+                "account-number-label": "賬戶號碼：",
+                "company-name-label": "公司名稱：",
+                "file-upload-label": "上傳文件：",
+                "file-upload-note": "接受格式：JPG、PNG、PDF",
+                "submit-button": "提交詳情",
                 "contact-info": "有咩問題，隨時打 (852) 29462285 或 (852) 29462287 搵我哋。",
                 "thank-you": "多謝你嘅支持！"
             }
@@ -619,6 +688,46 @@
         });
         backToTop.addEventListener('click', () => {
             window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Submit Form Handling
+        document.getElementById('submit-button').addEventListener('click', () => {
+            const accountNumber = document.getElementById('account-number').value;
+            const companyName = document.getElementById('company-name').value;
+            const fileInput = document.getElementById('file-upload');
+            const file = fileInput.files[0];
+
+            if (!accountNumber || !companyName) {
+                alert('Please fill in all required fields (Account Number and Company Name).');
+                return;
+            }
+
+            if (!file) {
+                alert('Please upload a file (JPG, PNG, or PDF).');
+                return;
+            }
+
+            const allowedTypes = ['image/jpeg', 'image/png', 'application/pdf'];
+            if (!allowedTypes.includes(file.type)) {
+                alert('Please upload a valid file type (JPG, PNG, or PDF).');
+                return;
+            }
+
+            // Prepare email content
+            const subject = encodeURIComponent('Payment Details Submission');
+            const body = encodeURIComponent(
+                `Account Number: ${accountNumber}\n` +
+                `Company Name: ${companyName}\n\n` +
+                `Please find the attached payment details file.`
+            );
+            const mailtoLink = `mailto:ar.hk@lyreco.com;charles.chan@lyreco.com?subject=${subject}&body=${body}`;
+
+            // Open email client with pre-filled email
+            window.location.href = mailtoLink;
+
+            // Note: Attaching files via mailto is not directly supported in all browsers.
+            // The user will need to manually attach the file in their email client.
+            alert('Your email client will open. Please manually attach the file and send the email.');
         });
     </script>
 </body>
