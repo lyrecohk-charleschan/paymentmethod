@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Credit Note Request Form</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+  <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-4xl">
+    <img src="https://cdn-s1.lyreco.com/staticswebshop/pictures/looknfeel/common/logo.svg" alt="Lyreco Logo" class="h-12 mb-6">
+    <h1 class="text-2xl font-bold mb-6 text-center">Credit Note Request Form</h1>
+    <form id="creditNoteForm" class="space-y-6">
+      <!-- Company Details -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Company Name <span class="text-red-500">*</span></label>
+          <input type="text" id="companyName" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" required>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Account No. <span class="text-red-500">*</span></label>
+          <input type="text" id="accountNo" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" required>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Contact Person <span class="text-red-500">*</span></label>
+          <input type="text" id="contactPerson" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" required>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Telephone <span class="text-red-500">*</span></label>
+          <input type="tel" id="telephone" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" required>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Fax</label>
+          <input type="text" id="fax" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Sales Rep. / Code <span class="text-red-500">*</span></label>
+          <input type="text" id="salesRep" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" required>
+        </div>
+      </div>
+
+      <!-- Invoice Details -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Invoice No. <span class="text-red-500">*</span></label>
+          <input type="text" id="invoiceNo" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" required>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Invoice Date <span class="text-red-500">*</span></label>
+          <input type="date" id="invoiceDate" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" required>
+        </div>
+      </div>
+
+      <!-- Reason and Follow-up (Parallel) -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Reason for Credit Adjustment</label>
+          <textarea id="reason" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" rows="4"></textarea>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Follow-up Action by CSO</label>
+          <textarea id="followUp" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" rows="4"></textarea>
+        </div>
+      </div>
+
+      <!-- Items Table -->
+      <div>
+        <h2 class="text-lg font-medium text-gray-700 mb-2">Items</h2>
+        <div class="overflow-x-auto">
+          <table class="min-w-full border-collapse">
+            <thead>
+              <tr class="bg-gray-200">
+                <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">SAP Code</th>
+                <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">Invoice Price</th>
+                <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">Offered Price</th>
+                <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">Adjusting Amount</th>
+                <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">Quantity</th>
+                <th class="px-4 py-2 text-left text-sm font-medium text-gray-700">Amount</th>
+                <th class="px-4 py-2"></th>
+              </tr>
+            </thead>
+            <tbody id="itemsTable">
+              <tr class="item-row">
+                <td class="px-4 py-2"><input type="text" class="w-full rounded-md border-gray-300 shadow-sm" name="sapCode"></td>
+                <td class="px-4 py-2"><input type="number" step="0.01" class="w-full rounded-md border-gray-300 shadow-sm" name="invoicePrice" oninput="calculateRow(this)"></td>
+                <td class="px-4 py-2"><input type="number" step="0.01" class="w-full rounded-md border-gray-300 shadow-sm" name="offeredPrice" oninput="calculateRow(this)"></td>
+                <td class="px-4 py-2"><input type="number" step="0.01" class="w-full rounded-md border-gray-300 shadow-sm" name="adjustingAmount" readonly></td>
+                <td class="px-4 py-2"><input type="number" class="w-full rounded-md border-gray-300 shadow-sm" name="quantity" oninput="calculateRow(this)"></td>
+                <td class="px-4 py-2"><input type="number" step="0.01" class="w-full rounded-md border-gray-300 shadow-sm" name="amount" readonly></td>
+                <td class="px-4 py-2"><button type="button" class="text-red-600 hover:text-red-800" onclick="removeRow(this)">Remove</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <button type="button" class="mt-2 bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700" onclick="addRow()">Add Item</button>
+      </div>
+
+      <!-- Total Amount -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700">Total Amount</label>
+        <input type="number" step="0.01" id="totalAmount" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" readonly>
+      </div>
+
+      <!-- Requested By and CSO -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Requested By <span class="text-red-500">*</span></label>
+          <input type="text" id="requestedBy" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" required>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Date</label>
+          <input type="date" id="requestDate" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700">CSO</label>
+          <input type="text" id="cso" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700">CSO Date</label>
+          <input type="date" id="csoDate" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+        </div>
+      </div>
+
+      <!-- Submit and Print Buttons -->
+      <div class="text-center space-x-4">
+        <button type="submit" class="bg-indigo-600 text-white px-6 py-3 rounded-md hover:bg-indigo-700">Submit via Email</button>
+        <button type="button" onclick="generatePDF()" class="bg-green-600 text-white px-6 py-3 rounded-md hover:bg-green-700">Print PDF</button>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    function calculateRow(input) {
+      const row = input.closest('tr');
+      const invoicePrice = parseFloat(row.querySelector('[name="invoicePrice"]').value) || 0;
+      const offeredPrice = parseFloat(row.querySelector('[name="offeredPrice"]').value) || 0;
+      const quantity = parseFloat(row.querySelector('[name="quantity"]').value) || 0;
+      const adjustingAmount = invoicePrice - offeredPrice;
+      const amount = adjustingAmount * quantity;
+
+      row.querySelector('[name="adjustingAmount"]').value = adjustingAmount.toFixed(2);
+      row.querySelector('[name="amount"]').value = amount.toFixed(2);
+      calculateTotal();
+    }
+
+    function calculateTotal() {
+      const rows = document.querySelectorAll('.item-row');
+      let total = 0;
+      rows.forEach(row => {
+        const amount = parseFloat(row.querySelector('[name="amount"]').value) || 0;
+        total += amount;
+      });
+      document.getElementById('totalAmount').value = total.toFixed(2);
+    }
+
+    function addRow() {
+      const table = document.getElementById('itemsTable');
+      const newRow = table.rows[0].cloneNode(true);
+      newRow.querySelectorAll('input').forEach(input => {
+        input.value = '';
+        if (input.hasAttribute('readonly')) input.value = '';
+      });
+      table.appendChild(newRow);
+    }
+
+    function removeRow(button) {
+      const row = button.closest('tr');
+      if (document.querySelectorAll('.item-row').length > 1) {
+        row.remove();
+        calculateTotal();
+      }
+    }
+
+    function generatePDF() {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+
+      // Collect form data
+      const companyName = document.getElementById('companyName').value || 'N/A';
+      const accountNo = document.getElementById('accountNo').value || 'N/A';
+      const contactPerson = document.getElementById('contactPerson').value || 'N/A';
+      const telephone = document.getElementById('telephone').value || 'N/A';
+      const fax = document.getElementById('fax').value || 'N/A';
+      const salesRep = document.getElementById('salesRep').value || 'N/A';
+      const invoiceNo = document.getElementById('invoiceNo').value || 'N/A';
+      const invoiceDate = document.getElementById('invoiceDate').value || 'N/A';
+      const reason = document.getElementById('reason').value || 'N/A';
+      const followUp = document.getElementById('followUp').value || 'N/A';
+      const requestedBy = document.getElementById('requestedBy').value || 'N/A';
+      const requestDate = document.getElementById('requestDate').value || 'N/A';
+      const cso = document.getElementById('cso').value || 'N/A';
+      const csoDate = document.getElementById('csoDate').value || 'N/A';
+      const totalAmount = document.getElementById('totalAmount').value || '0.00';
+
+      // Collect items
+      const items = [];
+      document.querySelectorAll('.item-row').forEach(row => {
+        items.push({
+          sapCode: row.querySelector('[name="sapCode"]').value || 'N/A',
+          invoicePrice: row.querySelector('[name="invoicePrice"]').value || '0.00',
+          offeredPrice: row.querySelector('[name="offeredPrice"]').value || '0.00',
+          adjustingAmount: row.querySelector('[name="adjustingAmount"]').value || '0.00',
+          quantity: row.querySelector('[name="quantity"]').value || '0',
+          amount: row.querySelector('[name="amount"]').value || '0.00'
+        });
+      });
+
+      // PDF Content
+      let y = 10;
+
+      // Header with Logo
+      doc.addImage('https://cdn-s1.lyreco.com/staticswebshop/pictures/looknfeel/common/logo.svg', 'SVG', 10, y, 40, 12);
+      doc.setFontSize(16);
+      doc.text('Credit Note Request Form', 105, y + 10, { align: 'center' });
+      y += 20;
+
+      // Section: Company Details
+      doc.setFontSize(14);
+      doc.text('Company Details', 10, y);
+      doc.setLineWidth(0.5);
+      doc.line(10, y + 2, 60, y + 2);
+      y += 10;
+      doc.setFontSize(12);
+      doc.text(`Company Name: ${companyName}`, 10, y);
+      y += 7;
+      doc.text(`Account No.: ${accountNo}`, 10, y);
+      y += 7;
+      doc.text(`Contact Person: ${contactPerson}`, 10, y);
+      y += 7;
+      doc.text(`Telephone: ${telephone}`, 10, y);
+      y += 7;
+      doc.text(`Fax: ${fax}`, 10, y);
+      y += 7;
+      doc.text(`Sales Rep. / Code: ${salesRep}`, 10, y);
+      y += 10;
+
+      // Section: Invoice Details
+      doc.setFontSize(14);
+      doc.text('Invoice Details', 10, y);
+      doc.line(10, y + 2, 60, y + 2);
+      y += 10;
+      doc.setFontSize(12);
+      doc.text(`Invoice No.: ${invoiceNo}`, 10, y);
+      y += 7;
+      doc.text(`Invoice Date: ${invoiceDate}`, 10, y);
+      y += 10;
+
+      // Section: Notes
+      doc.setFontSize(14);
+      doc.text('Notes', 10, y);
+      doc.line(10, y + 2, 30, y + 2);
+      y += 10;
+      doc.setFontSize(12);
+      doc.text('Reason for Credit Adjustment:', 10, y);
+      y += 7;
+      doc.text(reason, 10, y, { maxWidth: 90 });
+      y += doc.getTextDimensions(reason, { maxWidth: 90 }).h + 5;
+      doc.text('Follow-up Action by CSO:', 10, y);
+      y += 7;
+      doc.text(followUp, 10, y, { maxWidth: 90 });
+      y += doc.getTextDimensions(followUp, { maxWidth: 90 }).h + 10;
+
+      // Section: Items
+      doc.setFontSize(14);
+      doc.text('Items', 10, y);
+      doc.line(10, y + 2, 30, y + 2);
+      y += 10;
+      doc.setFontSize(12);
+      const headers = ['SAP Code', 'Inv. Price', 'Off. Price', 'Adj. Amt', 'Qty', 'Amount'];
+      const widths = [40, 30, 30, 30, 20, 30];
+      let x = 10;
+      headers.forEach((header, i) => {
+        doc.text(header, x, y);
+        x += widths[i];
+      });
+      y += 7;
+      doc.setLineWidth(0.2);
+      doc.line(10, y, 190, y);
+      y += 5;
+
+      items.forEach(item => {
+        x = 10;
+        doc.text(item.sapCode, x, y);
+        x += widths[0];
+        doc.text(item.invoicePrice, x, y);
+        x += widths[1];
+        doc.text(item.offeredPrice, x, y);
+        x += widths[2];
+        doc.text(item.adjustingAmount, x, y);
+        x += widths[3];
+        doc.text(item.quantity, x, y);
+        x += widths[4];
+        doc.text(item.amount, x, y);
+        y += 7;
+        doc.line(10, y - 2, 190, y - 2);
+      });
+
+      y += 5;
+      doc.setFontSize(12);
+      doc.text(`Total Amount: ${totalAmount}`, 10, y);
+      y += 10;
+
+      // Section: Approval
+      doc.setFontSize(14);
+      doc.text('Approval', 10, y);
+      doc.line(10, y + 2, 40, y + 2);
+      y += 10;
+      doc.setFontSize(12);
+      doc.text(`Requested By: ${requestedBy}`, 10, y);
+      y += 7;
+      doc.text(`Date: ${requestDate}`, 10, y);
+      y += 7;
+      doc.text(`CSO: ${cso}`, 10, y);
+      y += 7;
+      doc.text(`CSO Date: ${csoDate}`, 10, y);
+
+      // Save PDF
+      doc.save('Credit_Note_Request_Form.pdf');
+    }
+
+    document.getElementById('creditNoteForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const form = this;
+
+      // Validate required fields
+      const requiredFields = form.querySelectorAll('[required]');
+      let isValid = true;
+      requiredFields.forEach(field => {
+        if (!field.value.trim()) {
+          isValid = false;
+          field.classList.add('border-red-500');
+        } else {
+          field.classList.remove('border-red-500');
+        }
+      });
+
+      if (!isValid) {
+        alert('Please fill in all required fields.');
+        return;
+      }
+
+      // Collect form data
+      const companyName = document.getElementById('companyName').value;
+      const accountNo = document.getElementById('accountNo').value;
+      const contactPerson = document.getElementById('contactPerson').value;
+      const telephone = document.getElementById('telephone').value;
+      const fax = document.getElementById('fax').value;
+      const salesRep = document.getElementById('salesRep').value;
+      const invoiceNo = document.getElementById('invoiceNo').value;
+      const invoiceDate = document.getElementById('invoiceDate').value;
+      const reason = document.getElementById('reason').value;
+      const followUp = document.getElementById('followUp').value;
+      const requestedBy = document.getElementById('requestedBy').value;
+      const requestDate = document.getElementById('requestDate').value;
+      const cso = document.getElementById('cso').value;
+      const csoDate = document.getElementById('csoDate').value;
+      const totalAmount = document.getElementById('totalAmount').value;
+
+      // Collect items
+      const items = [];
+      document.querySelectorAll('.item-row').forEach(row => {
+        const item = {
+          sapCode: row.querySelector('[name="sapCode"]').value,
+          invoicePrice: row.querySelector('[name="invoicePrice"]').value,
+          offeredPrice: row.querySelector('[name="offeredPrice"]').value,
+          adjustingAmount: row.querySelector('[name="adjustingAmount"]').value,
+          quantity: row.querySelector('[name="quantity"]').value,
+          amount: row.querySelector('[name="amount"]').value
+        };
+        items.push(item);
+      });
+
+      // Format items for email
+      const itemsText = items.map((item, index) => `
+        Item ${index + 1}:
+        SAP Code: ${item.sapCode}
+        Invoice Price: ${item.invoicePrice}
+        Offered Price: ${item.offeredPrice}
+        Adjusting Amount: ${item.adjustingAmount}
+        Quantity: ${item.quantity}
+        Amount: ${item.amount}
+      `).join('\n');
+
+      // Create email body
+      const emailBody = `
+Credit Note Request Form
+
+Company Name: ${companyName}
+Account No.: ${accountNo}
+Contact Person: ${contactPerson}
+Telephone: ${telephone}
+Fax: ${fax}
+Sales Rep. / Code: ${salesRep}
+Invoice No.: ${invoiceNo}
+Invoice Date: ${invoiceDate}
+Reason for Credit Adjustment: ${reason}
+Follow-up Action by CSO: ${followUp}
+
+Items:
+${itemsText}
+
+Total Amount: ${totalAmount}
+
+Requested By: ${requestedBy}
+Date: ${requestDate}
+CSO: ${cso}
+CSO Date: ${csoDate}
+      `;
+
+      // Create mailto link
+      const mailtoLink = `mailto:cs.hk@lyreco.com?subject=Credit Note Request&body=${encodeURIComponent(emailBody)}`;
+      window.location.href = mailtoLink;
+    });
+  </script>
+</body>
+</html>
