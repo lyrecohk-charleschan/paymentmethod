@@ -179,7 +179,12 @@
       const pageHeight = 297; // A4 height in mm
       const margin = 10; // 10mm margin
       const maxY = pageHeight - margin; // Max y position before new page
-      const tableWidth = pageWidth - 2 * margin; // Table width within margins
+      const colWidth = (pageWidth - 2 * margin - 4) / 2; // Two columns with 4mm gap
+      const leftColX = margin;
+      const rightColX = margin + colWidth + 4;
+
+      // Declare leftY and rightY once
+      let leftY, rightY;
 
       // Helper function to check for page overflow
       function checkPageOverflow(currentY, addHeight) {
@@ -191,9 +196,13 @@
       }
 
       // Helper function to draw table borders
-      function drawTableCell(x, y, width, height, text, align = 'left') {
+      function drawTableCell(x, y, width, height, text, align = 'left', isHeader = false) {
         doc.setLineWidth(0.2);
         doc.rect(x, y - 4, width, height); // Draw cell border
+        if (isHeader) {
+          doc.setFillColor(229, 231, 235); // Tailwind bg-gray-200
+          doc.rect(x, y - 4, width, height, 'F');
+        }
         if (align === 'right') {
           doc.text(text, x + width - 2, y, { align: 'right' });
         } else {
@@ -234,78 +243,93 @@
       // PDF Content
       let y = 10;
 
-      // Header with Logo (Use PNG fallback if SVG fails)
+      // Header with Logo
       try {
-        doc.addImage('https://cdn-s1.lyreco.com/staticswebshop/pictures/looknfeel/common/logo.svg', 'SVG', margin, y, 40, 12);
+        // Placeholder PNG URL (replace with actual Lyreco PNG logo URL)
+        const logoUrl = 'https://via.placeholder.com/150x50.png?text=Lyreco+Logo';
+        doc.addImage(logoUrl, 'PNG', margin, y, 40, 12); // 12mm height ≈ 48px
       } catch (e) {
-        console.warn('SVG logo failed to load, using fallback text');
+        console.warn('Logo failed to load, using fallback text');
         doc.setFontSize(11);
         doc.text('Lyreco Logo', margin, y + 6);
       }
-      doc.setFontSize(16);
+      doc.setFontSize(18); // Match text-2xl
       doc.text('Credit Note Request Form', pageWidth / 2, y + 10, { align: 'center' });
-      y += 20;
+      y += 18; // 12mm logo + 6mm margin (≈ mb-6)
 
       // Section: Company Details
-      let sectionHeight = doc.getTextDimensions(`Company Name: ${companyName}`, { maxWidth: 180 }).h + 6 * 5 + 8 * 2;
+      let sectionHeight = 0;
+      const companyFields = [
+        { label: 'Company Name', value: companyName },
+        { label: 'Account No.', value: accountNo },
+        { label: 'Contact Person', value: contactPerson },
+        { label: 'Telephone', value: telephone },
+        { label: 'Fax', value: fax },
+        { label: 'Sales Rep. / Code', value: salesRep }
+      ];
+      companyFields.forEach(field => {
+        sectionHeight += doc.getTextDimensions(`${field.label}: ${field.value}`, { maxWidth: colWidth - 2 }).h + 6;
+      });
+      sectionHeight += 8 * 2; // Header and spacing
       y = checkPageOverflow(y, sectionHeight);
-      doc.setFontSize(13);
+      doc.setFontSize(14); // Match text-lg
       doc.text('Company Details', margin, y);
       doc.setLineWidth(0.5);
       doc.line(margin, y + 2, margin + 50, y + 2);
       y += 8;
-      doc.setFontSize(11);
-      doc.text(`Company Name: ${companyName}`, margin, y, { maxWidth: 180 });
-      y += doc.getTextDimensions(`Company Name: ${companyName}`, { maxWidth: 180 }).h + 2;
-      doc.text(`Account No.: ${accountNo}`, margin, y);
-      y += 6;
-      doc.text(`Contact Person: ${contactPerson}`, margin, y);
-      y += 6;
-      doc.text(`Telephone: ${telephone}`, margin, y);
-      y += 6;
-      doc.text(`Fax: ${fax}`, margin, y);
-      y += 6;
-      doc.text(`Sales Rep. / Code: ${salesRep}`, margin, y);
-      y += 8;
+      leftY = y;
+      rightY = y;
+      doc.setFontSize(11); // Match text-sm
+      companyFields.forEach((field, index) => {
+        const text = `${field.label}: ${field.value}`;
+        const height = doc.getTextDimensions(text, { maxWidth: colWidth - 2 }).h;
+        const targetY = index % 2 === 0 ? leftY : rightY;
+        const targetX = index % 2 === 0 ? leftColX : rightColX;
+        y = checkPageOverflow(targetY, height + 6);
+        if (y !== targetY) {
+          leftY = y;
+          rightY = y;
+        }
+        doc.text(text, targetX, index % 2 === 0 ? leftY : rightY, { maxWidth: colWidth - 2 });
+        if (index % 2 === 0) leftY += height + 6;
+        else rightY += height + 6;
+      });
+      y = Math.max(leftY, rightY) + 8;
 
       // Section: Invoice Details
       sectionHeight = 8 + 6 * 2 + 8;
       y = checkPageOverflow(y, sectionHeight);
-      doc.setFontSize(13);
+      doc.setFontSize(14);
       doc.text('Invoice Details', margin, y);
       doc.line(margin, y + 2, margin + 50, y + 2);
       y += 8;
       doc.setFontSize(11);
-      doc.text(`Invoice No.: ${invoiceNo}`, margin, y);
-      y += 6;
-      doc.text(`Invoice Date: ${invoiceDate}`, margin, y);
-      y += 8;
+      doc.text(`Invoice No.: ${invoiceNo}`, leftColX, y, { maxWidth: colWidth - 2 });
+      doc.text(`Invoice Date: ${invoiceDate}`, rightColX, y, { maxWidth: colWidth - 2 });
+      y += 6 + 8;
 
       // Section: Notes
-      const reasonHeight = doc.getTextDimensions(reason, { maxWidth: 90 }).h;
-      const followUpHeight = doc.getTextDimensions(followUp, { maxWidth: 90 }).h;
+      const reasonHeight = doc.getTextDimensions(reason, { maxWidth: colWidth - 2 }).h;
+      const followUpHeight = doc.getTextDimensions(followUp, { maxWidth: colWidth - 2 }).h;
       sectionHeight = 8 + 6 * 2 + reasonHeight + followUpHeight + 4 * 2 + 8;
       y = checkPageOverflow(y, sectionHeight);
-      doc.setFontSize(13);
+      doc.setFontSize(14);
       doc.text('Notes', margin, y);
       doc.line(margin, y + 2, margin + 30, y + 2);
       y += 8;
       doc.setFontSize(11);
-      doc.text('Reason for Credit Adjustment:', margin, y);
+      doc.text('Reason for Credit Adjustment:', leftColX, y);
+      doc.text('Follow-up Action by CSO:', rightColX, y);
       y += 6;
-      y = checkPageOverflow(y, reasonHeight + 4);
-      doc.text(reason, margin, y, { maxWidth: 90 });
-      y += reasonHeight + 4;
-      doc.text('Follow-up Action by CSO:', margin, y);
-      y += 6;
-      y = checkPageOverflow(y, followUpHeight + 4);
-      doc.text(followUp, margin, y, { maxWidth: 90 });
-      y += followUpHeight + 8;
+      y = checkPageOverflow(y, Math.max(reasonHeight, followUpHeight) + 4);
+      doc.text(reason, leftColX, y, { maxWidth: colWidth - 2 });
+      doc.text(followUp, rightColX, y, { maxWidth: colWidth - 2 });
+      y += Math.max(reasonHeight, followUpHeight) + 8;
 
       // Section: Items
       sectionHeight = 8 + 8 + 8 * items.length + 4 + 8;
       y = checkPageOverflow(y, sectionHeight);
-      doc.setFontSize(13);
+      doc.setFontSize(14);
       doc.text('Items', margin, y);
       doc.line(margin, y + 2, margin + 30, y + 2);
       y += 8;
@@ -315,7 +339,7 @@
       let x = margin;
       const tableStartY = y;
       headers.forEach((header, i) => {
-        drawTableCell(x, y, widths[i], 8, header, i === 0 ? 'left' : 'right');
+        drawTableCell(x, y, widths[i], 8, header, i === 0 ? 'left' : 'right', true);
         x += widths[i];
       });
       y += 8;
@@ -351,20 +375,40 @@
       y += 8;
 
       // Section: Approval
-      sectionHeight = 8 + 6 * 4 + 8;
+      sectionHeight = 0;
+      const approvalFields = [
+        { label: 'Requested By', value: requestedBy },
+        { label: 'Date', value: requestDate },
+        { label: 'CSO', value: cso },
+        { label: 'CSO Date', value: csoDate }
+      ];
+      approvalFields.forEach(field => {
+        sectionHeight += doc.getTextDimensions(`${field.label}: ${field.value}`, { maxWidth: colWidth - 2 }).h + 6;
+      });
+      sectionHeight += 8 * 2;
       y = checkPageOverflow(y, sectionHeight);
-      doc.setFontSize(13);
+      doc.setFontSize(14);
       doc.text('Approval', margin, y);
       doc.line(margin, y + 2, margin + 40, y + 2);
       y += 8;
+      leftY = y;
+      rightY = y;
       doc.setFontSize(11);
-      doc.text(`Requested By: ${requestedBy}`, margin, y);
-      y += 6;
-      doc.text(`Date: ${requestDate}`, margin, y);
-      y += 6;
-      doc.text(`CSO: ${cso}`, margin, y);
-      y += 6;
-      doc.text(`CSO Date: ${csoDate}`, margin, y);
+      approvalFields.forEach((field, index) => {
+        const text = `${field.label}: ${field.value}`;
+        const height = doc.getTextDimensions(text, { maxWidth: colWidth - 2 }).h;
+        const targetY = index % 2 === 0 ? leftY : rightY;
+        const targetX = index % 2 === 0 ? leftColX : rightColX;
+        y = checkPageOverflow(targetY, height + 6);
+        if (y !== targetY) {
+          leftY = y;
+          rightY = y;
+        }
+        doc.text(text, targetX, index % 2 === 0 ? leftY : rightY, { maxWidth: colWidth - 2 });
+        if (index % 2 === 0) leftY += height + 6;
+        else rightY += height + 6;
+      });
+      y = Math.max(leftY, rightY);
 
       // Save PDF
       doc.save('Credit_Note_Request_Form.pdf');
@@ -392,79 +436,129 @@
       }
 
       // Collect form data
-      const companyName = document.getElementById('companyName').value;
-      const accountNo = document.getElementById('accountNo').value;
-      const contactPerson = document.getElementById('contactPerson').value;
-      const telephone = document.getElementById('telephone').value;
-      const fax = document.getElementById('fax').value;
-      const salesRep = document.getElementById('salesRep').value;
-      const invoiceNo = document.getElementById('invoiceNo').value;
-      const invoiceDate = document.getElementById('invoiceDate').value;
-      const reason = document.getElementById('reason').value;
-      const followUp = document.getElementById('followUp').value;
-      const requestedBy = document.getElementById('requestedBy').value;
-      const requestDate = document.getElementById('requestDate').value;
-      const cso = document.getElementById('cso').value;
-      const csoDate = document.getElementById('csoDate').value;
-      const totalAmount = document.getElementById('totalAmount').value;
+      const companyName = document.getElementById('companyName').value || 'N/A';
+      const accountNo = document.getElementById('accountNo').value || 'N/A';
+      const contactPerson = document.getElementById('contactPerson').value || 'N/A';
+      const telephone = document.getElementById('telephone').value || 'N/A';
+      const fax = document.getElementById('fax').value || 'N/A';
+      const salesRep = document.getElementById('salesRep').value || 'N/A';
+      const invoiceNo = document.getElementById('invoiceNo').value || 'N/A';
+      const invoiceDate = document.getElementById('invoiceDate').value || 'N/A';
+      const reason = document.getElementById('reason').value || 'N/A';
+      const followUp = document.getElementById('followUp').value || 'N/A';
+      const requestedBy = document.getElementById('requestedBy').value || 'N/A';
+      const requestDate = document.getElementById('requestDate').value || 'N/A';
+      const cso = document.getElementById('cso').value || 'N/A';
+      const csoDate = document.getElementById('csoDate').value || 'N/A';
+      const totalAmount = document.getElementById('totalAmount').value || '0.00';
 
       // Collect items
       const items = [];
       document.querySelectorAll('.item-row').forEach(row => {
         const item = {
-          sapCode: row.querySelector('[name="sapCode"]').value,
-          invoicePrice: row.querySelector('[name="invoicePrice"]').value,
-          offeredPrice: row.querySelector('[name="offeredPrice"]').value,
-          adjustingAmount: row.querySelector('[name="adjustingAmount"]').value,
-          quantity: row.querySelector('[name="quantity"]').value,
-          amount: row.querySelector('[name="amount"]').value
+          sapCode: row.querySelector('[name="sapCode"]').value || 'N/A',
+          invoicePrice: row.querySelector('[name="invoicePrice"]').value || '0.00',
+          offeredPrice: row.querySelector('[name="offeredPrice"]').value || '0.00',
+          adjustingAmount: row.querySelector('[name="adjustingAmount"]').value || '0.00',
+          quantity: row.querySelector('[name="quantity"]').value || '0',
+          amount: row.querySelector('[name="amount"]').value || '0.00'
         };
         items.push(item);
       });
 
-      // Format items for email
-      const itemsText = items.map((item, index) => `
-        Item ${index + 1}:
-        SAP Code: ${item.sapCode}
-        Invoice Price: ${item.invoicePrice}
-        Offered Price: ${item.offeredPrice}
-        Adjusting Amount: ${item.adjustingAmount}
-        Quantity: ${item.quantity}
-        Amount: ${item.amount}
-      `).join('\n');
+      // Generate PDF for attachment
+      generatePDF();
 
-      // Create email body
+      // Create HTML email body
       const emailBody = `
-Credit Note Request Form
-
-Company Name: ${companyName}
-Account No.: ${accountNo}
-Contact Person: ${contactPerson}
-Telephone: ${telephone}
-Fax: ${fax}
-Sales Rep. / Code: ${salesRep}
-Invoice No.: ${invoiceNo}
-Invoice Date: ${invoiceDate}
-Reason for Credit Adjustment: ${reason}
-Follow-up Action by CSO: ${followUp}
-
-Items:
-${itemsText}
-
-Total Amount: ${totalAmount}
-
-Requested By: ${requestedBy}
-Date: ${requestDate}
-CSO: ${cso}
-CSO Date: ${csoDate}
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; background-color: #f3f4f6; }
+    .container { background-color: #ffffff; padding: 32px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+    .logo { height: 48px; margin-bottom: 24px; }
+    h1 { font-size: 24px; font-weight: bold; text-align: center; margin-bottom: 24px; color: #1f2937; }
+    h2 { font-size: 18px; font-weight: 500; color: #1f2937; margin-bottom: 8px; }
+    .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 24px; }
+    .grid div { font-size: 14px; color: #1f2937; }
+    .grid label { font-weight: 500; }
+    .grid p { margin: 4px 0; }
+    .table { width: 100%; border-collapse: collapse; margin-bottom: 24px; }
+    .table th, .table td { border: 1px solid #d1d5db; padding: 8px; font-size: 14px; color: #1f2937; }
+    .table th { background-color: #e5e7eb; font-weight: 500; text-align: left; }
+    .table td:not(:first-child) { text-align: right; }
+    .total { font-size: 14px; color: #1f2937; margin-bottom: 24px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="https://via.placeholder.com/150x50.png?text=Lyreco+Logo" alt="Lyreco Logo" class="logo">
+    <h1>Credit Note Request Form</h1>
+    <h2>Company Details</h2>
+    <div class="grid">
+      <div><label>Company Name:</label><p>${companyName}</p></div>
+      <div><label>Account No.:</label><p>${accountNo}</p></div>
+      <div><label>Contact Person:</label><p>${contactPerson}</p></div>
+      <div><label>Telephone:</label><p>${telephone}</p></div>
+      <div><label>Fax:</label><p>${fax}</p></div>
+      <div><label>Sales Rep. / Code:</label><p>${salesRep}</p></div>
+    </div>
+    <h2>Invoice Details</h2>
+    <div class="grid">
+      <div><label>Invoice No.:</label><p>${invoiceNo}</p></div>
+      <div><label>Invoice Date:</label><p>${invoiceDate}</p></div>
+    </div>
+    <h2>Notes</h2>
+    <div class="grid">
+      <div><label>Reason for Credit Adjustment:</label><p>${reason.replace(/\n/g, '<br>')}</p></div>
+      <div><label>Follow-up Action by CSO:</label><p>${followUp.replace(/\n/g, '<br>')}</p></div>
+    </div>
+    <h2>Items</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>SAP Code</th>
+          <th>Invoice Price</th>
+          <th>Offered Price</th>
+          <th>Adjusting Amount</th>
+          <th>Quantity</th>
+          <th>Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${items.map(item => `
+          <tr>
+            <td>${item.sapCode}</td>
+            <td>${item.invoicePrice}</td>
+            <td>${item.offeredPrice}</td>
+            <td>${item.adjustingAmount}</td>
+            <td>${item.quantity}</td>
+            <td>${item.amount}</td>
+          </tr>
+        `).join('')}
+      </tbody>
+    </table>
+    <div class="total"><label>Total Amount:</label> ${totalAmount}</div>
+    <h2>Approval</h2>
+    <div class="grid">
+      <div><label>Requested By:</label><p>${requestedBy}</p></div>
+      <div><label>Date:</label><p>${requestDate}</p></div>
+      <div><label>CSO:</label><p>${cso}</p></div>
+      <div><label>CSO Date:</label><p>${csoDate}</p></div>
+    </div>
+  </div>
+</body>
+</html>
       `;
 
       // Create mailto link
       try {
-        const mailtoLink = `mailto:cs.hk@lyreco.com?subject=Credit Note Request&body=${encodeURIComponent(emailBody)}`;
+        const mailtoLink = `mailto:cs.hk@lyreco.com?subject=Credit%20Note%20Request&body=${encodeURIComponent('Please see the attached PDF for the Credit Note Request Form.\n\nBelow is a preview of the form:\n\n')}&body=${encodeURIComponent(emailBody)}`;
         window.location.href = mailtoLink;
+        alert('A PDF has been generated (Credit_Note_Request_Form.pdf). Please attach it to the email before sending.');
       } catch (e) {
-        alert('Failed to open email client. Please copy the form data and send it manually to cs.hk@lyreco.com.');
+        alert('Failed to open email client. Please copy the form data from the generated PDF (Credit_Note_Request_Form.pdf) and send it manually to cs.hk@lyreco.com.');
         console.error('Email submission failed:', e);
       }
     });
