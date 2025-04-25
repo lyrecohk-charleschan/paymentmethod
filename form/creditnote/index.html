@@ -175,9 +175,11 @@
     function generatePDF() {
       const { jsPDF } = window.jspdf;
       const doc = new jsPDF();
+      const pageWidth = 210; // A4 width in mm
       const pageHeight = 297; // A4 height in mm
       const margin = 10; // 10mm margin
       const maxY = pageHeight - margin; // Max y position before new page
+      const tableWidth = pageWidth - 2 * margin; // Table width within margins
 
       // Helper function to check for page overflow
       function checkPageOverflow(currentY, addHeight) {
@@ -186,6 +188,17 @@
           return 10; // Reset y to top of new page
         }
         return currentY;
+      }
+
+      // Helper function to draw table borders
+      function drawTableCell(x, y, width, height, text, align = 'left') {
+        doc.setLineWidth(0.2);
+        doc.rect(x, y - 4, width, height); // Draw cell border
+        if (align === 'right') {
+          doc.text(text, x + width - 2, y, { align: 'right' });
+        } else {
+          doc.text(text, x + 2, y);
+        }
       }
 
       // Collect form data
@@ -221,122 +234,137 @@
       // PDF Content
       let y = 10;
 
-      // Header with Logo
-      doc.addImage('https://cdn-s1.lyreco.com/staticswebshop/pictures/looknfeel/common/logo.svg', 'SVG', 10, y, 40, 12);
+      // Header with Logo (Use PNG fallback if SVG fails)
+      try {
+        doc.addImage('https://cdn-s1.lyreco.com/staticswebshop/pictures/looknfeel/common/logo.svg', 'SVG', margin, y, 40, 12);
+      } catch (e) {
+        console.warn('SVG logo failed to load, using fallback text');
+        doc.setFontSize(11);
+        doc.text('Lyreco Logo', margin, y + 6);
+      }
       doc.setFontSize(16);
-      doc.text('Credit Note Request Form', 105, y + 10, { align: 'center' });
+      doc.text('Credit Note Request Form', pageWidth / 2, y + 10, { align: 'center' });
       y += 20;
 
       // Section: Company Details
-      y = checkPageOverflow(y, 60);
+      let sectionHeight = doc.getTextDimensions(`Company Name: ${companyName}`, { maxWidth: 180 }).h + 6 * 5 + 8 * 2;
+      y = checkPageOverflow(y, sectionHeight);
       doc.setFontSize(13);
-      doc.text('Company Details', 10, y);
+      doc.text('Company Details', margin, y);
       doc.setLineWidth(0.5);
-      doc.line(10, y + 2, 60, y + 2);
+      doc.line(margin, y + 2, margin + 50, y + 2);
       y += 8;
       doc.setFontSize(11);
-      doc.text(`Company Name: ${companyName}`, 10, y);
+      doc.text(`Company Name: ${companyName}`, margin, y, { maxWidth: 180 });
+      y += doc.getTextDimensions(`Company Name: ${companyName}`, { maxWidth: 180 }).h + 2;
+      doc.text(`Account No.: ${accountNo}`, margin, y);
       y += 6;
-      doc.text(`Account No.: ${accountNo}`, 10, y);
+      doc.text(`Contact Person: ${contactPerson}`, margin, y);
       y += 6;
-      doc.text(`Contact Person: ${contactPerson}`, 10, y);
+      doc.text(`Telephone: ${telephone}`, margin, y);
       y += 6;
-      doc.text(`Telephone: ${telephone}`, 10, y);
+      doc.text(`Fax: ${fax}`, margin, y);
       y += 6;
-      doc.text(`Fax: ${fax}`, 10, y);
-      y += 6;
-      doc.text(`Sales Rep. / Code: ${salesRep}`, 10, y);
+      doc.text(`Sales Rep. / Code: ${salesRep}`, margin, y);
       y += 8;
 
       // Section: Invoice Details
-      y = checkPageOverflow(y, 30);
+      sectionHeight = 8 + 6 * 2 + 8;
+      y = checkPageOverflow(y, sectionHeight);
       doc.setFontSize(13);
-      doc.text('Invoice Details', 10, y);
-      doc.line(10, y + 2, 60, y + 2);
+      doc.text('Invoice Details', margin, y);
+      doc.line(margin, y + 2, margin + 50, y + 2);
       y += 8;
       doc.setFontSize(11);
-      doc.text(`Invoice No.: ${invoiceNo}`, 10, y);
+      doc.text(`Invoice No.: ${invoiceNo}`, margin, y);
       y += 6;
-      doc.text(`Invoice Date: ${invoiceDate}`, 10, y);
+      doc.text(`Invoice Date: ${invoiceDate}`, margin, y);
       y += 8;
 
       // Section: Notes
-      y = checkPageOverflow(y, 50);
+      const reasonHeight = doc.getTextDimensions(reason, { maxWidth: 90 }).h;
+      const followUpHeight = doc.getTextDimensions(followUp, { maxWidth: 90 }).h;
+      sectionHeight = 8 + 6 * 2 + reasonHeight + followUpHeight + 4 * 2 + 8;
+      y = checkPageOverflow(y, sectionHeight);
       doc.setFontSize(13);
-      doc.text('Notes', 10, y);
-      doc.line(10, y + 2, 30, y + 2);
+      doc.text('Notes', margin, y);
+      doc.line(margin, y + 2, margin + 30, y + 2);
       y += 8;
       doc.setFontSize(11);
-      doc.text('Reason for Credit Adjustment:', 10, y);
+      doc.text('Reason for Credit Adjustment:', margin, y);
       y += 6;
-      const reasonHeight = doc.getTextDimensions(reason, { maxWidth: 90 }).h;
-      y = checkPageOverflow(y, reasonHeight + 10);
-      doc.text(reason, 10, y, { maxWidth: 90 });
+      y = checkPageOverflow(y, reasonHeight + 4);
+      doc.text(reason, margin, y, { maxWidth: 90 });
       y += reasonHeight + 4;
-      doc.text('Follow-up Action by CSO:', 10, y);
+      doc.text('Follow-up Action by CSO:', margin, y);
       y += 6;
-      const followUpHeight = doc.getTextDimensions(followUp, { maxWidth: 90 }).h;
-      y = checkPageOverflow(y, followUpHeight + 10);
-      doc.text(followUp, 10, y, { maxWidth: 90 });
+      y = checkPageOverflow(y, followUpHeight + 4);
+      doc.text(followUp, margin, y, { maxWidth: 90 });
       y += followUpHeight + 8;
 
       // Section: Items
-      y = checkPageOverflow(y, 30 + items.length * 7);
+      sectionHeight = 8 + 8 + 8 * items.length + 4 + 8;
+      y = checkPageOverflow(y, sectionHeight);
       doc.setFontSize(13);
-      doc.text('Items', 10, y);
-      doc.line(10, y + 2, 30, y + 2);
+      doc.text('Items', margin, y);
+      doc.line(margin, y + 2, margin + 30, y + 2);
       y += 8;
       doc.setFontSize(11);
       const headers = ['SAP Code', 'Inv. Price', 'Off. Price', 'Adj. Amt', 'Qty', 'Amount'];
-      const widths = [40, 30, 30, 30, 20, 30];
-      let x = 10;
+      const widths = [40, 30, 30, 30, 20, 30]; // Fixed column widths in mm
+      let x = margin;
+      const tableStartY = y;
       headers.forEach((header, i) => {
-        doc.text(header, x, y);
+        drawTableCell(x, y, widths[i], 8, header, i === 0 ? 'left' : 'right');
         x += widths[i];
       });
-      y += 6;
-      doc.setLineWidth(0.2);
-      doc.line(10, y, 190, y);
-      y += 4;
+      y += 8;
 
-      items.forEach(item => {
-        y = checkPageOverflow(y, 7); // Check for each row
-        x = 10;
-        doc.text(item.sapCode, x, y);
+      items.forEach((item, index) => {
+        y = checkPageOverflow(y, 8); // Check for each row
+        x = margin;
+        drawTableCell(x, y, widths[0], 8, item.sapCode, 'left');
         x += widths[0];
-        doc.text(item.invoicePrice, x, y);
+        drawTableCell(x, y, widths[1], 8, item.invoicePrice, 'right');
         x += widths[1];
-        doc.text(item.offeredPrice, x, y);
+        drawTableCell(x, y, widths[2], 8, item.offeredPrice, 'right');
         x += widths[2];
-        doc.text(item.adjustingAmount, x, y);
+        drawTableCell(x, y, widths[3], 8, item.adjustingAmount, 'right');
         x += widths[3];
-        doc.text(item.quantity, x, y);
+        drawTableCell(x, y, widths[4], 8, item.quantity, 'right');
         x += widths[4];
-        doc.text(item.amount, x, y);
-        y += 6;
-        doc.line(10, y - 2, 190, y - 2);
+        drawTableCell(x, y, widths[5], 8, item.amount, 'right');
+        y += 8;
       });
+
+      // Draw vertical lines for table
+      x = margin;
+      for (let i = 0; i <= widths.length; i++) {
+        doc.line(x, tableStartY - 4, x, y - 4);
+        x += widths[i] || 0;
+      }
 
       y += 4;
       y = checkPageOverflow(y, 10);
       doc.setFontSize(11);
-      doc.text(`Total Amount: ${totalAmount}`, 10, y);
+      doc.text(`Total Amount: ${totalAmount}`, margin, y);
       y += 8;
 
       // Section: Approval
-      y = checkPageOverflow(y, 40);
+      sectionHeight = 8 + 6 * 4 + 8;
+      y = checkPageOverflow(y, sectionHeight);
       doc.setFontSize(13);
-      doc.text('Approval', 10, y);
-      doc.line(10, y + 2, 40, y + 2);
+      doc.text('Approval', margin, y);
+      doc.line(margin, y + 2, margin + 40, y + 2);
       y += 8;
       doc.setFontSize(11);
-      doc.text(`Requested By: ${requestedBy}`, 10, y);
+      doc.text(`Requested By: ${requestedBy}`, margin, y);
       y += 6;
-      doc.text(`Date: ${requestDate}`, 10, y);
+      doc.text(`Date: ${requestDate}`, margin, y);
       y += 6;
-      doc.text(`CSO: ${cso}`, 10, y);
+      doc.text(`CSO: ${cso}`, margin, y);
       y += 6;
-      doc.text(`CSO Date: ${csoDate}`, 10, y);
+      doc.text(`CSO Date: ${csoDate}`, margin, y);
 
       // Save PDF
       doc.save('Credit_Note_Request_Form.pdf');
@@ -350,7 +378,7 @@
       const requiredFields = form.querySelectorAll('[required]');
       let isValid = true;
       requiredFields.forEach(field => {
-        if (!field.value.trim()) {
+        if (!field.value.trim() || field.value.trim() === '') {
           isValid = false;
           field.classList.add('border-red-500');
         } else {
@@ -359,7 +387,7 @@
       });
 
       if (!isValid) {
-        alert('Please fill in all required fields.');
+        alert('Please fill in all required fields with valid data.');
         return;
       }
 
@@ -432,8 +460,13 @@ CSO Date: ${csoDate}
       `;
 
       // Create mailto link
-      const mailtoLink = `mailto:cs.hk@lyreco.com?subject=Credit Note Request&body=${encodeURIComponent(emailBody)}`;
-      window.location.href = mailtoLink;
+      try {
+        const mailtoLink = `mailto:cs.hk@lyreco.com?subject=Credit Note Request&body=${encodeURIComponent(emailBody)}`;
+        window.location.href = mailtoLink;
+      } catch (e) {
+        alert('Failed to open email client. Please copy the form data and send it manually to cs.hk@lyreco.com.');
+        console.error('Email submission failed:', e);
+      }
     });
   </script>
 </body>
