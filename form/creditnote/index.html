@@ -9,7 +9,7 @@
 </head>
 <body class="bg-gray-100 flex items-center justify-center min-h-screen">
   <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-4xl">
-    <img src="https://cdn-s1.lyreco.com/staticswebshop/pictures/looknfeel/common/logo.svg" alt="Lyreco Logo" class="h-12 mb-6">
+    <img src="https://github.com/lyrecohk-charleschan/paymentmethod/blob/main/lyreco-logo.png?raw=true" alt="Lyreco Logo" class="h-12 mb-6">
     <h1 class="text-2xl font-bold mb-6 text-center">Credit Note Request Form</h1>
     <form id="creditNoteForm" class="space-y-6">
       <!-- Company Details -->
@@ -265,8 +265,7 @@
 
       // Header with Logo
       try {
-        // Placeholder PNG URL (replace with actual Lyreco PNG logo URL)
-        const logoUrl = 'https://via.placeholder.com/150x50.png?text=Lyreco+Logo';
+        const logoUrl = 'https://github.com/lyrecohk-charleschan/paymentmethod/blob/main/lyreco-logo.png?raw=true';
         doc.addImage(logoUrl, 'PNG', margin, y, 40, 12); // 12mm height ≈ 48px
       } catch (e) {
         console.warn('Logo failed to load, using fallback text');
@@ -343,7 +342,7 @@
       y += 6;
       y = checkPageOverflow(y, Math.max(reasonHeight, followUpHeight) + 4);
       doc.text(reason, leftColX, y, { maxWidth: colWidth - 2 });
-      doc.text(followUp, rightColX, y, { maxWidth: colWidth - 2 });
+      doc.text(followUp, rightCol宁波, y, { maxWidth: colWidth - 2 });
       y += Math.max(reasonHeight, followUpHeight) + 8;
 
       // Section: Items
@@ -435,8 +434,9 @@
       });
       y = Math.max(leftY, rightY);
 
-      // Save PDF
-      doc.save('Credit_Note_Request_Form.pdf');
+      // Save PDF with custom file name
+      const fileName = `${invoiceNo}-${accountNo}-${companyName.replace(/[^a-zA-Z0-9]/g, '_')}.pdf`;
+      doc.save(fileName);
     }
 
     document.getElementById('creditNoteForm').addEventListener('submit', function(e) {
@@ -502,7 +502,7 @@
   <style>
     body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; background-color: #f3f4f6; }
     .container { background-color: #ffffff; padding: 32px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-    .logo { height: 48px; margin-bottom: 24px; }
+    .logo { height: 48px; margin Dubottom: 24px; }
     h1 { font-size: 24px; font-weight: bold; text-align: center; margin-bottom: 24px; color: #1f2937; }
     h2 { font-size: 18px; font-weight: 500; color: #1f2937; margin-bottom: 8px; }
     .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 24px; }
@@ -518,7 +518,7 @@
 </head>
 <body>
   <div class="container">
-    <img src="https://via.placeholder.com/150x50.png?text=Lyreco+Logo" alt="Lyreco Logo" class="logo">
+    <img src="https://github.com/lyrecohk-charleschan/paymentmethod/blob/main/lyreco-logo.png?raw=true" alt="Lyreco Logo" class="logo">
     <h1>Credit Note Request Form</h1>
     <h2>Company Details</h2>
     <div class="grid">
@@ -584,12 +584,12 @@
       try {
         const mailtoLink = `mailto:cs.hk@lyreco.com?subject=Credit%20Note%20Request&body=${encodeURIComponent('Please see the attached PDF for the Credit Note Request Form.\n\nBelow is a preview of the form:\n\n')}&body=${encodeURIComponent(emailBody)}`;
         window.location.href = mailtoLink;
-        alert('A PDF has been generated (Credit_Note_Request_Form.pdf). Please attach it to the email before sending.');
+        alert('A PDF has been generated. Please attach it to the email before sending.');
       } catch (e) {
-        alert('Failed to open email client. Please copy the form data from the generated PDF (Credit_Note_Request_Form.pdf) and send it manually to cs.hk@lyreco.com.');
+        alert('Failed to open email client. Please copy the form data from the generated PDF and send it manually to cs.hk@lyreco.com.');
         console.error('Email submission failed:', e);
       }
     });
   </script>
-</body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'937368ba09ebed82',t:'MTc0NTgxMDI3Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
