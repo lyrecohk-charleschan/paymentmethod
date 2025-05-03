@@ -15,10 +15,22 @@
     <style>
         *,::before,::after{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e2e8f0}body{margin:0;font-family:'Inter',sans-serif;color:#1e293b;line-height:1.5;background-color:#f8fafc}a{color:#2563eb;text-decoration:none}a:hover{text-decoration:underline}.container{max-width:1280px;margin-left:auto;margin-right:auto;padding:1rem}.flex{display:flex}.grid{display:grid}.hidden{display:none}.space-y-2>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.5rem * var(--tw-space-y-reverse))}.space-y-4>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem * var(--tw-space-y-reverse))}.gap-2{gap:0.5rem}.gap-6{gap:1.5rem}.flex-col{flex-direction:column}.flex-wrap{flex-wrap:wrap}.items-start{align-items:flex-start}.items-center{align-items:center}.justify-end{justify-content:flex-end}.justify-between{justify-content:space-between}.overflow-x-auto{overflow-x:auto}.overflow-y-auto{overflow-y:auto}.rounded{border-radius:0.375rem}.rounded-lg{border-radius:0.5rem}.border{border-width:1px}.border-blue-100{border-color:#dbeafe}.border-gray-200{border-color:#e2e8f0}.border-red-500{border-color:#ef4444}.bg-blue-50{background-color:#eff6ff}.bg-gray-50{background-color:#f9fafb}.bg-white{background-color:#fff}.p-4{padding:1rem}.p-6{padding:1.5rem}.px-4{padding-left:1rem;padding-right:1rem}.py-2{padding-top:0.5rem;padding-bottom:0.5rem}.pl-4{padding-left:1rem}.pr-4{padding-right:1rem}.pt-2{padding-top:0.5rem}.text-sm{font-size:0.875rem;line-height:1.25rem}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-2xl{font-size:1.5rem;line-height:2rem}.font-bold{font-weight:700}.font-medium{font-weight:500}.font-semibold{font-weight:600}.text-blue-600{color:#2563eb}.text-blue-800{color:#1e40af}.text-gray-400{color:#9ca3af}.text-gray-600{color:#4b5563}.text-gray-800{color:#1f2937}.text-red-500{color:#ef4444}.text-red-600{color:#dc2626}.shadow{box-shadow:0 1px 3px 0 rgba(0,0,0,0.1),0 1px 2px 0 rgba(0,0,0,0.06)}.shadow-lg{box-shadow:0 10px 15px -3px rgba(0,0,0,0.1),0 4px 6px -2px rgba(0,0,0,0.05)}.transition{transition-property:color,background-color,border-color,text-decoration-color,opacity,transform,box-shadow;transition-timing-function:cubic-bezier(0.4,0,0.2,1);transition-duration:150ms}.grid-cols-1{grid-template-columns:repeat(1,minmax(0,1fr))}.w-full{width:100%}.max-w-96{max-width:24rem}.h-12{height:3rem}.mt-2{margin-top:0.5rem}.mt-4{margin-top:1rem}.mt-6{margin-top:1.5rem}.mb-4{margin-bottom:1rem}.mb-6{margin-bottom:1.5rem}@media (min-width:640px){.sm\:flex-row{flex-direction:row}.sm\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.sm\:items-center{align-items:center}.sm\:mt-0{margin-top:0}.sm\:w-96{width:24rem}}
         .form-input{border:1px solid #e2e8f0;border-radius:0.375rem;padding:0.5rem 0.75rem;width:100%;font-size:0.875rem;transition:border-color 0.2s, box-shadow 0.2s;background-color:#fff}.form-input:hover{border-color:#3b82f6}.form-input:focus{border-color:#3b82f6;outline:none;box-shadow:0 0 0 3px rgba(59, 130, 246, 0.1)}.form-input:disabled,.form-input[readonly]{background-color:#f1f5f9;cursor:not-allowed}.form-label{display:block;font-size:0.75rem;font-weight:500;color:#475569;margin-bottom:0.25rem}.btn{display:inline-flex;align-items:center;padding:0.5rem 1rem;border-radius:0.375rem;font-size:0.875rem;font-weight:500;transition:background-color 0.2s, transform 0.1s}.btn:hover{transform:translateY(-1px)}.btn:active{transform:translateY(0)}.btn-primary{background-color:#3b82f6;color:#fff}.btn-primary:hover{background-color:#2563eb}.btn-secondary{background-color:#64748b;color:#fff}.btn-secondary:hover{background-color:#475569}.btn-success{background-color:#22c55e;color:#fff}.btn-success:hover{background-color:#16a34a}.btn-danger{background-color:#ef4444;color:#fff}.btn-danger:hover{background-color:#dc2626}.table{width:100%;border-collapse:collapse;font-size:0.875rem;background-color:#fff;border-radius:0.375rem;overflow:hidden;box-shadow:0 1px 3px rgba(0, 0, 0, 0.1)}.table th,.table td{padding:0.75rem;text-align:left;border-bottom:1px solid #e2e8f0}.table th{background-color:#f8fafc;font-weight:600;color:#475569}.table tr:hover{background-color:#f1f5f9}.search-dropdown{position:absolute;width:100%;background-color:#fff;border:1px solid #e2e8f0;border-radius:0.375rem;box-shadow:0 4px 6px rgba(0, 0, 0, 0.1);z-index:50;max-height:12rem;overflow-y:auto}.search-item{padding:0.5rem 0.75rem;font-size:0.875rem;color:#1e293b;cursor:pointer}.search-item:hover{background-color:#eff6ff;color:#2563eb}.modal{position:fixed;inset:0;background-color:rgba(0, 0, 0, 0.5);display:flex;align-items:center;justify-content:center;z-index:100;opacity:0;visibility:hidden;transition:opacity 0.3s, visibility 0.3s}.modal.show{opacity:1;visibility:visible}.modal-content{background-color:#fff;padding:1.5rem;border-radius:0.5rem;max-width:32rem;width:100%;max-height:90vh;overflow-y:auto;transform:scale(0.95);transition:transform 0.3s}.modal.show .modal-content{transform:scale(1)}#toastMsg{position:fixed;top:1rem;right:1rem;background-color:#22c55e;color:#fff;padding:0.75rem 1rem;border-radius:0.375rem;box-shadow:0 4px 6px rgba(0, 0, 0, 0.1);z-index:1000;display:flex;align-items:center;gap:0.5rem;opacity:0;transform:translateY(-10px);transition:opacity 0.3s, transform 0.3s}#toastMsg.show{opacity:1;transform:translateY(0)}.toolbar{position:sticky;top:0;background-color:#fff;padding:1rem;border-radius:0.375rem;box-shadow:0 1px 3px rgba(0, 0, 0, 0.1);z-index:10;display:flex;flex-wrap:wrap;gap:0.5rem}@media (max-width:640px){.container{padding:0.5rem}.table{display:block;overflow-x:auto}.toolbar{flex-direction:column;align-items:stretch}.modal-content{margin:1rem}}@media print{@page{margin:20mm}body *{visibility:hidden}.print-area,.print-area *{visibility:visible}.print-area{position:absolute;left:0;top:0;width:100%}.no-print{display:none !important}}
+        .form-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(255,255,255,0.7);
+            z-index: 99;
+            display: none;
+            pointer-events: all;
+        }
     </style>
 </head>
 <body>
     <div class="container">
+        <div id="formOverlay" class="form-overlay" style="display:none;"></div>
         <div class="toolbar no-print">
             <button id="langToggle" class="btn btn-secondary">中文</button>
             <label class="btn btn-primary">
@@ -148,7 +160,7 @@
                             <th>Item Code</th>
                             <th>Description</th>
                             <th>Unit</th>
-                            <th>Package Unit</th>
+                            <!-- <th>Package Unit</th> 隱藏 -->
                             <th>Qty</th>
                             <th>Unit Price</th>
                             <th>Amount</th>
@@ -236,10 +248,10 @@
                     <label class="form-label" for="editUnit">Unit</label>
                     <input type="text" id="editUnit" class="form-input">
                 </div>
-                <div>
+                <!-- <div>
                     <label class="form-label" for="editPackageUnit">Package Unit</label>
                     <input type="number" id="editPackageUnit" class="form-input" min="1">
-                </div>
+                </div> 隱藏-->
                 <div>
                     <label class="form-label" for="editQty">Quantity</label>
                     <input type="number" id="editQty" class="form-input" min="1">
@@ -247,6 +259,10 @@
                 <div>
                     <label class="form-label" for="editUnitPrice">Unit Price</label>
                     <input type="number" id="editUnitPrice" class="form-input" min="0" step="0.01">
+                </div>
+                <div>
+                    <label class="form-label">CM</label>
+                    <div id="editCmName" style="font-weight:bold;color:#1e40af;"></div>
                 </div>
             </div>
             <div class="flex justify-end gap-2 mt-4">
@@ -312,14 +328,14 @@
 
         const predefinedCustomer = {
             accountNo: "",
-            companyName: "ECOLAB",
-            customerName: "Ms.",
+            companyName: "",
+            customerName: "",
             address: "",
-            quotationNo: "7418722",
-            quotationDate: "2025-04-25",
-            validUntil: "2025-05-25",
-            salesRep: "80270192 CHAN CHARLES",
-            customerType: "corporate"
+            quotationNo: "",
+            quotationDate: "",
+            validUntil: "",
+            salesRep: "",
+            customerType: ""
         };
 
         const LANGS = {
@@ -395,7 +411,9 @@
         }
 
         function generateQuotationNo() {
-            return `LY-${String(Math.floor(Math.random() * 10000000)).padStart(9, '0')}`;
+            // 產生 10 位數字，前面補0
+            const num = Math.floor(Math.random() * 1e10);
+            return `LY-${String(num).padStart(10, '0')}`;
         }
 
         function searchCustomer(input) {
@@ -479,7 +497,12 @@
                     accountNo: row.accountNo?.trim() || '',
                     companyName: row.companyName?.trim() || '',
                     customerName: row.customerName?.trim() || '',
-                    address: addressParts.join(', ')
+                    address: addressParts.join(', '),
+                    detailOne: row.detailOne?.trim() || '',
+                    detailTwo: row.detailTwo?.trim() || '',
+                    building: row.building?.trim() || '',
+                    street: row.street?.trim() || '',
+                    city: row.city?.trim() || ''
                 };
             });
         }
@@ -563,7 +586,9 @@
                 tr.innerHTML = `
                     <td>${rowCounter}</td>
                     <td>
-                        <img src="" alt="Product Image" class="w-12 h-12 rounded" onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+                        <a class="eshop-link" href="#" target="_blank">
+                            <img src="" alt="Product Image" class="w-12 h-12 rounded" onerror="this.style.display='none';if(this.nextElementSibling){this.nextElementSibling.style.display='block';}">
+                        </a>
                         <span class="text-xs text-gray-400" style="display:none;">No Image</span>
                     </td>
                     <td>
@@ -582,7 +607,7 @@
                     </td>
                     <td><textarea class="form-input description" rows="2" placeholder="Enter description"></textarea></td>
                     <td><input type="text" class="form-input unit" placeholder="Enter unit"></td>
-                    <td><input type="number" class="form-input package-unit" value="1" min="1" onchange="calculateRowAmount(this)" aria-label="Package Unit"></td>
+                    <!-- <td><input type="number" class="form-input package-unit" value="1" min="1" onchange="calculateRowAmount(this)" aria-label="Package Unit"></td> 隱藏-->
                     <td><input type="number" class="form-input qty" value="1" min="1" onchange="calculateRowAmount(this)" aria-label="Quantity"></td>
                     <td><input type="number" class="form-input unit-price text-right" step="0.01" min="0" onchange="calculateRowAmount(this)" placeholder="Enter unit price"></td>
                     <td><input type="number" class="form-input amount text-right" readonly></td>
@@ -591,6 +616,7 @@
                         <div class="flex gap-2">
                             <button onclick="openEditModal(this)" class="btn btn-secondary" title="Edit">Edit</button>
                             <button onclick="removeRow(this)" class="btn btn-danger" title="Remove">Remove</button>
+                            <button onclick="showInternalInfo(this)" class="btn btn-success" title="Internal">Internal</button>
                         </div>
                     </td>
                 `;
@@ -607,10 +633,16 @@
             const tbody = document.getElementById('quotationBody');
             const tr = document.createElement('tr');
             tr.setAttribute('draggable', 'true');
+            const qty = rowData.qty || 1;
+            const packageUnit = product.packageUnit || 1;
+            const unitPrice = rowData.unitPrice || product.unitPrice || 0;
+            const amount = qty * packageUnit * unitPrice;
             tr.innerHTML = `
                 <td>${rowCounter}</td>
                 <td>
-                    <img src="${product.itemCode ? `https://assets.lyreco.com/is/image/lyrecows/2018-${product.itemCode}?fmt=jpg&locale=HK_hk` : ''}" alt="Product Image" class="w-12 h-12 rounded" onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+                    <a class="eshop-link" href="${rowData.itemCode ? `https://www.lyreco.com/webshop/HKHK/detail-product-${rowData.itemCode}.html` : '#'}" target="_blank">
+                        <img src="${product.itemCode ? `https://assets.lyreco.com/is/image/lyrecows/2018-${product.itemCode}?fmt=jpg&locale=HK_hk` : ''}" alt="Product Image" class="w-12 h-12 rounded" onerror="this.style.display='none';if(this.nextElementSibling){this.nextElementSibling.style.display='block';}">
+                    </a>
                     <span class="text-xs text-gray-400" style="display:${product.itemCode ? 'none' : 'block'};">No Image</span>
                 </td>
                 <td>
@@ -629,15 +661,16 @@
                 </td>
                 <td><textarea class="form-input description" rows="2">${product.description || ''}</textarea></td>
                 <td><input type="text" class="form-input unit" value="${product.unit || ''}" placeholder="Enter unit"></td>
-                <td><input type="number" class="form-input package-unit" value="${product.packageUnit || '1'}" min="1" onchange="calculateRowAmount(this)" aria-label="Package Unit"></td>
+                <!-- <td><input type="number" class="form-input package-unit" value="${product.packageUnit || '1'}" min="1" onchange="calculateRowAmount(this)" aria-label="Package Unit"></td> 隱藏-->
                 <td><input type="number" class="form-input qty" value="${rowData.qty}" min="1" onchange="calculateRowAmount(this)" aria-label="Quantity"></td>
                 <td><input type="number" class="form-input unit-price text-right" value="${rowData.unitPrice || product.unitPrice || ''}" step="0.01" min="0" onchange="calculateRowAmount(this)" placeholder="Enter unit price"></td>
-                <td><input type="number" class="form-input amount text-right" value="${(rowData.qty * (product.packageUnit || 1) * (rowData.unitPrice || product.unitPrice || 0)).toFixed(2)}" readonly></td>
+                <td><input type="number" class="form-input amount text-right" value="${amount.toFixed(2)}" readonly></td>
                 <td><input type="text" class="form-input remarks" placeholder="Remarks" aria-label="Remarks"></td>
                 <td class="no-print">
                     <div class="flex gap-2">
                         <button onclick="openEditModal(this)" class="btn btn-secondary" title="Edit">Edit</button>
                         <button onclick="removeRow(this)" class="btn btn-danger" title="Remove">Remove</button>
+                        <button onclick="showInternalInfo(this)" class="btn btn-success" title="Internal">Internal</button>
                     </div>
                 </td>
             `;
@@ -672,7 +705,9 @@
             if (product) {
                 row.querySelector('.description').value = product.description.slice(0, 150);
                 row.querySelector('.unit').value = product.unit;
-                row.querySelector('.package-unit').value = product.packageUnit;
+                if (row.querySelector('.package-unit')) {
+                    row.querySelector('.package-unit').value = product.packageUnit;
+                }
                 row.querySelector('.unit-price').value = product.unitPrice.toFixed(2);
                 const qty = parseFloat(row.querySelector('.qty').value) || 0;
                 const packageUnit = parseFloat(product.packageUnit) || 1;
@@ -681,14 +716,26 @@
                 const img = row.querySelector('img');
                 img.src = `https://assets.lyreco.com/is/image/lyrecows/2018-${product.itemCode}?fmt=jpg&locale=HK_hk`;
                 img.style.display = 'block';
-                img.nextElementSibling.style.display = 'none';
+                if (img.nextElementSibling) img.nextElementSibling.style.display = 'none';
+                // 修正 eshop-link href
+                const eshopLink = row.querySelector('.eshop-link');
+                if (eshopLink) {
+                    eshopLink.href = product.itemCode ? `https://www.lyreco.com/webshop/HKHK/detail-product-${product.itemCode}.html` : '#';
+                }
             } else {
                 row.querySelector('img').src = '';
                 row.querySelector('.description').value = '';
                 row.querySelector('.unit').value = '';
-                row.querySelector('.package-unit').value = '1';
+                if (row.querySelector('.package-unit')) {
+                    row.querySelector('.package-unit').value = '1';
+                }
                 row.querySelector('.unit-price').value = '';
                 row.querySelector('.amount').value = '';
+                // 清空 eshop-link href
+                const eshopLink = row.querySelector('.eshop-link');
+                if (eshopLink) {
+                    eshopLink.href = '#';
+                }
             }
             updateTotals();
         }
@@ -698,13 +745,36 @@
             const qty = parseFloat(row.querySelector('.qty').value) || 0;
             const packageUnit = parseFloat(row.querySelector('.package-unit').value) || 1;
             const unitPrice = parseFloat(row.querySelector('.unit-price').value) || 0;
-            row.querySelector('.amount').value = (qty * packageUnit * unitPrice).toFixed(2);
+            const itemCode = row.querySelector('.item-code').value || '';
+            const product = productDatabase.find(p => p.itemCode === itemCode) || {};
+            const cost = parseFloat(product.cost) || 0;
+            const amount = qty * packageUnit * unitPrice;
+            const marginPct = amount > 0 ? ((amount - (cost * qty * packageUnit)) / amount * 100) : 0;
+            row.querySelector('.amount').value = amount.toFixed(2);
+            if (row.querySelector('.cost')) row.querySelector('.cost').value = cost;
+            if (row.querySelector('.margin-pct')) row.querySelector('.margin-pct').value = marginPct.toFixed(1);
+            // eShop link on image
+            if (row.querySelector('.eshop-link')) {
+                row.querySelector('.eshop-link').href = itemCode ? `https://www.lyreco.com/webshop/HKHK/detail-product-${itemCode}.html` : '#';
+            }
             updateTotals();
         }
 
         function updateTotals() {
-            const subtotal = Array.from(document.querySelectorAll('#quotationBody .amount'))
-                .reduce((sum, input) => sum + (parseFloat(input.value) || 0), 0);
+            let subtotal = 0;
+            let totalCost = 0;
+            let totalCashMargin = 0;
+            document.querySelectorAll('#quotationBody tr').forEach(row => {
+                const amount = parseFloat(row.querySelector('.amount')?.value) || 0;
+                const qty = parseFloat(row.querySelector('.qty')?.value) || 0;
+                const packageUnit = parseFloat(row.querySelector('.package-unit')?.value) || 1;
+                const itemCode = row.querySelector('.item-code')?.value || '';
+                const product = productDatabase.find(p => p.itemCode === itemCode) || {};
+                const cost = parseFloat(product.cost) || 0;
+                subtotal += amount;
+                totalCost += cost * qty * packageUnit;
+                totalCashMargin += amount - (cost * qty * packageUnit);
+            });
             const taxRate = parseFloat(document.getElementById('taxRate').value) || 0;
             const discount = parseFloat(document.getElementById('discount').value) || 0;
             const discountAmount = (subtotal * discount / 100);
@@ -722,6 +792,16 @@
             document.getElementById('discountAmount').textContent = discountAmount.toFixed(2);
             document.getElementById('taxAmount').textContent = taxAmount.toFixed(2);
             document.getElementById('grandTotal').textContent = grandTotal.toFixed(2);
+            // 顯示 Overall Margin
+            let overallMargin = subtotal > 0 ? ((subtotal - totalCost) / subtotal * 100) : 0;
+            let overallMarginDiv = document.getElementById('overallMarginDiv');
+            if (!overallMarginDiv) {
+                overallMarginDiv = document.createElement('div');
+                overallMarginDiv.id = 'overallMarginDiv';
+                overallMarginDiv.className = 'flex justify-between mt-2 font-bold text-blue-600';
+                document.querySelector('.w-full.sm\\:w-96.bg-gray-50.p-6.rounded-lg').appendChild(overallMarginDiv);
+            }
+            overallMarginDiv.innerHTML = `<span>Overall Margin:</span><span>${overallMargin.toFixed(1)}%</span>`;
         }
 
         let dragSrcRow = null;
@@ -795,7 +875,7 @@
             const itemCodeInput = document.getElementById('editItemCode');
             const descriptionInput = document.getElementById('editDescription');
             const unitInput = document.getElementById('editUnit');
-            const packageUnitInput = document.getElementById('editPackageUnit');
+            // const packageUnitInput = document.getElementById('editPackageUnit'); // 隱藏
             const qtyInput = document.getElementById('editQty');
             const unitPriceInput = document.getElementById('editUnitPrice');
 
@@ -805,9 +885,26 @@
             itemCodeInput.value = itemCode;
             descriptionInput.value = currentEditRow.querySelector('.description').value || (product ? product.description : '');
             unitInput.value = currentEditRow.querySelector('.unit').value || (product ? product.unit : '');
-            packageUnitInput.value = currentEditRow.querySelector('.package-unit').value || (product ? product.packageUnit : '1');
+            // packageUnitInput.value = currentEditRow.querySelector('.package-unit').value || (product ? product.packageUnit : '1'); // 隱藏
             qtyInput.value = currentEditRow.querySelector('.qty').value || '1';
             unitPriceInput.value = currentEditRow.querySelector('.unit-price').value || (product ? product.unitPrice.toFixed(2) : '');
+
+            // CM Name 計算
+            let qty = parseFloat(qtyInput.value) || 0;
+            let unitPrice = parseFloat(unitPriceInput.value) || 0;
+            let cost = product ? parseFloat(product.cost) || 0 : 0;
+            let amount = qty * unitPrice;
+            let marginPct = amount > 0 ? ((amount - (cost * qty)) / amount * 100) : 0;
+            let nameCM = String(Math.floor(marginPct / 5));
+            if (nameCM.length === 1) nameCM = '0' + nameCM;
+            let cmExplain = '';
+            if (!isNaN(marginPct)) {
+                const cmBand = Math.floor(marginPct / 5);
+                const cmLow = (cmBand * 5).toFixed(1);
+                const cmHigh = ((cmBand + 1) * 5).toFixed(1);
+                cmExplain = `(${cmLow}% - ${cmHigh}%)`;
+            }
+            document.getElementById('editCmName').textContent = `${nameCM} ${cmExplain}`;
 
             modal.classList.add('show');
         }
@@ -836,6 +933,11 @@
             currentEditRow.querySelector('.package-unit').value = packageUnit;
             currentEditRow.querySelector('.qty').value = qty;
             currentEditRow.querySelector('.unit-price').value = parseFloat(unitPrice).toFixed(2);
+            // 修正 eshop-link href
+            const eshopLink = currentEditRow.querySelector('.eshop-link');
+            if (eshopLink) {
+                eshopLink.href = itemCode ? `https://www.lyreco.com/webshop/HKHK/detail-product-${itemCode}.html` : '#';
+            }
             calculateRowAmount(currentEditRow.querySelector('.qty'));
             closeEditModal();
         }
@@ -903,15 +1005,13 @@
                     // 若找不到，則用 address 欄位分行
                     addressLines = getField('address').split(/\r?\n/).filter(Boolean);
                 }
-                doc.text(`Customer: ${getField('customerName')}`, 200, 14, { align: "right" });
-                doc.text(getField('companyName'), 200, 20, { align: "right" });
-                // 地址多行顯示
-                let addrY = 26;
-                addressLines.forEach(line => {
-                    doc.text(line, 200, addrY, { align: "right" });
-                    addrY += 6;
-                });
+                if (addressLines[0]) doc.text(addressLines[0], 200, 26, { align: "right" });
+                if (addressLines[1]) doc.text(addressLines[1], 200, 32, { align: "right" });
+                if (addressLines[2]) doc.text(addressLines[2], 200, 38, { align: "right" });
+                // 計算 addrY
+                const addrY = 26 + addressLines.length * 6;
                 doc.text(`Account No.: ${getField('accountNo')}`, 200, addrY, { align: "right" });
+
                 doc.setFontSize(16);
                 doc.text("QUOTATION", 105, 58, { align: "center" });
                 doc.setFontSize(12);
@@ -1347,6 +1447,20 @@
             quickBtn.textContent = 'Quick Row Template';
             quickBtn.onclick = downloadQuickRowTemplate;
             document.querySelector('.toolbar').insertBefore(quickBtn, document.getElementById('downloadProductTemplate'));
+            // Add Export CMC CSV button
+            const cmcBtn = document.createElement('button');
+            cmcBtn.id = 'exportCmcCsvBtn';
+            cmcBtn.className = 'btn btn-primary';
+            cmcBtn.textContent = 'Export CMC CSV';
+            cmcBtn.onclick = exportCmcCsv;
+            document.querySelector('.toolbar').insertBefore(cmcBtn, document.getElementById('downloadProductTemplate'));
+            // 新增 Quick Entry Bulk Row 按鈕
+            const quickEntryBtn = document.createElement('button');
+            quickEntryBtn.id = 'quickEntryBulkRowBtn';
+            quickEntryBtn.className = 'btn btn-primary';
+            quickEntryBtn.textContent = lang === 'en' ? 'Quick Entry Bulk Row' : '快速批量輸入';
+            quickEntryBtn.onclick = openQuickEntryModal;
+            document.querySelector('.toolbar').insertBefore(quickEntryBtn, document.getElementById('downloadProductTemplate'));
             // QR code default value
             document.getElementById('qrLink').value = 'https://lyrecohk-charleschan.github.io/paymentmethod/';
             document.getElementById('qrLink').dispatchEvent(new Event('input'));
@@ -1371,12 +1485,21 @@
                 restoreBtn.onclick = restoreDraft;
                 document.querySelector('.toolbar').appendChild(restoreBtn);
             }
+            // quotationNo 自動產生
+            document.getElementById('quotationNo').value = generateQuotationNo();
+            // quotationDate 預設今天
+            const today = new Date();
+            document.getElementById('quotationDate').value = today.toISOString().slice(0, 10);
+            // validUntil 預設今天+30天
+            const validUntil = new Date(today.getTime() + 30 * 24 * 60 * 60 * 1000);
+            document.getElementById('validUntil').value = validUntil.toISOString().slice(0, 10);
         });
 
         // First time modal logic
         function showFirstTimeModal() {
             document.getElementById('firstTimeModal').classList.add('show');
             document.body.style.overflow = 'hidden';
+            document.getElementById('formOverlay').style.display = 'block';
             checkFirstTimeFormValidity();
         }
 
@@ -1396,6 +1519,7 @@
         function hideFirstTimeModal() {
             document.getElementById('firstTimeModal').classList.remove('show');
             document.body.style.overflow = '';
+            document.getElementById('formOverlay').style.display = 'none';
         }
 
         function clearAllLocalStorage() {
@@ -1458,6 +1582,136 @@
             document.getElementById('firstTimePhone').addEventListener('input', checkFirstTimeFormValidity);
             document.getElementById('firstTimeEmail').addEventListener('input', checkFirstTimeFormValidity);
         });
+
+        // Internal info modal
+        function showInternalInfo(btn) {
+            const row = btn.closest('tr');
+            const itemCode = row.querySelector('.item-code').value || '';
+            const qty = parseFloat(row.querySelector('.qty').value) || 0;
+            const packageUnit = parseFloat(row.querySelector('.package-unit').value) || 1;
+            const unitPrice = parseFloat(row.querySelector('.unit-price').value) || 0;
+            const product = productDatabase.find(p => p.itemCode === itemCode) || {};
+            const cost = parseFloat(product.cost) || 0;
+            const amount = qty * packageUnit * unitPrice;
+            const totalCost = cost * qty * packageUnit;
+            const cashMargin = amount - totalCost;
+            const marginPct = amount > 0 ? (cashMargin / amount * 100) : 0;
+            // nameCM 重新定義公式
+            let nameCM = String(Math.floor(marginPct / 5));
+            if (nameCM.length === 1) nameCM = '0' + nameCM;
+            // 顯示 CM 解釋
+            let cmExplain = '';
+            if (!isNaN(marginPct)) {
+                const cmBand = Math.floor(marginPct / 5);
+                const cmLow = (cmBand * 5).toFixed(1);
+                const cmHigh = ((cmBand + 1) * 5).toFixed(1);
+                cmExplain = `(${cmLow}% - ${cmHigh}%)`;
+            }
+            let modal = document.getElementById('internalInfoModal');
+            if (!modal) {
+                modal = document.createElement('div');
+                modal.id = 'internalInfoModal';
+                modal.className = 'modal show';
+                modal.innerHTML = `
+                    <div class="modal-content">
+                        <h2 class="text-lg font-semibold mb-4">Internal Info</h2>
+                        <div class="space-y-2">
+                            <div>Cost: <span id="internalCost"></span></div>
+                            <div>Cash Margin: <span id="internalCashMargin"></span></div>
+                            <div>Margin %: <span id="internalMarginPct"></span></div>
+                            <div>CM: <span id="internalNameCM"></span> <span id="internalCMExplain" style="color:#888;font-size:0.9em;"></span></div>
+                        </div>
+                        <div class="flex justify-end gap-2 mt-4">
+                            <button class="btn btn-danger" onclick="closeInternalInfoModal()">Close</button>
+                        </div>
+                    </div>
+                `;
+                document.body.appendChild(modal);
+            } else {
+                modal.classList.add('show');
+            }
+            document.getElementById('internalCost').textContent = cost.toFixed(2);
+            document.getElementById('internalCashMargin').textContent = cashMargin.toFixed(2);
+            document.getElementById('internalMarginPct').textContent = marginPct.toFixed(1) + '%';
+            document.getElementById('internalNameCM').textContent = nameCM;
+            document.getElementById('internalCMExplain').textContent = cmExplain;
+        }
+
+        function closeInternalInfoModal() {
+            const modal = document.getElementById('internalInfoModal');
+            if (modal) modal.classList.remove('show');
+        }
+
+        function exportCmcCsv() {
+            const headers = ["itemCode", "unitPrice"];
+            const rows = [];
+            document.querySelectorAll("#quotationBody tr").forEach(row => {
+                const itemCode = row.querySelector(".item-code").value || '';
+                const unitPrice = row.querySelector(".unit-price").value || '';
+                if (itemCode) rows.push([itemCode, unitPrice]);
+            });
+            let csvContent = headers.join(",") + "\n" + rows.map(row => row.join(",")).join("\n");
+            const fileName = getExportFileName('CMC') + '.csv';
+            const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = fileName;
+            link.click();
+        }
+
+        // Quick Entry Bulk Row Modal
+        (function addQuickEntryModal() {
+            if (document.getElementById('quickEntryModal')) return;
+            const modal = document.createElement('div');
+            modal.id = 'quickEntryModal';
+            modal.className = 'modal';
+            modal.innerHTML = `
+                <div class="modal-content">
+                    <h2 class="text-lg font-semibold mb-4">${lang === 'en' ? 'Quick Entry Bulk Row' : '快速批量輸入'}</h2>
+                    <div class="mb-4 text-sm text-gray-600">${lang === 'en' ? 'Paste multiple lines, each line: itemCode,qty' : '每行輸入：itemCode,數量'}</div>
+                    <textarea id="quickEntryTextarea" class="form-input" rows="8" style="width:100%;"></textarea>
+                    <div id="quickEntryError" class="text-red-600 text-sm mt-2"></div>
+                    <div class="flex justify-end gap-2 mt-4">
+                        <button class="btn btn-danger" onclick="closeQuickEntryModal()">${lang === 'en' ? 'Cancel' : '取消'}</button>
+                        <button class="btn btn-success" onclick="applyQuickEntryRows()">${lang === 'en' ? 'Apply' : '應用'}</button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        })();
+
+        function openQuickEntryModal() {
+            document.getElementById('quickEntryTextarea').value = '';
+            document.getElementById('quickEntryError').textContent = '';
+            document.getElementById('quickEntryModal').classList.add('show');
+        }
+        function closeQuickEntryModal() {
+            document.getElementById('quickEntryModal').classList.remove('show');
+        }
+        function applyQuickEntryRows() {
+            const val = document.getElementById('quickEntryTextarea').value.trim();
+            const errorDiv = document.getElementById('quickEntryError');
+            errorDiv.textContent = '';
+            if (!val) {
+                errorDiv.textContent = lang === 'en' ? 'Please enter at least one line.' : '請輸入至少一行資料。';
+                return;
+            }
+            const lines = val.split(/\r?\n/).map(l => l.trim()).filter(Boolean);
+            let added = 0, failed = 0;
+            lines.forEach(line => {
+                // 支援逗號、空格、tab 任意一種分隔
+                let parts = line.split(/[,\s\t]+/).map(x => x.trim()).filter(Boolean);
+                if (parts.length < 2) { failed++; return; }
+                const itemCode = parts[0];
+                const qty = parseFloat(parts[1]);
+                if (!itemCode || isNaN(qty) || qty < 1) { failed++; return; }
+                addRowFromCSV({ itemCode, qty });
+                added++;
+            });
+            updateTotals();
+            closeQuickEntryModal();
+            showToast(`${added} ${lang === 'en' ? 'rows added.' : '行已加入。'}${failed ? ' ' + failed + (lang === 'en' ? ' failed.' : '行失敗。') : ''}`);
+        }
     </script>
 </body>
 </html>
