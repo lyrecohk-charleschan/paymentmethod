@@ -14,214 +14,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         *,::before,::after{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e2e8f0}body{margin:0;font-family:'Inter',sans-serif;color:#1e293b;line-height:1.5;background-color:#f8fafc}a{color:#2563eb;text-decoration:none}a:hover{text-decoration:underline}.container{max-width:1280px;margin-left:auto;margin-right:auto;padding:1rem}.flex{display:flex}.grid{display:grid}.hidden{display:none}.space-y-2>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.5rem * var(--tw-space-y-reverse))}.space-y-4>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem * var(--tw-space-y-reverse))}.gap-2{gap:0.5rem}.gap-6{gap:1.5rem}.flex-col{flex-direction:column}.flex-wrap{flex-wrap:wrap}.items-start{align-items:flex-start}.items-center{align-items:center}.justify-end{justify-content:flex-end}.justify-between{justify-content:space-between}.overflow-x-auto{overflow-x:auto}.overflow-y-auto{overflow-y:auto}.rounded{border-radius:0.375rem}.rounded-lg{border-radius:0.5rem}.border{border-width:1px}.border-blue-100{border-color:#dbeafe}.border-gray-200{border-color:#e2e8f0}.border-red-500{border-color:#ef4444}.bg-blue-50{background-color:#eff6ff}.bg-gray-50{background-color:#f9fafb}.bg-white{background-color:#fff}.p-4{padding:1rem}.p-6{padding:1.5rem}.px-4{padding-left:1rem;padding-right:1rem}.py-2{padding-top:0.5rem;padding-bottom:0.5rem}.pl-4{padding-left:1rem}.pr-4{padding-right:1rem}.pt-2{padding-top:0.5rem}.text-sm{font-size:0.875rem;line-height:1.25rem}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-2xl{font-size:1.5rem;line-height:2rem}.font-bold{font-weight:700}.font-medium{font-weight:500}.font-semibold{font-weight:600}.text-blue-600{color:#2563eb}.text-blue-800{color:#1e40af}.text-gray-400{color:#9ca3af}.text-gray-600{color:#4b5563}.text-gray-800{color:#1f2937}.text-red-500{color:#ef4444}.text-red-600{color:#dc2626}.shadow{box-shadow:0 1px 3px 0 rgba(0,0,0,0.1),0 1px 2px 0 rgba(0,0,0,0.06)}.shadow-lg{box-shadow:0 10px 15px -3px rgba(0,0,0,0.1),0 4px 6px -2px rgba(0,0,0,0.05)}.transition{transition-property:color,background-color,border-color,text-decoration-color,opacity,transform,box-shadow;transition-timing-function:cubic-bezier(0.4,0,0.2,1);transition-duration:150ms}.grid-cols-1{grid-template-columns:repeat(1,minmax(0,1fr))}.w-full{width:100%}.max-w-96{max-width:24rem}.h-12{height:3rem}.mt-2{margin-top:0.5rem}.mt-4{margin-top:1rem}.mt-6{margin-top:1.5rem}.mb-4{margin-bottom:1rem}.mb-6{margin-bottom:1.5rem}@media (min-width:640px){.sm\:flex-row{flex-direction:row}.sm\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.sm\:items-center{align-items:center}.sm\:mt-0{margin-top:0}.sm\:w-96{width:24rem}}
-
-        .form-input {
-            border: 1px solid #e2e8f0;
-            border-radius: 0.375rem;
-            padding: 0.5rem 0.75rem;
-            width: 100%;
-            font-size: 0.875rem;
-            transition: border-color 0.2s, box-shadow 0.2s;
-            background-color: #fff;
-        }
-        .form-input:hover {
-            border-color: #3b82f6;
-        }
-        .form-input:focus {
-            border-color: #3b82f6;
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-        }
-        .form-input:disabled, .form-input[readonly] {
-            background-color: #f1f5f9;
-            cursor: not-allowed;
-        }
-        .form-label {
-            display: block;
-            font-size: 0.75rem;
-            font-weight: 500;
-            color: #475569;
-            margin-bottom: 0.25rem;
-        }
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            padding: 0.5rem 1rem;
-            border-radius: 0.375rem;
-            font-size: 0.875rem;
-            font-weight: 500;
-            transition: background-color 0.2s, transform 0.1s;
-        }
-        .btn:hover {
-            transform: translateY(-1px);
-        }
-        .btn:active {
-            transform: translateY(0);
-        }
-        .btn-primary {
-            background-color: #3b82f6;
-            color: #fff;
-        }
-        .btn-primary:hover {
-            background-color: #2563eb;
-        }
-        .btn-secondary {
-            background-color: #64748b;
-            color: #fff;
-        }
-        .btn-secondary:hover {
-            background-color: #475569;
-        }
-        .btn-success {
-            background-color: #22c55e;
-            color: #fff;
-        }
-        .btn-success:hover {
-            background-color: #16a34a;
-        }
-        .btn-danger {
-            background-color: #ef4444;
-            color: #fff;
-        }
-        .btn-danger:hover {
-            background-color: #dc2626;
-        }
-        .table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.875rem;
-            background-color: #fff;
-            border-radius: 0.375rem;
-            overflow: hidden;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-        }
-        .table th, .table td {
-            padding: 0.75rem;
-            text-align: left;
-            border-bottom: 1px solid #e2e8f0;
-        }
-        .table th {
-            background-color: #f8fafc;
-            font-weight: 600;
-            color: #475569;
-        }
-        .table tr:hover {
-            background-color: #f1f5f9;
-        }
-        .search-dropdown {
-            position: absolute;
-            width: 100%;
-            background-color: #fff;
-            border: 1px solid #e2e8f0;
-            border-radius: 0.375rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            z-index: 50;
-            max-height: 12rem;
-            overflow-y: auto;
-        }
-        .search-item {
-            padding: 0.5rem 0.75rem;
-            font-size: 0.875rem;
-            color: #1e293b;
-            cursor: pointer;
-        }
-        .search-item:hover {
-            background-color: #eff6ff;
-            color: #2563eb;
-        }
-        .modal {
-            position: fixed;
-            inset: 0;
-            background-color: rgba(0, 0, 0, 0.5);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 100;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s, visibility 0.3s;
-        }
-        .modal.show {
-            opacity: 1;
-            visibility: visible;
-        }
-        .modal-content {
-            background-color: #fff;
-            padding: 1.5rem;
-            border-radius: 0.5rem;
-            max-width: 32rem;
-            width: 100%;
-            max-height: 90vh;
-            overflow-y: auto;
-            transform: scale(0.95);
-            transition: transform 0.3s;
-        }
-        .modal.show .modal-content {
-            transform: scale(1);
-        }
-        #toastMsg {
-            position: fixed;
-            top: 1rem;
-            right: 1rem;
-            background-color: #22c55e;
-            color: #fff;
-            padding: 0.75rem 1rem;
-            border-radius: 0.375rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            opacity: 0;
-            transform: translateY(-10px);
-            transition: opacity 0.3s, transform 0.3s;
-        }
-        #toastMsg.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .toolbar {
-            position: sticky;
-            top: 0;
-            background-color: #fff;
-            padding: 1rem;
-            border-radius: 0.375rem;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-            z-index: 10;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-        @media (max-width: 640px) {
-            .container {
-                padding: 0.5rem;
-            }
-            .table {
-                display: block;
-                overflow-x: auto;
-            }
-            .toolbar {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            .modal-content {
-                margin: 1rem;
-            }
-        }
-        @media print {
-            @page {
-                margin: 20mm;
-            }
-            body * { visibility: hidden; }
-            .print-area, .print-area * { visibility: visible; }
-            .print-area { position: absolute; left: 0; top: 0; width: 100%; }
-            .no-print { display: none !important; }
-        }
+        .form-input{border:1px solid #e2e8f0;border-radius:0.375rem;padding:0.5rem 0.75rem;width:100%;font-size:0.875rem;transition:border-color 0.2s, box-shadow 0.2s;background-color:#fff}.form-input:hover{border-color:#3b82f6}.form-input:focus{border-color:#3b82f6;outline:none;box-shadow:0 0 0 3px rgba(59, 130, 246, 0.1)}.form-input:disabled,.form-input[readonly]{background-color:#f1f5f9;cursor:not-allowed}.form-label{display:block;font-size:0.75rem;font-weight:500;color:#475569;margin-bottom:0.25rem}.btn{display:inline-flex;align-items:center;padding:0.5rem 1rem;border-radius:0.375rem;font-size:0.875rem;font-weight:500;transition:background-color 0.2s, transform 0.1s}.btn:hover{transform:translateY(-1px)}.btn:active{transform:translateY(0)}.btn-primary{background-color:#3b82f6;color:#fff}.btn-primary:hover{background-color:#2563eb}.btn-secondary{background-color:#64748b;color:#fff}.btn-secondary:hover{background-color:#475569}.btn-success{background-color:#22c55e;color:#fff}.btn-success:hover{background-color:#16a34a}.btn-danger{background-color:#ef4444;color:#fff}.btn-danger:hover{background-color:#dc2626}.table{width:100%;border-collapse:collapse;font-size:0.875rem;background-color:#fff;border-radius:0.375rem;overflow:hidden;box-shadow:0 1px 3px rgba(0, 0, 0, 0.1)}.table th,.table td{padding:0.75rem;text-align:left;border-bottom:1px solid #e2e8f0}.table th{background-color:#f8fafc;font-weight:600;color:#475569}.table tr:hover{background-color:#f1f5f9}.search-dropdown{position:absolute;width:100%;background-color:#fff;border:1px solid #e2e8f0;border-radius:0.375rem;box-shadow:0 4px 6px rgba(0, 0, 0, 0.1);z-index:50;max-height:12rem;overflow-y:auto}.search-item{padding:0.5rem 0.75rem;font-size:0.875rem;color:#1e293b;cursor:pointer}.search-item:hover{background-color:#eff6ff;color:#2563eb}.modal{position:fixed;inset:0;background-color:rgba(0, 0, 0, 0.5);display:flex;align-items:center;justify-content:center;z-index:100;opacity:0;visibility:hidden;transition:opacity 0.3s, visibility 0.3s}.modal.show{opacity:1;visibility:visible}.modal-content{background-color:#fff;padding:1.5rem;border-radius:0.5rem;max-width:32rem;width:100%;max-height:90vh;overflow-y:auto;transform:scale(0.95);transition:transform 0.3s}.modal.show .modal-content{transform:scale(1)}#toastMsg{position:fixed;top:1rem;right:1rem;background-color:#22c55e;color:#fff;padding:0.75rem 1rem;border-radius:0.375rem;box-shadow:0 4px 6px rgba(0, 0, 0, 0.1);z-index:1000;display:flex;align-items:center;gap:0.5rem;opacity:0;transform:translateY(-10px);transition:opacity 0.3s, transform 0.3s}#toastMsg.show{opacity:1;transform:translateY(0)}.toolbar{position:sticky;top:0;background-color:#fff;padding:1rem;border-radius:0.375rem;box-shadow:0 1px 3px rgba(0, 0, 0, 0.1);z-index:10;display:flex;flex-wrap:wrap;gap:0.5rem}@media (max-width:640px){.container{padding:0.5rem}.table{display:block;overflow-x:auto}.toolbar{flex-direction:column;align-items:stretch}.modal-content{margin:1rem}}@media print{@page{margin:20mm}body *{visibility:hidden}.print-area,.print-area *{visibility:visible}.print-area{position:absolute;left:0;top:0;width:100%}.no-print{display:none !important}}
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Toolbar -->
         <div class="toolbar no-print">
             <button id="langToggle" class="btn btn-secondary">中文</button>
             <label class="btn btn-primary">
@@ -232,7 +29,12 @@
                 Upload Customer CSV
                 <input type="file" id="customerCsvFile" accept=".csv" hidden onchange="handleCSVUpload(event, 'customer')">
             </label>
+            <label class="btn btn-primary">
+                Quick Upload Rows CSV
+                <input type="file" id="quickCsvFile" accept=".csv" hidden onchange="handleQuickCSVUpload(event)">
+            </label>
             <button onclick="addRow()" class="btn btn-primary">Add Row</button>
+            <button onclick="clearAllRows()" class="btn btn-danger">Clear All Rows</button>
             <button onclick="saveDraft()" class="btn btn-primary">Save Draft</button>
             <button onclick="openPDFModal()" class="btn btn-success">Print PDF</button>
             <button onclick="downloadCSV()" class="btn btn-primary">Download CSV</button>
@@ -241,7 +43,6 @@
             <button id="downloadCustomerTemplate" class="btn btn-primary">Customer Template</button>
         </div>
 
-        <!-- Instructions -->
         <div class="mt-4 bg-blue-50 border border-blue-100 rounded-lg p-4 text-sm text-blue-800">
             <p><strong>Step 1:</strong> Upload product & customer data (CSV)</p>
             <p><strong>Step 2:</strong> Edit quotation (add/remove product rows)</p>
@@ -249,9 +50,7 @@
             <p><strong>Step 4:</strong> Export PDF/CSV or save draft</p>
         </div>
 
-        <!-- Main Content -->
         <div class="mt-6 bg-white p-6 rounded-lg shadow-lg print-area">
-            <!-- Header -->
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6">
                 <div>
                     <img src="https://www.lyreco.com/content/dam/lyreco/pr/logos/lyreco-logo-og.png" alt="Lyreco Logo" class="h-12 mb-4">
@@ -262,11 +61,10 @@
                 <h1 class="text-2xl font-bold text-gray-800 mt-4 sm:mt-0">Quotation</h1>
             </div>
 
-            <!-- Customer Info -->
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
                 <div>
                     <p class="text-sm text-gray-600 mb-4">Hotline: (852) 2946 2233 | Fax: (852) 2754 9866</p>
-                    <p class="text-sm text-gray-600 mb-4">Email: <a href="/cdn-cgi/l/email-protection#3350401d5b58735f4a4156505c1d505c5e" class="text-blue-600 hover:underline"><span class="__cf_email__" data-cfemail="1a79693472715a7663687f797534797577">[email protected]</span></a></p>
+                    <p class="text-sm text-gray-600 mb-4">Email: <a href="mailto:cs.hk@lyreco.com" class="text-blue-600 hover:underline">cs.hk@lyreco.com</a></p>
                     <div class="space-y-4">
                         <div>
                             <label class="form-label" for="salesRep">Sales Representative</label>
@@ -341,7 +139,6 @@
                 </div>
             </div>
 
-            <!-- Quotation Table -->
             <div class="overflow-x-auto">
                 <table class="table">
                     <thead>
@@ -351,6 +148,7 @@
                             <th>Item Code</th>
                             <th>Description</th>
                             <th>Unit</th>
+                            <th>Package Unit</th>
                             <th>Qty</th>
                             <th>Unit Price</th>
                             <th>Amount</th>
@@ -362,7 +160,6 @@
                 </table>
             </div>
 
-            <!-- Total Section -->
             <div class="flex justify-end mt-6">
                 <div class="w-full sm:w-96 bg-gray-50 p-6 rounded-lg">
                     <div class="space-y-2">
@@ -383,8 +180,12 @@
                             <input type="number" id="taxRate" class="form-input w-24 text-right" value="0" min="0" max="100" step="0.01" onchange="updateTotals()">
                         </div>
                         <div class="flex justify-between">
-                            <inpuTax:</span>
+                            <span>Tax:</span>
                             <span id="taxAmount" class="font-medium">0.00</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <label for="shippingFee" class="form-label">Shipping Fee:</label>
+                            <input type="number" id="shippingFee" class="form-input w-24 text-right" value="0" min="0" step="0.01" onchange="updateTotals()">
                         </div>
                         <div class="flex justify-between font-bold text-blue-600">
                             <span>Grand Total:</span>
@@ -394,14 +195,12 @@
                 </div>
             </div>
 
-            <!-- Remarks -->
             <div class="mt-6">
                 <label for="remarks" class="form-label">Remarks</label>
                 <textarea id="remarks" class="form-input" rows="4" placeholder="Enter remarks (if any)"></textarea>
                 <button onclick="applySuggestedTerms()" class="btn btn-primary mt-2">Apply Suggested Terms</button>
             </div>
 
-            <!-- QR Code -->
             <div class="mt-6">
                 <label for="qrLink" class="form-label">QR Code Link</label>
                 <input type="text" id="qrLink" class="form-input" placeholder="Enter URL for QR code">
@@ -410,7 +209,6 @@
         </div>
     </div>
 
-    <!-- Modals -->
     <div id="pdfModal" class="modal">
         <div class="modal-content">
             <h2 class="text-lg font-semibold mb-4">Generate PDF</h2>
@@ -428,15 +226,19 @@
             <div class="space-y-4">
                 <div>
                     <label class="form-label" for="editItemCode">Item Code</label>
-                    <select id="editItemCode" class="form-input"></select>
+                    <input type="text" id="editItemCode" class="form-input">
                 </div>
                 <div>
                     <label class="form-label" for="editDescription">Description</label>
-                    <textarea id="editDescription" class="form-input" rows="2" readonly></textarea>
+                    <textarea id="editDescription" class="form-input" rows="2"></textarea>
                 </div>
                 <div>
                     <label class="form-label" for="editUnit">Unit</label>
-                    <input type="text" id="editUnit" class="form-input" readonly>
+                    <input type="text" id="editUnit" class="form-input">
+                </div>
+                <div>
+                    <label class="form-label" for="editPackageUnit">Package Unit</label>
+                    <input type="number" id="editPackageUnit" class="form-input" min="1">
                 </div>
                 <div>
                     <label class="form-label" for="editQty">Quantity</label>
@@ -444,7 +246,7 @@
                 </div>
                 <div>
                     <label class="form-label" for="editUnitPrice">Unit Price</label>
-                    <input type="number" id="editUnitPrice" class="form-input" readonly>
+                    <input type="number" id="editUnitPrice" class="form-input" min="0" step="0.01">
                 </div>
             </div>
             <div class="flex justify-end gap-2 mt-4">
@@ -466,817 +268,1196 @@
         </div>
     </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-<script>
-    let productDatabase = [];
-    let rowCounter = 1;
-    let currentEditRow = null;
-    let customerDatabase = [];
-    let lang = 'en';
-    let csvPreviewType = null;
-    let csvPreviewData = null;
-
-    // Predefined product data from the PDF
-    const predefinedProducts = [
-        { itemCode: "1865152", description: "LYRECO PREMIUM GEL PEN RT 0.7MM BLACK", unit: "", unitPrice: 5.90 },
-        { itemCode: "103687", description: "PK12 LYRECO STICKY NOTE 50X40 YLLW", unit: "", unitPrice: 30.50 },
-        { itemCode: "18655174", description: "LYRECO PREMIUM GEL PEN RT 0.7MM RED", unit: "", unitPrice: 5.90 },
-        { itemCode: "6344598", description: "LAVAZZA TOP CLASS COFFEE BEAN POUCH 1KG", unit: "", unitPrice: 292.00 }
-    ];
-
-    // Predefined customer data from the PDF
-    const predefinedCustomer = {
-        accountNo: "",
-        companyName: "ECOLAB ",
-        customerName: "Ms. ",
-        address: "",
-        quotationNo: "7418722",
-        quotationDate: "2025-04-25",
-        validUntil: "2025-05-25",
-        salesRep: "80270192 CHAN CHARLES",
-        customerType: "corporate"
-    };
-
-    // Language Dictionaries
-    const LANGS = {
-        en: {
-            step1: "Step 1: Upload product & customer data (CSV)",
-            step2: "Step 2: Edit quotation (add/remove product rows)",
-            step3: "Step 3: Fill customer info & remarks",
-            step4: "Step 4: Export PDF/CSV or save draft",
-            addRow: "Add Row",
-            printPDF: "Print PDF",
-            downloadCSV: "Download CSV",
-            saveDraft: "Save Draft",
-            saved: "Draft saved!",
-            restore: "Draft restored.",
-            csvPreview: "CSV Preview",
-            cancel: "Cancel",
-            apply: "Apply",
-            csvFormatError: "CSV format error: Please check column count.",
-            fieldRequired: "This field is required.",
-            selectProduct: "Please select a product.",
-            enterQty: "Please enter quantity.",
-            noCustomers: "No customer data loaded. Please upload a customer CSV."
-        },
-        zh: {
-            step1: "步骤 1：上传产品及客户资料（CSV）",
-            step2: "步骤 2：编辑报价单内容（可新增/删除产品行）",
-            step3: "步骤 3：填写客户资料及备注",
-            step4: "步骤 4：输出 PDF 或 CSV，或保存草稿",
-            addRow: "新增产品行",
-            printPDF: "打印 PDF",
-            downloadCSV: "下载 CSV",
-            saveDraft: "保存草稿",
-            saved: "草稿已保存！",
-            restore: "草稿已还原。",
-            csvPreview: "CSV 预览",
-            cancel: "取消",
-            apply: "应用",
-            csvFormatError: "CSV 格式错误：请检查栏位数。",
-            fieldRequired: "此栏位必填。",
-            selectProduct: "请选择产品。",
-            enterQty: "请输入数量。",
-            noCustomers: "未加载客户数据。请上传客户 CSV 文件。"
-        }
-    };
-
-    // Language Toggle
-    function setLang(newLang) {
-        lang = newLang;
-        document.getElementById('langToggle').textContent = lang === 'en' ? '中文' : 'English';
-        const steps = document.querySelectorAll('.bg-blue-50 p');
-        steps[0].innerHTML = `<strong>Step 1:</strong> ${LANGS[lang].step1}`;
-        steps[1].innerHTML = `<strong>Step 2:</strong> ${LANGS[lang].step2}`;
-        steps[2].innerHTML = `<strong>Step 3:</strong> ${LANGS[lang].step3}`;
-        steps[3].innerHTML = `<strong>Step 4:</strong> ${LANGS[lang].step4}`;
-        document.getElementById('companyName').placeholder = lang === 'en' ? 'Enter company name' : '输入公司名称';
-        document.getElementById('customerName').placeholder = lang === 'en' ? 'Enter customer name' : '输入客户名称';
-        document.getElementById('address').placeholder = lang === 'en' ? 'Enter billing/delivery address' : '输入账单/送货地址';
-        document.getElementById('remarks').placeholder = lang === 'en' ? 'Enter remarks (if any)' : '请输入备注（如有）';
-        document.getElementById('customerSearch').placeholder = lang === 'en' ? 'Search by Account No., Company, or Name' : '按账户编号、公司或名称搜索';
-    }
-    function toggleLang() {
-        setLang(lang === 'en' ? 'zh' : 'en');
-    }
-    document.addEventListener('DOMContentLoaded', () => setLang('en'));
-
-    // Generate Quotation No.
-    function generateQuotationNo() {
-        return `LY-${String(Math.floor(Math.random() * 10000000)).padStart(9, '0')}`;
-    }
-
-    // Customer Search
-    function searchCustomer(input) {
-        const keyword = input.value.toLowerCase();
-        const dropdown = document.getElementById('customerSearchDropdown');
-        if (!keyword || customerDatabase.length === 0) {
-            dropdown.classList.add('hidden');
-            if (customerDatabase.length === 0 && keyword) {
-                showToast(LANGS[lang].noCustomers);
-            }
-            return;
-        }
-        const matches = customerDatabase.filter(c => 
-            c.accountNo.toLowerCase().includes(keyword) ||
-            c.companyName.toLowerCase().includes(keyword) ||
-            (c.customerName && c.customerName.toLowerCase().includes(keyword))
-        );
-        dropdown.innerHTML = matches.map(c => `
-            <div class="search-item" onclick="selectCustomer('${c.accountNo.replace(/'/g, "\\'")}', '${c.companyName.replace(/'/g, "\\'")}', '${c.customerName ? c.customerName.replace(/'/g, "\\'") : ''}', '${c.address.replace(/'/g, "\\'")}')">
-                ${c.companyName} (${c.accountNo})${c.customerName ? ' - ' + c.customerName : ''}
+    <div id="firstTimeModal" class="modal show">
+        <div class="modal-content">
+            <h2 class="text-lg font-semibold mb-4">Welcome! Please complete setup</h2>
+            <div class="space-y-4">
+                <label class="form-label">Upload Product CSV
+                    <input type="file" id="firstTimeProductCsv" accept=".csv" class="form-input" style="margin-top:8px">
+                </label>
+                <button id="firstTimeDownloadProductTemplate" class="btn btn-primary mb-2" type="button">Download Product Template</button>
+                <label class="form-label">Sales Representative
+                    <input type="text" id="firstTimeSalesRep" class="form-input" placeholder="Enter name">
+                </label>
+                <label class="form-label">Phone
+                    <input type="text" id="firstTimePhone" class="form-input" placeholder="Enter phone number">
+                </label>
+                <label class="form-label">Email
+                    <input type="email" id="firstTimeEmail" class="form-input" placeholder="Enter email address">
+                </label>
+                <div id="firstTimeError" class="text-red-600 text-sm"></div>
             </div>
-        `).join('');
-        dropdown.classList.toggle('hidden', matches.length === 0);
-    }
-
-    function selectCustomer(accountNo, companyName, customerName, address) {
-        document.getElementById('accountNo').value = accountNo;
-        document.getElementById('companyName').value = companyName;
-        document.getElementById('customerName').value = customerName;
-        document.getElementById('address').value = address;
-        document.getElementById('customerSearch').value = '';
-        document.getElementById('customerSearchDropdown').classList.add('hidden');
-    }
-
-    // CSV Upload & Preview
-    function handleCSVUpload(event, type) {
-        const file = event.target.files[0];
-        if (!file) return;
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            showCSVPreview(type, e.target.result);
-        };
-        reader.readAsText(file);
-        event.target.value = '';
-    }
-
-    function parseCSV(csvData) {
-        const parsed = Papa.parse(csvData, { header: true, skipEmptyLines: true });
-        return parsed.data.map(row => ({
-            itemCode: row.itemCode?.trim() || '',
-            description: row.description?.trim() || '',
-            unit: row.unit?.trim() || '',
-            unitPrice: parseFloat(row.unitPrice) || 0
-        }));
-    }
-
-    function parseCustomerCSV(csvData) {
-        const parsed = Papa.parse(csvData, { header: true, skipEmptyLines: true });
-        return parsed.data.map(row => ({
-            accountNo: row.accountNo?.trim() || '',
-            companyName: row.companyName?.trim() || '',
-            customerName: row.customerName?.trim() || '',
-            address: row.address?.trim() || ''
-        }));
-    }
-
-    function showCSVPreview(type, csvData) {
-        csvPreviewType = type;
-        csvPreviewData = csvData;
-        const parsed = Papa.parse(csvData, { header: true, skipEmptyLines: true });
-        if (parsed.errors.length > 0) {
-            document.getElementById('csvPreviewError').textContent = LANGS[lang].csvFormatError;
-            document.getElementById('csvPreviewApplyBtn').disabled = true;
-            document.getElementById('csvPreviewTable').innerHTML = '';
-            document.getElementById('csvPreviewModal').classList.add('show');
-            return;
-        }
-        const headers = parsed.meta.fields;
-        const rows = parsed.data;
-        let table = `<table class="table"><thead><tr>${headers.map(h => `<th>${h}</th>`).join('')}</tr></thead><tbody>${rows.map(r => `<tr>${headers.map(h => `<td>${r[h] || ''}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
-        document.getElementById('csvPreviewTable').innerHTML = table;
-        document.getElementById('csvPreviewError').textContent = '';
-        document.getElementById('csvPreviewApplyBtn').disabled = false;
-        document.getElementById('csvPreviewModal').classList.add('show');
-    }
-    function closeCSVPreviewModal() {
-        document.getElementById('csvPreviewModal').classList.remove('show');
-        csvPreviewType = null;
-        csvPreviewData = null;
-    }
-    function applyCSVPreview() {
-        if (csvPreviewType === 'product') {
-            productDatabase = parseCSV(csvPreviewData);
-            document.getElementById('quotationBody').innerHTML = '';
-            rowCounter = 1;
-            addRow();
-        } else if (csvPreviewType === 'customer') {
-            customerDatabase = parseCustomerCSV(csvPreviewData);
-        }
-        closeCSVPreviewModal();
-    }
-
-    // Add Row
-    function addRow() {
-        const tbody = document.getElementById('quotationBody');
-        const tr = document.createElement('tr');
-        tr.setAttribute('draggable', 'true');
-        tr.innerHTML = `
-            <td>${rowCounter}</td>
-            <td>
-                <img src="" alt="Product Image" class="w-12 h-12 rounded" onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
-                <span class="text-xs text-gray-400" style="display:none;">No Image</span>
-            </td>
-            <td>
-                <select class="form-input" onchange="updateRowDetails(this)" aria-label="Select item">
-                    <option value="">Select Item</option>
-                    ${productDatabase.map(p => `<option value="${p.itemCode}">${p.itemCode}</option>`).join('')}
-                </select>
-                <div class="relative mt-2">
-                    <input type="text" class="form-input" placeholder="Search by Description & Item Code" oninput="searchByDescription(this)">
-                    <div class="search-dropdown hidden"></div>
-                </div>
-            </td>
-            <td><textarea class="form-input description" rows="2" readonly></textarea></td>
-            <td><input type="text" class="form-input unit" readonly></td>
-            <td><input type="number" class="form-input qty" value="1" min="1" onchange="calculateRowAmount(this)" aria-label="Quantity"></td>
-            <td><input type="number" class="form-input unit-price text-right" readonly></td>
-            <td><input type="number" class="form-input amount text-right" readonly></td>
-            <td><input type="text" class="form-input remarks" placeholder="Remarks" aria-label="Remarks"></td>
-            <td class="no-print">
-                <div class="flex gap-2">
-                    <button onclick="openEditModal(this)" class="btn btn-secondary" title="Edit">Edit</button>
-                    <button onclick="removeRow(this)" class="btn btn-danger" title="Remove">Remove</button>
-                </div>
-            </td>
-        `;
-        tbody.appendChild(tr);
-        rowCounter++;
-        tr.querySelector('select').focus();
-    }
-
-    // Remove Row
-    function removeRow(btn) {
-        btn.closest('tr').remove();
-        updateRowNumbers();
-        updateTotals();
-    }
-
-    // Update Row Numbers
-    function updateRowNumbers() {
-        document.querySelectorAll('#quotationBody tr').forEach((tr, i) => {
-            tr.cells[0].textContent = i + 1;
-        });
-    }
-
-    // Update Row Details
-    function updateRowDetails(select) {
-        const row = select.closest('tr');
-        const product = productDatabase.find(p => p.itemCode === select.value);
-        if (product) {
-            row.querySelector('.description').value = product.description.slice(0, 150);
-            row.querySelector('.unit').value = product.unit;
-            row.querySelector('.unit-price').value = product.unitPrice.toFixed(2);
-            const qty = parseFloat(row.querySelector('.qty').value) || 0;
-            row.querySelector('.amount').value = (qty * product.unitPrice).toFixed(2);
-            const img = row.querySelector('img');
-            img.src = `https://assets.lyreco.com/is/image/lyrecows/2018-${product.itemCode}?fmt=jpg&locale=HK_hk`;
-            img.style.display = 'block';
-            img.nextElementSibling.style.display = 'none';
-        } else {
-            row.querySelector('img').src = '';
-            row.querySelector('.description').value = '';
-            row.querySelector('.unit').value = '';
-            row.querySelector('.unit-price').value = '';
-            row.querySelector('.amount').value = '';
-        }
-        updateTotals();
-    }
-
-    // Calculate Row Amount
-    function calculateRowAmount(input) {
-        const row = input.closest('tr');
-        const qty = parseFloat(row.querySelector('.qty').value) || 0;
-        const unitPrice = parseFloat(row.querySelector('.unit-price').value) || 0;
-        row.querySelector('.amount').value = (qty * unitPrice).toFixed(2);
-        updateTotals();
-    }
-
-    // Update Totals
-    function updateTotals() {
-        const subtotal = Array.from(document.querySelectorAll('#quotationBody .amount'))
-            .reduce((sum, input) => sum + (parseFloat(input.value) || 0), 0);
-        const taxRate = parseFloat(document.getElementById('taxRate').value) || 0;
-        const discount = parseFloat(document.getElementById('discount').value) || 0;
-        const discountAmount = (subtotal * discount / 100);
-        const taxAmount = ((subtotal - discountAmount) * taxRate / 100);
-        const grandTotal = subtotal - discountAmount + taxAmount;
-        document.getElementById('subtotal').textContent = subtotal.toFixed(2);
-        document.getElementById('discountAmount').textContent = discountAmount.toFixed(2);
-        document.getElementById('taxAmount').textContent = taxAmount.toFixed(2);
-        document.getElementById('grandTotal').textContent = grandTotal.toFixed(2);
-    }
-
-    // Drag & Drop
-    let dragSrcRow = null;
-    document.getElementById('quotationBody').addEventListener('dragstart', e => {
-        dragSrcRow = e.target.closest('tr');
-        dragSrcRow.style.opacity = '0.5';
-    });
-    document.getElementById('quotationBody').addEventListener('dragend', () => {
-        if (dragSrcRow) dragSrcRow.style.opacity = '';
-        dragSrcRow = null;
-    });
-    document.getElementById('quotationBody').addEventListener('dragover', e => e.preventDefault());
-    document.getElementById('quotationBody').addEventListener('drop', e => {
-        e.preventDefault();
-        if (dragSrcRow && dragSrcRow !== e.target.closest('tr')) {
-            const targetRow = e.target.closest('tr');
-            if (targetRow) {
-                document.getElementById('quotationBody').insertBefore(dragSrcRow, targetRow.nextSibling);
-                updateRowNumbers();
-                updateTotals();
-            }
-        }
-        dragSrcRow = null;
-    });
-
-    // Search By Description & Item Code
-    function searchByDescription(input) {
-        const row = input.closest('tr');
-        const keyword = input.value.toLowerCase();
-        const dropdown = row.querySelector('.search-dropdown');
-        if (!keyword) {
-            dropdown.classList.add('hidden');
-            return;
-        }
-        const matches = productDatabase.filter(p => 
-            p.description.toLowerCase().includes(keyword) ||
-            p.itemCode.toLowerCase().includes(keyword)
-        );
-        dropdown.innerHTML = matches.map(p => `
-            <div class="search-item" onclick="selectDescription(this, '${p.itemCode.replace(/'/g, "\\'")}')">
-                ${p.itemCode} - ${p.description}
+            <div class="flex justify-end gap-2 mt-4">
+                <button id="firstTimeSubmitBtn" class="btn btn-success">Submit</button>
             </div>
-        `).join('');
-        dropdown.classList.toggle('hidden', matches.length === 0);
-    }
+        </div>
+    </div>
 
-    function selectDescription(div, itemCode) {
-        const row = div.closest('tr');
-        row.querySelector('select').value = itemCode;
-        updateRowDetails(row.querySelector('select'));
-        row.querySelector('.search-dropdown').classList.add('hidden');
-        row.querySelector('input[type=text]').value = '';
-    }
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cloudflare-email-decode/5c5dd728/email-decode.min.js"></script>
+    <script>
+        let productDatabase = [];
+        let rowCounter = 1;
+        let currentEditRow = null;
+        let customerDatabase = [];
+        let lang = 'en';
+        let csvPreviewType = null;
+        let csvPreviewData = null;
 
-    // Edit Modal
-    function openEditModal(button) {
-        currentEditRow = button.closest('tr');
-        const modal = document.getElementById('editModal');
-        const itemCodeSelect = document.getElementById('editItemCode');
-        itemCodeSelect.innerHTML = '<option value="">Select Item</option>' + productDatabase.map(p => 
-            `<option value="${p.itemCode}">${p.itemCode}</option>`
-        ).join('');
-        const product = productDatabase.find(p => p.itemCode === currentEditRow.querySelector('select').value);
-        if (product) {
-            itemCodeSelect.value = product.itemCode;
-            document.getElementById('editDescription').value = product.description.slice(0, 150);
-            document.getElementById('editUnit').value = product.unit;
-            document.getElementById('editUnitPrice').value = product.unitPrice.toFixed(2);
-        }
-        document.getElementById('editQty').value = currentEditRow.querySelector('.qty').value || '1';
-        itemCodeSelect.onchange = function() {
-            const product = productDatabase.find(p => p.itemCode === this.value);
-            if (product) {
-                document.getElementById('editDescription').value = product.description.slice(0, 150);
-                document.getElementById('editUnit').value = product.unit;
-                document.getElementById('editUnitPrice').value = product.unitPrice.toFixed(2);
-            }
+        const predefinedProducts = [
+            { itemCode: "1865152", description: "LYRECO PREMIUM GEL PEN RT 0.7MM BLACK", descriptionChi: "LYRECO 优质凝胶笔 0.7毫米 黑色", unit: "", packageUnit: "1", unitPrice: 5.90, cost: 4.50 },
+            { itemCode: "103687", description: "PK12 LYRECO STICKY NOTE 50X40 YLLW", descriptionChi: "LYRECO 便签纸 50X40 黄色 12包", unit: "", packageUnit: "12", unitPrice: 30.50, cost: 25.00 },
+            { itemCode: "18655174", description: "LYRECO PREMIUM GEL PEN RT 0.7MM RED", descriptionChi: "LYRECO 优质凝胶笔 0.7毫米 红色", unit: "", packageUnit: "1", unitPrice: 5.90, cost: 4.50 },
+            { itemCode: "6344598", description: "LAVAZZA TOP CLASS COFFEE BEAN POUCH 1KG", descriptionChi: "LAVAZZA 顶级咖啡豆袋 1公斤", unit: "", packageUnit: "1", unitPrice: 292.00, cost: 250.00 }
+        ];
+
+        const predefinedCustomer = {
+            accountNo: "",
+            companyName: "ECOLAB",
+            customerName: "Ms.",
+            address: "",
+            quotationNo: "7418722",
+            quotationDate: "2025-04-25",
+            validUntil: "2025-05-25",
+            salesRep: "80270192 CHAN CHARLES",
+            customerType: "corporate"
         };
-        modal.classList.add('show');
-    }
-    function closeEditModal() {
-        document.getElementById('editModal').classList.remove('show');
-        currentEditRow = null;
-    }
-    function saveEdit() {
-        if (!currentEditRow) return;
-        const itemCode = document.getElementById('editItemCode').value;
-        const qty = document.getElementById('editQty').value;
-        if (!itemCode || !qty || parseInt(qty) < 1) {
-            showToast(LANGS[lang].selectProduct);
-            return;
-        }
-        currentEditRow.querySelector('select').value = itemCode;
-        currentEditRow.querySelector('.qty').value = qty;
-        updateRowDetails(currentEditRow.querySelector('select'));
-        closeEditModal();
-    }
 
-    // PDF Generation
-    async function confirmGeneratePDF() {
-        if (!confirm("Generate PDF for this quotation?")) return;
-        showToast("Generating PDF...");
-        const requiredFields = ['companyName', 'accountNo', 'address'];
-        for (const id of requiredFields) {
-            const field = document.getElementById(id);
-            if (!field.value.trim()) {
-                showToast(LANGS[lang].fieldRequired);
-                field.focus();
-                closePDFModal();
-                return;
-            }
-        }
-        closePDFModal();
-
-        try {
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF({ orientation: 'p', unit: 'mm', format: 'a4', encoding: 'UTF-8' });
-            doc.setFontSize(12);
-            doc.text("Lyreco (Hong Kong) Co., Ltd.", 12, 14);
-            doc.text("16/F, 78 Hung To Road, Kwun Tong, Kowloon", 12, 20);
-            doc.text("Bank: HSBC 004-728325-001", 12, 26);
-            doc.text("FPS ID: 112461512", 12, 32);
-            const getField = id => document.getElementById(id)?.value || '';
-            doc.text(`Customer: ${getField('customerName')}`, 200, 14, { align: "right" });
-            doc.text(getField('companyName'), 200, 20, { align: "right" });
-            doc.text(getField('address'), 200, 26, { align: "right" });
-            doc.text(`Account No.: ${getField('accountNo')}`, 200, 32, { align: "right" });
-            doc.setFontSize(16);
-            doc.text("QUOTATION", 105, 44, { align: "center" });
-            doc.setFontSize(12);
-            doc.text(`Quotation No.: ${getField('quotationNo')}`, 200, 52, { align: "right" });
-            doc.text(`Date: ${getField('quotationDate')}`, 200, 58, { align: "right" });
-
-            const rows = [];
-            let subtotal = 0;
-
-            // Collect table data and images
-            const tableData = [];
-            const imagePromises = [];
-            document.querySelectorAll("#quotationBody tr").forEach(row => {
-                const itemCode = row.querySelector("select")?.value || '';
-                const description = row.querySelector(".description")?.value || '';
-                const unitPrice = parseFloat(row.querySelector(".unit-price")?.value || '0');
-                const qty = parseFloat(row.querySelector(".qty")?.value || '0');
-                const amount = parseFloat(row.querySelector(".amount")?.value || '0');
-                const remarks = row.querySelector(".remarks")?.value || '';
-                const imgElement = row.querySelector("img");
-
-                if (itemCode && description && !isNaN(unitPrice) && !isNaN(qty)) {
-                    const rowData = {
-                        product: `${description}\n(${itemCode})`,
-                        unitPrice: unitPrice.toFixed(2),
-                        qty: qty,
-                        amount: amount.toFixed(2),
-                        remarks: remarks,
-                        imgSrc: imgElement && imgElement.src ? imgElement.src : null
-                    };
-                    rows.push(rowData);
-                    subtotal += amount;
-
-                    // Load image as data URL
-                    if (rowData.imgSrc) {
-                        const promise = new Promise((resolve) => {
-                            const img = new Image();
-                            img.crossOrigin = "Anonymous";
-                            img.onload = () => {
-                                const canvas = document.createElement('canvas');
-                                canvas.width = img.width;
-                                canvas.height = img.height;
-                                const ctx = canvas.getContext('2d');
-                                ctx.drawImage(img, 0, 0);
-                                resolve(canvas.toDataURL('image/png'));
-                            };
-                            img.onerror = () => resolve(null);
-                            img.src = rowData.imgSrc;
-                        });
-                        imagePromises.push(promise);
-                    } else {
-                        imagePromises.push(Promise.resolve(null));
-                    }
-                }
-            });
-
-            if (rows.length === 0) {
-                showToast("No valid products to include in PDF.");
-                return;
-            }
-
-            // Wait for all images to load
-            const imageDataURLs = await Promise.all(imagePromises);
-
-            // Combine rows with image data
-            rows.forEach((row, index) => {
-                tableData.push({
-                    ...row,
-                    imgData: imageDataURLs[index]
-                });
-            });
-
-            // Define table headers and column widths
-            const headers = ["Image", "Product", "Unit Price", "Quantity", "Amount", "Remarks"];
-            const columnWidths = {
-                0: 15, // Image
-                1: 45, // Product
-                2: 25, // Unit Price
-                3: 25, // Quantity
-                4: 25, // Amount
-                5: 45  // Remarks
-            };
-
-            // Create table data for PDF (including empty image column)
-            const tableRows = tableData.map(rowData => [
-                '', // Placeholder for image column
-                rowData.product,
-                rowData.unitPrice,
-                rowData.qty,
-                rowData.amount,
-                rowData.remarks
-            ]);
-
-            // Render table with autoTable
-            let startY = 68;
-            doc.autoTable({
-                head: [headers],
-                body: tableRows,
-                startY: startY,
-                theme: 'grid',
-                styles: { fontSize: 10, cellPadding: 2, encoding: 'utf8', minCellHeight: 15 },
-                headStyles: { fillColor: [41, 128, 185], textColor: 255 },
-                columnStyles: {
-                    0: { cellWidth: columnWidths[0] },
-                    1: { cellWidth: columnWidths[1] },
-                    2: { cellWidth: columnWidths[2], halign: 'right' },
-                    3: { cellWidth: columnWidths[3], halign: 'right' },
-                    4: { cellWidth: columnWidths[4], halign: 'right' },
-                    5: { cellWidth: columnWidths[5] }
-                },
-                didDrawCell: (data) => {
-                    if (data.section === 'body' && data.column.index === 0) {
-                        const rowIndex = data.row.index;
-                        const imgData = tableData[rowIndex].imgData;
-                        if (imgData) {
-                            const cellX = data.cell.x + 2;
-                            const cellY = data.cell.y + 2;
-                            const imgWidth = 10; // mm
-                            const imgHeight = 10; // mm
-                            try {
-                                doc.addImage(imgData, 'PNG', cellX, cellY, imgWidth, imgHeight);
-                            } catch (e) {
-                                console.warn('Failed to add image to PDF:', e);
-                            }
-                        }
-                    }
-                }
-            });
-
-            let finalY = doc.lastAutoTable.finalY || startY;
-            const remarks = getField('remarks');
-            if (remarks) {
-                doc.setFontSize(10);
-                doc.text("Remarks:", 10, finalY + 10);
-                doc.text(remarks, 10, finalY + 16);
-                finalY += 20;
-            }
-
-            const discount = parseFloat(getField('discount')) || 0;
-            const discountAmount = (subtotal * discount / 100).toFixed(2);
-            const taxRate = parseFloat(getField('taxRate')) || 0;
-            const taxAmount = ((subtotal - discountAmount) * taxRate / 100).toFixed(2);
-            const grandTotal = (subtotal - discountAmount + parseFloat(taxAmount)).toFixed(2);
-
-            doc.setFontSize(10);
-            doc.text(`Subtotal: HKD ${subtotal.toFixed(2)}`, 150, finalY + 10);
-            doc.text(`Discount: HKD ${discountAmount}`, 150, finalY + 16);
-            doc.text(`Tax: HKD ${taxAmount}`, 150, finalY + 22);
-            doc.text(`Grand Total: HKD ${grandTotal}`, 150, finalY + 28);
-
-            const paymentTerms = getField('paymentTerms');
-            if (paymentTerms) {
-                doc.text(`Payment Terms: ${paymentTerms}`, 10, finalY + 36);
-            }
-
-            const qrCodeElement = document.querySelector('#qrcode canvas');
-            if (qrCodeElement) {
-                doc.addImage(qrCodeElement.toDataURL(), 'PNG', 160, finalY + 40, 30, 30);
-            }
-
-            doc.save("quotation.pdf");
-            showToast("PDF generated successfully!");
-        } catch (err) {
-            console.error('PDF generation error:', err);
-            showToast("Failed to generate PDF: " + err.message);
-        }
-    }
-
-    // CSV Download
-    function downloadCSV() {
-        const headers = ["Line No.", "Item Code", "Description", "Unit", "Qty", "Unit Price", "Amount", "Remarks"];
-        const rows = [];
-        document.querySelectorAll("#quotationBody tr").forEach((row, index) => {
-            const itemCode = row.querySelector("select")?.value || '';
-            const description = row.querySelector(".description")?.value || '';
-            const unit = row.querySelector(".unit")?.value || '';
-            const qty = row.querySelector(".qty")?.value || '0';
-            const unitPrice = row.querySelector(".unit-price")?.value || '0.00';
-            const amount = row.querySelector(".amount")?.value || '0.00';
-            const remarks = row.querySelector(".remarks")?.value || '';
-            rows.push([index + 1, itemCode, description, unit, qty, unitPrice, amount, remarks]);
-        });
-        let csvContent = headers.join(",") + "\n" + rows.map(row => row.join(",")).join("\n");
-        const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
-        const link = document.createElement("a");
-        link.href = URL.createObjectURL(blob);
-        link.download = "quotation.csv";
-        link.click();
-    }
-
-    // Excel Export
-    function exportToExcel() {
-        const headers = ["Line No.", "Item Code", "Description", "Unit", "Qty", "Unit Price", "Amount", "Remarks"];
-        const rows = [];
-        document.querySelectorAll("#quotationBody tr").forEach((row, index) => {
-            const itemCode = row.querySelector("select")?.value || '';
-            const description = row.querySelector(".description")?.value || '';
-            const unit = row.querySelector(".unit")?.value || '';
-            const qty = row.querySelector(".qty")?.value || '0';
-            const unitPrice = row.querySelector(".unit-price")?.value || '0.00';
-            const amount = row.querySelector(".amount")?.value || '0.00';
-            const remarks = row.querySelector(".remarks")?.value || '';
-            rows.push([index + 1, itemCode, description, unit, qty, unitPrice, amount, remarks]);
-        });
-        const worksheet = XLSX.utils.aoa_to_sheet([headers, ...rows]);
-        const workbook = XLSX.utils.book_new();
-        XLSX.utils.book_append_sheet(workbook, worksheet, "Quotation");
-        XLSX.writeFile(workbook, "quotation.xlsx");
-    }
-
-    // Template Downloads
-    function downloadProductTemplate() {
-        const headers = ["itemCode", "description", "unit", "unitPrice"];
-        const example = ["P12345", "Sample Product", "PCS", "10.00"];
-        let csvContent = headers.join(",") + "\n" + example.join(",") + "\n";
-        const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
-        const link = document.createElement("a");
-        link.href = URL.createObjectURL(blob);
-        link.download = "product_template.csv";
-        link.click();
-    }
-
-    function downloadCustomerTemplate() {
-        const headers = ["accountNo", "companyName", "customerName", "address"];
-        const example = ["A00001", "Sample Company", "John Doe", "123 Sample St, City"];
-        let csvContent = headers.join(",") + "\n" + example.join(",") + "\n";
-        const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
-        const link = document.createElement("a");
-        link.href = URL.createObjectURL(blob);
-        link.download = "customer_template.csv";
-        link.click();
-    }
-
-    // Save Draft
-    function getDraftData() {
-        const formFields = ['accountNo', 'quotationNo', 'companyName', 'customerName', 'quotationDate', 'paymentTerms', 'deliveryTerms', 'validUntil', 'address', 'remarks', 'taxRate', 'discount', 'customerPhone', 'customerEmail'];
-        const form = {};
-        formFields.forEach(id => form[id] = document.getElementById(id)?.value || '');
-        const rows = [];
-        document.querySelectorAll("#quotationBody tr").forEach(row => {
-            rows.push({
-                itemCode: row.querySelector('select')?.value || '',
-                description: row.querySelector('.description')?.value || '',
-                unit: row.querySelector('.unit')?.value || '',
-                qty: row.querySelector('.qty')?.value || '',
-                unitPrice: row.querySelector('.unit-price')?.value || '',
-                amount: row.querySelector('.amount')?.value || '',
-                lineRemark: row.querySelector('.remarks')?.value || ''
-            });
-        });
-        return { form, rows };
-    }
-    function setDraftData(data) {
-        if (!data) return;
-        Object.entries(data.form).forEach(([id, val]) => {
-            const el = document.getElementById(id);
-            if (el) el.value = val;
-        });
-        document.getElementById('quotationBody').innerHTML = '';
-        rowCounter = 1;
-        data.rows.forEach(row => {
-            addRow();
-            const tr = document.querySelector('#quotationBody tr:last-child');
-            tr.querySelector('select').value = row.itemCode;
-            tr.querySelector('.description').value = row.description;
-            tr.querySelector('.unit').value = row.unit;
-            tr.querySelector('.unit-price').value = row.unitPrice;
-            tr.querySelector('.qty').value = row.qty;
-            tr.querySelector('.amount').value = row.amount;
-            tr.querySelector('.remarks').value = row.lineRemark;
-            updateRowDetails(tr.querySelector('select'));
-        });
-        updateTotals();
-    }
-    function saveDraft() {
-        localStorage.setItem('quotationDraft', JSON.stringify(getDraftData()));
-        showToast(LANGS[lang].saved);
-    }
-    function restoreDraft() {
-        const data = localStorage.getItem('quotationDraft');
-        if (data) {
-            setDraftData(JSON.parse(data));
-            showToast(LANGS[lang].restore);
-        }
-    }
-
-    // Populate Form with Predefined Data
-    function populateForm() {
-        // Set customer data
-        document.getElementById('accountNo').value = predefinedCustomer.accountNo;
-        document.getElementById('quotationNo').value = predefinedCustomer.quotationNo;
-        document.getElementById('companyName').value = predefinedCustomer.companyName;
-        document.getElementById('customerName').value = predefinedCustomer.customerName;
-        document.getElementById('quotationDate').value = predefinedCustomer.quotationDate;
-        document.getElementById('validUntil').value = predefinedCustomer.validUntil;
-        document.getElementById('address').value = predefinedCustomer.address;
-        document.getElementById('salesRep').value = predefinedCustomer.salesRep;
-        document.getElementById('customerType').value = predefinedCustomer.customerType;
-
-        // Set product data
-        productDatabase = predefinedProducts;
-        document.getElementById('quotationBody').innerHTML = '';
-        rowCounter = 1;
-        
-        // Add row for the new product from the uploaded image
-        addRow();
-        const tr = document.querySelector('#quotationBody tr:last-child');
-        const product = predefinedProducts.find(p => p.itemCode === "6344598");
-        tr.querySelector('select').value = product.itemCode;
-        tr.querySelector('.description').value = product.description;
-        tr.querySelector('.unit').value = product.unit;
-        tr.querySelector('.unit-price').value = product.unitPrice.toFixed(2);
-        tr.querySelector('.qty').value = 1; // Quantity from the uploaded image
-        tr.querySelector('.amount').value = (1 * product.unitPrice).toFixed(2);
-        updateRowDetails(tr.querySelector('select'));
-        
-        updateTotals();
-    }
-
-    // Toast Notification
-    function showToast(msg) {
-        let toast = document.getElementById('toastMsg');
-        if (!toast) {
-            toast = document.createElement('div');
-            toast.id = 'toastMsg';
-            document.body.appendChild(toast);
-        }
-        toast.textContent = msg;
-        toast.classList.add('show');
-        setTimeout(() => toast.classList.remove('show'), 3000);
-    }
-
-    // PDF Modal
-    function openPDFModal() {
-        document.getElementById('pdfModal').classList.add('show');
-    }
-    function closePDFModal() {
-        document.getElementById('pdfModal').classList.remove('show');
-    }
-
-    // Suggested Terms
-    function suggestTerms(customerType, language, amount) {
-        const termsTemplates = {
+        const LANGS = {
             en: {
-                standard: "This quotation is valid for 30 days. mercy Payment terms: 30 days net.",
-                corporate: "Corporate clients enjoy a 5% discount for orders above $10,000.",
-                government: "Government orders are tax-exempt. Payment terms: 60 days net."
+                step1: "Step 1: Upload product & customer data (CSV)",
+                step2: "Step 2: Edit quotation (add/remove product rows)",
+                step3: "Step 3: Fill customer info & remarks",
+                step4: "Step 4: Export PDF/CSV or save draft",
+                addRow: "Add Row",
+                clearAllRows: "Clear All Rows",
+                quickUpload: "Quick Upload Rows CSV",
+                printPDF: "Print PDF",
+                downloadCSV: "Download CSV",
+                saveDraft: "Save Draft",
+                saved: "Draft saved!",
+                restore: "Draft restored.",
+                csvPreview: "CSV Preview",
+                cancel: "Cancel",
+                apply: "Apply",
+                csvFormatError: "CSV format error: Please check column count.",
+                quickCsvFormatError: "CSV must have columns: itemCode, qty, unitPrice.",
+                fieldRequired: "This field is required.",
+                selectProduct: "Please select or enter a product.",
+                enterQty: "Please enter quantity.",
+                noCustomers: "No customer data loaded. Please upload a customer CSV.",
+                enterRowCount: "Enter number of rows to add (1-100):",
+                invalidRowCount: "Please enter a valid number between 1 and 100."
             },
             zh: {
-                standard: "此报价单有效期为30天。付款条件：月结30天。",
-                corporate: "企业客户订单满10,000元享95折优惠。",
-                government: "政府订单免税。付款条件：月结60天。"
+                step1: "步骤 1：上传产品及客户资料（CSV）",
+                step2: "步骤 2：编辑报价单内容（可新增/删除产品行）",
+                step3: "步骤 3：填写客户资料及备注",
+                step4: "步骤 4：输出 PDF 或 CSV，或保存草稿",
+                addRow: "新增产品行",
+                clearAllRows: "清除所有行",
+                quickUpload: "快速上传行 CSV",
+                printPDF: "打印 PDF",
+                downloadCSV: "下载 CSV",
+                saveDraft: "保存草稿",
+                saved: "草稿已保存！",
+                restore: "草稿已还原。",
+                csvPreview: "CSV 预览",
+                cancel: "取消",
+                apply: "应用",
+                csvFormatError: "CSV 格式错误：请检查栏位数。",
+                quickCsvFormatError: "CSV 必须包含栏位：itemCode, qty, unitPrice。",
+                fieldRequired: "此栏位必填。",
+                selectProduct: "请选择或输入产品。",
+                enterQty: "请输入数量。",
+                noCustomers: "未加载客户数据。请上传客户 CSV 文件。",
+                enterRowCount: "输入要添加的行数（1-100）：",
+                invalidRowCount: "请输入 1 到 100 之间的有效数字。"
             }
         };
-        const key = customerType === 'government' ? 'government' : amount > 10000 ? 'corporate' : 'standard';
-        return termsTemplates[language][key];
-    }
-    function applySuggestedTerms() {
-        const customerType = document.getElementById('customerType').value;
-        const amount = parseFloat(document.getElementById('grandTotal').textContent) || 0;
-        document.getElementById('remarks').value = suggestTerms(customerType, lang, amount);
-    }
 
-    // QR Code Generation
-    document.getElementById('qrLink').addEventListener('input', function() {
-        const qrCodeDiv = document.getElementById('qrcode');
-        qrCodeDiv.innerHTML = '';
-        if (this.value) {
-            new QRCode(qrCodeDiv, { text: this.value, width: 100, height: 100 });
+        function setLang(newLang) {
+            lang = newLang;
+            document.getElementById('langToggle').textContent = lang === 'en' ? '中文' : 'English';
+            const steps = document.querySelectorAll('.bg-blue-50 p');
+            steps[0].innerHTML = `<strong>Step 1:</strong> ${LANGS[lang].step1}`;
+            steps[1].innerHTML = `<strong>Step 2:</strong> ${LANGS[lang].step2}`;
+            steps[2].innerHTML = `<strong>Step 3:</strong> ${LANGS[lang].step3}`;
+            steps[3].innerHTML = `<strong>Step 4:</strong> ${LANGS[lang].step4}`;
+            document.getElementById('companyName').placeholder = lang === 'en' ? 'Enter company name' : '输入公司名称';
+            document.getElementById('customerName').placeholder = lang === 'en' ? 'Enter customer name' : '输入客户名称';
+            document.getElementById('address').placeholder = lang === 'en' ? 'Enter billing/delivery address' : '输入账单/送货地址';
+            document.getElementById('remarks').placeholder = lang === 'en' ? 'Enter remarks (if any)' : '请输入备注（如有）';
+            document.getElementById('customerSearch').placeholder = lang === 'en' ? 'Search by Account No., Company, or Name' : '按账户编号、公司或名称搜索';
         }
-    });
 
-    // Event Listeners
-    document.addEventListener('DOMContentLoaded', () => {
-        document.getElementById('downloadProductTemplate').addEventListener('click', downloadProductTemplate);
-        document.getElementById('downloadCustomerTemplate').addEventListener('click', downloadCustomerTemplate);
-        document.getElementById('csvPreviewCancelBtn').addEventListener('click', closeCSVPreviewModal);
-        document.getElementById('csvPreviewApplyBtn').addEventListener('click', applyCSVPreview);
-        populateForm();
-        if (localStorage.getItem('quotationDraft')) restoreDraft();
-    });
-</script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'939f3188da3bb0c9',t:'MTc0NjI2OTM4NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'939f39dccce2bd2f',t:'MTc0NjI2OTcyNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+        function toggleLang() {
+            setLang(lang === 'en' ? 'zh' : 'en');
+        }
+
+        function generateQuotationNo() {
+            return `LY-${String(Math.floor(Math.random() * 10000000)).padStart(9, '0')}`;
+        }
+
+        function searchCustomer(input) {
+            const keyword = input.value.toLowerCase();
+            const dropdown = document.getElementById('customerSearchDropdown');
+            if (!keyword || customerDatabase.length === 0) {
+                dropdown.classList.add('hidden');
+                if (customerDatabase.length === 0 && keyword) {
+                    showToast(LANGS[lang].noCustomers);
+                }
+                return;
+            }
+            const matches = customerDatabase.filter(c => 
+                c.accountNo.toLowerCase().includes(keyword) ||
+                c.companyName.toLowerCase().includes(keyword) ||
+                (c.customerName && c.customerName.toLowerCase().includes(keyword))
+            );
+            dropdown.innerHTML = matches.map(c => `
+                <div class="search-item" onclick="selectCustomer('${c.accountNo.replace(/'/g, "\\'")}', '${c.companyName.replace(/'/g, "\\'")}', '${c.customerName ? c.customerName.replace(/'/g, "\\'") : ''}', '${c.address.replace(/'/g, "\\'")}')">
+                    ${c.companyName} (${c.accountNo})${c.customerName ? ' - ' + c.customerName : ''}
+                </div>
+            `).join('');
+            dropdown.classList.toggle('hidden', matches.length === 0);
+        }
+
+        function selectCustomer(accountNo, companyName, customerName, address) {
+            document.getElementById('accountNo').value = accountNo;
+            document.getElementById('companyName').value = companyName;
+            document.getElementById('customerName').value = customerName;
+            document.getElementById('address').value = address;
+            document.getElementById('customerSearch').value = '';
+            document.getElementById('customerSearchDropdown').classList.add('hidden');
+        }
+
+        function handleCSVUpload(event, type) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                showCSVPreview(type, e.target.result);
+            };
+            reader.readAsText(file);
+            event.target.value = '';
+        }
+
+        function handleQuickCSVUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                processQuickCSV(e.target.result);
+            };
+            reader.readAsText(file);
+            event.target.value = '';
+        }
+
+        function parseCSV(csvData) {
+            const parsed = Papa.parse(csvData, { header: true, skipEmptyLines: true });
+            return parsed.data.map(row => ({
+                itemCode: row.itemCode?.trim() || '',
+                description: row.descriptionEng?.trim() || '',
+                descriptionChi: row.descriptionChi?.trim() || '',
+                unit: row.unit?.trim() || '',
+                packageUnit: row.packageUnit?.trim() || '1',
+                unitPrice: parseFloat(row.unitPrice) || 0,
+                cost: parseFloat(row.cost) || 0
+            }));
+        }
+
+        function parseCustomerCSV(csvData) {
+            const parsed = Papa.parse(csvData, { header: true, skipEmptyLines: true });
+            return parsed.data.map(row => {
+                const addressParts = [
+                    row.detailOne?.trim(),
+                    row.detailTwo?.trim(),
+                    row.building?.trim(),
+                    row.street?.trim(),
+                    row.city?.trim()
+                ].filter(part => part);
+                return {
+                    accountNo: row.accountNo?.trim() || '',
+                    companyName: row.companyName?.trim() || '',
+                    customerName: row.customerName?.trim() || '',
+                    address: addressParts.join(', ')
+                };
+            });
+        }
+
+        function parseQuickCSV(csvData) {
+            const parsed = Papa.parse(csvData, { header: true, skipEmptyLines: true });
+            return parsed.data.map(row => ({
+                itemCode: row.itemCode?.trim() || '',
+                qty: parseFloat(row.qty) || 1,
+                unitPrice: parseFloat(row.unitPrice) || 0
+            }));
+        }
+
+        function processQuickCSV(csvData) {
+            const parsed = parseQuickCSV(csvData);
+            const expectedHeaders = ['itemCode', 'qty', 'unitPrice'];
+            const headers = Object.keys(parsed[0] || {});
+            if (!expectedHeaders.every(h => headers.includes(h))) {
+                showToast(LANGS[lang].quickCsvFormatError);
+                return;
+            }
+            parsed.forEach(row => {
+                if (row.itemCode && row.qty > 0) {
+                    addRowFromCSV(row);
+                }
+            });
+            updateTotals();
+            showToast(`${parsed.length} rows added from CSV.`);
+        }
+
+        function showCSVPreview(type, csvData) {
+            csvPreviewType = type;
+            csvPreviewData = csvData;
+            const parsed = Papa.parse(csvData, { header: true, skipEmptyLines: true });
+            if (parsed.errors.length > 0) {
+                document.getElementById('csvPreviewError').textContent = LANGS[lang].csvFormatError;
+                document.getElementById('csvPreviewApplyBtn').disabled = true;
+                document.getElementById('csvPreviewTable').innerHTML = '';
+                document.getElementById('csvPreviewModal').classList.add('show');
+                return;
+            }
+            const headers = parsed.meta.fields;
+            const rows = parsed.data;
+            let table = `<table class="table"><thead><tr>${headers.map(h => `<th>${h}</th>`).join('')}</tr></thead><tbody>${rows.map(r => `<tr>${headers.map(h => `<td>${r[h] || ''}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
+            document.getElementById('csvPreviewTable').innerHTML = table;
+            document.getElementById('csvPreviewError').textContent = '';
+            document.getElementById('csvPreviewApplyBtn').disabled = false;
+            document.getElementById('csvPreviewModal').classList.add('show');
+        }
+
+        function closeCSVPreviewModal() {
+            document.getElementById('csvPreviewModal').classList.remove('show');
+            csvPreviewType = null;
+            csvPreviewData = null;
+        }
+
+        function applyCSVPreview() {
+            if (csvPreviewType === 'product') {
+                productDatabase = parseCSV(csvPreviewData);
+                document.getElementById('quotationBody').innerHTML = '';
+                rowCounter = 1;
+                addRow();
+            } else if (csvPreviewType === 'customer') {
+                customerDatabase = parseCustomerCSV(csvPreviewData);
+            }
+            closeCSVPreviewModal();
+        }
+
+        function addRow() {
+            const input = prompt(LANGS[lang].enterRowCount, '1');
+            if (input === null) return; // User clicked Cancel
+            const numRows = parseInt(input, 10);
+            if (isNaN(numRows) || numRows < 1 || numRows > 100) {
+                showToast(LANGS[lang].invalidRowCount);
+                return;
+            }
+            const tbody = document.getElementById('quotationBody');
+            for (let i = 0; i < numRows; i++) {
+                const tr = document.createElement('tr');
+                tr.setAttribute('draggable', 'true');
+                tr.innerHTML = `
+                    <td>${rowCounter}</td>
+                    <td>
+                        <img src="" alt="Product Image" class="w-12 h-12 rounded" onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+                        <span class="text-xs text-gray-400" style="display:none;">No Image</span>
+                    </td>
+                    <td>
+                        ${productDatabase.length > 0 ? `
+                            <select class="form-input item-code" onchange="updateRowDetails(this)" aria-label="Select item">
+                                <option value="">Select Item</option>
+                                ${productDatabase.map(p => `<option value="${p.itemCode}">${p.itemCode}</option>`).join('')}
+                            </select>
+                        ` : `
+                            <input type="text" class="form-input item-code" placeholder="Enter item code" aria-label="Item code">
+                        `}
+                        <div class="relative mt-2">
+                            <input type="text" class="form-input" placeholder="Search by Description & Item Code" oninput="searchByDescription(this)">
+                            <div class="search-dropdown hidden"></div>
+                        </div>
+                    </td>
+                    <td><textarea class="form-input description" rows="2" placeholder="Enter description"></textarea></td>
+                    <td><input type="text" class="form-input unit" placeholder="Enter unit"></td>
+                    <td><input type="number" class="form-input package-unit" value="1" min="1" onchange="calculateRowAmount(this)" aria-label="Package Unit"></td>
+                    <td><input type="number" class="form-input qty" value="1" min="1" onchange="calculateRowAmount(this)" aria-label="Quantity"></td>
+                    <td><input type="number" class="form-input unit-price text-right" step="0.01" min="0" onchange="calculateRowAmount(this)" placeholder="Enter unit price"></td>
+                    <td><input type="number" class="form-input amount text-right" readonly></td>
+                    <td><input type="text" class="form-input remarks" placeholder="Remarks" aria-label="Remarks"></td>
+                    <td class="no-print">
+                        <div class="flex gap-2">
+                            <button onclick="openEditModal(this)" class="btn btn-secondary" title="Edit">Edit</button>
+                            <button onclick="removeRow(this)" class="btn btn-danger" title="Remove">Remove</button>
+                        </div>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+                rowCounter++;
+            }
+            document.querySelector('#quotationBody .item-code')?.focus();
+            showToast(`${numRows} row${numRows > 1 ? 's' : ''} added.`);
+            updateTotals();
+        }
+
+        function addRowFromCSV(rowData) {
+            const product = productDatabase.find(p => p.itemCode === rowData.itemCode) || {};
+            const tbody = document.getElementById('quotationBody');
+            const tr = document.createElement('tr');
+            tr.setAttribute('draggable', 'true');
+            tr.innerHTML = `
+                <td>${rowCounter}</td>
+                <td>
+                    <img src="${product.itemCode ? `https://assets.lyreco.com/is/image/lyrecows/2018-${product.itemCode}?fmt=jpg&locale=HK_hk` : ''}" alt="Product Image" class="w-12 h-12 rounded" onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+                    <span class="text-xs text-gray-400" style="display:${product.itemCode ? 'none' : 'block'};">No Image</span>
+                </td>
+                <td>
+                    ${productDatabase.length > 0 ? `
+                        <select class="form-input item-code" onchange="updateRowDetails(this)" aria-label="Select item">
+                            <option value="">Select Item</option>
+                            ${productDatabase.map(p => `<option value="${p.itemCode}" ${p.itemCode === rowData.itemCode ? 'selected' : ''}>${p.itemCode}</option>`).join('')}
+                        </select>
+                    ` : `
+                        <input type="text" class="form-input item-code" value="${rowData.itemCode}" placeholder="Enter item code" aria-label="Item code">
+                    `}
+                    <div class="relative mt-2">
+                        <input type="text" class="form-input" placeholder="Search by Description & Item Code" oninput="searchByDescription(this)">
+                        <div class="search-dropdown hidden"></div>
+                    </div>
+                </td>
+                <td><textarea class="form-input description" rows="2">${product.description || ''}</textarea></td>
+                <td><input type="text" class="form-input unit" value="${product.unit || ''}" placeholder="Enter unit"></td>
+                <td><input type="number" class="form-input package-unit" value="${product.packageUnit || '1'}" min="1" onchange="calculateRowAmount(this)" aria-label="Package Unit"></td>
+                <td><input type="number" class="form-input qty" value="${rowData.qty}" min="1" onchange="calculateRowAmount(this)" aria-label="Quantity"></td>
+                <td><input type="number" class="form-input unit-price text-right" value="${rowData.unitPrice || product.unitPrice || ''}" step="0.01" min="0" onchange="calculateRowAmount(this)" placeholder="Enter unit price"></td>
+                <td><input type="number" class="form-input amount text-right" value="${(rowData.qty * (product.packageUnit || 1) * (rowData.unitPrice || product.unitPrice || 0)).toFixed(2)}" readonly></td>
+                <td><input type="text" class="form-input remarks" placeholder="Remarks" aria-label="Remarks"></td>
+                <td class="no-print">
+                    <div class="flex gap-2">
+                        <button onclick="openEditModal(this)" class="btn btn-secondary" title="Edit">Edit</button>
+                        <button onclick="removeRow(this)" class="btn btn-danger" title="Remove">Remove</button>
+                    </div>
+                </td>
+            `;
+            tbody.appendChild(tr);
+            rowCounter++;
+        }
+
+        function clearAllRows() {
+            if (confirm(LANGS[lang].clearAllRows + '?')) {
+                document.getElementById('quotationBody').innerHTML = '';
+                rowCounter = 1;
+                updateTotals();
+                showToast('All rows cleared.');
+            }
+        }
+
+        function removeRow(btn) {
+            btn.closest('tr').remove();
+            updateRowNumbers();
+            updateTotals();
+        }
+
+        function updateRowNumbers() {
+            document.querySelectorAll('#quotationBody tr').forEach((tr, i) => {
+                tr.cells[0].textContent = i + 1;
+            });
+        }
+
+        function updateRowDetails(select) {
+            const row = select.closest('tr');
+            const product = productDatabase.find(p => p.itemCode === select.value);
+            if (product) {
+                row.querySelector('.description').value = product.description.slice(0, 150);
+                row.querySelector('.unit').value = product.unit;
+                row.querySelector('.package-unit').value = product.packageUnit;
+                row.querySelector('.unit-price').value = product.unitPrice.toFixed(2);
+                const qty = parseFloat(row.querySelector('.qty').value) || 0;
+                const packageUnit = parseFloat(product.packageUnit) || 1;
+                const unitPrice = parseFloat(product.unitPrice) || 0;
+                row.querySelector('.amount').value = (qty * packageUnit * unitPrice).toFixed(2);
+                const img = row.querySelector('img');
+                img.src = `https://assets.lyreco.com/is/image/lyrecows/2018-${product.itemCode}?fmt=jpg&locale=HK_hk`;
+                img.style.display = 'block';
+                img.nextElementSibling.style.display = 'none';
+            } else {
+                row.querySelector('img').src = '';
+                row.querySelector('.description').value = '';
+                row.querySelector('.unit').value = '';
+                row.querySelector('.package-unit').value = '1';
+                row.querySelector('.unit-price').value = '';
+                row.querySelector('.amount').value = '';
+            }
+            updateTotals();
+        }
+
+        function calculateRowAmount(input) {
+            const row = input.closest('tr');
+            const qty = parseFloat(row.querySelector('.qty').value) || 0;
+            const packageUnit = parseFloat(row.querySelector('.package-unit').value) || 1;
+            const unitPrice = parseFloat(row.querySelector('.unit-price').value) || 0;
+            row.querySelector('.amount').value = (qty * packageUnit * unitPrice).toFixed(2);
+            updateTotals();
+        }
+
+        function updateTotals() {
+            const subtotal = Array.from(document.querySelectorAll('#quotationBody .amount'))
+                .reduce((sum, input) => sum + (parseFloat(input.value) || 0), 0);
+            const taxRate = parseFloat(document.getElementById('taxRate').value) || 0;
+            const discount = parseFloat(document.getElementById('discount').value) || 0;
+            const discountAmount = (subtotal * discount / 100);
+            const taxAmount = ((subtotal - discountAmount) * taxRate / 100);
+            let shippingFee = parseFloat(document.getElementById('shippingFee').value) || 0;
+            if (subtotal < 200 && subtotal > 0) {
+                shippingFee = 50;
+                document.getElementById('shippingFee').value = shippingFee.toFixed(2);
+            } else if (subtotal >= 200) {
+                shippingFee = 0;
+                document.getElementById('shippingFee').value = shippingFee.toFixed(2);
+            }
+            const grandTotal = subtotal - discountAmount + taxAmount + shippingFee;
+            document.getElementById('subtotal').textContent = subtotal.toFixed(2);
+            document.getElementById('discountAmount').textContent = discountAmount.toFixed(2);
+            document.getElementById('taxAmount').textContent = taxAmount.toFixed(2);
+            document.getElementById('grandTotal').textContent = grandTotal.toFixed(2);
+        }
+
+        let dragSrcRow = null;
+        document.getElementById('quotationBody').addEventListener('dragstart', e => {
+            dragSrcRow = e.target.closest('tr');
+            dragSrcRow.style.opacity = '0.5';
+        });
+        document.getElementById('quotationBody').addEventListener('dragend', () => {
+            if (dragSrcRow) dragSrcRow.style.opacity = '';
+            dragSrcRow = null;
+        });
+        document.getElementById('quotationBody').addEventListener('dragover', e => e.preventDefault());
+        document.getElementById('quotationBody').addEventListener('drop', e => {
+            e.preventDefault();
+            if (dragSrcRow && dragSrcRow !== e.target.closest('tr')) {
+                const targetRow = e.target.closest('tr');
+                if (targetRow) {
+                    document.getElementById('quotationBody').insertBefore(dragSrcRow, targetRow.nextSibling);
+                    updateRowNumbers();
+                    updateTotals();
+                }
+            }
+            dragSrcRow = null;
+        });
+
+        function searchByDescription(input) {
+            const row = input.closest('tr');
+            const keyword = input.value.toLowerCase();
+            const dropdown = row.querySelector('.search-dropdown');
+            if (!keyword) {
+                dropdown.classList.add('hidden');
+                return;
+            }
+            const matches = productDatabase.filter(p => 
+                p.description.toLowerCase().includes(keyword) ||
+                p.itemCode.toLowerCase().includes(keyword) ||
+                p.descriptionChi.toLowerCase().includes(keyword)
+            );
+            dropdown.innerHTML = matches.map(p => `
+                <div class="search-item" onclick="selectDescription(this, '${p.itemCode.replace(/'/g, "\\'")}')">
+                    ${p.itemCode} - ${p.description} (${p.descriptionChi})
+                </div>
+            `).join('');
+            dropdown.classList.toggle('hidden', matches.length === 0);
+        }
+
+        function selectDescription(div, itemCode) {
+            const row = div.closest('tr');
+            const select = row.querySelector('select.item-code');
+            if (select) {
+                select.value = itemCode;
+                updateRowDetails(select);
+            } else {
+                const product = productDatabase.find(p => p.itemCode === itemCode);
+                if (product) {
+                    row.querySelector('.item-code').value = product.itemCode;
+                    row.querySelector('.description').value = product.description;
+                    row.querySelector('.unit').value = product.unit;
+                    row.querySelector('.package-unit').value = product.packageUnit;
+                    row.querySelector('.unit-price').value = product.unitPrice.toFixed(2);
+                    calculateRowAmount(row.querySelector('.qty'));
+                }
+            }
+            row.querySelector('.search-dropdown').classList.add('hidden');
+            row.querySelector('input[type=text]').value = '';
+        }
+
+        function openEditModal(button) {
+            currentEditRow = button.closest('tr');
+            const modal = document.getElementById('editModal');
+            const itemCodeInput = document.getElementById('editItemCode');
+            const descriptionInput = document.getElementById('editDescription');
+            const unitInput = document.getElementById('editUnit');
+            const packageUnitInput = document.getElementById('editPackageUnit');
+            const qtyInput = document.getElementById('editQty');
+            const unitPriceInput = document.getElementById('editUnitPrice');
+
+            const itemCode = currentEditRow.querySelector('.item-code').value;
+            const product = productDatabase.find(p => p.itemCode === itemCode);
+            
+            itemCodeInput.value = itemCode;
+            descriptionInput.value = currentEditRow.querySelector('.description').value || (product ? product.description : '');
+            unitInput.value = currentEditRow.querySelector('.unit').value || (product ? product.unit : '');
+            packageUnitInput.value = currentEditRow.querySelector('.package-unit').value || (product ? product.packageUnit : '1');
+            qtyInput.value = currentEditRow.querySelector('.qty').value || '1';
+            unitPriceInput.value = currentEditRow.querySelector('.unit-price').value || (product ? product.unitPrice.toFixed(2) : '');
+
+            modal.classList.add('show');
+        }
+
+        function closeEditModal() {
+            document.getElementById('editModal').classList.remove('show');
+            currentEditRow = null;
+        }
+
+        function saveEdit() {
+            if (!currentEditRow) return;
+            const itemCode = document.getElementById('editItemCode').value;
+            const description = document.getElementById('editDescription').value;
+            const unit = document.getElementById('editUnit').value;
+            const packageUnit = document.getElementById('editPackageUnit').value;
+            const qty = document.getElementById('editQty').value;
+            const unitPrice = document.getElementById('editUnitPrice').value;
+
+            if (!itemCode || !qty || parseInt(qty) < 1) {
+                showToast(LANGS[lang].selectProduct);
+                return;
+            }
+            currentEditRow.querySelector('.item-code').value = itemCode;
+            currentEditRow.querySelector('.description').value = description;
+            currentEditRow.querySelector('.unit').value = unit;
+            currentEditRow.querySelector('.package-unit').value = packageUnit;
+            currentEditRow.querySelector('.qty').value = qty;
+            currentEditRow.querySelector('.unit-price').value = parseFloat(unitPrice).toFixed(2);
+            calculateRowAmount(currentEditRow.querySelector('.qty'));
+            closeEditModal();
+        }
+
+        async function confirmGeneratePDF() {
+            // Move getField definition to the top
+            const getField = id => document.getElementById(id)?.value || '';
+            if (!confirm("Generate PDF for this quotation?")) return;
+            showToast("Generating PDF...");
+            const requiredFields = ['companyName', 'accountNo', 'address'];
+            for (const id of requiredFields) {
+                const field = document.getElementById(id);
+                if (!field.value.trim()) {
+                    showToast(LANGS[lang].fieldRequired);
+                    field.focus();
+                    closePDFModal();
+                    return;
+                }
+            }
+            closePDFModal();
+
+            try {
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF({ orientation: 'p', unit: 'mm', format: 'a4', encoding: 'UTF-8' });
+                doc.setFontSize(8);
+                doc.text("Lyreco (Hong Kong) Co., Ltd.", 8, 14);
+                doc.text("16/F, 78 Hung To Road, Kwun Tong, Kowloon", 8, 20);
+                doc.text("", 8, 26);
+                doc.text("Hotline: (852) 2946 2233, Fax: (852) 2754 9866", 8, 32);
+                doc.text("Email: cs.hk@lyreco.com", 8, 38);
+                doc.text("Website: www.lyreco.com.hk", 8, 44);
+                // Fix: define salesRep, phone, email from form fields
+                const salesRep = getField('salesRep');
+                const phone = getField('customerPhone');
+                const email = getField('customerEmail');
+                doc.text(salesRep + (phone ? ', ' + phone : ''), 8, 50);
+                doc.text(email ? email : '', 8, 56);
+                doc.setFontSize(8);
+                // 地址分割為多行
+                let addressLines = [];
+                if (customerDatabase && customerDatabase.length > 0) {
+                    // 依據 accountNo 找到對應客戶
+                    const accNo = getField('accountNo');
+                    const customer = customerDatabase.find(c => c.accountNo === accNo);
+                    if (customer) {
+                        // 取出原始欄位，分割為2-3行
+                        const row = customer;
+                        const addressParts = [
+                            row.detailOne?.trim(),
+                            row.detailTwo?.trim(),
+                            row.building?.trim(),
+                            row.street?.trim(),
+                            row.city?.trim()
+                        ].filter(Boolean);
+                        // 第一行: detailOne, detailTwo
+                        let line1 = [row.detailOne, row.detailTwo].filter(Boolean).join(', ');
+                        // 第二行: building, street
+                        let line2 = [row.building, row.street].filter(Boolean).join(', ');
+                        // 第三行: city
+                        let line3 = row.city || '';
+                        addressLines = [line1, line2, line3].filter(line => line);
+                    }
+                }
+                if (addressLines.length === 0) {
+                    // 若找不到，則用 address 欄位分行
+                    addressLines = getField('address').split(/\r?\n/).filter(Boolean);
+                }
+                doc.text(`Customer: ${getField('customerName')}`, 200, 14, { align: "right" });
+                doc.text(getField('companyName'), 200, 20, { align: "right" });
+                // 地址多行顯示
+                let addrY = 26;
+                addressLines.forEach(line => {
+                    doc.text(line, 200, addrY, { align: "right" });
+                    addrY += 6;
+                });
+                doc.text(`Account No.: ${getField('accountNo')}`, 200, addrY, { align: "right" });
+                doc.setFontSize(16);
+                doc.text("QUOTATION", 105, 58, { align: "center" });
+                doc.setFontSize(12);
+                doc.text(`Quotation No.: ${getField('quotationNo')}`, 200, 52, { align: "right" });
+                doc.text(`Date: ${getField('quotationDate')}`, 200, 58, { align: "right" });
+
+                let subtotal = 0;
+                const tableData = [];
+                const imagePromises = [];
+
+                document.querySelectorAll("#quotationBody tr").forEach(row => {
+                    const itemCode = row.querySelector(".item-code").value || '';
+                    const description = row.querySelector(".description").value || '';
+                    const unit = row.querySelector(".unit").value || '';
+                    const packageUnit = parseFloat(row.querySelector(".package-unit").value) || 1;
+                    const unitPrice = parseFloat(row.querySelector(".unit-price").value) || 0;
+                    const qty = parseFloat(row.querySelector(".qty").value) || 0;
+                    const amount = parseFloat(row.querySelector(".amount").value) || 0;
+                    const remarks = row.querySelector(".remarks").value || '';
+                    const imgElement = row.querySelector("img");
+
+                    if (itemCode && description && !isNaN(unitPrice) && !isNaN(qty)) {
+                        tableData.push({
+                            product: `${description}\n(${itemCode})`,
+                            unit: unit,
+                            packageUnit: packageUnit,
+                            unitPrice: unitPrice.toFixed(2),
+                            qty: qty,
+                            amount: amount.toFixed(2),
+                            remarks: remarks,
+                            imgSrc: imgElement && imgElement.src ? imgElement.src : null
+                        });
+                        subtotal += amount;
+
+                        if (imgElement && imgElement.src) {
+                            const promise = new Promise((resolve) => {
+                                const img = new Image();
+                                img.crossOrigin = "Anonymous";
+                                img.onload = () => {
+                                    const canvas = document.createElement('canvas');
+                                    canvas.width = img.width;
+                                    canvas.height = img.height;
+                                    const ctx = canvas.getContext('2d');
+                                    ctx.drawImage(img, 0, 0);
+                                    resolve(canvas.toDataURL('image/png'));
+                                };
+                                img.onerror = () => resolve(null);
+                                img.src = imgElement.src;
+                            });
+                            imagePromises.push(promise);
+                        } else {
+                            imagePromises.push(Promise.resolve(null));
+                        }
+                    }
+                });
+
+                if (tableData.length === 0) {
+                    showToast("No valid products to include in PDF.");
+                    return;
+                }
+
+                const imageDataURLs = await Promise.all(imagePromises);
+                tableData.forEach((rowData, index) => {
+                    rowData.imgData = imageDataURLs[index];
+                });
+
+                const tableRows = tableData.map(rowData => [
+                    '', // Placeholder for image column
+                    rowData.product,
+                    rowData.unit,
+                    rowData.packageUnit,
+                    rowData.unitPrice,
+                    rowData.qty,
+                    rowData.amount,
+                    rowData.remarks
+                ]);
+
+                const headers = ["Image", "Product", "Unit", "Pkg Unit", "Unit Price", "Quantity", "Amount", "Remarks"];
+                const pageWidth = 210;
+                const margin = 10;
+                const availableWidth = pageWidth - 2 * margin;
+                const columnWidths = {
+                    0: 15,
+                    1: 50,
+                    2: 20,
+                    3: 20,
+                    4: 20,
+                    5: 20,
+                    6: 20,
+                    7: 25
+                };
+                const totalWidth = Object.values(columnWidths).reduce((sum, w) => sum + w, 0);
+                if (totalWidth > availableWidth) {
+                    const scaleFactor = availableWidth / totalWidth;
+                    Object.keys(columnWidths).forEach(key => {
+                        columnWidths[key] = Math.floor(columnWidths[key] * scaleFactor);
+                    });
+                }
+
+                let startY = 68;
+                const fileName = getExportFileName('Quotation') + '.pdf';
+                doc.autoTable({
+                    head: [headers],
+                    body: tableRows,
+                    startY: startY,
+                    theme: 'grid',
+                    styles: { fontSize: 8, cellPadding: 2, encoding: 'utf8', minCellHeight: 15 },
+                    headStyles: { fillColor: [41, 128, 185], textColor: 255 },
+                    columnStyles: {
+                        0: { cellWidth: columnWidths[0] },
+                        1: { cellWidth: columnWidths[1] },
+                        2: { cellWidth: columnWidths[2] },
+                        3: { cellWidth: columnWidths[3] },
+                        4: { cellWidth: columnWidths[4], halign: 'right' },
+                        5: { cellWidth: columnWidths[5], halign: 'right' },
+                        6: { cellWidth: columnWidths[6], halign: 'right' },
+                        7: { cellWidth: columnWidths[7] }
+                    },
+                    didDrawCell: (data) => {
+                        if (data.section === 'body' && data.column.index === 0 && data.row.index < tableData.length) {
+                            const imgData = tableData[data.row.index].imgData;
+                            if (imgData) {
+                                const cellX = data.cell.x + 2;
+                                const cellY = data.cell.y + 2;
+                                const imgWidth = 10;
+                                const imgHeight = 10;
+                                try {
+                                    doc.addImage(imgData, 'PNG', cellX, cellY, imgWidth, imgHeight);
+                                } catch (e) {
+                                    console.warn('Failed to add image to PDF:', e);
+                                }
+                            }
+                        }
+                    },
+                    margin: { left: margin, right: margin },
+                    didDrawPage: function (data) {
+                        const pageCount = doc.internal.getNumberOfPages();
+                        const pageSize = doc.internal.pageSize;
+                        const pageWidth = pageSize.getWidth();
+                        const pageHeight = pageSize.getHeight();
+                        const page = doc.internal.getCurrentPageInfo().pageNumber;
+                        // 頁數左下角
+                        doc.setFontSize(9);
+                        doc.text(`Page ${page} of ${pageCount}`,
+                            margin, pageHeight - 8, { align: 'left' });
+                        // 檔案名稱右下
+                        doc.setFontSize(8);
+                        doc.text(fileName, pageWidth - 10, pageHeight - 8, { align: 'right' });
+                    }
+                });
+
+                let finalY = doc.lastAutoTable.finalY || startY;
+                const remarks = getField('remarks');
+                if (remarks) {
+                    doc.setFontSize(10);
+                    doc.text("Remarks:", 10, finalY + 10);
+                    doc.text(remarks, 10, finalY + 16);
+                    finalY += 20;
+                }
+
+                const discount = parseFloat(getField('discount')) || 0;
+                const discountAmount = (subtotal * discount / 100).toFixed(2);
+                const taxRate = parseFloat(getField('taxRate')) || 0;
+                const taxAmount = ((subtotal - discountAmount) * taxRate / 100).toFixed(2);
+                const shippingFee = parseFloat(getField('shippingFee')) || 0;
+                const grandTotal = (subtotal - discountAmount + parseFloat(taxAmount) + shippingFee).toFixed(2);
+
+                doc.setFontSize(10);
+                doc.text(`Subtotal: HKD ${subtotal.toFixed(2)}`, 150, finalY + 10);
+                doc.text(`Discount: HKD ${discountAmount}`, 150, finalY + 16);
+                doc.text(`Tax: HKD ${taxAmount}`, 150, finalY + 22);
+                doc.text(`Shipping Fee: HKD ${shippingFee.toFixed(2)}`, 150, finalY + 28);
+                doc.text(`Grand Total: HKD ${grandTotal}`, 150, finalY + 34);
+
+                const paymentTerms = getField('paymentTerms');
+                if (paymentTerms) {
+                    doc.text(`Payment Terms: ${paymentTerms}`, 10, finalY + 42);
+                }
+
+                const qrCodeElement = document.querySelector('#qrcode canvas');
+                if (qrCodeElement) {
+                    doc.addImage(qrCodeElement.toDataURL(), 'PNG', 160, finalY + 48, 30, 30);
+                }
+
+                doc.save(fileName);
+                showToast("PDF generated successfully!");
+            } catch (err) {
+                console.error('PDF generation error:', err);
+                showToast("Failed to generate PDF: " + err.message);
+            }
+        }
+
+        function downloadCSV() {
+            const headers = ["Line No.", "Item Code", "Description", "Unit", "Package Unit", "Qty", "Unit Price", "Amount", "Remarks"];
+            const rows = [];
+            document.querySelectorAll("#quotationBody tr").forEach((row, index) => {
+                const itemCode = row.querySelector(".item-code").value || '';
+                const description = row.querySelector(".description").value || '';
+                const unit = row.querySelector(".unit").value || '';
+                const packageUnit = row.querySelector(".package-unit").value || '1';
+                const qty = row.querySelector(".qty").value || '0';
+                const unitPrice = row.querySelector(".unit-price").value || '0.00';
+                const amount = row.querySelector(".amount").value || '0.00';
+                const remarks = row.querySelector(".remarks").value || '';
+                rows.push([index + 1, itemCode, description, unit, packageUnit, qty, unitPrice, amount, remarks]);
+            });
+            let csvContent = headers.join(",") + "\n" + rows.map(row => row.join(",")).join("\n");
+            const fileName = getExportFileName('Quotation') + '.csv';
+            const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = fileName;
+            link.click();
+        }
+
+        function exportToExcel() {
+            const headers = ["Line No.", "Item Code", "Description", "Unit", "Package Unit", "Qty", "Unit Price", "Amount", "Remarks"];
+            const rows = [];
+            document.querySelectorAll("#quotationBody tr").forEach((row, index) => {
+                const itemCode = row.querySelector(".item-code").value || '';
+                const description = row.querySelector(".description").value || '';
+                const unit = row.querySelector(".unit").value || '';
+                const packageUnit = row.querySelector(".package-unit").value || '1';
+                const qty = row.querySelector(".qty").value || '0';
+                const unitPrice = row.querySelector(".unit-price").value || '0.00';
+                const amount = row.querySelector(".amount").value || '0.00';
+                const remarks = row.querySelector(".remarks").value || '';
+                rows.push([index + 1, itemCode, description, unit, packageUnit, qty, unitPrice, amount, remarks]);
+            });
+            const worksheet = XLSX.utils.aoa_to_sheet([headers, ...rows]);
+            const workbook = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(workbook, worksheet, "Quotation");
+            const fileName = getExportFileName('Quotation') + '.xlsx';
+            XLSX.writeFile(workbook, fileName);
+        }
+
+        function downloadProductTemplate() {
+            const headers = ["itemCode", "descriptionEng", "descriptionChi", "unit", "packageUnit", "unitPrice", "cost"];
+            const example = [
+                "P12345",
+                "Sample Product",
+                "样本产品",
+                "PCS",
+                "10",
+                "10.00",
+                "8.00"
+            ];
+            let csvContent = headers.join(",") + "\n" + example.join(",") + "\n";
+            const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = "product_template.csv";
+            link.click();
+        }
+
+        function downloadCustomerTemplate() {
+            const headers = ["accountNo", "companyName", "customerName", "detailOne", "detailTwo", "building", "street", "city"];
+            const example = [
+                "A00001",
+                "Sample Company",
+                "John Doe",
+                "Unit 101",
+                "Floor 10",
+                "Sunshine Tower",
+                "123 Sample St",
+                "Hong Kong"
+            ];
+            let csvContent = headers.join(",") + "\n" + example.join(",") + "\n";
+            const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = "customer_template.csv";
+            link.click();
+        }
+
+        function downloadQuickRowTemplate() {
+            const headers = ["itemCode","qty","unitPrice"];
+            const example = ["P12345","2","10.00"];
+            let csvContent = headers.join(",") + "\n" + example.join(",") + "\n";
+            const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = "quick_upload_template.csv";
+            link.click();
+        }
+
+        function getExportFileName(type) {
+            const formType = type || 'Quotation';
+            const quotationNo = document.getElementById('quotationNo').value || 'Q';
+            const companyName = (document.getElementById('companyName').value || 'Company').replace(/[^a-zA-Z0-9]/g, '');
+            const accountNo = (document.getElementById('accountNo').value || 'A').replace(/[^a-zA-Z0-9]/g, '');
+            const date = (document.getElementById('quotationDate').value || new Date().toISOString().slice(0,10)).replace(/-/g, '');
+            return `${formType}_${quotationNo}_${companyName}_${accountNo}_${date}`;
+        }
+
+        function getDraftData() {
+            const formFields = ['accountNo', 'quotationNo', 'companyName', 'customerName', 'quotationDate', 'paymentTerms', 'deliveryTerms', 'validUntil', 'address', 'remarks', 'taxRate', 'discount', 'customerPhone', 'customerEmail', 'shippingFee'];
+            const form = {};
+            formFields.forEach(id => form[id] = document.getElementById(id)?.value || '');
+            const rows = [];
+            document.querySelectorAll("#quotationBody tr").forEach(row => {
+                rows.push({
+                    itemCode: row.querySelector('.item-code').value || '',
+                    description: row.querySelector('.description').value || '',
+                    unit: row.querySelector('.unit').value || '',
+                    packageUnit: row.querySelector('.package-unit').value || '1',
+                    qty: row.querySelector('.qty').value || '',
+                    unitPrice: row.querySelector('.unit-price').value || '',
+                    amount: row.querySelector('.amount').value || '',
+                    lineRemark: row.querySelector('.remarks').value || ''
+                });
+            });
+            return { form, rows };
+        }
+
+        function setDraftData(data) {
+            if (!data) return;
+            Object.entries(data.form).forEach(([id, val]) => {
+                const el = document.getElementById(id);
+                if (el) el.value = val;
+            });
+            document.getElementById('quotationBody').innerHTML = '';
+            rowCounter = 1;
+            data.rows.forEach(row => {
+                addRowFromCSV({
+                    itemCode: row.itemCode,
+                    qty: parseFloat(row.qty) || 1,
+                    unitPrice: parseFloat(row.unitPrice) || 0
+                });
+                const tr = document.querySelector('#quotationBody tr:last-child');
+                tr.querySelector('.remarks').value = row.lineRemark;
+            });
+            updateTotals();
+        }
+
+        function saveDraft() {
+            localStorage.setItem('quotationDraft', JSON.stringify(getDraftData()));
+            showToast(LANGS[lang].saved);
+        }
+
+        function restoreDraft() {
+            const data = localStorage.getItem('quotationDraft');
+            if (data) {
+                setDraftData(JSON.parse(data));
+                showToast(LANGS[lang].restore);
+            }
+        }
+
+        function populateForm() {
+            document.getElementById('accountNo').value = predefinedCustomer.accountNo;
+            document.getElementById('quotationNo').value = predefinedCustomer.quotationNo;
+            document.getElementById('companyName').value = predefinedCustomer.companyName;
+            document.getElementById('customerName').value = predefinedCustomer.customerName;
+            document.getElementById('quotationDate').value = predefinedCustomer.quotationDate;
+            document.getElementById('validUntil').value = predefinedCustomer.validUntil;
+            document.getElementById('address').value = predefinedCustomer.address;
+            document.getElementById('salesRep').value = predefinedCustomer.salesRep;
+            document.getElementById('customerType').value = predefinedCustomer.customerType;
+
+            productDatabase = predefinedProducts;
+            document.getElementById('quotationBody').innerHTML = '';
+            rowCounter = 1;
+            
+            addRowFromCSV({
+                itemCode: "6344598",
+                qty: 1,
+                unitPrice: predefinedProducts.find(p => p.itemCode === "6344598").unitPrice
+            });
+            updateTotals();
+        }
+
+        function showToast(msg) {
+            let toast = document.getElementById('toastMsg');
+            if (!toast) {
+                toast = document.createElement('div');
+                toast.id = 'toastMsg';
+                document.body.appendChild(toast);
+            }
+            toast.textContent = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
+        }
+
+        function openPDFModal() {
+            document.getElementById('pdfModal').classList.add('show');
+        }
+
+        function closePDFModal() {
+            document.getElementById('pdfModal').classList.remove('show');
+        }
+
+        function suggestTerms(customerType, language, amount) {
+            const termsTemplates = {
+                en: {
+                    standard: "This quotation is valid for 30 days. ",
+                    corporate: "Corporate clients enjoy a 5% discount for orders above $10,000.",
+                    government: "Government orders are tax-exempt. "
+                },
+                zh: {
+                    standard: "此报价单有效期为30天。",
+                    corporate: "企业客户订单满10,000元享95折优惠。",
+                    government: "政府订单免税。"
+                }
+            };
+            const key = customerType === 'government' ? 'government' : amount > 10000 ? 'corporate' : 'standard';
+            return termsTemplates[language][key];
+        }
+
+        function applySuggestedTerms() {
+            const customerType = document.getElementById('customerType').value;
+            const amount = parseFloat(document.getElementById('grandTotal').textContent) || 0;
+            document.getElementById('remarks').value = suggestTerms(customerType, lang, amount);
+        }
+
+        document.getElementById('qrLink').addEventListener('input', function() {
+            const qrCodeDiv = document.getElementById('qrcode');
+            qrCodeDiv.innerHTML = '';
+            if (this.value) {
+                new QRCode(qrCodeDiv, { text: this.value, width: 100, height: 100 });
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('langToggle').addEventListener('click', toggleLang);
+            document.getElementById('downloadProductTemplate').addEventListener('click', downloadProductTemplate);
+            document.getElementById('downloadCustomerTemplate').addEventListener('click', downloadCustomerTemplate);
+            document.getElementById('csvPreviewCancelBtn').addEventListener('click', closeCSVPreviewModal);
+            document.getElementById('csvPreviewApplyBtn').addEventListener('click', applyCSVPreview);
+            // Add quick upload template button
+            const quickBtn = document.createElement('button');
+            quickBtn.id = 'downloadQuickRowTemplate';
+            quickBtn.className = 'btn btn-primary';
+            quickBtn.textContent = 'Quick Row Template';
+            quickBtn.onclick = downloadQuickRowTemplate;
+            document.querySelector('.toolbar').insertBefore(quickBtn, document.getElementById('downloadProductTemplate'));
+            // QR code default value
+            document.getElementById('qrLink').value = 'https://lyrecohk-charleschan.github.io/paymentmethod/';
+            document.getElementById('qrLink').dispatchEvent(new Event('input'));
+            // Product CSV upload check
+            if (!localStorage.getItem('productCsvUploaded')) {
+                setTimeout(() => {
+                    alert('Please upload Product CSV first.\n請先上傳產品CSV。\n\nFill in Sales Representative, Phone, Email before editing.');
+                }, 500);
+            }
+            // Mark product CSV upload
+            document.getElementById('csvFile').addEventListener('change', () => {
+                localStorage.setItem('productCsvUploaded', '1');
+            });
+            populateForm();
+            setLang('en');
+            // 新增 Restore Draft 按鈕
+            if (localStorage.getItem('quotationDraft')) {
+                const restoreBtn = document.createElement('button');
+                restoreBtn.id = 'restoreDraftBtn';
+                restoreBtn.className = 'btn btn-primary';
+                restoreBtn.textContent = 'Restore Draft';
+                restoreBtn.onclick = restoreDraft;
+                document.querySelector('.toolbar').appendChild(restoreBtn);
+            }
+        });
+
+        // First time modal logic
+        function showFirstTimeModal() {
+            document.getElementById('firstTimeModal').classList.add('show');
+            document.body.style.overflow = 'hidden';
+            checkFirstTimeFormValidity();
+        }
+
+        function checkFirstTimeFormValidity() {
+            const fileInput = document.getElementById('firstTimeProductCsv');
+            const salesRep = document.getElementById('firstTimeSalesRep').value.trim();
+            const phone = document.getElementById('firstTimePhone').value.trim();
+            const email = document.getElementById('firstTimeEmail').value.trim();
+            const submitBtn = document.getElementById('firstTimeSubmitBtn');
+            if (fileInput.files.length === 0 || !salesRep || !phone || !email) {
+                submitBtn.disabled = true;
+            } else {
+                submitBtn.disabled = false;
+            }
+        }
+
+        function hideFirstTimeModal() {
+            document.getElementById('firstTimeModal').classList.remove('show');
+            document.body.style.overflow = '';
+        }
+
+        function clearAllLocalStorage() {
+            localStorage.clear();
+        }
+
+        function handleFirstTimeSubmit() {
+            const fileInput = document.getElementById('firstTimeProductCsv');
+            const salesRep = document.getElementById('firstTimeSalesRep').value.trim();
+            const phone = document.getElementById('firstTimePhone').value.trim();
+            const email = document.getElementById('firstTimeEmail').value.trim();
+            const errorDiv = document.getElementById('firstTimeError');
+            errorDiv.textContent = '';
+            if (!fileInput.files[0]) {
+                errorDiv.textContent = 'Please upload Product CSV.';
+                return;
+            }
+            if (!salesRep) {
+                errorDiv.textContent = 'Please enter Sales Representative.';
+                return;
+            }
+            if (!phone) {
+                errorDiv.textContent = 'Please enter Phone.';
+                return;
+            }
+            if (!email) {
+                errorDiv.textContent = 'Please enter Email.';
+                return;
+            }
+            // Parse and load product CSV
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                productDatabase = parseCSV(e.target.result);
+                localStorage.setItem('productCsvUploaded', '1');
+                document.getElementById('salesRep').value = salesRep;
+                document.getElementById('customerPhone').value = phone;
+                document.getElementById('customerEmail').value = email;
+                document.getElementById('quotationBody').innerHTML = '';
+                rowCounter = 1;
+                addRow();
+                hideFirstTimeModal();
+                // 只有這裡才允許 draft restore
+                if (localStorage.getItem('quotationDraft')) restoreDraft();
+            };
+            reader.readAsText(fileInput.files[0]);
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+            // First time modal logic
+            if (!localStorage.getItem('productCsvUploaded')) {
+                showFirstTimeModal();
+            } else {
+                document.getElementById('firstTimeModal').classList.remove('show');
+                // 只保留手動 restoreDraft，不自動 restore
+            }
+            document.getElementById('firstTimeSubmitBtn').onclick = handleFirstTimeSubmit;
+            document.getElementById('firstTimeDownloadProductTemplate').onclick = downloadProductTemplate;
+            // 新增即時檢查
+            document.getElementById('firstTimeProductCsv').addEventListener('change', checkFirstTimeFormValidity);
+            document.getElementById('firstTimeSalesRep').addEventListener('input', checkFirstTimeFormValidity);
+            document.getElementById('firstTimePhone').addEventListener('input', checkFirstTimeFormValidity);
+            document.getElementById('firstTimeEmail').addEventListener('input', checkFirstTimeFormValidity);
+        });
+    </script>
 </body>
 </html>
