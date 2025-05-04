@@ -57,6 +57,15 @@
     <div class="container">
         <div id="formOverlay" class="form-overlay" style="display:none;"></div>
         <div class="toolbar no-print">
+            <label class="form-label" style="margin-right:8px;">
+                <span>Form Type:</span>
+                <select id="formType" class="form-input" style="width:auto;display:inline-block;margin-left:8px;">
+                    <option value="QUOTATION">QUOTATION</option>
+                    <option value="Proforma Invoice">Proforma Invoice</option>
+                    <option value="Invoice">Invoice</option>
+                    <option value="Purchasing Order">Purchasing Order</option>
+                </select>
+            </label>
             <button id="langToggle" class="btn btn-secondary">中文</button>
             <label class="btn btn-primary">
                 Upload Product CSV
@@ -89,31 +98,38 @@
 
         <div class="mt-6 bg-white p-6 rounded-lg shadow-lg print-area">
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6">
-                <div>
-                    <img src="https://www.lyreco.com/content/dam/lyreco/pr/logos/lyreco-logo-og.png" alt="Lyreco Logo" class="h-12 mb-4">
-                    <p class="text-sm text-gray-600">16th Floor, 78 Hung To Road, Kwun Tong, Kowloon, Hong Kong</p>
-                    <p class="text-sm text-gray-600">Payment: Bank transfer (HSBC code 004) 004-728325-001</p>
-                    <p class="text-sm text-gray-600">FPS ID: 112461512 / Cheque: Lyreco (Hong Kong) Company Limited</p>
-                </div>
-                <h1 class="text-2xl font-bold text-gray-800 mt-4 sm:mt-0">Quotation</h1>
+                <!-- 公司資訊區塊已移除，僅保留下方可編輯欄位 -->
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
                 <div>
-                    <p class="text-sm text-gray-600 mb-4">Hotline: (852) 2946 2233 | Fax: (852) 2754 9866</p>
-                    <p class="text-sm text-gray-600 mb-4">Email: <a href="mailto:cs.hk@lyreco.com" class="text-blue-600 hover:underline">cs.hk@lyreco.com</a></p>
                     <div class="space-y-4">
+                        <label class="form-label">Payable to:
+                            <input type="text" class="form-input" value="LYRECO (HONG KONG) COMPANY LIMITED" readonly>
+                        </label>
+                        <label class="form-label">Office Address
+                            <input type="text" class="form-input" value="16th Floor, 78 Hung To Road, Kwun Tong, Kowloon, Hong Kong">
+                        </label>
+                        <label class="form-label">Hotline
+                            <input type="text" class="form-input" value="Hotline: (852) 292462233" readonly>
+                        </label>
+                        <label class="form-label">FAX:
+                            <input type="text" class="form-input" value="FAX: (852) 27549866" readonly>
+                        </label>
+                        <label class="form-label">Customer service :
+                            <input type="text" class="form-input" value="Customer service : cs.hk@lyreco.com" readonly>
+                        </label>
                         <div>
                             <label class="form-label" for="salesRep">Sales Representative</label>
-                            <input type="text" id="salesRep" class="form-input" placeholder="Enter name">
+                            <input type="text" id="salesRep" class="form-input" placeholder="Entry contact person">
                         </div>
                         <div>
                             <label class="form-label" for="customerPhone">Phone</label>
-                            <input type="text" id="customerPhone" class="form-input" placeholder="Enter phone number">
+                            <input type="text" id="customerPhone" class="form-input" placeholder="Entry sales rep phone number">
                         </div>
                         <div>
                             <label class="form-label" for="customerEmail">Email</label>
-                            <input type="email" id="customerEmail" class="form-input" placeholder="Enter email address">
+                            <input type="email" id="customerEmail" class="form-input" placeholder="Entry sales rep email">
                         </div>
                     </div>
                 </div>
@@ -345,10 +361,7 @@
         let csvPreviewData = null;
 
         const predefinedProducts = [
-            { itemCode: "1865152", description: "LYRECO PREMIUM GEL PEN RT 0.7MM BLACK", descriptionChi: "LYRECO 优质凝胶笔 0.7毫米 黑色", unit: "", packageUnit: "1", unitPrice: 5.90, cost: 4.50 },
-            { itemCode: "103687", description: "PK12 LYRECO STICKY NOTE 50X40 YLLW", descriptionChi: "LYRECO 便签纸 50X40 黄色 12包", unit: "", packageUnit: "12", unitPrice: 30.50, cost: 25.00 },
-            { itemCode: "18655174", description: "LYRECO PREMIUM GEL PEN RT 0.7MM RED", descriptionChi: "LYRECO 优质凝胶笔 0.7毫米 红色", unit: "", packageUnit: "1", unitPrice: 5.90, cost: 4.50 },
-            { itemCode: "6344598", description: "LAVAZZA TOP CLASS COFFEE BEAN POUCH 1KG", descriptionChi: "LAVAZZA 顶级咖啡豆袋 1公斤", unit: "", packageUnit: "1", unitPrice: 292.00, cost: 250.00 }
+            { itemCode: "6344598", description: "LAVAZZA TOP CLASS COFFEE BEAN POUCH 1KG", descriptionChi: "LAVAZZA 顶级咖啡豆袋 1公斤", unit: "EA", packageUnit: "1", unitPrice: 292.00 }
         ];
 
         const predefinedCustomer = {
@@ -682,8 +695,7 @@
                     <div class="relative mt-2">
                         <input type="text" class="form-input" placeholder="Search by Description & Item Code" oninput="searchByDescription(this)">
                         <div class="search-dropdown hidden"></div>
-                    </div>
-                </td>
+                    </td>
                 <td><textarea class="form-input description" rows="2">${product.description || ''}</textarea></td>
                 <td><input type="text" class="form-input unit" value="${product.unit || ''}" placeholder="Enter unit"></td>
                 <!-- <td><input type="number" class="form-input package-unit" value="${product.packageUnit || '1'}" min="1" onchange="calculateRowAmount(this)" aria-label="Package Unit"></td> 隱藏-->
@@ -970,6 +982,25 @@
         async function confirmGeneratePDF() {
             // Move getField definition to the top
             const getField = id => document.getElementById(id)?.value || '';
+            // 新增取得公司資訊 input 欄位的輔助函數
+            function getCompanyInfoInput(idx) {
+                const labels = [
+                    'LYRECO (HONG KONG) COMPANY LIMITED',
+                    '16th Floor, 78 Hung To Road, Kwun Tong, Kowloon, Hong Kong',
+                    'Hotline: (852) 292462233',
+                    'FAX: (852) 27549866',
+                    'Customer service : cs.hk@lyreco.com'
+                ];
+                const label = labels[idx];
+                const labelEls = Array.from(document.querySelectorAll('.form-label'));
+                for (const el of labelEls) {
+                    if (el.textContent.trim().startsWith(label)) {
+                        const input = el.querySelector('input');
+                        if (input) return input.value;
+                    }
+                }
+                return label;
+            }
             if (!confirm("Generate PDF for this quotation?")) return;
             showToast("Generating PDF...");
             const requiredFields = ['companyName', 'accountNo', 'address'];
@@ -988,18 +1019,19 @@
                 const { jsPDF } = window.jspdf;
                 const doc = new jsPDF({ orientation: 'p', unit: 'mm', format: 'a4', encoding: 'UTF-8' });
                 doc.setFontSize(8);
-                doc.text("Lyreco (Hong Kong) Co., Ltd.", 8, 14);
-                doc.text("16/F, 78 Hung To Road, Kwun Tong, Kowloon", 8, 20);
-                doc.text("", 8, 26);
-                doc.text("Hotline: (852) 2946 2233, Fax: (852) 2754 9866", 8, 32);
-                doc.text("Email: cs.hk@lyreco.com", 8, 38);
-                doc.text("Website: www.lyreco.com.hk", 8, 44);
-                // Fix: define salesRep, phone, email from form fields
+                // 取 input 欄位內容
+                doc.text(getCompanyInfoInput(0), 8, 14);
+                doc.text(getCompanyInfoInput(1), 8, 20);
+                doc.text(getCompanyInfoInput(2), 8, 26);
+                doc.text(getCompanyInfoInput(3), 8, 32);
+                doc.text(getCompanyInfoInput(4), 8, 38);
+                // Sales Rep block
                 const salesRep = getField('salesRep');
                 const phone = getField('customerPhone');
                 const email = getField('customerEmail');
-                doc.text(salesRep + (phone ? ', ' + phone : ''), 8, 50);
-                doc.text(email ? email : '', 8, 56);
+                doc.text("Sales Representative: " + salesRep, 8, 44);
+                doc.text("Phone: " + phone, 8, 50);
+                doc.text("Email: " + email, 8, 56);
                 doc.setFontSize(8);
                 // 地址分割為多行
                 let addressLines = [];
@@ -1017,28 +1049,25 @@
                             row.street?.trim(),
                             row.city?.trim()
                         ].filter(Boolean);
-                        // 第一行: detailOne, detailTwo
                         let line1 = [row.detailOne, row.detailTwo].filter(Boolean).join(', ');
-                        // 第二行: building, street
                         let line2 = [row.building, row.street].filter(Boolean).join(', ');
-                        // 第三行: city
                         let line3 = row.city || '';
                         addressLines = [line1, line2, line3].filter(line => line);
                     }
                 }
                 if (addressLines.length === 0) {
-                    // 若找不到，則用 address 欄位分行
                     addressLines = getField('address').split(/\r?\n/).filter(Boolean);
                 }
                 if (addressLines[0]) doc.text(addressLines[0], 200, 26, { align: "right" });
                 if (addressLines[1]) doc.text(addressLines[1], 200, 32, { align: "right" });
                 if (addressLines[2]) doc.text(addressLines[2], 200, 38, { align: "right" });
-                // 計算 addrY
                 const addrY = 26 + addressLines.length * 6;
                 doc.text(`Account No.: ${getField('accountNo')}`, 200, addrY, { align: "right" });
 
+                // Use selected form type
+                const formType = document.getElementById('formType')?.value || 'QUOTATION';
                 doc.setFontSize(16);
-                doc.text("QUOTATION", 105, 58, { align: "center" });
+                doc.text(formType, 105, 58, { align: "center" });
                 doc.setFontSize(12);
                 doc.text(`Quotation No.: ${getField('quotationNo')}`, 200, 52, { align: "right" });
                 doc.text(`Date: ${getField('quotationDate')}`, 200, 58, { align: "right" });
@@ -1138,7 +1167,8 @@
                 }
 
                 let startY = 68;
-                const fileName = getExportFileName('Quotation') + '.pdf';
+                // Use formType in file name
+                const fileName = getExportFileName(formType) + '.pdf';
                 doc.autoTable({
                     head: [headers],
                     body: tableRows,
@@ -1325,7 +1355,8 @@
         }
 
         function getExportFileName(type) {
-            const formType = type || 'Quotation';
+            // Use formType if available
+            const formType = document.getElementById('formType')?.value || type || 'Quotation';
             const quotationNo = document.getElementById('quotationNo').value || 'Q';
             const companyName = (document.getElementById('companyName').value || 'Company').replace(/[^a-zA-Z0-9]/g, '');
             const accountNo = (document.getElementById('accountNo').value || 'A').replace(/[^a-zA-Z0-9]/g, '');
@@ -1540,6 +1571,13 @@
                 restoreBtn.textContent = 'Restore Draft';
                 restoreBtn.onclick = restoreDraft;
                 document.querySelector('.toolbar').appendChild(restoreBtn);
+                // 新增 Clean Draft 按鈕
+                const cleanBtn = document.createElement('button');
+                cleanBtn.id = 'cleanDraftBtn';
+                cleanBtn.className = 'btn btn-danger';
+                cleanBtn.textContent = 'Clean Draft';
+                cleanBtn.onclick = cleanDraft;
+                document.querySelector('.toolbar').appendChild(cleanBtn);
             }
             // quotationNo 自動產生
             document.getElementById('quotationNo').value = generateQuotationNo();
@@ -1791,6 +1829,14 @@
             updateTotals();
             closeQuickEntryModal();
             showToast(`${added} ${lang === 'en' ? 'rows added.' : '行已加入。'}${failed ? ' ' + failed + (lang === 'en' ? ' failed.' : '行失敗。') : ''}`);
+        }
+
+        // Clean Draft function
+        function cleanDraft() {
+            localStorage.removeItem('quotationDraft');
+            showToast('Draft cleaned!');
+            // Optionally, reload to update UI
+            setTimeout(() => location.reload(), 800);
         }
     </script>
 </body>
