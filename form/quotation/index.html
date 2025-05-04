@@ -14,7 +14,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         *,::before,::after{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e2e8f0}body{margin:0;font-family:'Inter',sans-serif;color:#1e293b;line-height:1.5;background-color:#f8fafc}a{color:#2563eb;text-decoration:none}a:hover{text-decoration:underline}.container{max-width:1280px;margin-left:auto;margin-right:auto;padding:1rem}.flex{display:flex}.grid{display:grid}.hidden{display:none}.space-y-2>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.5rem * var(--tw-space-y-reverse))}.space-y-4>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem * var(--tw-space-y-reverse))}.gap-2{gap:0.5rem}.gap-6{gap:1.5rem}.flex-col{flex-direction:column}.flex-wrap{flex-wrap:wrap}.items-start{align-items:flex-start}.items-center{align-items:center}.justify-end{justify-content:flex-end}.justify-between{justify-content:space-between}.overflow-x-auto{overflow-x:auto}.overflow-y-auto{overflow-y:auto}.rounded{border-radius:0.375rem}.rounded-lg{border-radius:0.5rem}.border{border-width:1px}.border-blue-100{border-color:#dbeafe}.border-gray-200{border-color:#e2e8f0}.border-red-500{border-color:#ef4444}.bg-blue-50{background-color:#eff6ff}.bg-gray-50{background-color:#f9fafb}.bg-white{background-color:#fff}.p-4{padding:1rem}.p-6{padding:1.5rem}.px-4{padding-left:1rem;padding-right:1rem}.py-2{padding-top:0.5rem;padding-bottom:0.5rem}.pl-4{padding-left:1rem}.pr-4{padding-right:1rem}.pt-2{padding-top:0.5rem}.text-sm{font-size:0.875rem;line-height:1.25rem}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-2xl{font-size:1.5rem;line-height:2rem}.font-bold{font-weight:700}.font-medium{font-weight:500}.font-semibold{font-weight:600}.text-blue-600{color:#2563eb}.text-blue-800{color:#1e40af}.text-gray-400{color:#9ca3af}.text-gray-600{color:#4b5563}.text-gray-800{color:#1f2937}.text-red-500{color:#ef4444}.text-red-600{color:#dc2626}.shadow{box-shadow:0 1px 3px 0 rgba(0,0,0,0.1),0 1px 2px 0 rgba(0,0,0,0.06)}.shadow-lg{box-shadow:0 10px 15px -3px rgba(0,0,0,0.1),0 4px 6px -2px rgba(0,0,0,0.05)}.transition{transition-property:color,background-color,border-color,text-decoration-color,opacity,transform,box-shadow;transition-timing-function:cubic-bezier(0.4,0,0.2,1);transition-duration:150ms}.grid-cols-1{grid-template-columns:repeat(1,minmax(0,1fr))}.w-full{width:100%}.max-w-96{max-width:24rem}.h-12{height:3rem}.mt-2{margin-top:0.5rem}.mt-4{margin-top:1rem}.mt-6{margin-top:1.5rem}.mb-4{margin-bottom:1rem}.mb-6{margin-bottom:1.5rem}@media (min-width:640px){.sm\:flex-row{flex-direction:row}.sm\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.sm\:items-center{align-items:center}.sm\:mt-0{margin-top:0}.sm\:w-96{width:24rem}}
-        .form-input{border:1px solid #e2e8f0;border-radius:0.375rem;padding:0.5rem 0.75rem;width:100%;font-size:0.875rem;transition:border-color 0.2s, box-shadow 0.2s;background-color:#fff}.form-input:hover{border-color:#3b82f6}.form-input:focus{border-color:#3b82f6;outline:none;box-shadow:0 0 0 3px rgba(59, 130, 246, 0.1)}.form-input:disabled,.form-input[readonly]{background-color:#f1f5f9;cursor:not-allowed}.form-label{display:block;font-size:0.75rem;font-weight:500;color:#475569;margin-bottom:0.25rem}.btn{display:inline-flex;align-items:center;padding:0.5rem 1rem;border-radius:0.375rem;font-size:0.875rem;font-weight:500;transition:background-color 0.2s, transform 0.1s}.btn:hover{transform:translateY(-1px)}.btn:active{transform:translateY(0)}.btn-primary{background-color:#3b82f6;color:#fff}.btn-primary:hover{background-color:#2563eb}.btn-secondary{background-color:#64748b;color:#fff}.btn-secondary:hover{background-color:#475569}.btn-success{background-color:#22c55e;color:#fff}.btn-success:hover{background-color:#16a34a}.btn-danger{background-color:#ef4444;color:#fff}.btn-danger:hover{background-color:#dc2626}.table{width:100%;border-collapse:collapse;font-size:0.875rem;background-color:#fff;border-radius:0.375rem;overflow:hidden;box-shadow:0 1px 3px rgba(0, 0, 0, 0.1)}.table th,.table td{padding:0.75rem;text-align:left;border-bottom:1px solid #e2e8f0}.table th{background-color:#f8fafc;font-weight:600;color:#475569}.table tr:hover{background-color:#f1f5f9}.search-dropdown{position:absolute;width:100%;background-color:#fff;border:1px solid #e2e8f0;border-radius:0.375rem;box-shadow:0 4px 6px rgba(0, 0, 0, 0.1);z-index:50;max-height:12rem;overflow-y:auto}.search-item{padding:0.5rem 0.75rem;font-size:0.875rem;color:#1e293b;cursor:pointer}.search-item:hover{background-color:#eff6ff;color:#2563eb}.modal{position:fixed;inset:0;background-color:rgba(0, 0, 0, 0.5);display:flex;align-items:center;justify-content:center;z-index:100;opacity:0;visibility:hidden;transition:opacity 0.3s, visibility 0.3s}.modal.show{opacity:1;visibility:visible}.modal-content{background-color:#fff;padding:1.5rem;border-radius:0.5rem;max-width:32rem;width:100%;max-height:90vh;overflow-y:auto;transform:scale(0.95);transition:transform 0.3s}.modal.show .modal-content{transform:scale(1)}#toastMsg{position:fixed;top:1rem;right:1rem;background-color:#22c55e;color:#fff;padding:0.75rem 1rem;border-radius:0.375rem;box-shadow:0 4px 6px rgba(0, 0, 0, 0.1);z-index:1000;display:flex;align-items:center;gap:0.5rem;opacity:0;transform:translateY(-10px);transition:opacity 0.3s, transform 0.3s}#toastMsg.show{opacity:1;transform:translateY(0)}.toolbar{position:sticky;top:0;background-color:#fff;padding:1rem;border-radius:0.375rem;box-shadow:0 1px 3px rgba(0, 0, 0, 0.1);z-index:10;display:flex;flex-wrap:wrap;gap:0.5rem}@media (max-width:640px){.container{padding:0.5rem}.table{display:block;overflow-x:auto}.toolbar{flex-direction:column;align-items:stretch}.modal-content{margin:1rem}}@media print{@page{margin:20mm}body *{visibility:hidden}.print-area,.print-area *{visibility:visible}.print-area{position:absolute;left:0;top:0;width:100%}.no-print{display:none !important}}
+        .form-input{border:1px solid #e2e8f0;border-radius:0.375rem;padding:0.5rem 0.75rem;width:100%;font-size:0.875rem;transition:border-color 0.2s, box-shadow 0.2s;background-color:#fff}.form-input:hover{border-color:#3b82f6}.form-input:focus{border-color:#3b82f6;outline:none;box-shadow:0 0 0 3px rgba(59, 130, 246, 0.1)}.form-input:disabled,.form-input[readonly]{background-color:#f1f5f9;cursor:not-allowed}.form-label{display:block;font-size:0.75rem;font-weight:500;color:#475569;margin-bottom:0.25rem}.btn{display:inline-flex;align-items:center;padding:0.5rem 1rem;border-radius:0.375rem;font-size:0.875rem;font-weight:500;transition:background-color 0.2s, transform 0.1s}.btn:hover{transform:translateY(-1px)}.btn:active{transform:translateY(0)}.btn-primary{background-color:#3b82f6;color:#fff}.btn-primary:hover{background-color:#2563eb}.btn-secondary{background-color:#64748b;color:#fff}.btn-secondary:hover{background-color:#475569}.btn-success{background-color:#22c55e;color:#fff}.btn-success:hover{background-color:#16a34a}.btn-danger{background-color:#ef4444;color:#fff}.btn-danger:hover{background-color:#dc2626}.table{width:100%;border-collapse:collapse;font-size:0.875rem;background-color:#fff;border-radius:0.375rem;overflow:hidden;box-shadow:0 1px 3px rgba(0, 0, 0, 0.1)}.table th,.table td{padding:0.75rem;text-align:left;border-bottom:1px solid #e2e8f0}.table th{background-color:#f8fafc;font-weight:600;color:#475569}.table tr:hover{background-color:#f1f5f9}.search-dropdown{position:absolute;width:100%;background-color:#fff;border:1px solid #e2e8f0;border-radius:0.375rem;box-shadow:0 4px 6px rgba(0, 0, 0, 0.1);z-index:50;max-height:12rem;overflow-y:auto}.search-item{padding:0.5rem 0.75rem;font-size:0.875rem;color:#1e293b;cursor:pointer}.search-item:hover{background-color:#eff6ff;color:#2563eb}.modal{position:fixed;inset:0;background-color:rgba(0, 0, 0, 0.5);display:flex;align-items:center;justify-content:center;z-index:9999;opacity:0;visibility:hidden;transition:opacity 0.3s, visibility 0.3s}.modal.show{opacity:1;visibility:visible}.modal-content{background-color:#fff;padding:1.5rem;border-radius:0.5rem;max-width:32rem;width:100%;max-height:90vh;overflow-y:auto;transform:scale(0.95);transition:transform 0.3s;position:relative;z-index:10000;margin:0 auto}.modal.show .modal-content{transform:scale(1)}body.modal-open{overflow:hidden !important}@media (max-width:640px){.container{padding:0.5rem}.table{display:block;overflow-x:auto}.toolbar{flex-direction:column;align-items:stretch;position:sticky;top:0;width:100%}.modal-content{margin:1rem}}@media print{@page{margin:20mm}body *{visibility:hidden}.print-area,.print-area *{visibility:visible}.print-area{position:absolute;left:0;top:0;width:100%}.no-print{display:none !important}}
         .form-overlay {
             position: fixed;
             top: 0;
@@ -22,9 +22,34 @@
             width: 100vw;
             height: 100vh;
             background: rgba(255,255,255,0.7);
-            z-index: 99;
+            z-index: 9998;
             display: none;
             pointer-events: all;
+        }
+        .toolbar {
+            position: sticky;
+            top: 0;
+            z-index: 1001;
+            width: 100%;
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+        }
+        .toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        .toolbar .btn,
+        .toolbar label.btn {
+            margin-bottom: 0;
+            cursor: pointer;
+        }
+        .toolbar label.btn input[type="file"] {
+            display: none;
         }
     </style>
 </head>
@@ -1026,7 +1051,8 @@
                     const itemCode = row.querySelector(".item-code").value || '';
                     const description = row.querySelector(".description").value || '';
                     const unit = row.querySelector(".unit").value || '';
-                    const packageUnit = parseFloat(row.querySelector(".package-unit").value) || 1;
+                    const packageUnitInput = row.querySelector(".package-unit");
+                    const packageUnit = packageUnitInput ? parseFloat(packageUnitInput.value) || 1 : 1;
                     const unitPrice = parseFloat(row.querySelector(".unit-price").value) || 0;
                     const qty = parseFloat(row.querySelector(".qty").value) || 0;
                     const amount = parseFloat(row.querySelector(".amount").value) || 0;
@@ -1310,14 +1336,17 @@
         function getDraftData() {
             const formFields = ['accountNo', 'quotationNo', 'companyName', 'customerName', 'quotationDate', 'paymentTerms', 'deliveryTerms', 'validUntil', 'address', 'remarks', 'taxRate', 'discount', 'customerPhone', 'customerEmail', 'shippingFee'];
             const form = {};
-            formFields.forEach(id => form[id] = document.getElementById(id)?.value || '');
+            formFields.forEach(id => {
+                const el = document.getElementById(id);
+                form[id] = el ? el.value : '';
+            });
             const rows = [];
             document.querySelectorAll("#quotationBody tr").forEach(row => {
                 rows.push({
                     itemCode: row.querySelector('.item-code').value || '',
                     description: row.querySelector('.description').value || '',
                     unit: row.querySelector('.unit').value || '',
-                    packageUnit: row.querySelector('.package-unit').value || '1',
+                    packageUnit: row.querySelector('.package-unit') ? row.querySelector('.package-unit').value : '1',
                     qty: row.querySelector('.qty').value || '',
                     unitPrice: row.querySelector('.unit-price').value || '',
                     amount: row.querySelector('.amount').value || '',
@@ -1434,7 +1463,34 @@
             }
         });
 
-        document.addEventListener('DOMContentLoaded', () => {
+        async function autoLoadCSVsIfExist() {
+            let loaded = false;
+            try {
+                const productResp = await fetch('./product.csv');
+                if (productResp.ok) {
+                    const text = await productResp.text();
+                    productDatabase = parseCSV(text);
+                    localStorage.setItem('productCsvUploaded', '1');
+                    loaded = true;
+                }
+            } catch(e) {}
+            try {
+                const customerResp = await fetch('./customer.csv');
+                if (customerResp.ok) {
+                    const text = await customerResp.text();
+                    customerDatabase = parseCustomerCSV(text);
+                    loaded = true;
+                }
+            } catch(e) {}
+            if (loaded) {
+                document.getElementById('firstTimeModal').classList.remove('show');
+                document.body.classList.remove('modal-open');
+                document.getElementById('formOverlay').style.display = 'none';
+            }
+            return loaded;
+        }
+
+        document.addEventListener('DOMContentLoaded', async () => {
             document.getElementById('langToggle').addEventListener('click', toggleLang);
             document.getElementById('downloadProductTemplate').addEventListener('click', downloadProductTemplate);
             document.getElementById('downloadCustomerTemplate').addEventListener('click', downloadCustomerTemplate);
@@ -1493,12 +1549,21 @@
             // validUntil 預設今天+30天
             const validUntil = new Date(today.getTime() + 30 * 24 * 60 * 60 * 1000);
             document.getElementById('validUntil').value = validUntil.toISOString().slice(0, 10);
+
+            let loaded = await autoLoadCSVsIfExist();
+            if (!loaded && !localStorage.getItem('productCsvUploaded')) {
+                showFirstTimeModal();
+            } else {
+                document.getElementById('firstTimeModal').classList.remove('show');
+                document.body.classList.remove('modal-open');
+                document.getElementById('formOverlay').style.display = 'none';
+            }
         });
 
         // First time modal logic
         function showFirstTimeModal() {
             document.getElementById('firstTimeModal').classList.add('show');
-            document.body.style.overflow = 'hidden';
+            document.body.classList.add('modal-open');
             document.getElementById('formOverlay').style.display = 'block';
             checkFirstTimeFormValidity();
         }
@@ -1518,7 +1583,7 @@
 
         function hideFirstTimeModal() {
             document.getElementById('firstTimeModal').classList.remove('show');
-            document.body.style.overflow = '';
+            document.body.classList.remove('modal-open');
             document.getElementById('formOverlay').style.display = 'none';
         }
 
@@ -1586,20 +1651,26 @@
         // Internal info modal
         function showInternalInfo(btn) {
             const row = btn.closest('tr');
-            const itemCode = row.querySelector('.item-code').value || '';
-            const qty = parseFloat(row.querySelector('.qty').value) || 0;
-            const packageUnit = parseFloat(row.querySelector('.package-unit').value) || 1;
-            const unitPrice = parseFloat(row.querySelector('.unit-price').value) || 0;
+            const itemCodeInput = row.querySelector('.item-code');
+            const qtyInput = row.querySelector('.qty');
+            const packageUnitInput = row.querySelector('.package-unit');
+            const unitPriceInput = row.querySelector('.unit-price');
+            if (!itemCodeInput || !qtyInput || !unitPriceInput) {
+                alert('Row data is incomplete.');
+                return;
+            }
+            const itemCode = itemCodeInput.value || '';
+            const qty = parseFloat(qtyInput.value) || 0;
+            const packageUnit = packageUnitInput ? parseFloat(packageUnitInput.value) : 1;
+            const unitPrice = parseFloat(unitPriceInput.value) || 0;
             const product = productDatabase.find(p => p.itemCode === itemCode) || {};
             const cost = parseFloat(product.cost) || 0;
             const amount = qty * packageUnit * unitPrice;
             const totalCost = cost * qty * packageUnit;
             const cashMargin = amount - totalCost;
             const marginPct = amount > 0 ? (cashMargin / amount * 100) : 0;
-            // nameCM 重新定義公式
             let nameCM = String(Math.floor(marginPct / 5));
             if (nameCM.length === 1) nameCM = '0' + nameCM;
-            // 顯示 CM 解釋
             let cmExplain = '';
             if (!isNaN(marginPct)) {
                 const cmBand = Math.floor(marginPct / 5);
@@ -1668,7 +1739,7 @@
             modal.innerHTML = `
                 <div class="modal-content">
                     <h2 class="text-lg font-semibold mb-4">${lang === 'en' ? 'Quick Entry Bulk Row' : '快速批量輸入'}</h2>
-                    <div class="mb-4 text-sm text-gray-600">${lang === 'en' ? 'Paste multiple lines, each line: itemCode,qty' : '每行輸入：itemCode,數量'}</div>
+                    <div class="mb-4 text-sm text-gray-600">${lang === 'en' ? 'Paste multiple lines, each line: itemCode,qty or itemCode,qty,unitPrice' : '每行輸入：itemCode,數量 或 itemCode,數量,單價'}</div>
                     <textarea id="quickEntryTextarea" class="form-input" rows="8" style="width:100%;"></textarea>
                     <div id="quickEntryError" class="text-red-600 text-sm mt-2"></div>
                     <div class="flex justify-end gap-2 mt-4">
@@ -1700,12 +1771,21 @@
             let added = 0, failed = 0;
             lines.forEach(line => {
                 // 支援逗號、空格、tab 任意一種分隔
-                let parts = line.split(/[,\s\t]+/).map(x => x.trim()).filter(Boolean);
+                let parts = line.split(/[\,\s\t]+/).map(x => x.trim()).filter(Boolean);
                 if (parts.length < 2) { failed++; return; }
                 const itemCode = parts[0];
                 const qty = parseFloat(parts[1]);
+                let unitPrice = undefined;
+                if (parts.length >= 3) {
+                    unitPrice = parseFloat(parts[2]);
+                    if (isNaN(unitPrice)) unitPrice = undefined;
+                }
                 if (!itemCode || isNaN(qty) || qty < 1) { failed++; return; }
-                addRowFromCSV({ itemCode, qty });
+                if (unitPrice !== undefined) {
+                    addRowFromCSV({ itemCode, qty, unitPrice });
+                } else {
+                    addRowFromCSV({ itemCode, qty });
+                }
                 added++;
             });
             updateTotals();
