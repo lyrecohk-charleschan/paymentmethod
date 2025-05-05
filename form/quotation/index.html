@@ -57,6 +57,7 @@
     <div class="container">
         <div id="formOverlay" class="form-overlay" style="display:none;"></div>
         <div class="toolbar no-print">
+            <button id="firstTimeSetupBtn" class="btn btn-primary">First Setup</button>
             <label class="form-label" style="margin-right:8px;">
                 <span>Form Type:</span>
                 <select id="formType" class="form-input" style="width:auto;display:inline-block;margin-left:8px;">
@@ -71,10 +72,26 @@
                 Upload Product CSV
                 <input type="file" id="csvFile" accept=".csv" hidden onchange="handleCSVUpload(event, 'product')">
             </label>
-            <label class="btn btn-primary">
+            <label class="btn btn-primary" id="csvUploadLabel">
                 Upload Customer CSV
                 <input type="file" id="customerCsvFile" accept=".csv" hidden onchange="handleCSVUpload(event, 'customer')">
             </label>
+            <!-- Customer Data Source 選擇區塊移到 toolbar -->
+            <div class="flex items-center ml-2" style="gap:8px;">
+                <label class="form-label mb-0" for="dataSourceType" style="margin-bottom:0;">Customer Data Source</label>
+                <select id="dataSourceType" class="form-input" style="width:auto;display:inline-block;">
+                    <option value="csv">CSV</option>
+                    <option value="json">JSON</option>
+                    <option value="api">API</option>
+                </select>
+                <label class="form-label mb-0" id="jsonUploadLabel" style="display:none;margin-bottom:0;">
+                    <input type="file" id="customerJsonFile" accept=".json,application/json" class="form-input" style="width:auto;display:inline-block;">
+                </label>
+                <span id="apiInputLabel" style="display:none;">
+                    <input type="text" id="customerApiUrl" class="form-input" placeholder="https://api.example.com/customers" style="width:220px;display:inline-block;">
+                    <button type="button" class="btn btn-primary" id="loadCustomerApiBtn">Load from API</button>
+                </span>
+            </div>
             <label class="btn btn-primary">
                 Quick Upload Rows CSV
                 <input type="file" id="quickCsvFile" accept=".csv" hidden onchange="handleQuickCSVUpload(event)">
@@ -87,6 +104,8 @@
             <button onclick="exportToExcel()" class="btn btn-primary">Export Excel</button>
             <button id="downloadProductTemplate" class="btn btn-primary">Product Template</button>
             <button id="downloadCustomerTemplate" class="btn btn-primary">Customer Template</button>
+            <button id="openCalculatorBtn" class="btn btn-primary">Calculator</button>
+            <button id="customerDataMgmtBtn" class="btn btn-primary">Customer Data Management</button>
         </div>
 
         <div class="mt-4 bg-blue-50 border border-blue-100 rounded-lg p-4 text-sm text-blue-800">
@@ -120,16 +139,16 @@
                             <input type="text" class="form-input" value="Customer service : cs.hk@lyreco.com" readonly>
                         </label>
                         <div>
-                            <label class="form-label" for="salesRep">Sales Representative</label>
-                            <input type="text" id="salesRep" class="form-input" placeholder="Entry contact person">
+                            <label class="form-label" for="salesRep">Sales Representative<span class="text-red-500">*</span></label>
+                            <input type="text" id="salesRep" class="form-input" value="80270192 Chan Charles" placeholder="Entry contact person" required>
                         </div>
                         <div>
-                            <label class="form-label" for="customerPhone">Phone</label>
-                            <input type="text" id="customerPhone" class="form-input" placeholder="Entry sales rep phone number">
+                            <label class="form-label" for="salesrepPhone">Phone<span class="text-red-500">*</span></label>
+                            <input type="text" id="salesrepPhone" class="form-input" value="(852) 67779473"  placeholder="Entry sales rep phone number" required>
                         </div>
                         <div>
-                            <label class="form-label" for="customerEmail">Email</label>
-                            <input type="email" id="customerEmail" class="form-input" placeholder="Entry sales rep email">
+                            <label class="form-label" for="salesrepEmail">Email<span class="text-red-500">*</span></label>
+                            <input type="email" id="salesrepEmail" class="form-input" value="charles.chan@lyreco.com" placeholder="Entry sales rep email" required>
                         </div>
                     </div>
                 </div>
@@ -152,8 +171,24 @@
                         <input type="text" id="companyName" class="form-input" placeholder="Enter company name" required>
                     </div>
                     <div>
-                        <label class="form-label" for="customerName">Customer Name</label>
-                        <input type="text" id="customerName" class="form-input" placeholder="Enter customer name">
+                        <label class="form-label" for="firstName">First Name <span class="text-red-500">*</span></label>
+                        <input type="text" id="firstName" class="form-input" placeholder="Enter first name">
+                    </div>
+                    <div>
+                        <label class="form-label" for="lastName">Last Name <span class="text-red-500">*</span></label>
+                        <input type="text" id="lastName" class="form-input" placeholder="Enter last name">
+                    </div>
+                    <div>
+                        <label class="form-label" for="mobilePhone">Mobile Phone</label>
+                        <input type="text" id="mobilePhone" class="form-input" placeholder="Enter mobile phone">
+                    </div>
+                    <div>
+                        <label class="form-label" for="businessPhone">Business Phone <span class="text-red-500">*</span></label>
+                        <input type="text" id="businessPhone" class="form-input" placeholder="Enter business phone">
+                    </div>
+                    <div>
+                        <label class="form-label" for="businessEmail">Business Email</label>
+                        <input type="email" id="businessEmail" class="form-input" placeholder="Enter business email">
                     </div>
                     <div>
                         <label class="form-label" for="quotationDate">Date</label>
@@ -167,10 +202,6 @@
                             <option>90 Days</option>
                             <option>Immediate</option>
                         </select>
-                    </div>
-                    <div>
-                        <label class="form-label" for="deliveryTerms">Delivery Terms</label>
-                        <input type="text" id="deliveryTerms" class="form-input" placeholder="Enter delivery terms">
                     </div>
                     <div>
                         <label class="form-label" for="validUntil">Valid Until</label>
@@ -201,7 +232,7 @@
                             <th>Item Code</th>
                             <th>Description</th>
                             <th>Unit</th>
-                            <!-- <th>Package Unit</th> 隱藏 -->
+                            <th style="display:none;">Package Unit</th>
                             <th>Qty</th>
                             <th>Unit Price</th>
                             <th>Amount</th>
@@ -236,9 +267,19 @@
                             <span>Tax:</span>
                             <span id="taxAmount" class="font-medium">0.00</span>
                         </div>
+                        <div class="flex justify-between items-center">
+                            <label for="deposit" class="form-label">Deposit (%):</label>
+                            <input type="number" id="deposit" class="form-input w-24 text-right" value="0" min="0" max="100" step="0.01" onchange="updateTotals();updateDepositAmount()">
+                            <span id="depositAmountLabel" class="ml-2 text-sm text-gray-600"></span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <label for="additionalCharge" class="form-label">Additional Charge (%):</label>
+                            <input type="number" id="additionalCharge" class="form-input w-24 text-right" value="0" min="0" max="100" step="0.01" onchange="updateTotals();updateAdditionalChargeAmount()">
+                            <span id="additionalChargeAmountLabel" class="ml-2 text-sm text-gray-600"></span>
+                        </div>
                         <div class="flex justify-between">
-                            <label for="shippingFee" class="form-label">Shipping Fee:</label>
-                            <input type="number" id="shippingFee" class="form-input w-24 text-right" value="0" min="0" step="0.01" onchange="updateTotals()">
+                            <label for="freight" class="form-label">Freight:</label>
+                            <input type="number" id="freight" class="form-input w-24 text-right" value="0" min="0" step="0.01" onchange="updateTotals()">
                         </div>
                         <div class="flex justify-between font-bold text-blue-600">
                             <span>Grand Total:</span>
@@ -252,6 +293,10 @@
                 <label for="remarks" class="form-label">Remarks</label>
                 <textarea id="remarks" class="form-input" rows="4" placeholder="Enter remarks (if any)"></textarea>
                 <button onclick="applySuggestedTerms()" class="btn btn-primary mt-2">Apply Suggested Terms</button>
+            </div>
+            <div class="mt-6">
+                <label class="form-label" for="deliveryTerms">Delivery Terms</label>
+                <textarea type="text" id="deliveryTerms" class="form-input" rows="4" placeholder="Enter delivery terms"></textarea>
             </div>
 
             <div class="mt-6">
@@ -289,17 +334,21 @@
                     <label class="form-label" for="editUnit">Unit</label>
                     <input type="text" id="editUnit" class="form-input">
                 </div>
-                <!-- <div>
+                <div>
                     <label class="form-label" for="editPackageUnit">Package Unit</label>
-                    <input type="number" id="editPackageUnit" class="form-input" min="1">
-                </div> 隱藏-->
+                    <input type="number" id="editPackageUnit" class="form-input" min="1" onchange="updateEditModalAmountAndMC()">
+                </div>
+                <div>
+                    <label class="form-label" for="editAmount">Amount</label>
+                    <input type="number" id="editAmount" class="form-input" readonly>
+                </div>
                 <div>
                     <label class="form-label" for="editQty">Quantity</label>
-                    <input type="number" id="editQty" class="form-input" min="1">
+                    <input type="number" id="editQty" class="form-input" min="1" onchange="updateEditModalAmountAndMC()">
                 </div>
                 <div>
                     <label class="form-label" for="editUnitPrice">Unit Price</label>
-                    <input type="number" id="editUnitPrice" class="form-input" min="0" step="0.01">
+                    <input type="number" id="editUnitPrice" class="form-input" min="0" step="0.01" onchange="updateEditModalAmountAndMC()">
                 </div>
                 <div>
                     <label class="form-label">CM</label>
@@ -328,19 +377,20 @@
     <div id="firstTimeModal" class="modal show">
         <div class="modal-content">
             <h2 class="text-lg font-semibold mb-4">Welcome! Please complete setup</h2>
+            <button id="firstTimeSetupBtn" class="btn btn-primary mb-4" type="button">First Setup</button>
             <div class="space-y-4">
                 <label class="form-label">Upload Product CSV
                     <input type="file" id="firstTimeProductCsv" accept=".csv" class="form-input" style="margin-top:8px">
                 </label>
                 <button id="firstTimeDownloadProductTemplate" class="btn btn-primary mb-2" type="button">Download Product Template</button>
                 <label class="form-label">Sales Representative
-                    <input type="text" id="firstTimeSalesRep" class="form-input" placeholder="Enter name">
+                    <input type="text" id="salesRep" class="form-input" value="80270192 Chan Charles" placeholder="Enter name">
                 </label>
                 <label class="form-label">Phone
-                    <input type="text" id="firstTimePhone" class="form-input" placeholder="Enter phone number">
+                    <input type="text" id="salesrepPhone" class="form-input" value="(852)6777 9473" placeholder="Enter phone number">
                 </label>
                 <label class="form-label">Email
-                    <input type="email" id="firstTimeEmail" class="form-input" placeholder="Enter email address">
+                    <input type="email" id="salesrepEmail" class="form-input" value="charles.chan@lyreco.com" placeholder="Enter email address">
                 </label>
                 <div id="firstTimeError" class="text-red-600 text-sm"></div>
             </div>
@@ -350,7 +400,130 @@
         </div>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/cloudflare-email-decode/5c5dd728/email-decode.min.js"></script>
+    <div id="calculatorModal" class="modal">
+        <div class="modal-content" style="max-width:480px; position:relative; padding-bottom:72px;">
+            <button onclick="closeCalculatorModal()" style="position:absolute;top:12px;right:12px;background:none;border:none;font-size:1.5rem;cursor:pointer;" title="Close">&times;</button>
+            <h2 class="text-lg font-semibold mb-4">Calculator</h2>
+            <!-- 結果區塊置頂，重點數值大字顯示 -->
+            <div class="mb-4 p-3 rounded-lg bg-blue-100 border border-blue-300 flex flex-wrap gap-4 items-center justify-between">
+                <div class="flex flex-col items-center">
+                    <span class="text-xs text-gray-500">SP</span>
+                    <span id="resultSP" class="text-2xl font-bold text-blue-700 cursor-pointer" title="Copy" onclick="copyCalcResult('resultSP')"></span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <span class="text-xs text-gray-500">Margin%</span>
+                    <span id="resultMargin" class="text-2xl font-bold text-blue-700 cursor-pointer" title="Copy" onclick="copyCalcResult('resultMargin')"></span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <span class="text-xs text-gray-500">Markup%</span>
+                    <span id="resultMarkup" class="text-2xl font-bold text-blue-700 cursor-pointer" title="Copy" onclick="copyCalcResult('resultMarkup')"></span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <span class="text-xs text-gray-500">Cash Margin</span>
+                    <span id="resultCashMargin" class="text-2xl font-bold text-blue-700 cursor-pointer" title="Copy" onclick="copyCalcResult('resultCashMargin')"></span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <span class="text-xs text-gray-500">CM</span>
+                    <span id="resultNameCM" class="text-2xl font-bold text-blue-700 cursor-pointer" title="Copy" onclick="copyCalcResult('resultNameCM')"></span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <span class="text-xs text-gray-500">Margin區間</span>
+                    <span id="resultMarginRange" class="text-lg font-semibold text-blue-600"></span>
+                </div>
+            </div>
+            <!-- 常用欄位 -->
+            <div class="mb-2 space-y-2">
+                <div class="flex flex-wrap gap-4 mb-2 pb-2 border-b border-gray-200">
+                    <div class="flex items-center" style="min-width: 200px;">
+                        <span style="width:100px;">Cost</span>
+                        <input type="number" id="calcCost" class="form-input" step="any" style="width:100px;" placeholder="0.00">
+                        <span class="ml-1 text-xs text-gray-400">HKD</span>
+                    </div>
+                    <div class="flex items-center" style="min-width: 200px;">
+                        <span style="width:100px;">Selling Price</span>
+                        <input type="number" id="calcSP" class="form-input" step="any" style="width:100px;" placeholder="0.00">
+                        <span class="ml-1 text-xs text-gray-400">HKD</span>
+                    </div>
+                    <div class="flex items-center" style="min-width: 200px;">
+                        <span style="width:100px;">Margin (%)</span>
+                        <input type="number" id="calcMargin" class="form-input" step="any" style="width:100px;" placeholder="0.00">
+                        <span class="ml-1 text-xs text-gray-400">%</span>
+                    </div>
+                    <div class="flex items-center" style="min-width: 200px;">
+                        <span style="width:100px;">Markup (%)</span>
+                        <input type="number" id="calcMarkup" class="form-input" step="any" style="width:100px;" placeholder="0.00">
+                        <span class="ml-1 text-xs text-gray-400">%</span>
+                    </div>
+                </div>
+                <!-- 進階欄位可收合 -->
+                <details class="mb-2">
+                    <summary class="cursor-pointer text-blue-700 font-semibold">進階欄位</summary>
+                    <div class="flex flex-wrap gap-4 mt-2">
+                        <div class="flex items-center" style="min-width: 200px;">
+                            <span style="width:100px;">Cash Margin</span>
+                            <input type="number" id="calcCashMargin" class="form-input" step="any" style="width:100px;" placeholder="0.00">
+                            <span class="ml-1 text-xs text-gray-400">HKD</span>
+                        </div>
+                        <div class="flex items-center" style="min-width: 200px;">
+                            <span style="width:100px;">CM</span>
+                            <input type="text" id="calcNameCMInput" class="form-input" maxlength="2" style="width:40px;display:inline-block;" placeholder="00">
+                            <span id="calcNameCM" style="margin-left:4px;font-weight:bold;color:#1e40af;"></span>
+                            <span id="nameCMExplain" style="margin-left:8px;color:#888;font-size:0.9em;"></span>
+                        </div>
+                        <div class="flex items-center" style="min-width: 200px;">
+                            <span style="width:100px;">Price by Margin</span>
+                            <input type="number" id="calcPriceByMargin" class="form-input" step="any" style="width:100px;" placeholder="0.00" readonly>
+                            <span class="ml-1 text-xs text-gray-400">HKD</span>
+                        </div>
+                        <div class="flex items-center" style="min-width: 200px;">
+                            <span style="width:100px;">Price by Markup</span>
+                            <input type="number" id="calcPriceByMarkup" class="form-input" step="any" style="width:100px;" placeholder="0.00" readonly>
+                            <span class="ml-1 text-xs text-gray-400">HKD</span>
+                        </div>
+                    </div>
+                </details>
+            </div>
+            <div class="mt-4 space-y-1 text-base bg-blue-100 rounded p-3 border border-blue-300 shadow">
+                <div id="calcResultSummary" class="font-bold text-blue-800"></div>
+                <div id="calcResultDetail" class="text-gray-800"></div>
+            </div>
+            <!-- 底部按鈕區固定 -->
+            <div class="flex justify-end gap-2 mt-4" style="position:absolute;bottom:16px;right:24px;left:24px;">
+                <button class="btn btn-secondary" onclick="cleanCalculatorModal()">Clean</button>
+                <button class="btn btn-danger" onclick="closeCalculatorModal()">Close</button>
+            </div>
+        </div>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <script>
+        function copyCalcResult(id) {
+            const el = document.getElementById(id);
+            if (!el) return;
+            const val = el.textContent || el.innerText;
+            if (!val) return;
+            navigator.clipboard.writeText(val);
+            el.classList.add('bg-green-200');
+            el.title = 'Copied!';
+            setTimeout(() => { el.classList.remove('bg-green-200'); el.title = 'Copy'; }, 1000);
+        }
+        </script>
+    </div>
+    <style>
+        #calculatorModal .form-input {
+            font-size: 1rem;
+            padding: 0.5rem 0.75rem;
+            border-radius: 0.5rem;
+            border: 1.5px solid #dbeafe;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        #calculatorModal .form-input:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 2px #93c5fd;
+        }
+        #calculatorModal .btn-secondary[title='Copied!'] {
+            background: #22c55e;
+            color: #fff;
+        }
+    </style>
     <script>
         let productDatabase = [];
         let rowCounter = 1;
@@ -367,7 +540,9 @@
         const predefinedCustomer = {
             accountNo: "",
             companyName: "",
-            customerName: "",
+            firstName: "",
+            lastName: "",
+            mobilePhone: "",
             address: "",
             quotationNo: "",
             quotationDate: "",
@@ -438,7 +613,8 @@
             steps[2].innerHTML = `<strong>Step 3:</strong> ${LANGS[lang].step3}`;
             steps[3].innerHTML = `<strong>Step 4:</strong> ${LANGS[lang].step4}`;
             document.getElementById('companyName').placeholder = lang === 'en' ? 'Enter company name' : '输入公司名称';
-            document.getElementById('customerName').placeholder = lang === 'en' ? 'Enter customer name' : '输入客户名称';
+            document.getElementById('firstName').placeholder = lang === 'en' ? 'Enter first name' : '输入名字';
+            document.getElementById('lastName').placeholder = lang === 'en' ? 'Enter last name' : '输入姓氏';
             document.getElementById('address').placeholder = lang === 'en' ? 'Enter billing/delivery address' : '输入账单/送货地址';
             document.getElementById('remarks').placeholder = lang === 'en' ? 'Enter remarks (if any)' : '请输入备注（如有）';
             document.getElementById('customerSearch').placeholder = lang === 'en' ? 'Search by Account No., Company, or Name' : '按账户编号、公司或名称搜索';
@@ -449,9 +625,26 @@
         }
 
         function generateQuotationNo() {
-            // 產生 10 位數字，前面補0
+            const formType = document.getElementById('formType')?.value || 'QUOTATION';
+            let prefix = 'LY-';
+            if (formType === 'QUOTATION') prefix = 'LY-';
+            else if (formType === 'Proforma Invoice') prefix = 'PF-I-';
+            else if (formType === 'Invoice') prefix = 'INV-';
+            else if (formType === 'Purchasing Order') prefix = 'PO-';
             const num = Math.floor(Math.random() * 1e10);
-            return `LY-${String(num).padStart(10, '0')}`;
+            return `${prefix}${String(num).padStart(10, '0')}`;
+        }
+
+        function updateQuotationNoAndLabel() {
+            const formType = document.getElementById('formType')?.value || 'QUOTATION';
+            const labelMap = {
+                'QUOTATION': 'Quotation No.',
+                'Proforma Invoice': 'Proforma invoice No.',
+                'Invoice': 'Invoice No.',
+                'Purchasing Order': 'Purchasing Order No.'
+            };
+            document.querySelector('label[for="quotationNo"]').textContent = labelMap[formType] || 'Quotation No.';
+            document.getElementById('quotationNo').value = generateQuotationNo();
         }
 
         function searchCustomer(input) {
@@ -464,24 +657,38 @@
                 }
                 return;
             }
-            const matches = customerDatabase.filter(c => 
-                c.accountNo.toLowerCase().includes(keyword) ||
-                c.companyName.toLowerCase().includes(keyword) ||
-                (c.customerName && c.customerName.toLowerCase().includes(keyword))
+            // 新增多關鍵字搜尋（空格分割 tokens，每個 token 都要 match 任一欄位）
+            const tokens = keyword.split(/\s+/).filter(Boolean);
+            const matches = customerDatabase.filter(c =>
+                tokens.every(token =>
+                    [
+                        c.accountNo, c.firstName, c.lastName, c.companyName,
+                        c.businessPhone, c.mobilePhone, c.businessEmail,
+                        c.flat, c.building, c.street, c.district, c.city
+                    ].some(field => String(field || '').toLowerCase().includes(token))
+                )
             );
             dropdown.innerHTML = matches.map(c => `
-                <div class="search-item" onclick="selectCustomer('${c.accountNo.replace(/'/g, "\\'")}', '${c.companyName.replace(/'/g, "\\'")}', '${c.customerName ? c.customerName.replace(/'/g, "\\'") : ''}', '${c.address.replace(/'/g, "\\'")}')">
-                    ${c.companyName} (${c.accountNo})${c.customerName ? ' - ' + c.customerName : ''}
+                <div class="search-item" onclick="selectCustomer('${String(c.accountNo||'').replace(/'/g, "\\'")}', '${String(c.companyName||'').replace(/'/g, "\\'")}', '${String(c.firstName||'').replace(/'/g, "\\'")}', '${String(c.lastName||'').replace(/'/g, "\\'")}', '${String(c.businessPhone||'').replace(/'/g, "\\'")}', '${String(c.mobilePhone||'').replace(/'/g, "\\'")}', '${String(c.businessEmail||'').replace(/'/g, "\\'")}', '${String(c.flat||'').replace(/'/g, "\\'")}', '${String(c.building||'').replace(/'/g, "\\'")}', '${String(c.street||'').replace(/'/g, "\\'")}', '${String(c.district||'').replace(/'/g, "\\'")}', '${String(c.city||'').replace(/'/g, "\\'")}', '${String(c.zipCode||'').replace(/'/g, "\\'")}' )">
+                    <div><b>${c.companyName}</b> (${c.accountNo})</div>
+                    <div>Name: ${c.firstName} ${c.lastName}</div>
+                    <div>Business Phone: ${c.businessPhone} | Mobile: ${c.mobilePhone}</div>
+                    <div>Email: ${c.businessEmail}</div>
+                    <div>Address: ${[c.flat, c.building, c.street, c.district, c.city, c.zipCode].filter(Boolean).join(', ')}</div>
                 </div>
             `).join('');
             dropdown.classList.toggle('hidden', matches.length === 0);
         }
 
-        function selectCustomer(accountNo, companyName, customerName, address) {
+        function selectCustomer(accountNo, companyName, firstName, lastName, businessPhone, mobilePhone, businessEmail, flat, building, street, district, city, zipCode) {
             document.getElementById('accountNo').value = accountNo;
             document.getElementById('companyName').value = companyName;
-            document.getElementById('customerName').value = customerName;
-            document.getElementById('address').value = address;
+            document.getElementById('firstName').value = firstName;
+            document.getElementById('lastName').value = lastName;
+            document.getElementById('businessPhone').value = businessPhone;
+            document.getElementById('mobilePhone').value = mobilePhone;
+            document.getElementById('businessEmail').value = businessEmail;
+            document.getElementById('address').value = [flat, building, street, district, city, zipCode].filter(Boolean).join(', ');
             document.getElementById('customerSearch').value = '';
             document.getElementById('customerSearchDropdown').classList.add('hidden');
         }
@@ -523,52 +730,46 @@
 
         function parseCustomerCSV(csvData) {
             const parsed = Papa.parse(csvData, { header: true, skipEmptyLines: true });
-            return parsed.data.map(row => {
-                const addressParts = [
-                    row.detailOne?.trim(),
-                    row.detailTwo?.trim(),
-                    row.building?.trim(),
-                    row.street?.trim(),
-                    row.city?.trim()
-                ].filter(part => part);
-                return {
-                    accountNo: row.accountNo?.trim() || '',
-                    companyName: row.companyName?.trim() || '',
-                    customerName: row.customerName?.trim() || '',
-                    address: addressParts.join(', '),
-                    detailOne: row.detailOne?.trim() || '',
-                    detailTwo: row.detailTwo?.trim() || '',
-                    building: row.building?.trim() || '',
-                    street: row.street?.trim() || '',
-                    city: row.city?.trim() || ''
-                };
-            });
+            return parsed.data.map(row => ({
+                accountNo: row.accountNo?.trim() || '',
+                companyName: row.companyName?.trim() || '',
+                firstName: row.firstName?.trim() || '',
+                lastName: row.lastName?.trim() || '',
+                businessPhone: row.businessPhone?.trim() || '',
+                mobilePhone: row.mobilePhone?.trim() || '',
+                businessEmail: row.businessEmail?.trim() || '',
+                flat: row.flat?.trim() || row["Name 2"]?.trim() || '',
+                building: row.building?.trim() || row["Name 3"]?.trim() || '',
+                street: row.street?.trim() || '',
+                district: row.district?.trim() || '',
+                city: row.city?.trim() || '',
+                zipCode: row.zipCode?.trim() || '000',
+            }));
         }
 
         function parseQuickCSV(csvData) {
             const parsed = Papa.parse(csvData, { header: true, skipEmptyLines: true });
+            // 支援多種標題名稱
             return parsed.data.map(row => ({
-                itemCode: row.itemCode?.trim() || '',
-                qty: parseFloat(row.qty) || 1,
-                unitPrice: parseFloat(row.unitPrice) || 0
+                itemCode: row.itemCode?.trim() || row["Item Code"]?.trim() || row["item code"]?.trim() || '',
+                qty: parseFloat(row.qty || row["Qty"] || row["qty"] || 1) || 1,
+                unitPrice: parseFloat(row.unitPrice || row["Unit Price"] || row["unit price"] || 0) || 0
             }));
         }
 
         function processQuickCSV(csvData) {
             const parsed = parseQuickCSV(csvData);
-            const expectedHeaders = ['itemCode', 'qty', 'unitPrice'];
-            const headers = Object.keys(parsed[0] || {});
-            if (!expectedHeaders.every(h => headers.includes(h))) {
+            // 只要有 itemCode, qty, unitPrice 就接受
+            const validRows = parsed.filter(row => row.itemCode && row.qty > 0);
+            if (validRows.length === 0) {
                 showToast(LANGS[lang].quickCsvFormatError);
                 return;
             }
-            parsed.forEach(row => {
-                if (row.itemCode && row.qty > 0) {
-                    addRowFromCSV(row);
-                }
+            validRows.forEach(row => {
+                addRowFromCSV(row);
             });
             updateTotals();
-            showToast(`${parsed.length} rows added from CSV.`);
+            showToast(`${validRows.length} rows added from CSV.`);
         }
 
         function showCSVPreview(type, csvData) {
@@ -645,7 +846,7 @@
                     </td>
                     <td><textarea class="form-input description" rows="2" placeholder="Enter description"></textarea></td>
                     <td><input type="text" class="form-input unit" placeholder="Enter unit"></td>
-                    <!-- <td><input type="number" class="form-input package-unit" value="1" min="1" onchange="calculateRowAmount(this)" aria-label="Package Unit"></td> 隱藏-->
+                    <td><input type="number" class="form-input package-unit" value="1" min="1" onchange="calculateRowAmount(this)" placeholder="Pkg Unit"></td>
                     <td><input type="number" class="form-input qty" value="1" min="1" onchange="calculateRowAmount(this)" aria-label="Quantity"></td>
                     <td><input type="number" class="form-input unit-price text-right" step="0.01" min="0" onchange="calculateRowAmount(this)" placeholder="Enter unit price"></td>
                     <td><input type="number" class="form-input amount text-right" readonly></td>
@@ -695,10 +896,11 @@
                     <div class="relative mt-2">
                         <input type="text" class="form-input" placeholder="Search by Description & Item Code" oninput="searchByDescription(this)">
                         <div class="search-dropdown hidden"></div>
-                    </td>
+                    </div>
+                </td>
                 <td><textarea class="form-input description" rows="2">${product.description || ''}</textarea></td>
                 <td><input type="text" class="form-input unit" value="${product.unit || ''}" placeholder="Enter unit"></td>
-                <!-- <td><input type="number" class="form-input package-unit" value="${product.packageUnit || '1'}" min="1" onchange="calculateRowAmount(this)" aria-label="Package Unit"></td> 隱藏-->
+                <td><input type="number" class="form-input package-unit" value="${packageUnit}" min="1" onchange="calculateRowAmount(this)" placeholder="Pkg Unit"></td>
                 <td><input type="number" class="form-input qty" value="${rowData.qty}" min="1" onchange="calculateRowAmount(this)" aria-label="Quantity"></td>
                 <td><input type="number" class="form-input unit-price text-right" value="${rowData.unitPrice || product.unitPrice || ''}" step="0.01" min="0" onchange="calculateRowAmount(this)" placeholder="Enter unit price"></td>
                 <td><input type="number" class="form-input amount text-right" value="${amount.toFixed(2)}" readonly></td>
@@ -780,20 +982,10 @@
         function calculateRowAmount(input) {
             const row = input.closest('tr');
             const qty = parseFloat(row.querySelector('.qty').value) || 0;
-            const packageUnit = parseFloat(row.querySelector('.package-unit').value) || 1;
+            const packageUnit = row.querySelector('.package-unit') ? parseFloat(row.querySelector('.package-unit').value) || 1 : 1;
             const unitPrice = parseFloat(row.querySelector('.unit-price').value) || 0;
-            const itemCode = row.querySelector('.item-code').value || '';
-            const product = productDatabase.find(p => p.itemCode === itemCode) || {};
-            const cost = parseFloat(product.cost) || 0;
             const amount = qty * packageUnit * unitPrice;
-            const marginPct = amount > 0 ? ((amount - (cost * qty * packageUnit)) / amount * 100) : 0;
             row.querySelector('.amount').value = amount.toFixed(2);
-            if (row.querySelector('.cost')) row.querySelector('.cost').value = cost;
-            if (row.querySelector('.margin-pct')) row.querySelector('.margin-pct').value = marginPct.toFixed(1);
-            // eShop link on image
-            if (row.querySelector('.eshop-link')) {
-                row.querySelector('.eshop-link').href = itemCode ? `https://www.lyreco.com/webshop/HKHK/detail-product-${itemCode}.html` : '#';
-            }
             updateTotals();
         }
 
@@ -816,19 +1008,25 @@
             const discount = parseFloat(document.getElementById('discount').value) || 0;
             const discountAmount = (subtotal * discount / 100);
             const taxAmount = ((subtotal - discountAmount) * taxRate / 100);
-            let shippingFee = parseFloat(document.getElementById('shippingFee').value) || 0;
+            let freight = parseFloat(document.getElementById('freight').value) || 0;
+            let depositPct = parseFloat(document.getElementById('deposit').value) || 0;
+            let additionalChargePct = parseFloat(document.getElementById('additionalCharge').value) || 0;
+            let deposit = subtotal * depositPct / 100;
+            let additionalCharge = subtotal * additionalChargePct / 100;
             if (subtotal < 200 && subtotal > 0) {
-                shippingFee = 50;
-                document.getElementById('shippingFee').value = shippingFee.toFixed(2);
+                freight = 50;
+                document.getElementById('freight').value = freight.toFixed(2);
             } else if (subtotal >= 200) {
-                shippingFee = 0;
-                document.getElementById('shippingFee').value = shippingFee.toFixed(2);
+                freight = 0;
+                document.getElementById('freight').value = freight.toFixed(2);
             }
-            const grandTotal = subtotal - discountAmount + taxAmount + shippingFee;
+            const grandTotal = subtotal - discountAmount + taxAmount + freight + deposit + additionalCharge;
             document.getElementById('subtotal').textContent = subtotal.toFixed(2);
             document.getElementById('discountAmount').textContent = discountAmount.toFixed(2);
             document.getElementById('taxAmount').textContent = taxAmount.toFixed(2);
             document.getElementById('grandTotal').textContent = grandTotal.toFixed(2);
+            updateDepositAmount();
+            updateAdditionalChargeAmount();
             // 顯示 Overall Margin
             let overallMargin = subtotal > 0 ? ((subtotal - totalCost) / subtotal * 100) : 0;
             let overallMarginDiv = document.getElementById('overallMarginDiv');
@@ -872,10 +1070,14 @@
                 dropdown.classList.add('hidden');
                 return;
             }
-            const matches = productDatabase.filter(p => 
-                p.description.toLowerCase().includes(keyword) ||
-                p.itemCode.toLowerCase().includes(keyword) ||
-                p.descriptionChi.toLowerCase().includes(keyword)
+            // 多關鍵字搜尋：每個 token 都要 match 任一欄位
+            const tokens = keyword.split(/\s+/).filter(Boolean);
+            const matches = productDatabase.filter(p =>
+                tokens.every(token =>
+                    p.description.toLowerCase().includes(token) ||
+                    p.itemCode.toLowerCase().includes(token) ||
+                    p.descriptionChi.toLowerCase().includes(token)
+                )
             );
             dropdown.innerHTML = matches.map(p => `
                 <div class="search-item" onclick="selectDescription(this, '${p.itemCode.replace(/'/g, "\\'")}')">
@@ -909,29 +1111,109 @@
         function openEditModal(button) {
             currentEditRow = button.closest('tr');
             const modal = document.getElementById('editModal');
+            if (!modal) {
+                alert('Edit modal not found!');
+                return;
+            }
+            // 強制顯示 modal
+            modal.classList.add('show');
+            modal.style.display = 'flex';
+            // ...原本填值邏輯...
             const itemCodeInput = document.getElementById('editItemCode');
             const descriptionInput = document.getElementById('editDescription');
             const unitInput = document.getElementById('editUnit');
-            // const packageUnitInput = document.getElementById('editPackageUnit'); // 隱藏
+            const packageUnitInput = document.getElementById('editPackageUnit');
             const qtyInput = document.getElementById('editQty');
             const unitPriceInput = document.getElementById('editUnitPrice');
-
+            const amountInput = document.getElementById('editAmount');
             const itemCode = currentEditRow.querySelector('.item-code').value;
             const product = productDatabase.find(p => p.itemCode === itemCode);
-            
             itemCodeInput.value = itemCode;
             descriptionInput.value = currentEditRow.querySelector('.description').value || (product ? product.description : '');
             unitInput.value = currentEditRow.querySelector('.unit').value || (product ? product.unit : '');
-            // packageUnitInput.value = currentEditRow.querySelector('.package-unit').value || (product ? product.packageUnit : '1'); // 隱藏
+            packageUnitInput.value = currentEditRow.querySelector('.package-unit')?.value || (product ? product.packageUnit : '1');
             qtyInput.value = currentEditRow.querySelector('.qty').value || '1';
             unitPriceInput.value = currentEditRow.querySelector('.unit-price').value || (product ? product.unitPrice.toFixed(2) : '');
+            amountInput.value = currentEditRow.querySelector('.amount').value || '0.00';
+            updateEditModalAmountAndMC();
+        }
 
-            // CM Name 計算
-            let qty = parseFloat(qtyInput.value) || 0;
-            let unitPrice = parseFloat(unitPriceInput.value) || 0;
-            let cost = product ? parseFloat(product.cost) || 0 : 0;
-            let amount = qty * unitPrice;
-            let marginPct = amount > 0 ? ((amount - (cost * qty)) / amount * 100) : 0;
+        function closeEditModal() {
+            document.getElementById('editModal').classList.remove('show');
+            currentEditRow = null;
+        }
+
+        function showFieldError(input, msg) {
+            if (!input) return;
+            let err = input.parentElement.querySelector('.field-error');
+            if (!err) {
+                err = document.createElement('div');
+                err.className = 'field-error text-xs text-red-600 mt-1';
+                input.parentElement.appendChild(err);
+            }
+            err.textContent = msg;
+            input.classList.add('border-red-500');
+        }
+        function clearFieldError(input) {
+            if (!input) return;
+            let err = input.parentElement.querySelector('.field-error');
+            if (err) err.remove();
+            input.classList.remove('border-red-500');
+        }
+        function validateEditModalFields() {
+            let valid = true;
+            const itemCode = document.getElementById('editItemCode');
+            const qty = document.getElementById('editQty');
+            clearFieldError(itemCode);
+            clearFieldError(qty);
+            if (!itemCode.value.trim()) {
+                showFieldError(itemCode, LANGS[lang].selectProduct);
+                valid = false;
+            }
+            if (!qty.value.trim() || parseInt(qty.value) < 1) {
+                showFieldError(qty, LANGS[lang].enterQty);
+                valid = false;
+            }
+            return valid;
+        }
+        function saveEdit() {
+            if (!currentEditRow) return;
+            if (!validateEditModalFields()) return;
+            const itemCode = document.getElementById('editItemCode').value;
+            const description = document.getElementById('editDescription').value;
+            const unit = document.getElementById('editUnit').value;
+            const packageUnit = document.getElementById('editPackageUnit').value;
+            const qty = document.getElementById('editQty').value;
+            const unitPrice = document.getElementById('editUnitPrice').value;
+            const amount = document.getElementById('editAmount').value;
+            currentEditRow.querySelector('.item-code').value = itemCode;
+            currentEditRow.querySelector('.description').value = description;
+            currentEditRow.querySelector('.unit').value = unit;
+            if (currentEditRow.querySelector('.package-unit')) {
+                currentEditRow.querySelector('.package-unit').value = packageUnit;
+            }
+            currentEditRow.querySelector('.qty').value = qty;
+            currentEditRow.querySelector('.unit-price').value = parseFloat(unitPrice).toFixed(2);
+            currentEditRow.querySelector('.amount').value = parseFloat(amount).toFixed(2);
+            // 修正 eshop-link href
+            const eshopLink = currentEditRow.querySelector('.eshop-link');
+            if (eshopLink) {
+                eshopLink.href = itemCode ? `https://www.lyreco.com/webshop/HKHK/detail-product-${itemCode}.html` : '#';
+            }
+            calculateRowAmount(currentEditRow.querySelector('.qty'));
+            closeEditModal();
+        }
+        function updateEditModalAmountAndMC() {
+            const qty = parseFloat(document.getElementById('editQty').value) || 0;
+            const packageUnit = parseFloat(document.getElementById('editPackageUnit').value) || 1;
+            const unitPrice = parseFloat(document.getElementById('editUnitPrice').value) || 0;
+            const amount = qty * packageUnit * unitPrice;
+            document.getElementById('editAmount').value = amount.toFixed(2);
+            // MC 計算
+            const itemCode = document.getElementById('editItemCode').value;
+            const product = productDatabase.find(p => p.itemCode === itemCode);
+            const cost = product ? parseFloat(product.cost) || 0 : 0;
+            const marginPct = amount > 0 ? ((amount - (cost * qty * packageUnit)) / amount * 100) : 0;
             let nameCM = String(Math.floor(marginPct / 5));
             if (nameCM.length === 1) nameCM = '0' + nameCM;
             let cmExplain = '';
@@ -942,45 +1224,32 @@
                 cmExplain = `(${cmLow}% - ${cmHigh}%)`;
             }
             document.getElementById('editCmName').textContent = `${nameCM} ${cmExplain}`;
-
-            modal.classList.add('show');
         }
-
-        function closeEditModal() {
-            document.getElementById('editModal').classList.remove('show');
-            currentEditRow = null;
-        }
-
-        function saveEdit() {
-            if (!currentEditRow) return;
-            const itemCode = document.getElementById('editItemCode').value;
-            const description = document.getElementById('editDescription').value;
-            const unit = document.getElementById('editUnit').value;
-            const packageUnit = document.getElementById('editPackageUnit').value;
-            const qty = document.getElementById('editQty').value;
-            const unitPrice = document.getElementById('editUnitPrice').value;
-
-            if (!itemCode || !qty || parseInt(qty) < 1) {
-                showToast(LANGS[lang].selectProduct);
-                return;
-            }
-            currentEditRow.querySelector('.item-code').value = itemCode;
-            currentEditRow.querySelector('.description').value = description;
-            currentEditRow.querySelector('.unit').value = unit;
-            currentEditRow.querySelector('.package-unit').value = packageUnit;
-            currentEditRow.querySelector('.qty').value = qty;
-            currentEditRow.querySelector('.unit-price').value = parseFloat(unitPrice).toFixed(2);
-            // 修正 eshop-link href
-            const eshopLink = currentEditRow.querySelector('.eshop-link');
-            if (eshopLink) {
-                eshopLink.href = itemCode ? `https://www.lyreco.com/webshop/HKHK/detail-product-${itemCode}.html` : '#';
-            }
-            calculateRowAmount(currentEditRow.querySelector('.qty'));
-            closeEditModal();
-        }
+        // Modal UX/a11y: ESC 關閉、遮罩點擊、自動 focus
+        (function enhanceEditModalUX() {
+            const modal = document.getElementById('editModal');
+            if (!modal) return;
+            // ESC 關閉
+            document.addEventListener('keydown', function(e) {
+                if (modal.classList.contains('show') && e.key === 'Escape') closeEditModal();
+            });
+            // 遮罩點擊關閉
+            modal.addEventListener('mousedown', function(e) {
+                if (e.target === modal) closeEditModal();
+            });
+            // 自動 focus
+            const observer = new MutationObserver(() => {
+                if (modal.classList.contains('show')) {
+                    setTimeout(() => {
+                        const firstInput = modal.querySelector('input,select,textarea');
+                        if (firstInput) firstInput.focus();
+                    }, 50);
+                }
+            });
+            observer.observe(modal, { attributes: true, attributeFilter: ['class'] });
+        })();
 
         async function confirmGeneratePDF() {
-            // Move getField definition to the top
             const getField = id => document.getElementById(id)?.value || '';
             // 新增取得公司資訊 input 欄位的輔助函數
             function getCompanyInfoInput(idx) {
@@ -1013,8 +1282,6 @@
                     return;
                 }
             }
-            closePDFModal();
-
             try {
                 const { jsPDF } = window.jspdf;
                 const doc = new jsPDF({ orientation: 'p', unit: 'mm', format: 'a4', encoding: 'UTF-8' });
@@ -1027,28 +1294,28 @@
                 doc.text(getCompanyInfoInput(4), 8, 38);
                 // Sales Rep block
                 const salesRep = getField('salesRep');
-                const phone = getField('customerPhone');
-                const email = getField('customerEmail');
+                const phone = getField('salesrepPhone');
+                const email = getField('salesrepEmail');
                 doc.text("Sales Representative: " + salesRep, 8, 44);
                 doc.text("Phone: " + phone, 8, 50);
                 doc.text("Email: " + email, 8, 56);
                 doc.setFontSize(8);
-                // 地址分割為多行
+                // 客戶資訊
+                doc.text("Customer Information", 200, 14, { align: "right" });
+                doc.setFontSize(10);
+                doc.text(getField('companyName'), 200, 20, { align: "right" });
+                doc.text(getField('firstName') + ' ' + getField('lastName'), 200, 26, { align: "right" });
+                doc.setFontSize(8);
+                // 取得客戶地址，優先用手動輸入
                 let addressLines = [];
-                if (customerDatabase && customerDatabase.length > 0) {
-                    // 依據 accountNo 找到對應客戶
-                    const accNo = getField('accountNo');
-                    const customer = customerDatabase.find(c => c.accountNo === accNo);
+                let manualAddress = getField('address').split(/\r?\n/).map(l => l.trim()).filter(Boolean);
+                if (manualAddress.length > 0) {
+                    addressLines = manualAddress;
+                } else {
+                    let accNo = getField('accountNo');
+                    let customer = Array.isArray(customerDatabase) ? customerDatabase.find(c => c.accountNo === accNo) : null;
                     if (customer) {
-                        // 取出原始欄位，分割為2-3行
                         const row = customer;
-                        const addressParts = [
-                            row.detailOne?.trim(),
-                            row.detailTwo?.trim(),
-                            row.building?.trim(),
-                            row.street?.trim(),
-                            row.city?.trim()
-                        ].filter(Boolean);
                         let line1 = [row.detailOne, row.detailTwo].filter(Boolean).join(', ');
                         let line2 = [row.building, row.street].filter(Boolean).join(', ');
                         let line3 = row.city || '';
@@ -1056,26 +1323,27 @@
                     }
                 }
                 if (addressLines.length === 0) {
-                    addressLines = getField('address').split(/\r?\n/).filter(Boolean);
+                    showToast(LANGS[lang].noCustomers + ' ' + (LANGS[lang].fieldRequired || 'Using default address.'));
                 }
-                if (addressLines[0]) doc.text(addressLines[0], 200, 26, { align: "right" });
-                if (addressLines[1]) doc.text(addressLines[1], 200, 32, { align: "right" });
-                if (addressLines[2]) doc.text(addressLines[2], 200, 38, { align: "right" });
-                const addrY = 26 + addressLines.length * 6;
-                doc.text(`Account No.: ${getField('accountNo')}`, 200, addrY, { align: "right" });
-
+                // 動態列印 addressLines，避免 undefined
+                let addressY = 32;
+                for (let i = 0; i < addressLines.length; i++) {
+                    doc.text(addressLines[i], 200, addressY, { align: "right" });
+                    addressY += 6;
+                }
+                doc.text(`Account No.: ${getField('accountNo')}`, 200, addressY, { align: "right" });
                 // Use selected form type
                 const formType = document.getElementById('formType')?.value || 'QUOTATION';
                 doc.setFontSize(16);
                 doc.text(formType, 105, 58, { align: "center" });
-                doc.setFontSize(12);
+                doc.setFontSize(10);
                 doc.text(`Quotation No.: ${getField('quotationNo')}`, 200, 52, { align: "right" });
                 doc.text(`Date: ${getField('quotationDate')}`, 200, 58, { align: "right" });
+                doc.text(`Valid Until: ${getField('validUntil')}`, 200, 64, { align: "right" });
 
                 let subtotal = 0;
                 const tableData = [];
                 const imagePromises = [];
-
                 document.querySelectorAll("#quotationBody tr").forEach(row => {
                     const itemCode = row.querySelector(".item-code").value || '';
                     const description = row.querySelector(".description").value || '';
@@ -1232,28 +1500,35 @@
                 const discountAmount = (subtotal * discount / 100).toFixed(2);
                 const taxRate = parseFloat(getField('taxRate')) || 0;
                 const taxAmount = ((subtotal - discountAmount) * taxRate / 100).toFixed(2);
-                const shippingFee = parseFloat(getField('shippingFee')) || 0;
-                const grandTotal = (subtotal - discountAmount + parseFloat(taxAmount) + shippingFee).toFixed(2);
+                const freight = parseFloat(getField('freight')) || 0;
+                const depositPct = parseFloat(getField('deposit')) || 0;
+                const additionalChargePct = parseFloat(getField('additionalCharge')) || 0;
+                const deposit = subtotal * depositPct / 100;
+                const additionalCharge = subtotal * additionalChargePct / 100;
+                const grandTotal = (subtotal - discountAmount + parseFloat(taxAmount) + freight + deposit + additionalCharge).toFixed(2);
 
                 doc.setFontSize(10);
                 doc.text(`Subtotal: HKD ${subtotal.toFixed(2)}`, 150, finalY + 10);
                 doc.text(`Discount: HKD ${discountAmount}`, 150, finalY + 16);
                 doc.text(`Tax: HKD ${taxAmount}`, 150, finalY + 22);
-                doc.text(`Shipping Fee: HKD ${shippingFee.toFixed(2)}`, 150, finalY + 28);
-                doc.text(`Grand Total: HKD ${grandTotal}`, 150, finalY + 34);
+                doc.text(`Freight: HKD ${freight.toFixed(2)}`, 150, finalY + 28);
+                doc.text(`Deposit: HKD ${deposit.toFixed(2)}`, 150, finalY + 34);
+                doc.text(`Additional Charge: HKD ${additionalCharge.toFixed(2)}`, 150, finalY + 40);
+                doc.text(`Grand Total: HKD ${grandTotal}`, 150, finalY + 46);
 
                 const paymentTerms = getField('paymentTerms');
                 if (paymentTerms) {
-                    doc.text(`Payment Terms: ${paymentTerms}`, 10, finalY + 42);
+                    doc.text(`Payment Terms: ${paymentTerms}`, 10, finalY + 54);
                 }
 
                 const qrCodeElement = document.querySelector('#qrcode canvas');
                 if (qrCodeElement) {
-                    doc.addImage(qrCodeElement.toDataURL(), 'PNG', 160, finalY + 48, 30, 30);
+                    doc.addImage(qrCodeElement.toDataURL(), 'PNG', 160, finalY + 60, 30, 30);
                 }
 
                 doc.save(fileName);
                 showToast("PDF generated successfully!");
+                closePDFModal();
             } catch (err) {
                 console.error('PDF generation error:', err);
                 showToast("Failed to generate PDF: " + err.message);
@@ -1264,14 +1539,22 @@
             const headers = ["Line No.", "Item Code", "Description", "Unit", "Package Unit", "Qty", "Unit Price", "Amount", "Remarks"];
             const rows = [];
             document.querySelectorAll("#quotationBody tr").forEach((row, index) => {
-                const itemCode = row.querySelector(".item-code").value || '';
-                const description = row.querySelector(".description").value || '';
-                const unit = row.querySelector(".unit").value || '';
-                const packageUnit = row.querySelector(".package-unit").value || '1';
-                const qty = row.querySelector(".qty").value || '0';
-                const unitPrice = row.querySelector(".unit-price").value || '0.00';
-                const amount = row.querySelector(".amount").value || '0.00';
-                const remarks = row.querySelector(".remarks").value || '';
+                const itemCodeEl = row.querySelector(".item-code");
+                const descriptionEl = row.querySelector(".description");
+                const unitEl = row.querySelector(".unit");
+                const packageUnitEl = row.querySelector(".package-unit");
+                const qtyEl = row.querySelector(".qty");
+                const unitPriceEl = row.querySelector(".unit-price");
+                const amountEl = row.querySelector(".amount");
+                const remarksEl = row.querySelector(".remarks");
+                const itemCode = itemCodeEl ? itemCodeEl.value : '';
+                const description = descriptionEl ? descriptionEl.value : '';
+                const unit = unitEl ? unitEl.value : '';
+                const packageUnit = packageUnitEl ? packageUnitEl.value : '1';
+                const qty = qtyEl ? qtyEl.value : '0';
+                const unitPrice = unitPriceEl ? unitPriceEl.value : '0.00';
+                const amount = amountEl ? amountEl.value : '0.00';
+                const remarks = remarksEl ? remarksEl.value : '';
                 rows.push([index + 1, itemCode, description, unit, packageUnit, qty, unitPrice, amount, remarks]);
             });
             let csvContent = headers.join(",") + "\n" + rows.map(row => row.join(",")).join("\n");
@@ -1287,14 +1570,22 @@
             const headers = ["Line No.", "Item Code", "Description", "Unit", "Package Unit", "Qty", "Unit Price", "Amount", "Remarks"];
             const rows = [];
             document.querySelectorAll("#quotationBody tr").forEach((row, index) => {
-                const itemCode = row.querySelector(".item-code").value || '';
-                const description = row.querySelector(".description").value || '';
-                const unit = row.querySelector(".unit").value || '';
-                const packageUnit = row.querySelector(".package-unit").value || '1';
-                const qty = row.querySelector(".qty").value || '0';
-                const unitPrice = row.querySelector(".unit-price").value || '0.00';
-                const amount = row.querySelector(".amount").value || '0.00';
-                const remarks = row.querySelector(".remarks").value || '';
+                const itemCodeEl = row.querySelector(".item-code");
+                const descriptionEl = row.querySelector(".description");
+                const unitEl = row.querySelector(".unit");
+                const packageUnitEl = row.querySelector(".package-unit");
+                const qtyEl = row.querySelector(".qty");
+                const unitPriceEl = row.querySelector(".unit-price");
+                const amountEl = row.querySelector(".amount");
+                const remarksEl = row.querySelector(".remarks");
+                const itemCode = itemCodeEl ? itemCodeEl.value : '';
+                const description = descriptionEl ? descriptionEl.value : '';
+                const unit = unitEl ? unitEl.value : '';
+                const packageUnit = packageUnitEl ? packageUnitEl.value : '1';
+                const qty = qtyEl ? qtyEl.value : '0';
+                const unitPrice = unitPriceEl ? unitPriceEl.value : '0.00';
+                const amount = amountEl ? amountEl.value : '0.00';
+                const remarks = remarksEl ? remarksEl.value : '';
                 rows.push([index + 1, itemCode, description, unit, packageUnit, qty, unitPrice, amount, remarks]);
             });
             const worksheet = XLSX.utils.aoa_to_sheet([headers, ...rows]);
@@ -1324,16 +1615,11 @@
         }
 
         function downloadCustomerTemplate() {
-            const headers = ["accountNo", "companyName", "customerName", "detailOne", "detailTwo", "building", "street", "city"];
+            const headers = [
+                "accountNo", "companyName", "firstName", "lastName", "businessPhone", "mobilePhone", "businessEmail", "flat", "building", "street", "district", "city", "zipCode"
+            ];
             const example = [
-                "A00001",
-                "Sample Company",
-                "John Doe",
-                "Unit 101",
-                "Floor 10",
-                "Sunshine Tower",
-                "123 Sample St",
-                "Hong Kong"
+                "A00001", "Sample Company", "John", "Doe", "12345678", "91234567", "john.doe@email.com", "Room 101, 10/F", "Sunshine Tower", "123 Sample St", "Kwun Tong", "Kowloon", "HKG"
             ];
             let csvContent = headers.join(",") + "\n" + example.join(",") + "\n";
             const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
@@ -1365,7 +1651,7 @@
         }
 
         function getDraftData() {
-            const formFields = ['accountNo', 'quotationNo', 'companyName', 'customerName', 'quotationDate', 'paymentTerms', 'deliveryTerms', 'validUntil', 'address', 'remarks', 'taxRate', 'discount', 'customerPhone', 'customerEmail', 'shippingFee'];
+            const formFields = ['accountNo', 'quotationNo', 'companyName', 'firstName', 'lastName', 'mobilePhone', 'businessPhone', 'businessEmail', 'quotationDate', 'paymentTerms', 'deliveryTerms', 'validUntil', 'address', 'remarks', 'taxRate', 'discount', 'salesrepPhone', 'salesrepEmail', 'freight', 'salesRep', 'deposit', 'additionalCharge'];
             const form = {};
             formFields.forEach(id => {
                 const el = document.getElementById(id);
@@ -1408,6 +1694,10 @@
         }
 
         function saveDraft() {
+            if (!validateAllFields()) {
+                showToast('Please fill all required fields correctly.');
+                return;
+            }
             localStorage.setItem('quotationDraft', JSON.stringify(getDraftData()));
             showToast(LANGS[lang].saved);
         }
@@ -1424,7 +1714,11 @@
             document.getElementById('accountNo').value = predefinedCustomer.accountNo;
             document.getElementById('quotationNo').value = predefinedCustomer.quotationNo;
             document.getElementById('companyName').value = predefinedCustomer.companyName;
-            document.getElementById('customerName').value = predefinedCustomer.customerName;
+            document.getElementById('firstName').value = predefinedCustomer.firstName || '';
+            document.getElementById('lastName').value = predefinedCustomer.lastName || '';
+            document.getElementById('mobilePhone').value = predefinedCustomer.mobilePhone || '';
+            document.getElementById('businessPhone').value = predefinedCustomer.businessPhone || '';
+            document.getElementById('businessEmail').value = predefinedCustomer.businessEmail || '';
             document.getElementById('quotationDate').value = predefinedCustomer.quotationDate;
             document.getElementById('validUntil').value = predefinedCustomer.validUntil;
             document.getElementById('address').value = predefinedCustomer.address;
@@ -1570,7 +1864,6 @@
                 restoreBtn.className = 'btn btn-primary';
                 restoreBtn.textContent = 'Restore Draft';
                 restoreBtn.onclick = restoreDraft;
-                document.querySelector('.toolbar').appendChild(restoreBtn);
                 // 新增 Clean Draft 按鈕
                 const cleanBtn = document.createElement('button');
                 cleanBtn.id = 'cleanDraftBtn';
@@ -1589,28 +1882,80 @@
             document.getElementById('validUntil').value = validUntil.toISOString().slice(0, 10);
 
             let loaded = await autoLoadCSVsIfExist();
-            if (!loaded && !localStorage.getItem('productCsvUploaded')) {
-                showFirstTimeModal();
-            } else {
-                document.getElementById('firstTimeModal').classList.remove('show');
-                document.body.classList.remove('modal-open');
-                document.getElementById('formOverlay').style.display = 'none';
+            // 停用自動彈出 firstTimeModal
+            // if (!loaded && !localStorage.getItem('productCsvUploaded')) {
+            //     showFirstTimeModal();
+            // } else {
+            document.getElementById('firstTimeModal').classList.remove('show');
+            document.body.classList.remove('modal-open');
+            document.getElementById('formOverlay').style.display = 'none';
+            // }
+            document.getElementById('formType').addEventListener('change', updateQuotationNoAndLabel);
+            updateQuotationNoAndLabel();
+            // Customer Data Management Modal 綁定
+            var mgmtCsv = document.getElementById('customerMgmtCsvFile');
+            if (mgmtCsv) mgmtCsv.onchange = function(e) {
+                const file = e.target.files[0];
+                if (!file) return;
+                const reader = new FileReader();
+                reader.onload = function(evt) {
+                    customerDatabase = parseCustomerCSV(evt.target.result);
+                    renderCustomerMgmtTable();
+                    showToast('CSV loaded: ' + customerDatabase.length + ' rows');
+                };
+                reader.readAsText(file);
+            };
+            var mgmtJson = document.getElementById('customerMgmtJsonFile');
+            if (mgmtJson) {
+                mgmtJson.onchange = function(e) {
+                    const file = e.target.files[0];
+                    if (!file) return;
+                    const reader = new FileReader();
+                    reader.onload = function(evt) {
+                        try {
+                            customerDatabase = JSON.parse(evt.target.result);
+                            renderCustomerMgmtTable();
+                            showToast('JSON loaded: ' + customerDatabase.length + ' rows');
+                        } catch(err) { showToast('Invalid JSON'); }
+                    };
+                    reader.readAsText(file);
+                };
+            }
+            var mgmtExportBtn = document.getElementById('customerMgmtExportCsvBtn');
+            if (mgmtExportBtn) mgmtExportBtn.onclick = function() {
+                if (!Array.isArray(customerDatabase) || customerDatabase.length === 0) {
+                    showToast('No data to export'); return;
+                }
+                const keys = Object.keys(customerDatabase[0]);
+                let csv = keys.join(',') + '\n';
+                customerDatabase.forEach(row => {
+                    csv += keys.map(k => '"'+String(row[k]||'').replace(/"/g,'""')+'"').join(',') + '\n';
+                });
+                const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                link.download = 'customer_export.csv';
+                link.click();
+            };
+            // Modal 關閉 UX
+            const mgmtModal = document.getElementById('customerDataMgmtModal');
+            if (mgmtModal) {
+                mgmtModal.addEventListener('mousedown', function(e) {
+                    if (e.target === mgmtModal) closeCustomerMgmtModal();
+                });
             }
         });
 
         // First time modal logic
         function showFirstTimeModal() {
             document.getElementById('firstTimeModal').classList.add('show');
-            document.body.classList.add('modal-open');
-            document.getElementById('formOverlay').style.display = 'block';
-            checkFirstTimeFormValidity();
         }
 
         function checkFirstTimeFormValidity() {
             const fileInput = document.getElementById('firstTimeProductCsv');
-            const salesRep = document.getElementById('firstTimeSalesRep').value.trim();
-            const phone = document.getElementById('firstTimePhone').value.trim();
-            const email = document.getElementById('firstTimeEmail').value.trim();
+            const salesRep = document.getElementById('salesRep').value.trim();
+            const phone = document.getElementById('salesrepPhone').value.trim();
+            const email = document.getElementById('salesrepEmail').value.trim();
             const submitBtn = document.getElementById('firstTimeSubmitBtn');
             if (fileInput.files.length === 0 || !salesRep || !phone || !email) {
                 submitBtn.disabled = true;
@@ -1630,10 +1975,11 @@
         }
 
         function handleFirstTimeSubmit() {
+            alert('submit!');
             const fileInput = document.getElementById('firstTimeProductCsv');
-            const salesRep = document.getElementById('firstTimeSalesRep').value.trim();
-            const phone = document.getElementById('firstTimePhone').value.trim();
-            const email = document.getElementById('firstTimeEmail').value.trim();
+            const salesRep = document.getElementById('salesRep').value.trim();
+            const phone = document.getElementById('salesrepPhone').value.trim();
+            const email = document.getElementById('salesrepEmail').value.trim();
             const errorDiv = document.getElementById('firstTimeError');
             errorDiv.textContent = '';
             if (!fileInput.files[0]) {
@@ -1657,14 +2003,14 @@
             reader.onload = function(e) {
                 productDatabase = parseCSV(e.target.result);
                 localStorage.setItem('productCsvUploaded', '1');
-                document.getElementById('salesRep').value = salesRep;
-                document.getElementById('customerPhone').value = phone;
-                document.getElementById('customerEmail').value = email;
+                // 只在 salesRep input 有值時才覆蓋
+                if (salesRep) document.getElementById('salesRep').value = salesRep;
+                if (phone) document.getElementById('salesrepPhone').value = phone;
+                if (email) document.getElementById('salesrepEmail').value = email;
                 document.getElementById('quotationBody').innerHTML = '';
                 rowCounter = 1;
                 addRow();
                 hideFirstTimeModal();
-                // 只有這裡才允許 draft restore
                 if (localStorage.getItem('quotationDraft')) restoreDraft();
             };
             reader.readAsText(fileInput.files[0]);
@@ -1681,9 +2027,9 @@
             document.getElementById('firstTimeDownloadProductTemplate').onclick = downloadProductTemplate;
             // 新增即時檢查
             document.getElementById('firstTimeProductCsv').addEventListener('change', checkFirstTimeFormValidity);
-            document.getElementById('firstTimeSalesRep').addEventListener('input', checkFirstTimeFormValidity);
-            document.getElementById('firstTimePhone').addEventListener('input', checkFirstTimeFormValidity);
-            document.getElementById('firstTimeEmail').addEventListener('input', checkFirstTimeFormValidity);
+            document.getElementById('salesRep').addEventListener('input', checkFirstTimeFormValidity);
+            document.getElementById('salesrepPhone').addEventListener('input', checkFirstTimeFormValidity);
+            document.getElementById('salesrepEmail').addEventListener('input', checkFirstTimeFormValidity);
         });
 
         // Internal info modal
@@ -1838,6 +2184,580 @@
             // Optionally, reload to update UI
             setTimeout(() => location.reload(), 800);
         }
+
+        function updateDepositAmount() {
+            const subtotal = parseFloat(document.getElementById('subtotal').textContent) || 0;
+            const depositPct = parseFloat(document.getElementById('deposit').value) || 0;
+            const amount = subtotal * depositPct / 100;
+            document.getElementById('depositAmountLabel').textContent = `= ${amount.toFixed(2)}`;
+        }
+
+        function updateAdditionalChargeAmount() {
+            const subtotal = parseFloat(document.getElementById('subtotal').textContent) || 0;
+            const addPct = parseFloat(document.getElementById('additionalCharge').value) || 0;
+            const amount = subtotal * addPct / 100;
+            document.getElementById('additionalChargeAmountLabel').textContent = `= ${amount.toFixed(2)}`;
+        }
+
+        document.getElementById('firstTimeSetupBtn').onclick = function() {
+            document.getElementById('firstTimeModal').classList.add('show');
+            document.body.classList.add('modal-open');
+            document.getElementById('formOverlay').style.display = 'block';
+            checkFirstTimeFormValidity();
+        };
+
+        document.addEventListener('click', function(e) {
+            const btn = e.target.closest('#firstTimeSubmitBtn');
+            if (btn) {
+                handleFirstTimeSubmit();
+            }
+        });
+
+        // 隱藏 First Setup 按鈕
+        const firstSetupBtn = document.getElementById('firstTimeSetupBtn');
+        if (firstSetupBtn) firstSetupBtn.style.display = 'none';
+        // 停用 firstTimeModal
+        const firstTimeModal = document.getElementById('firstTimeModal');
+        if (firstTimeModal) firstTimeModal.style.display = 'none';
+
+        // Calculator Modal Logic
+        (function setupCalculatorModal() {
+            const ids = ['calcCost','calcSP','calcMargin','calcMarkup','calcCashMargin','calcNameCMInput'];
+            ids.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) {
+                    el.addEventListener('input', calculatorAutoUpdate);
+                }
+            });
+            function to2(val) {
+                return isFinite(val) ? parseFloat(val).toFixed(2) : '';
+            }
+            function calculatorAutoUpdate(e) {
+                let cost = parseFloat(document.getElementById('calcCost')?.value) || 0;
+                let sp = parseFloat(document.getElementById('calcSP')?.value) || 0;
+                let margin = parseFloat(document.getElementById('calcMargin')?.value) || 0;
+                let markup = parseFloat(document.getElementById('calcMarkup')?.value) || 0;
+                let cashMargin = parseFloat(document.getElementById('calcCashMargin')?.value) || 0;
+                let nameCM = document.getElementById('calcNameCMInput')?.value;
+                let changed = e?.target?.id;
+
+                // NameCM 處理
+                if (changed === 'calcNameCMInput') {
+                    let n = parseInt(nameCM, 10);
+                    if (isNaN(n) || n < 0) n = 0;
+                    if (n > 19) n = 19;
+                    nameCM = n;
+                    margin = n * 5;
+                    sp = cost / (1 - margin / 100);
+                    cashMargin = sp - cost;
+                    markup = cost ? (cashMargin / cost * 100) : 0;
+                } else if (changed === 'calcCost') {
+                    if (margin) {
+                        sp = cost / (1 - margin / 100);
+                        cashMargin = sp - cost;
+                        markup = cost ? (cashMargin / cost * 100) : 0;
+                    } else if (markup) {
+                        sp = cost * (1 + markup / 100);
+                        cashMargin = sp - cost;
+                        margin = sp ? (cashMargin / sp * 100) : 0;
+                    } else if (cashMargin) {
+                        sp = cost + cashMargin;
+                        margin = sp ? (cashMargin / sp * 100) : 0;
+                        markup = cost ? (cashMargin / cost * 100) : 0;
+                    } else {
+                        sp = 0; margin = 0; markup = 0; cashMargin = 0;
+                    }
+                    nameCM = Math.floor(margin / 5);
+                } else if (changed === 'calcSP') {
+                    cashMargin = sp - cost;
+                    margin = sp ? (cashMargin / sp * 100) : 0;
+                    markup = cost ? (cashMargin / cost * 100) : 0;
+                    nameCM = Math.floor(margin / 5);
+                } else if (changed === 'calcMargin') {
+                    sp = cost / (1 - margin / 100);
+                    cashMargin = sp - cost;
+                    markup = cost ? (cashMargin / cost * 100) : 0;
+                    nameCM = Math.floor(margin / 5);
+                } else if (changed === 'calcMarkup') {
+                    sp = cost * (1 + markup / 100);
+                    cashMargin = sp - cost;
+                    margin = sp ? (cashMargin / sp * 100) : 0;
+                    nameCM = Math.floor(margin / 5);
+                } else if (changed === 'calcCashMargin') {
+                    sp = cost + cashMargin;
+                    margin = sp ? (cashMargin / sp * 100) : 0;
+                    markup = cost ? (cashMargin / cost * 100) : 0;
+                    nameCM = Math.floor(margin / 5);
+                }
+                // 格式化
+                document.getElementById('calcCost').value = cost !== undefined ? to2(cost) : '';
+                document.getElementById('calcSP').value = sp !== undefined ? to2(sp) : '';
+                document.getElementById('calcMargin').value = margin !== undefined ? to2(margin) : '';
+                document.getElementById('calcMarkup').value = markup !== undefined ? to2(markup) : '';
+                document.getElementById('calcCashMargin').value = cashMargin !== undefined ? to2(cashMargin) : '';
+                document.getElementById('calcNameCM').textContent = nameCM < 10 ? '0' + nameCM : nameCM;
+                document.getElementById('calcNameCMInput').value = nameCM;
+                // NameCM 區間說明
+                let explain = '';
+                if (!isNaN(nameCM)) {
+                    let low = nameCM * 5, high = (parseInt(nameCM) + 1) * 5;
+                    explain = `對應 Margin 區間：${low}% ~ ${high}%`;
+                }
+                var nameCMExplain = document.getElementById('nameCMExplain');
+                if (nameCMExplain) nameCMExplain.textContent = explain;
+                // Summary
+                document.getElementById('calcResultSummary').innerHTML =
+                    `Margin: <b>${margin ? to2(margin) : ''}%</b> &nbsp;|&nbsp; nameCM: <b>${nameCM < 10 ? '0' + nameCM : nameCM}</b>`;
+                // Real-time result area
+                document.getElementById('resultSP').textContent = to2(sp);
+                document.getElementById('resultMargin').textContent = to2(margin) + '%';
+                document.getElementById('resultMarkup').textContent = to2(markup) + '%';
+                document.getElementById('resultCashMargin').textContent = to2(cashMargin);
+                document.getElementById('resultNameCM').textContent = nameCM < 10 ? '0' + nameCM : nameCM;
+                document.getElementById('resultMarginRange').textContent = explain;
+
+                // Calculate price by margin %
+                let priceByMargin = '';
+                if (cost && margin) {
+                    priceByMargin = cost / (1 - margin / 100);
+                }
+                document.getElementById('calcPriceByMargin').value = priceByMargin ? to2(priceByMargin) : '';
+
+                // Calculate price by markup %
+                let priceByMarkup = '';
+                if (cost && markup) {
+                    priceByMarkup = cost * (1 + markup / 100);
+                }
+                document.getElementById('calcPriceByMarkup').value = priceByMarkup ? to2(priceByMarkup) : '';
+            }
+            window.copyCalcValue = function(id) {
+                const el = document.getElementById(id);
+                if (el) {
+                    el.select();
+                    document.execCommand('copy');
+                }
+            };
+            window.cleanCalculatorModal = function() {
+                ['calcCost','calcSP','calcMargin','calcMarkup','calcCashMargin','calcNameCMInput','calcPriceByMargin','calcPriceByMarkup'].forEach(id => {
+                    const el = document.getElementById(id);
+                    if (el) el.value = '';
+                });
+                document.getElementById('calcResultSummary').innerHTML = '';
+                document.getElementById('calcResultDetail').innerHTML = '';
+                document.getElementById('calcNameCM').textContent = '';
+                document.getElementById('nameCMExplain').textContent = '';
+                document.getElementById('resultSP').textContent = '';
+                document.getElementById('resultMargin').textContent = '';
+                document.getElementById('resultMarkup').textContent = '';
+                document.getElementById('resultCashMargin').textContent = '';
+                document.getElementById('resultNameCM').textContent = '';
+                document.getElementById('resultMarginRange').textContent = '';
+            };
+        })();
+
+        // Calculator Modal 開關
+        (function setupCalculatorToolbarBtn() {
+            var btn = document.getElementById('openCalculatorBtn');
+            if (btn) {
+                btn.onclick = function() {
+                    document.getElementById('calculatorModal').classList.add('show');
+                };
+            }
+            // 關閉 calculatorModal 時移除 show class
+            window.closeCalculatorModal = function() {
+                document.getElementById('calculatorModal').classList.remove('show');
+            };
+        })();
+        var calcNameCMInput = document.getElementById('calcNameCMInput');
+        if (calcNameCMInput) {
+            calcNameCMInput.addEventListener('input', function() {
+                let nameCM = parseInt(this.value, 10);
+                let explain = '';
+                if (!isNaN(nameCM)) {
+                    let low = nameCM * 5, high = (nameCM + 1) * 5;
+                    explain = `對應 Margin 區間：${low}% ~ ${high}%`;
+                }
+                var nameCMExplain = document.getElementById('nameCMExplain');
+                if (nameCMExplain) nameCMExplain.textContent = explain;
+            });
+        }
+        document.getElementById('calcNameCMInput').addEventListener('input', function() {
+            let nameCM = parseInt(this.value, 10);
+            let explain = '';
+            if (!isNaN(nameCM)) {
+                if (nameCM < 0) nameCM = 0;
+                if (nameCM > 19) nameCM = 19;
+                let low = nameCM * 5, high = (nameCM + 1) * 5;
+                explain = `對應 Margin 區間：${low}% ~ ${high}%`;
+            }
+            document.getElementById('nameCMExplain').textContent = explain;
+        });
+
+        // 欄位驗證工具
+        function validateField(id, type = 'required') {
+            const el = document.getElementById(id);
+            if (!el) return true;
+            let valid = true;
+            let msg = '';
+            const val = el.value.trim();
+            if (type === 'required' && !val) {
+                valid = false;
+                msg = 'Required';
+            } else if (type === 'phone' && val && !/^\d{6,}$/.test(val.replace(/\D/g, ''))) {
+                valid = false;
+                msg = 'Invalid phone';
+            } else if (type === 'email' && val && !/^\S+@\S+\.\S+$/.test(val)) {
+                valid = false;
+                msg = 'Invalid email';
+            } else if (type === 'zip' && val && !['000','0000','000000','HKG'].includes(val)) {
+                valid = false;
+                msg = 'Invalid zip';
+            }
+            let err = el.parentElement.querySelector('.field-error');
+            if (!valid) {
+                if (!err) {
+                    err = document.createElement('div');
+                    err.className = 'field-error text-xs text-red-600 mt-1';
+                    el.parentElement.appendChild(err);
+                }
+                err.textContent = msg;
+                el.classList.add('border-red-500');
+            } else {
+                if (err) err.remove();
+                el.classList.remove('border-red-500');
+            }
+            return valid;
+        }
+
+        // 綁定即時驗證
+        ['accountNo','companyName','firstName','lastName','businessPhone','address','mobilePhone','businessEmail'].forEach(function(id) {
+            var el = document.getElementById(id);
+            if (el) {
+                el.addEventListener('input', function() {
+                    if (id === 'businessPhone' || id === 'mobilePhone') validateField(id, 'phone');
+                    else if (id === 'businessEmail') validateField(id, 'email');
+                    else validateField(id, 'required');
+                });
+            }
+        });
+        // zipCode 處理（如有分拆欄位）
+        var zipEl = document.getElementById('zipCode');
+        if (zipEl) {
+            zipEl.addEventListener('input', function() { validateField('zipCode', 'zip'); });
+        }
+
+        // 儲存/送出時驗證所有欄位
+        function validateAllFields() {
+            var valid = true;
+            valid = validateField('accountNo') && valid;
+            valid = validateField('companyName') && valid;
+            valid = validateField('firstName') && valid;
+            valid = validateField('lastName') && valid;
+            valid = validateField('businessPhone', 'phone') && valid;
+            valid = validateField('address') && valid;
+            if (document.getElementById('mobilePhone')) valid = validateField('mobilePhone', 'phone') && valid;
+            if (document.getElementById('businessEmail')) valid = validateField('businessEmail', 'email') && valid;
+            if (zipEl) valid = validateField('zipCode', 'zip') && valid;
+            return !!valid;
+        }
+
+        // 儲存/送出前加驗證
+        var oldSaveDraft = saveDraft;
+        saveDraft = function() {
+            if (!validateAllFields()) {
+                showToast('Please fill all required fields correctly.');
+                return;
+            }
+            oldSaveDraft();
+        };
+
+        // PDF 產生前加驗證
+        var oldConfirmGeneratePDF = confirmGeneratePDF;
+        confirmGeneratePDF = async function() {
+            if (!validateAllFields()) {
+                showToast('Please fill all required fields correctly.');
+                closePDFModal();
+                return;
+            }
+            await oldConfirmGeneratePDF();
+        };
+
+        // 必填欄位 label 加紅色星號
+        ['accountNo','companyName','firstName','lastName','businessPhone','address'].forEach(function(id) {
+            var label = document.querySelector('label[for="'+id+'"]');
+            if (label && !label.innerHTML.includes('text-red-500')) {
+                label.innerHTML = label.innerHTML.replace(/(<\/label>)/, ' <span class="text-red-500">*</span>$1');
+            }
+        });
+
+        // Address 自動分行（每55字元）
+        (function setupAddressAutoWrap() {
+            var addressEl = document.getElementById('address');
+            if (!addressEl) return;
+            addressEl.addEventListener('input', function(e) {
+                var val = addressEl.value.replace(/\r?\n/g, '');
+                var lines = [];
+                for (let i = 0; i < val.length; i += 55) {
+                    lines.push(val.slice(i, i + 55));
+                }
+                var joined = lines.join('\n');
+                if (addressEl.value !== joined) {
+                    addressEl.value = joined;
+                }
+            });
+        })();
+
+        document.getElementById('dataSourceType').addEventListener('change', function() {
+            var v = this.value;
+            document.getElementById('csvUploadLabel').style.display = v === 'csv' ? 'block' : 'none';
+            document.getElementById('jsonUploadLabel').style.display = v === 'json' ? 'block' : 'none';
+            document.getElementById('apiInputLabel').style.display = v === 'api' ? 'block' : 'none';
+        });
+        // JSON 檔案上傳
+        var jsonFileInput = document.getElementById('customerJsonFile');
+        if (jsonFileInput) {
+            jsonFileInput.addEventListener('change', function(e) {
+                var file = e.target.files[0];
+                if (!file) return;
+                var reader = new FileReader();
+                reader.onload = function(evt) {
+                    try {
+                        customerDatabase = JSON.parse(evt.target.result);
+                        showToast('Customer JSON loaded: ' + customerDatabase.length + ' entries');
+                    } catch (err) {
+                        showToast('Invalid JSON file');
+                    }
+                };
+                reader.readAsText(file);
+            });
+        }
+        // API 載入
+        var apiBtn = document.getElementById('loadCustomerApiBtn');
+        if (apiBtn) {
+            apiBtn.addEventListener('click', async function() {
+                var url = document.getElementById('customerApiUrl').value.trim();
+                if (!url) { showToast('Please enter API URL'); return; }
+                try {
+                    let resp = await fetch(url);
+                    if (!resp.ok) throw new Error('API error');
+                    customerDatabase = await resp.json();
+                    showToast('Customer API loaded: ' + customerDatabase.length + ' entries');
+                } catch (err) {
+                    showToast('API load failed');
+                }
+            });
+        }
+
+        // 資料來源切換優化
+        (function setupCustomerDataSourceSwitch() {
+            const dataSourceType = document.getElementById('dataSourceType');
+            const csvUploadLabel = document.getElementById('csvUploadLabel');
+            const jsonUploadLabel = document.getElementById('jsonUploadLabel');
+            const apiInputLabel = document.getElementById('apiInputLabel');
+            const customerApiUrl = document.getElementById('customerApiUrl');
+            let lastSource = localStorage.getItem('customerDataSourceType') || 'csv';
+            let lastApiUrl = localStorage.getItem('customerApiUrl') || '';
+            let lastCsv = localStorage.getItem('customerCsvData') || '';
+            let lastJson = localStorage.getItem('customerJsonData') || '';
+            // 預設值
+            dataSourceType.value = lastSource;
+            if (customerApiUrl && lastApiUrl) customerApiUrl.value = lastApiUrl;
+            // 切換時
+            dataSourceType.addEventListener('change', function() {
+                var v = this.value;
+                localStorage.setItem('customerDataSourceType', v);
+                csvUploadLabel.style.display = v === 'csv' ? 'block' : 'none';
+                jsonUploadLabel.style.display = v === 'json' ? 'block' : 'none';
+                apiInputLabel.style.display = v === 'api' ? 'block' : 'none';
+                customerDatabase = [];
+                showToast('請上傳/載入客戶資料');
+                // 自動還原
+                if (v === 'csv' && lastCsv) {
+                    customerDatabase = parseCustomerCSV(lastCsv);
+                    showToast('已還原上次CSV客戶資料：' + customerDatabase.length + ' 筆');
+                } else if (v === 'json' && lastJson) {
+                    try {
+                        customerDatabase = JSON.parse(lastJson);
+                        showToast('已還原上次JSON客戶資料：' + customerDatabase.length + ' 筆');
+                    } catch(e) {}
+                } else if (v === 'api' && lastApiUrl) {
+                    customerApiUrl.value = lastApiUrl;
+                }
+            });
+            // CSV 上傳記錄
+            document.getElementById('customerCsvFile').addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (!file) return;
+                const reader = new FileReader();
+                reader.onload = function(evt) {
+                    localStorage.setItem('customerCsvData', evt.target.result);
+                };
+                reader.readAsText(file);
+            });
+            // JSON 上傳記錄
+            document.getElementById('customerJsonFile').addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (!file) return;
+                const reader = new FileReader();
+                reader.onload = function(evt) {
+                    localStorage.setItem('customerJsonData', evt.target.result);
+                };
+                reader.readAsText(file);
+            });
+            // API URL 輸入記錄
+            if (customerApiUrl) {
+                customerApiUrl.addEventListener('input', function() {
+                    localStorage.setItem('customerApiUrl', this.value.trim());
+                });
+            }
+        })();
+        // 搜尋時自動提示
+        (function enhanceCustomerSearch() {
+            const searchInput = document.getElementById('customerSearch');
+            if (!searchInput) return;
+            const origSearchCustomer = window.searchCustomer;
+            window.searchCustomer = function(input) {
+                if (!customerDatabase || customerDatabase.length === 0) {
+                    showToast('請先上傳/載入客戶資料');
+                    return;
+                }
+                origSearchCustomer(input);
+            };
+        })();
+
+        // Customer Data Management Modal
+        function openCustomerMgmtModal() {
+            document.getElementById('customerDataMgmtModal').classList.add('show');
+            renderCustomerMgmtTable();
+        }
+        function closeCustomerMgmtModal() {
+            document.getElementById('customerDataMgmtModal').classList.remove('show');
+        }
+        document.getElementById('customerDataMgmtBtn').onclick = openCustomerMgmtModal;
+        // Render table
+        function renderCustomerMgmtTable() {
+            const head = document.getElementById('customerMgmtTableHead');
+            const body = document.getElementById('customerMgmtTableBody');
+            body.innerHTML = '';
+            if (!Array.isArray(customerDatabase) || customerDatabase.length === 0) {
+                head.innerHTML = '<th>No Data</th>';
+                return;
+            }
+            const keys = Object.keys(customerDatabase[0]);
+            head.innerHTML = keys.map(k => `<th>${k}</th>`).join('') + '<th>Actions</th>';
+            customerDatabase.forEach((row, idx) => {
+                body.innerHTML += `<tr>${keys.map(k => `<td contenteditable="true" oninput="editCustomerCell(${idx},'${k}',this.innerText)">${row[k]||''}</td>`).join('')}<td><button class='btn btn-danger btn-sm' onclick='deleteCustomerRow(${idx})'>Delete</button></td></tr>`;
+            });
+        }
+        window.editCustomerCell = function(idx, key, val) {
+            customerDatabase[idx][key] = val;
+        };
+        window.deleteCustomerRow = function(idx) {
+            if (confirm('Delete this customer?')) {
+                customerDatabase.splice(idx,1);
+                renderCustomerMgmtTable();
+            }
+        }
+        // Upload CSV
+        const mgmtCsv = document.getElementById('customerMgmtCsvFile');
+        if (mgmtCsv) {
+            mgmtCsv.onchange = function(e) {
+                const file = e.target.files[0];
+                if (!file) return;
+                const reader = new FileReader();
+                reader.onload = function(evt) {
+                    customerDatabase = parseCustomerCSV(evt.target.result);
+                    renderCustomerMgmtTable();
+                    showToast('CSV loaded: ' + customerDatabase.length + ' rows');
+                };
+                reader.readAsText(file);
+            };
+        }
+        // 只保留一段 customerMgmtJsonFile 綁定，並加 null 檢查
+        const mgmtJson = document.getElementById('customerMgmtJsonFile');
+        if (mgmtJson) {
+            mgmtJson.onchange = function(e) {
+                const file = e.target.files[0];
+                if (!file) return;
+                const reader = new FileReader();
+                reader.onload = function(evt) {
+                    try {
+                        customerDatabase = JSON.parse(evt.target.result);
+                        renderCustomerMgmtTable();
+                        showToast('JSON loaded: ' + customerDatabase.length + ' rows');
+                    } catch(err) { showToast('Invalid JSON'); }
+                };
+                reader.readAsText(file);
+            };
+        }
+        // Load API
+        const mgmtApiBtn = document.getElementById('customerMgmtLoadApiBtn');
+        if (mgmtApiBtn) {
+            mgmtApiBtn.onclick = async function() {
+                const url = document.getElementById('customerMgmtApiUrl').value.trim();
+                if (!url) { showToast('Enter API URL'); return; }
+                try {
+                    let resp = await fetch(url);
+                    if (!resp.ok) throw new Error('API error');
+                    customerDatabase = await resp.json();
+                    renderCustomerMgmtTable();
+                    showToast('API loaded: ' + customerDatabase.length + ' rows');
+                } catch (err) { showToast('API load failed'); }
+            };
+        }
+        // Export CSV
+        const mgmtExportBtn = document.getElementById('customerMgmtExportCsvBtn');
+        if (mgmtExportBtn) {
+            mgmtExportBtn.onclick = function() {
+                if (!Array.isArray(customerDatabase) || customerDatabase.length === 0) {
+                    showToast('No data to export'); return;
+                }
+                const keys = Object.keys(customerDatabase[0]);
+                let csv = keys.join(',') + '\n';
+                customerDatabase.forEach(row => {
+                    csv += keys.map(k => '"'+String(row[k]||'').replace(/"/g,'""')+'"').join(',') + '\n';
+                });
+                const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                link.download = 'customer_export.csv';
+                link.click();
+            };
+        }
+        // Modal 關閉 UX
+        const mgmtModal = document.getElementById('customerDataMgmtModal');
+        if (mgmtModal) {
+            mgmtModal.addEventListener('mousedown', function(e) {
+                if (e.target === mgmtModal) closeCustomerMgmtModal();
+            });
+        }
     </script>
+    <div id="customerDataMgmtModal" class="modal">
+        <div class="modal-content" style="max-width:700px;">
+            <h2 class="text-lg font-semibold mb-4">Customer Data Management</h2>
+            <div class="flex flex-wrap gap-4 mb-4">
+                <label class="btn btn-primary mb-0">
+                    Upload CSV
+                    <input type="file" id="customerMgmtCsvFile" accept=".csv" hidden>
+                </label>
+                <label class="btn btn-primary mb-0">
+                    Upload JSON
+                    <input type="file" id="customerMgmtJsonFile" accept=".json,application/json" hidden>
+                </label>
+                <input type="text" id="customerMgmtApiUrl" class="form-input" placeholder="API Endpoint" style="width:220px;">
+                <button type="button" class="btn btn-primary" id="customerMgmtLoadApiBtn">Load API</button>
+                <button type="button" class="btn btn-primary" id="customerMgmtExportCsvBtn">Export CSV</button>
+            </div>
+            <div class="overflow-x-auto" style="max-height:300px;">
+                <table class="table" id="customerMgmtTable">
+                    <thead><tr id="customerMgmtTableHead"></tr></thead>
+                    <tbody id="customerMgmtTableBody"></tbody>
+                </table>
+            </div>
+            <div class="flex justify-end gap-2 mt-4">
+                <button class="btn btn-danger" onclick="closeCustomerMgmtModal()">Close</button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
