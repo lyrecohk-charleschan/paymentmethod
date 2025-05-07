@@ -51,7 +51,186 @@
         .toolbar label.btn input[type="file"] {
             display: none;
         }
+        table th, table td {
+            vertical-align: middle;
+            text-align: center;
+            height: 48px;
+            min-width: 80px;
+        }
+        .form-input, textarea, select {
+            height: 40px;
+            min-height: 0px;
+            padding: 6px 12px;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+        .btn {
+            height: 40px;
+            min-width: 70px;
+            font-size: 1rem;
+        }
+        .table th, .table td {
+            min-width: 100px;
+            max-width: 180px;
+            text-align: center;
+            vertical-align: middle;
+            white-space: nowrap;
+        }
+        .table th.image-col, .table td.image-col { width: 80px; }
+        .table th.actions-col, .table td.actions-col { width: 160px; }
+        /* --- UI FIX PATCH START --- */
+        .table th.actions-col, .table td.actions-col {
+            min-width: 160px;
+            white-space: nowrap;
+        }
+        .actions-col .flex {
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .actions-col button {
+            margin-bottom: 2px;
+        }
+        .search-dropdown {
+            z-index: 9999 !important;
+            min-width: 220px;
+            max-width: 400px;
+            word-break: break-all;
+            overflow-y: auto;
+            max-height: 250px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+        }
+        #csvPreviewModal .modal-content {
+            max-width: 90vw;
+            min-width: 320px;
+            overflow-x: auto;
+        }
+        #csvPreviewTable {
+            overflow-x: auto;
+            max-width: 100%;
+        }
+        #csvPreviewTable table {
+            min-width: 600px;
+            word-break: break-all;
+        }
+        .table {
+            overflow-x: auto;
+            display: block;
+        }
+        /* --- UI FIX PATCH END --- */
+        /* Grand Total Summary Card UI Redesign */
+        .summary-card {
+            background: #f9fafb;
+            border-radius: 16px;
+            box-shadow: 0 2px 8px #e0e7ef;
+            padding: 24px;
+            max-width: 350px;
+            margin-left: auto;
+            margin-right: 0;
+        }
+        .summary-group {
+            margin-bottom: 18px;
+        }
+        .summary-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+        .summary-row label {
+            min-width: 110px;
+            font-weight: 500;
+            color: #475569;
+        }
+        .summary-row input {
+            width: 60px;
+            margin: 0 8px;
+            border-radius: 6px;
+            border: 1px solid #e2e8f0;
+            padding: 2px 6px;
+            font-size: 1em;
+            text-align: right;
+        }
+        .summary-value {
+            min-width: 60px;
+            text-align: right;
+            color: #334155;
+        }
+        .summary-total-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #2563eb;
+            margin-top: 18px;
+        }
+        .summary-grand {
+            font-size: 1.5em;
+            color: #2563eb;
+        }
+        .summary-margin-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #22c55e;
+            margin-top: 8px;
+        }
+        .summary-margin {
+            font-size: 1.2em;
+        }
+        .actions-col .flex, .actions-inline {
+            flex-direction: row;
+            gap: 4px;
+            flex-wrap: nowrap;
+            justify-content: center;
+            align-items: center;
+        }
+        .actions-col button {
+            margin-bottom: 0;
+            min-width: 60px;
+            padding-left: 8px;
+            padding-right: 8px;
+        }
+        .line-no {
+            font-weight: bold;
+            text-align: center;
+            width: 40px;
+        }
+        .table {
+            table-layout: fixed;
+        }
+        .table th, .table td {
+            white-space: normal;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            padding: 0.5rem;
+        }
+        .table th.line-no, .table td.line-no { width: 50px; min-width: 50px; max-width: 50px; }
+        .table th.image-col, .table td.image-col { width: 65px; min-width: 60px; max-width: 70px; }
+        .table th:nth-child(3), .table td:nth-child(3) { width: 110px; min-width: 90px; max-width: 120px; }
+        .table th:nth-child(4), .table td:nth-child(4) { width: 180px; min-width: 120px; max-width: 220px; }
+        .table th:nth-child(5), .table td:nth-child(5) { width: 60px; min-width: 50px; max-width: 70px; }
+        .table th:nth-child(6), .table td:nth-child(6) { width: 60px; min-width: 50px; max-width: 70px; }
+        .table th:nth-child(7), .table td:nth-child(7) { width: 80px; min-width: 60px; max-width: 100px; }
+        .table th:nth-child(8), .table td:nth-child(8) { width: 90px; min-width: 70px; max-width: 110px; }
+        .table th:nth-child(9), .table td:nth-child(9) { width: 120px; min-width: 80px; max-width: 150px; }
+        .table th.actions-col, .table td.actions-col { width: 110px; min-width: 90px; max-width: 220px; }
+        .description, .remarks { word-break: break-all; }
+        @media (max-width: 900px) {
+          .print-area {
+            display: flex;
+            flex-direction: column;
+          }
+          .summary-card {
+            max-width: 100%;
+            margin-left: 0;
+            margin-right: 0;
+            margin-top: 24px;
+            order: 99;
+          }
+        }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/canvg/dist/browser/canvg.min.js"></script>
 </head>
 <body>
     <div class="container">
@@ -106,10 +285,11 @@
             <button id="downloadCustomerTemplate" class="btn btn-primary">Customer Template</button>
             <button id="openCalculatorBtn" class="btn btn-primary">Calculator</button>
             <button id="customerDataMgmtBtn" class="btn btn-primary">Customer Data Management</button>
+            <button id="searchCompanyBtn" class="btn btn-primary">Search Company</button>
         </div>
 
         <div class="mt-4 bg-blue-50 border border-blue-100 rounded-lg p-4 text-sm text-blue-800">
-            <p><strong>Step 1:</strong> Upload product & customer data (CSV)</p>
+            <p><strong>Step 1:</strong> Upload product & customer data (UTF-8 CSV)</p>
             <p><strong>Step 2:</strong> Edit quotation (add/remove product rows)</p>
             <p><strong>Step 3:</strong> Fill customer info & remarks</p>
             <p><strong>Step 4:</strong> Export PDF/CSV or save draft</p>
@@ -121,7 +301,9 @@
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
-                <div>
+                <!-- Lyreco 公司資料區塊（可收合） -->
+                <details open class="bg-gray-50 rounded-lg p-4 shadow">
+                    <summary class="font-semibold text-blue-700 cursor-pointer mb-2">Lyreco 公司資料</summary>
                     <div class="space-y-4">
                         <label class="form-label">Payable to:
                             <input type="text" class="form-input" value="LYRECO (HONG KONG) COMPANY LIMITED" readonly>
@@ -151,84 +333,103 @@
                             <input type="email" id="salesrepEmail" class="form-input" value="charles.chan@lyreco.com" placeholder="Entry sales rep email" required>
                         </div>
                     </div>
-                </div>
-                <div class="space-y-4">
-                    <div class="relative">
-                        <label class="form-label" for="customerSearch">Search Customer</label>
-                        <input type="text" id="customerSearch" class="form-input" placeholder="Search by Account No., Company, or Name" oninput="searchCustomer(this)">
-                        <div id="customerSearchDropdown" class="search-dropdown hidden"></div>
+                </details>
+                <!-- 客戶資料區塊（可收合，分組） -->
+                <details open class="bg-gray-50 rounded-lg p-4 shadow">
+                    <summary class="font-semibold text-blue-700 cursor-pointer mb-2">客戶資料</summary>
+                    <div class="space-y-4">
+                        <!-- 基本資料分組 -->
+                        <div class="mb-2 pb-2 border-b border-blue-100">
+                            <div class="font-semibold text-blue-600 mb-1">基本資料</div>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="form-label" for="accountNo">Account No. <span class="text-red-500">*</span></label>
+                                    <input type="text" id="accountNo" class="form-input" placeholder="Enter account number" required>
+                                </div>
+                                <div>
+                                    <label class="form-label" for="quotationNo">Quotation No.</label>
+                                    <input type="text" id="quotationNo" class="form-input" readonly>
+                                </div>
+                                <div class="sm:col-span-2">
+                                    <label class="form-label" for="companyName">Company Name <span class="text-red-500">*</span></label>
+                                    <input type="text" id="companyName" class="form-input" placeholder="Enter company name" required>
+                                </div>
+                                <div>
+                                    <label class="form-label" for="customerType">Customer Type</label>
+                                    <select id="customerType" class="form-input">
+                                        <option value="corporate">Corporate</option>
+                                        <option value="school">School</option>
+                                        <option value="government">Government</option>
+                                        <option value="flash">Flash Order</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="form-label" for="quotationDate">Date</label>
+                                    <input type="date" id="quotationDate" class="form-input">
+                                </div>
+                                <div>
+                                    <label class="form-label" for="paymentTerms">Payment Terms</label>
+                                    <select id="paymentTerms" class="form-input">
+                                        <option>30 Days</option>
+                                        <option>60 Days</option>
+                                        <option>90 Days</option>
+                                        <option>Immediate</option>
+                                    </select>
+                                </div>
+                                <div id="validUntilField">
+                                    <label class="form-label" for="validUntil">Valid Until</label>
+                                    <input type="date" id="validUntil" class="form-input">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 聯絡方式分組 -->
+                        <div class="mb-2 pb-2 border-b border-blue-100">
+                            <div class="font-semibold text-blue-600 mb-1">聯絡方式</div>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="form-label" for="firstName">First Name <span class="text-red-500">*</span></label>
+                                    <input type="text" id="firstName" class="form-input" placeholder="Enter first name">
+                                </div>
+                                <div>
+                                    <label class="form-label" for="lastName">Last Name <span class="text-red-500">*</span></label>
+                                    <input type="text" id="lastName" class="form-input" placeholder="Enter last name">
+                                </div>
+                                <div>
+                                    <label class="form-label" for="mobilePhone">Mobile Phone</label>
+                                    <input type="text" id="mobilePhone" class="form-input" placeholder="Enter mobile phone">
+                                </div>
+                                <div>
+                                    <label class="form-label" for="businessPhone">Business Phone <span class="text-red-500">*</span></label>
+                                    <input type="text" id="businessPhone" class="form-input" placeholder="Enter business phone">
+                                </div>
+                                <div class="sm:col-span-2">
+                                    <label class="form-label" for="businessEmail">Business Email</label>
+                                    <input type="email" id="businessEmail" class="form-input" placeholder="Enter business email">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 地址分組 -->
+                        <div>
+                            <div class="font-semibold text-blue-600 mb-1">地址資料</div>
+                            <label class="form-label" for="address">Billing/Delivery English Address <span class="text-red-500">*</span></label>
+                            <textarea id="address" class="form-input" rows="4" placeholder="Enter billing/delivery english address" required></textarea>
+                        </div>
+                        <!-- 搜尋客戶功能 -->
+                        <div class="relative mt-2">
+                            <label class="form-label" for="customerSearch">Search Customer</label>
+                            <input type="text" id="customerSearch" class="form-input" placeholder="Search by Account No., Company, or Name" oninput="searchCustomer(this)">
+                            <div id="customerSearchDropdown" class="search-dropdown hidden"></div>
+                        </div>
                     </div>
-                    <div>
-                        <label class="form-label" for="accountNo">Account No. <span class="text-red-500">*</span></label>
-                        <input type="text" id="accountNo" class="form-input" placeholder="Enter account number" required>
-                    </div>
-                    <div>
-                        <label class="form-label" for="quotationNo">Quotation No.</label>
-                        <input type="text" id="quotationNo" class="form-input" readonly>
-                    </div>
-                    <div>
-                        <label class="form-label" for="companyName">Company Name <span class="text-red-500">*</span></label>
-                        <input type="text" id="companyName" class="form-input" placeholder="Enter company name" required>
-                    </div>
-                    <div>
-                        <label class="form-label" for="firstName">First Name <span class="text-red-500">*</span></label>
-                        <input type="text" id="firstName" class="form-input" placeholder="Enter first name">
-                    </div>
-                    <div>
-                        <label class="form-label" for="lastName">Last Name <span class="text-red-500">*</span></label>
-                        <input type="text" id="lastName" class="form-input" placeholder="Enter last name">
-                    </div>
-                    <div>
-                        <label class="form-label" for="mobilePhone">Mobile Phone</label>
-                        <input type="text" id="mobilePhone" class="form-input" placeholder="Enter mobile phone">
-                    </div>
-                    <div>
-                        <label class="form-label" for="businessPhone">Business Phone <span class="text-red-500">*</span></label>
-                        <input type="text" id="businessPhone" class="form-input" placeholder="Enter business phone">
-                    </div>
-                    <div>
-                        <label class="form-label" for="businessEmail">Business Email</label>
-                        <input type="email" id="businessEmail" class="form-input" placeholder="Enter business email">
-                    </div>
-                    <div>
-                        <label class="form-label" for="quotationDate">Date</label>
-                        <input type="date" id="quotationDate" class="form-input">
-                    </div>
-                    <div>
-                        <label class="form-label" for="paymentTerms">Payment Terms</label>
-                        <select id="paymentTerms" class="form-input">
-                            <option>30 Days</option>
-                            <option>60 Days</option>
-                            <option>90 Days</option>
-                            <option>Immediate</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="form-label" for="validUntil">Valid Until</label>
-                        <input type="date" id="validUntil" class="form-input">
-                    </div>
-                    <div>
-                        <label class="form-label" for="address">Billing/Delivery Address <span class="text-red-500">*</span></label>
-                        <textarea id="address" class="form-input" rows="3" placeholder="Enter billing/delivery address" required></textarea>
-                    </div>
-                    <div>
-                        <label class="form-label" for="customerType">Customer Type</label>
-                        <select id="customerType" class="form-input">
-                            <option value="corporate">Corporate</option>
-                            <option value="school">School</option>
-                            <option value="government">Government</option>
-                            <option value="flash">Flash Order</option>
-                        </select>
-                    </div>
-                </div>
+                </details>
             </div>
 
             <div class="overflow-x-auto">
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>#</th>
-                            <th>Image</th>
+                            <th>Line No</th>
+                            <th class="image-col">Image</th>
                             <th>Item Code</th>
                             <th>Description</th>
                             <th>Unit</th>
@@ -237,73 +438,102 @@
                             <th>Unit Price</th>
                             <th>Amount</th>
                             <th>Remarks</th>
-                            <th class="no-print">Actions</th>
+                            <th class="actions-col no-print">Actions</th>
                         </tr>
                     </thead>
                     <tbody id="quotationBody"></tbody>
                 </table>
             </div>
 
-            <div class="flex justify-end mt-6">
-                <div class="w-full sm:w-96 bg-gray-50 p-6 rounded-lg">
-                    <div class="space-y-2">
-                        <div class="flex justify-between">
-                            <span>Subtotal:</span>
-                            <span id="subtotal" class="font-medium">0.00</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <label for="discount" class="form-label">Discount (%):</label>
-                            <input type="number" id="discount" class="form-input w-24 text-right" value="0" min="0" max="100" step="0.01" onchange="updateTotals()">
-                        </div>
-                        <div class="flex justify-between">
-                            <span>Discount Amount:</span>
-                            <span id="discountAmount" class="font-medium">0.00</span>
-                        </div>
-                        <div class="flex justify-between">
-                            <label for="taxRate" class="form-label">Tax Rate (%):</label>
-                            <input type="number" id="taxRate" class="form-input w-24 text-right" value="0" min="0" max="100" step="0.01" onchange="updateTotals()">
-                        </div>
-                        <div class="flex justify-between">
-                            <span>Tax:</span>
-                            <span id="taxAmount" class="font-medium">0.00</span>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <label for="deposit" class="form-label">Deposit (%):</label>
-                            <input type="number" id="deposit" class="form-input w-24 text-right" value="0" min="0" max="100" step="0.01" onchange="updateTotals();updateDepositAmount()">
-                            <span id="depositAmountLabel" class="ml-2 text-sm text-gray-600"></span>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <label for="additionalCharge" class="form-label">Additional Charge (%):</label>
-                            <input type="number" id="additionalCharge" class="form-input w-24 text-right" value="0" min="0" max="100" step="0.01" onchange="updateTotals();updateAdditionalChargeAmount()">
-                            <span id="additionalChargeAmountLabel" class="ml-2 text-sm text-gray-600"></span>
-                        </div>
-                        <div class="flex justify-between">
-                            <label for="freight" class="form-label">Freight:</label>
-                            <input type="number" id="freight" class="form-input w-24 text-right" value="0" min="0" step="0.01" onchange="updateTotals()">
-                        </div>
-                        <div class="flex justify-between font-bold text-blue-600">
-                            <span>Grand Total:</span>
-                            <span id="grandTotal" class="font-bold">0.00</span>
-                        </div>
+            <!-- Grand Total Summary Card -->
+            <div class="summary-card">
+                <div class="summary-group">
+                    <div class="summary-row">
+                        <span>Subtotal</span>
+                        <span class="summary-value" id="subtotal">0.00</span>
                     </div>
+                    <div class="summary-row">
+                        <label for="discount">Discount (%)</label>
+                        <input type="number" id="discount" min="0" max="100" step="0.01" onchange="updateTotals()">
+                        <span class="summary-value" id="discountAmount">0.00</span>
+                    </div>
+                    <div class="summary-row">
+                        <label for="taxRate">Tax Rate (%)</label>
+                        <input type="number" id="taxRate" min="0" max="100" step="0.01" onchange="updateTotals()">
+                        <span class="summary-value" id="taxAmount">0.00</span>
+                    </div>
+                </div>
+                <div class="summary-group">
+                    <div class="summary-row">
+                        <label for="deposit">Deposit (%)</label>
+                        <input type="number" id="deposit" min="0" max="100" step="0.01" onchange="updateTotals();updateDepositAmount()">
+                        <span class="summary-value" id="depositAmountLabel">0.00</span>
+                    </div>
+                    <div class="summary-row">
+                        <label for="additionalCharge">Additional Charge (%)</label>
+                        <input type="number" id="additionalCharge" min="0" max="100" step="0.01" onchange="updateTotals();updateAdditionalChargeAmount()">
+                        <span class="summary-value" id="additionalChargeAmountLabel">0.00</span>
+                    </div>
+                    <div class="summary-row">
+                        <label for="freight">Freight</label>
+                        <input type="number" id="freight" min="0" step="0.01" onchange="updateTotals()">
+                        <span class="summary-value" id="freightValue">0.00</span>
+                    </div>
+                </div>
+                <div class="summary-total-row">
+                    <span>Grand Total</span>
+                    <span class="summary-grand" id="grandTotal">0.00</span>
+                </div>
+                <div class="summary-margin-row">
+                    <span>Overall Margin</span>
+                    <span class="summary-margin" id="overallMargin">0.0%</span>
                 </div>
             </div>
 
             <div class="mt-6">
-                <label for="remarks" class="form-label">Remarks</label>
+                <div class="flex items-center mb-1">
+                    <label for="remarks" class="form-label mb-0">Remarks</label>
+                    <button onclick="applySuggestedTerms()" class="btn btn-primary ml-2" style="margin-bottom:0;">Apply Suggested Terms</button>
+                </div>
                 <textarea id="remarks" class="form-input" rows="4" placeholder="Enter remarks (if any)"></textarea>
-                <button onclick="applySuggestedTerms()" class="btn btn-primary mt-2">Apply Suggested Terms</button>
             </div>
             <div class="mt-6">
                 <label class="form-label" for="deliveryTerms">Delivery Terms</label>
                 <textarea type="text" id="deliveryTerms" class="form-input" rows="4" placeholder="Enter delivery terms"></textarea>
             </div>
 
-            <div class="mt-6">
-                <label for="qrLink" class="form-label">QR Code Link</label>
-                <input type="text" id="qrLink" class="form-input" placeholder="Enter URL for QR code">
-                <div id="qrcode" class="mt-2"></div>
-            </div>
+            <details open class="bg-gray-50 rounded-lg p-4 shadow mt-6">
+                <summary class="font-semibold text-blue-700 cursor-pointer mb-2">品牌與付款資訊</summary>
+                <div class="mb-4">
+                    <label for="qrLink" class="form-label">QR Code Link</label>
+                    <input type="text" id="qrLink" class="form-input" placeholder="Enter URL for QR code">
+                    <div id="qrcode" class="mt-2"></div>
+                </div>
+                <!-- Logo row -->
+                <div class="flex items-center gap-2 mt-2">
+                    <label for="logoLink" class="form-label mb-0" style="min-width:120px;">Logo Link</label>
+                    <input type="text" id="logoLink" class="form-input" placeholder="Enter URL for logo (optional)" style="max-width:320px;">
+                    <button id="logoFileBtn" type="button" class="btn btn-secondary" title="Upload local logo" style="padding:0 10px;min-width:40px;height:40px;display:flex;align-items:center;justify-content:center;">
+                        <span class="material-icons">upload</span>
+                        <input type="file" id="logoFileInput" accept="image/png,image/jpeg,image/jpg" style="display:none;">
+                    </button>
+                    <img id="logoLinkPreview" src="" alt="Logo Preview" style="max-width:80px;max-height:40px;border:1px solid #eee;background:#fff;margin-left:8px;">
+                    <span id="logoLinkPreviewText" class="text-xs text-gray-600 ml-2"></span>
+                </div>
+                <div class="mt-1 text-xs text-gray-500">建議使用透明底 SVG/PNG，SVG 透明底最佳。</div>
+                <!-- Watermark row -->
+                <div class="flex items-center gap-2 mt-4">
+                    <label for="watermarkLink" class="form-label mb-0" style="min-width:120px;">Watermark Link</label>
+                    <input type="text" id="watermarkLink" class="form-input" placeholder="Enter URL for watermark (optional)" style="max-width:320px;">
+                    <button id="watermarkFileBtn" type="button" class="btn btn-secondary" title="Upload local watermark" style="padding:0 10px;min-width:40px;height:40px;display:flex;align-items:center;justify-content:center;">
+                        <span class="material-icons">upload</span>
+                        <input type="file" id="watermarkFileInput" accept="image/png,image/jpeg,image/jpg" style="display:none;">
+                    </button>
+                    <img id="watermarkLinkPreview" src="" alt="Watermark Preview" style="max-width:80px;max-height:40px;border:1px solid #eee;background:#fff;margin-left:8px;">
+                    <span id="watermarkLinkPreviewText" class="text-xs text-gray-600 ml-2"></span>
+                </div>
+                <div class="mt-1 text-xs text-gray-500">建議使用透明底 SVG/PNG，SVG 透明底最佳。</div>
+            </details>
         </div>
     </div>
 
@@ -529,6 +759,7 @@
         let rowCounter = 1;
         let currentEditRow = null;
         let customerDatabase = [];
+        let lastApiUrl = "";
         let lang = 'en';
         let csvPreviewType = null;
         let csvPreviewData = null;
@@ -553,7 +784,7 @@
 
         const LANGS = {
             en: {
-                step1: "Step 1: Upload product & customer data (CSV)",
+                step1: "Step 1: Upload product & customer data (UTF-8 CSV)",
                 step2: "Step 2: Edit quotation (add/remove product rows)",
                 step3: "Step 3: Fill customer info & remarks",
                 step4: "Step 4: Export PDF/CSV or save draft",
@@ -823,8 +1054,8 @@
                 const tr = document.createElement('tr');
                 tr.setAttribute('draggable', 'true');
                 tr.innerHTML = `
-                    <td>${rowCounter}</td>
-                    <td>
+                    <td class="line-no"></td>
+                    <td class="image-col">
                         <a class="eshop-link" href="#" target="_blank">
                             <img src="" alt="Product Image" class="w-12 h-12 rounded" onerror="this.style.display='none';if(this.nextElementSibling){this.nextElementSibling.style.display='block';}">
                         </a>
@@ -846,16 +1077,17 @@
                     </td>
                     <td><textarea class="form-input description" rows="2" placeholder="Enter description"></textarea></td>
                     <td><input type="text" class="form-input unit" placeholder="Enter unit"></td>
-                    <td><input type="number" class="form-input package-unit" value="1" min="1" onchange="calculateRowAmount(this)" placeholder="Pkg Unit"></td>
+                    <!-- Package Unit column is hidden, but still used in calculation -->
+                    <td style="display:none;"><input type="number" class="form-input package-unit" value="1" readonly></td>
                     <td><input type="number" class="form-input qty" value="1" min="1" onchange="calculateRowAmount(this)" aria-label="Quantity"></td>
                     <td><input type="number" class="form-input unit-price text-right" step="0.01" min="0" onchange="calculateRowAmount(this)" placeholder="Enter unit price"></td>
                     <td><input type="number" class="form-input amount text-right" readonly></td>
                     <td><input type="text" class="form-input remarks" placeholder="Remarks" aria-label="Remarks"></td>
-                    <td class="no-print">
-                        <div class="flex gap-2">
-                            <button onclick="openEditModal(this)" class="btn btn-secondary" title="Edit">Edit</button>
-                            <button onclick="removeRow(this)" class="btn btn-danger" title="Remove">Remove</button>
-                            <button onclick="showInternalInfo(this)" class="btn btn-success" title="Internal">Internal</button>
+                    <td class="actions-col no-print">
+                        <div class="flex actions-inline">
+                            <button onclick="openEditModal(this)" class="btn btn-secondary" title="Edit">✏️</button>
+                            <button onclick="removeRow(this)" class="btn btn-danger" title="Remove">🗑️</button>
+                            <button onclick="showInternalInfo(this)" class="btn btn-success" title="Internal">🔒</button>
                         </div>
                     </td>
                 `;
@@ -867,8 +1099,16 @@
             updateTotals();
         }
 
+        function cleanItemCode(code) {
+            return String(code || '').replace(/^0+/, '').trim().toUpperCase();
+        }
+
+        function findProductByItemCode(code) {
+            return productDatabase.find(p => cleanItemCode(p.itemCode) === cleanItemCode(code));
+        }
+
         function addRowFromCSV(rowData) {
-            const product = productDatabase.find(p => p.itemCode === rowData.itemCode) || {};
+            const product = findProductByItemCode(rowData.itemCode) || {};
             const tbody = document.getElementById('quotationBody');
             const tr = document.createElement('tr');
             tr.setAttribute('draggable', 'true');
@@ -876,40 +1116,45 @@
             const packageUnit = product.packageUnit || 1;
             const unitPrice = rowData.unitPrice || product.unitPrice || 0;
             const amount = qty * packageUnit * unitPrice;
+            const itemCode = rowData.itemCode || '';
+            // 修正 product image 及 landing page 連結
+            const productUrl = itemCode ? `https://www.lyreco.com/webshop/HKHK/detail-product-${itemCode}.html` : '#';
+            const imageUrl = product.itemCode ? `https://assets.lyreco.com/is/image/lyrecows/2018-${product.itemCode}?fmt=jpg&locale=HK_hk` : '';
             tr.innerHTML = `
-                <td>${rowCounter}</td>
-                <td>
-                    <a class="eshop-link" href="${rowData.itemCode ? `https://www.lyreco.com/webshop/HKHK/detail-product-${rowData.itemCode}.html` : '#'}" target="_blank">
-                        <img src="${product.itemCode ? `https://assets.lyreco.com/is/image/lyrecows/2018-${product.itemCode}?fmt=jpg&locale=HK_hk` : ''}" alt="Product Image" class="w-12 h-12 rounded" onerror="this.style.display='none';if(this.nextElementSibling){this.nextElementSibling.style.display='block';}">
+                <td class="line-no"></td>
+                <td class="image-col">
+                    ${product.itemCode ? `
+                    <a class="eshop-link" href="${productUrl}" target="_blank">
+                        <img src="${imageUrl}" alt="Product Image" class="w-12 h-12 rounded" onerror="this.style.display='none';if(this.nextElementSibling){this.nextElementSibling.style.display='block';}">
                     </a>
-                    <span class="text-xs text-gray-400" style="display:${product.itemCode ? 'none' : 'block'};">No Image</span>
+                    <span class="text-xs text-gray-400" style="display:none;">No Image</span>
+                    ` : `<span class="text-xs text-gray-400">No Image</span>`}
                 </td>
                 <td>
                     ${productDatabase.length > 0 ? `
                         <select class="form-input item-code" onchange="updateRowDetails(this)" aria-label="Select item">
                             <option value="">Select Item</option>
-                            ${productDatabase.map(p => `<option value="${p.itemCode}" ${p.itemCode === rowData.itemCode ? 'selected' : ''}>${p.itemCode}</option>`).join('')}
+                            ${productDatabase.map(p => `<option value="${p.itemCode}" ${cleanItemCode(p.itemCode) === cleanItemCode(itemCode) ? 'selected' : ''}>${p.itemCode}</option>`).join('')}
                         </select>
                     ` : `
-                        <input type="text" class="form-input item-code" value="${rowData.itemCode}" placeholder="Enter item code" aria-label="Item code">
+                        <input type="text" class="form-input item-code" value="${itemCode}" placeholder="Enter item code" aria-label="Item code">
                     `}
                     <div class="relative mt-2">
                         <input type="text" class="form-input" placeholder="Search by Description & Item Code" oninput="searchByDescription(this)">
                         <div class="search-dropdown hidden"></div>
-                    </div>
-                </td>
+                    </td>
                 <td><textarea class="form-input description" rows="2">${product.description || ''}</textarea></td>
                 <td><input type="text" class="form-input unit" value="${product.unit || ''}" placeholder="Enter unit"></td>
-                <td><input type="number" class="form-input package-unit" value="${packageUnit}" min="1" onchange="calculateRowAmount(this)" placeholder="Pkg Unit"></td>
-                <td><input type="number" class="form-input qty" value="${rowData.qty}" min="1" onchange="calculateRowAmount(this)" aria-label="Quantity"></td>
-                <td><input type="number" class="form-input unit-price text-right" value="${rowData.unitPrice || product.unitPrice || ''}" step="0.01" min="0" onchange="calculateRowAmount(this)" placeholder="Enter unit price"></td>
+                <td style="display:none;"><input type="number" class="form-input package-unit" value="${product.packageUnit || '1'}" readonly></td>
+                <td><input type="number" class="form-input qty" value="${qty}" min="1" onchange="calculateRowAmount(this)" aria-label="Quantity"></td>
+                <td><input type="number" class="form-input unit-price text-right" value="${unitPrice}" step="0.01" min="0" onchange="calculateRowAmount(this)" placeholder="Enter unit price"></td>
                 <td><input type="number" class="form-input amount text-right" value="${amount.toFixed(2)}" readonly></td>
                 <td><input type="text" class="form-input remarks" placeholder="Remarks" aria-label="Remarks"></td>
-                <td class="no-print">
-                    <div class="flex gap-2">
-                        <button onclick="openEditModal(this)" class="btn btn-secondary" title="Edit">Edit</button>
-                        <button onclick="removeRow(this)" class="btn btn-danger" title="Remove">Remove</button>
-                        <button onclick="showInternalInfo(this)" class="btn btn-success" title="Internal">Internal</button>
+                <td class="actions-col no-print">
+                    <div class="flex actions-inline">
+                        <button onclick="openEditModal(this)" class="btn btn-secondary" title="Edit">✏️</button>
+                        <button onclick="removeRow(this)" class="btn btn-danger" title="Remove">🗑️</button>
+                        <button onclick="showInternalInfo(this)" class="btn btn-success" title="Internal">🔒</button>
                     </div>
                 </td>
             `;
@@ -934,7 +1179,8 @@
 
         function updateRowNumbers() {
             document.querySelectorAll('#quotationBody tr').forEach((tr, i) => {
-                tr.cells[0].textContent = i + 1;
+                const cell = tr.querySelector('.line-no');
+                if (cell) cell.textContent = (i + 1) * 10;
             });
         }
 
@@ -1029,14 +1275,7 @@
             updateAdditionalChargeAmount();
             // 顯示 Overall Margin
             let overallMargin = subtotal > 0 ? ((subtotal - totalCost) / subtotal * 100) : 0;
-            let overallMarginDiv = document.getElementById('overallMarginDiv');
-            if (!overallMarginDiv) {
-                overallMarginDiv = document.createElement('div');
-                overallMarginDiv.id = 'overallMarginDiv';
-                overallMarginDiv.className = 'flex justify-between mt-2 font-bold text-blue-600';
-                document.querySelector('.w-full.sm\\:w-96.bg-gray-50.p-6.rounded-lg').appendChild(overallMarginDiv);
-            }
-            overallMarginDiv.innerHTML = `<span>Overall Margin:</span><span>${overallMargin.toFixed(1)}%</span>`;
+            document.getElementById('overallMargin').textContent = overallMargin.toFixed(1) + '%';
         }
 
         let dragSrcRow = null;
@@ -1249,290 +1488,180 @@
             observer.observe(modal, { attributes: true, attributeFilter: ['class'] });
         })();
 
+        // 圖片壓縮 function（canvas）
+        async function compressImage(imgUrl, mimeType = 'image/jpeg', quality = 0.7, maxWidth = 600) {
+            return new Promise((resolve) => {
+                const img = new window.Image();
+                img.crossOrigin = 'Anonymous';
+                img.onload = function() {
+                    const scale = Math.min(1, maxWidth / img.width);
+                    const canvas = document.createElement('canvas');
+                    canvas.width = img.width * scale;
+                    canvas.height = img.height * scale;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                    resolve(canvas.toDataURL(mimeType, quality));
+                };
+                img.onerror = function() { resolve(imgUrl); };
+                img.src = imgUrl;
+            });
+        }
+
+        // --- SVG 轉 PNG（透明底）---
+        async function svgUrlToPngDataUrl(svgUrl, width = 120, height = 60) {
+            try {
+                const resp = await fetch(svgUrl);
+                if (!resp.ok) throw new Error('SVG fetch failed');
+                const svgText = await resp.text();
+                const canvas = document.createElement('canvas');
+                canvas.width = width;
+                canvas.height = height;
+                const ctx = canvas.getContext('2d');
+                // 清空
+                ctx.clearRect(0, 0, width, height);
+                // 用 canvg 畫 SVG
+                const v = await canvg.Canvg.fromString(ctx, svgText, { ignoreAnimation: true });
+                await v.render();
+                return canvas.toDataURL('image/png');
+            } catch (e) {
+                return null;
+            }
+        }
+
         async function confirmGeneratePDF() {
             const getField = id => document.getElementById(id)?.value || '';
-            // 新增取得公司資訊 input 欄位的輔助函數
-            function getCompanyInfoInput(idx) {
-                const labels = [
-                    'LYRECO (HONG KONG) COMPANY LIMITED',
-                    '16th Floor, 78 Hung To Road, Kwun Tong, Kowloon, Hong Kong',
-                    'Hotline: (852) 292462233',
-                    'FAX: (852) 27549866',
-                    'Customer service : cs.hk@lyreco.com'
-                ];
-                const label = labels[idx];
-                const labelEls = Array.from(document.querySelectorAll('.form-label'));
-                for (const el of labelEls) {
-                    if (el.textContent.trim().startsWith(label)) {
-                        const input = el.querySelector('input');
-                        if (input) return input.value;
-                    }
-                }
-                return label;
-            }
             if (!confirm("Generate PDF for this quotation?")) return;
             showToast("Generating PDF...");
-            const requiredFields = ['companyName', 'accountNo', 'address'];
-            for (const id of requiredFields) {
-                const field = document.getElementById(id);
-                if (!field.value.trim()) {
-                    showToast(LANGS[lang].fieldRequired);
-                    field.focus();
-                    closePDFModal();
-                    return;
-                }
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF({ orientation: 'p', unit: 'mm', format: 'a4', encoding: 'UTF-8', compress: true });
+            // --- Always use official Lyreco logo PNG ---
+            const logoUrl = "https://raw.githubusercontent.com/lyrecohk-charleschan/paymentmethod/refs/heads/main/lyreco-logo.png";
+            const logoImg = await compressImage(logoUrl, 'image/png', 0.9, 600);
+            doc.addImage(logoImg, 'PNG', 10, 8, 50, 20, '', 'FAST');
+            // --- Form Type at top right ---
+            const formType = getField('formType') || 'QUOTATION';
+            doc.setFontSize(14);
+            doc.text(` ${formType}`, 160, 16);
+            // --- Customer Info (left) & Quotation Info (right, vertical) ---
+            doc.setFontSize(10);
+            // Lyreco company info block
+            let yCompany = 32;
+            doc.text("Lyreco (Hong Kong) Company Limited", 10, yCompany); yCompany += 6;
+            doc.text("16th Floor, 78 Hung To Road, Kwun Tong, Kowloon, Hong Kong", 10, yCompany); yCompany += 6;
+            doc.text("Hotline: (852) 29246 2233 ,FAX: (852) 2754 9866 ,Customer service: cs.hk@lyreco.com", 10, yCompany); yCompany += 6;
+
+            doc.text('Sales Representative', rightX, yStart);
+            doc.text('Name: ' + repName, rightX, yStart + 8);
+            doc.text('Phone: ' + repPhone, rightX, yStart + 16);
+            doc.text('Email: ' + repEmail, rightX, yStart + 24);
+
+            const salesRepHeight = 32; // 根據內容調整
+            const ySalesRep = yCompany + salesRepHeight;
+            
+            let yStart = Math.max(yCompany, 32);
+            let leftX = 10, rightX = 120;
+            let yL = yStart, yR = yStart;
+            // 左欄 Customer Info
+            doc.text("Customer:", leftX, yL); yL += 6;
+            doc.text(getField('companyName'), leftX, yL); yL += 6;
+            // Address 多行
+            const address = getField('address');
+            const addressLines = address.match(/.{1,35}/g) || [''];
+            addressLines.forEach(line => {
+                doc.text(line, leftX, yL);
+                yL += 6;
+            });
+            doc.text(`Contact: ${getField('firstName')} ${getField('lastName')}`, leftX, yL); yL += 6;
+            doc.text(`Phone: ${getField('businessPhone')}`, leftX, yL); yL += 6;
+            doc.text(`Email: ${getField('businessEmail')}`, leftX, yL); yL += 6;
+            doc.text(`Account No.: ${getField('accountNo')}`, leftX, yL); yL += 6;
+            doc.text(`Payment Terms: ${getField('paymentTerms')}`, leftX, yL); yL += 6;
+            // 右欄 Quotation Info（打直）
+            doc.text("Quotation Info:", rightX, yR); yR += 6;
+            doc.text(`Quotation No.: ${getField('quotationNo')}`, rightX, yR); yR += 6;
+            doc.text(`Date: ${getField('quotationDate')}`, rightX, yR); yR += 6;
+            doc.text(`Valid Until: ${getField('validUntil')}`, rightX, yR); yR += 6;
+
+            // 取左右最大 y
+            let y = Math.max(yL, yR) + 2;
+            // --- Table ---
+            const headers = ["Item Code", "Product Image", "Description", "Unit", "Package Unit", "Qty", "Unit Price", "Amount", "Remarks"];
+            const tableRows = Array.from(document.querySelectorAll('#quotationBody tr'));
+            // 1. 收集所有圖片 URL
+            const imageUrls = tableRows.map(row => {
+                const itemCode = row.querySelector('.item-code')?.value || '';
+                return itemCode ? `https://assets.lyreco.com/is/image/lyrecows/2018-${itemCode}?fmt=jpg&locale=HK_hk` : '';
+            });
+            // 2. 批量下載圖片並轉 base64
+            async function fetchImageBase64(url) {
+                if (!url) return null;
+                try {
+                    return await compressImage(url, 'image/jpeg', 0.7, 40); // 40px 寬
+                } catch (e) { return null; }
             }
-            try {
-                const { jsPDF } = window.jspdf;
-                const doc = new jsPDF({ orientation: 'p', unit: 'mm', format: 'a4', encoding: 'UTF-8' });
-                doc.setFontSize(8);
-                // 取 input 欄位內容
-                doc.text(getCompanyInfoInput(0), 8, 14);
-                doc.text(getCompanyInfoInput(1), 8, 20);
-                doc.text(getCompanyInfoInput(2), 8, 26);
-                doc.text(getCompanyInfoInput(3), 8, 32);
-                doc.text(getCompanyInfoInput(4), 8, 38);
-                // Sales Rep block
-                const salesRep = getField('salesRep');
-                const phone = getField('salesrepPhone');
-                const email = getField('salesrepEmail');
-                doc.text("Sales Representative: " + salesRep, 8, 44);
-                doc.text("Phone: " + phone, 8, 50);
-                doc.text("Email: " + email, 8, 56);
-                doc.setFontSize(8);
-                // 客戶資訊
-                doc.text("Customer Information", 200, 14, { align: "right" });
-                doc.setFontSize(10);
-                doc.text(getField('companyName'), 200, 20, { align: "right" });
-                doc.text(getField('firstName') + ' ' + getField('lastName'), 200, 26, { align: "right" });
-                doc.setFontSize(8);
-                // 取得客戶地址，優先用手動輸入
-                let addressLines = [];
-                let manualAddress = getField('address').split(/\r?\n/).map(l => l.trim()).filter(Boolean);
-                if (manualAddress.length > 0) {
-                    addressLines = manualAddress;
-                } else {
-                    let accNo = getField('accountNo');
-                    let customer = Array.isArray(customerDatabase) ? customerDatabase.find(c => c.accountNo === accNo) : null;
-                    if (customer) {
-                        const row = customer;
-                        let line1 = [row.detailOne, row.detailTwo].filter(Boolean).join(', ');
-                        let line2 = [row.building, row.street].filter(Boolean).join(', ');
-                        let line3 = row.city || '';
-                        addressLines = [line1, line2, line3].filter(line => line);
-                    }
-                }
-                if (addressLines.length === 0) {
-                    showToast(LANGS[lang].noCustomers + ' ' + (LANGS[lang].fieldRequired || 'Using default address.'));
-                }
-                // 動態列印 addressLines，避免 undefined
-                let addressY = 32;
-                for (let i = 0; i < addressLines.length; i++) {
-                    doc.text(addressLines[i], 200, addressY, { align: "right" });
-                    addressY += 6;
-                }
-                doc.text(`Account No.: ${getField('accountNo')}`, 200, addressY, { align: "right" });
-                // Use selected form type
-                const formType = document.getElementById('formType')?.value || 'QUOTATION';
-                doc.setFontSize(16);
-                doc.text(formType, 105, 58, { align: "center" });
-                doc.setFontSize(10);
-                doc.text(`Quotation No.: ${getField('quotationNo')}`, 200, 52, { align: "right" });
-                doc.text(`Date: ${getField('quotationDate')}`, 200, 58, { align: "right" });
-                doc.text(`Valid Until: ${getField('validUntil')}`, 200, 64, { align: "right" });
-
-                let subtotal = 0;
-                const tableData = [];
-                const imagePromises = [];
-                document.querySelectorAll("#quotationBody tr").forEach(row => {
-                    const itemCode = row.querySelector(".item-code").value || '';
-                    const description = row.querySelector(".description").value || '';
-                    const unit = row.querySelector(".unit").value || '';
-                    const packageUnitInput = row.querySelector(".package-unit");
-                    const packageUnit = packageUnitInput ? parseFloat(packageUnitInput.value) || 1 : 1;
-                    const unitPrice = parseFloat(row.querySelector(".unit-price").value) || 0;
-                    const qty = parseFloat(row.querySelector(".qty").value) || 0;
-                    const amount = parseFloat(row.querySelector(".amount").value) || 0;
-                    const remarks = row.querySelector(".remarks").value || '';
-                    const imgElement = row.querySelector("img");
-
-                    if (itemCode && description && !isNaN(unitPrice) && !isNaN(qty)) {
-                        tableData.push({
-                            product: `${description}\n(${itemCode})`,
-                            unit: unit,
-                            packageUnit: packageUnit,
-                            unitPrice: unitPrice.toFixed(2),
-                            qty: qty,
-                            amount: amount.toFixed(2),
-                            remarks: remarks,
-                            imgSrc: imgElement && imgElement.src ? imgElement.src : null
-                        });
-                        subtotal += amount;
-
-                        if (imgElement && imgElement.src) {
-                            const promise = new Promise((resolve) => {
-                                const img = new Image();
-                                img.crossOrigin = "Anonymous";
-                                img.onload = () => {
-                                    const canvas = document.createElement('canvas');
-                                    canvas.width = img.width;
-                                    canvas.height = img.height;
-                                    const ctx = canvas.getContext('2d');
-                                    ctx.drawImage(img, 0, 0);
-                                    resolve(canvas.toDataURL('image/png'));
-                                };
-                                img.onerror = () => resolve(null);
-                                img.src = imgElement.src;
-                            });
-                            imagePromises.push(promise);
-                        } else {
-                            imagePromises.push(Promise.resolve(null));
-                        }
-                    }
-                });
-
-                if (tableData.length === 0) {
-                    showToast("No valid products to include in PDF.");
-                    return;
-                }
-
-                const imageDataURLs = await Promise.all(imagePromises);
-                tableData.forEach((rowData, index) => {
-                    rowData.imgData = imageDataURLs[index];
-                });
-
-                const tableRows = tableData.map(rowData => [
-                    '', // Placeholder for image column
-                    rowData.product,
-                    rowData.unit,
-                    rowData.packageUnit,
-                    rowData.unitPrice,
-                    rowData.qty,
-                    rowData.amount,
-                    rowData.remarks
-                ]);
-
-                const headers = ["Image", "Product", "Unit", "Pkg Unit", "Unit Price", "Quantity", "Amount", "Remarks"];
-                const pageWidth = 210;
-                const margin = 10;
-                const availableWidth = pageWidth - 2 * margin;
-                const columnWidths = {
-                    0: 15,
-                    1: 50,
-                    2: 20,
-                    3: 20,
-                    4: 20,
-                    5: 20,
-                    6: 20,
-                    7: 25
-                };
-                const totalWidth = Object.values(columnWidths).reduce((sum, w) => sum + w, 0);
-                if (totalWidth > availableWidth) {
-                    const scaleFactor = availableWidth / totalWidth;
-                    Object.keys(columnWidths).forEach(key => {
-                        columnWidths[key] = Math.floor(columnWidths[key] * scaleFactor);
-                    });
-                }
-
-                let startY = 68;
-                // Use formType in file name
-                const fileName = getExportFileName(formType) + '.pdf';
-                doc.autoTable({
-                    head: [headers],
-                    body: tableRows,
-                    startY: startY,
-                    theme: 'grid',
-                    styles: { fontSize: 8, cellPadding: 2, encoding: 'utf8', minCellHeight: 15 },
-                    headStyles: { fillColor: [41, 128, 185], textColor: 255 },
-                    columnStyles: {
-                        0: { cellWidth: columnWidths[0] },
-                        1: { cellWidth: columnWidths[1] },
-                        2: { cellWidth: columnWidths[2] },
-                        3: { cellWidth: columnWidths[3] },
-                        4: { cellWidth: columnWidths[4], halign: 'right' },
-                        5: { cellWidth: columnWidths[5], halign: 'right' },
-                        6: { cellWidth: columnWidths[6], halign: 'right' },
-                        7: { cellWidth: columnWidths[7] }
-                    },
-                    didDrawCell: (data) => {
-                        if (data.section === 'body' && data.column.index === 0 && data.row.index < tableData.length) {
-                            const imgData = tableData[data.row.index].imgData;
-                            if (imgData) {
-                                const cellX = data.cell.x + 2;
-                                const cellY = data.cell.y + 2;
-                                const imgWidth = 10;
-                                const imgHeight = 10;
-                                try {
-                                    doc.addImage(imgData, 'PNG', cellX, cellY, imgWidth, imgHeight);
-                                } catch (e) {
-                                    console.warn('Failed to add image to PDF:', e);
-                                }
+            const imageBase64Arr = await Promise.all(imageUrls.map(fetchImageBase64));
+            // 3. 準備 table body，圖片 cell 填空字串（不填 base64）
+            const body = tableRows.map((row, idx) => {
+                const itemCode = row.querySelector('.item-code')?.value || '';
+                return [
+                    itemCode,
+                    '', // 圖片 cell 填空字串，避免 base64 顯示
+                    row.querySelector('.description')?.value || '',
+                    row.querySelector('.unit')?.value || '',
+                    row.querySelector('.package-unit')?.value || '',
+                    row.querySelector('.qty')?.value || '',
+                    row.querySelector('.unit-price')?.value || '',
+                    row.querySelector('.amount')?.value || '',
+                    row.querySelector('.remarks')?.value || ''
+                ];
+            });
+            // 4. 插入圖片或顯示 No Image
+            await doc.autoTable({
+                head: [headers],
+                body,
+                startY: y,
+                styles: { fontSize: 9, cellPadding: 2, minCellHeight: 22 },
+                headStyles: { fillColor: [41, 128, 185], textColor: 255 },
+                margin: { left: 10, right: 10 },
+                didDrawCell: function (data) {
+                    // 只在 body 的第2欄（即圖片欄）插入圖片
+                    if (data.section === 'body' && data.column.index === 1) {
+                        const itemCode = body[data.row.index][0];
+                        if (itemCode) {
+                            const imageUrl = `https://assets.lyreco.com/is/image/lyrecows/2018-${itemCode}?fmt=jpg&locale=HK_hk`;
+                            try {
+                                doc.addImage(imageUrl, 'JPEG', data.cell.x + 2, data.cell.y + 2, 20, 20);
+                            } catch (e) {
+                                // 不顯示 No Image
                             }
                         }
-                    },
-                    margin: { left: margin, right: margin },
-                    didDrawPage: function (data) {
-                        const pageCount = doc.internal.getNumberOfPages();
-                        const pageSize = doc.internal.pageSize;
-                        const pageWidth = pageSize.getWidth();
-                        const pageHeight = pageSize.getHeight();
-                        const page = doc.internal.getCurrentPageInfo().pageNumber;
-                        // 頁數左下角
-                        doc.setFontSize(9);
-                        doc.text(`Page ${page} of ${pageCount}`,
-                            margin, pageHeight - 8, { align: 'left' });
-                        // 檔案名稱右下
-                        doc.setFontSize(8);
-                        doc.text(fileName, pageWidth - 10, pageHeight - 8, { align: 'right' });
+                        // 無 itemCode 亦不顯示任何內容
                     }
-                });
-
-                let finalY = doc.lastAutoTable.finalY || startY;
-                const remarks = getField('remarks');
-                if (remarks) {
-                    doc.setFontSize(10);
-                    doc.text("Remarks:", 10, finalY + 10);
-                    doc.text(remarks, 10, finalY + 16);
-                    finalY += 20;
                 }
-
-                const discount = parseFloat(getField('discount')) || 0;
-                const discountAmount = (subtotal * discount / 100).toFixed(2);
-                const taxRate = parseFloat(getField('taxRate')) || 0;
-                const taxAmount = ((subtotal - discountAmount) * taxRate / 100).toFixed(2);
-                const freight = parseFloat(getField('freight')) || 0;
-                const depositPct = parseFloat(getField('deposit')) || 0;
-                const additionalChargePct = parseFloat(getField('additionalCharge')) || 0;
-                const deposit = subtotal * depositPct / 100;
-                const additionalCharge = subtotal * additionalChargePct / 100;
-                const grandTotal = (subtotal - discountAmount + parseFloat(taxAmount) + freight + deposit + additionalCharge).toFixed(2);
-
-                doc.setFontSize(10);
-                doc.text(`Subtotal: HKD ${subtotal.toFixed(2)}`, 150, finalY + 10);
-                doc.text(`Discount: HKD ${discountAmount}`, 150, finalY + 16);
-                doc.text(`Tax: HKD ${taxAmount}`, 150, finalY + 22);
-                doc.text(`Freight: HKD ${freight.toFixed(2)}`, 150, finalY + 28);
-                doc.text(`Deposit: HKD ${deposit.toFixed(2)}`, 150, finalY + 34);
-                doc.text(`Additional Charge: HKD ${additionalCharge.toFixed(2)}`, 150, finalY + 40);
-                doc.text(`Grand Total: HKD ${grandTotal}`, 150, finalY + 46);
-
-                const paymentTerms = getField('paymentTerms');
-                if (paymentTerms) {
-                    doc.text(`Payment Terms: ${paymentTerms}`, 10, finalY + 54);
-                }
-
-                const qrCodeElement = document.querySelector('#qrcode canvas');
-                if (qrCodeElement) {
-                    doc.addImage(qrCodeElement.toDataURL(), 'PNG', 160, finalY + 60, 30, 30);
-                }
-
-                doc.save(fileName);
-                showToast("PDF generated successfully!");
-                closePDFModal();
-            } catch (err) {
-                console.error('PDF generation error:', err);
-                showToast("Failed to generate PDF: " + err.message);
+            });
+            // --- Grand Total, Remarks, QR code ---
+            let finalY = doc.lastAutoTable.finalY || y;
+            doc.setFontSize(10);
+            doc.text('Subtotal: HKD ' + (document.getElementById('subtotal')?.textContent || ''), 10, finalY + 2);
+            doc.text('Grand Total: HKD ' + (document.getElementById('grandTotal')?.textContent || ''), 10, finalY + 10);
+            doc.text('Remarks: ' + (document.getElementById('remarks')?.value || ''), 10, finalY + 16);
+            // QR code
+            const qrCodeElement = document.querySelector('#qrcode canvas');
+            if (qrCodeElement) {
+                doc.addImage(qrCodeElement.toDataURL(), 'PNG', 170, finalY + 2, 28, 28);
             }
+            // Page numbers
+            const pageCount = doc.internal.getNumberOfPages();
+            for (let i = 1; i <= pageCount; i++) {
+                doc.setPage(i);
+                doc.setFontSize(9);
+                doc.text(`Page ${i} of ${pageCount}`, 200, 289, { align: 'right' });
+            }
+            // Download PDF
+            const fileName = getExportFileName(formType) + '.pdf';
+            doc.save(fileName);
+            showToast("PDF generated successfully!");
+            closePDFModal();
         }
 
         function downloadCSV() {
@@ -1619,7 +1748,7 @@
                 "accountNo", "companyName", "firstName", "lastName", "businessPhone", "mobilePhone", "businessEmail", "flat", "building", "street", "district", "city", "zipCode"
             ];
             const example = [
-                "A00001", "Sample Company", "John", "Doe", "12345678", "91234567", "john.doe@email.com", "Room 101, 10/F", "Sunshine Tower", "123 Sample St", "Kwun Tong", "Kowloon", "HKG"
+                "A00001", "Lyreco HK CO. LTD.", "Charles", "Chan", "", "6777 9473", "charles.chan@lyreco.com", "16/F", "", "78 Hung To Road", "Kwun Tong", "Kowloon", "HKG"
             ];
             let csvContent = headers.join(",") + "\n" + example.join(",") + "\n";
             const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
@@ -1762,12 +1891,12 @@
                 en: {
                     standard: "This quotation is valid for 30 days. ",
                     corporate: "Corporate clients enjoy a 5% discount for orders above $10,000.",
-                    government: "Government orders are tax-exempt. "
+                    government: ""
                 },
                 zh: {
                     standard: "此报价单有效期为30天。",
-                    corporate: "企业客户订单满10,000元享95折优惠。",
-                    government: "政府订单免税。"
+                    corporate: "",
+                    government: ""
                 }
             };
             const key = customerType === 'government' ? 'government' : amount > 10000 ? 'corporate' : 'standard';
@@ -1787,33 +1916,6 @@
                 new QRCode(qrCodeDiv, { text: this.value, width: 100, height: 100 });
             }
         });
-
-        async function autoLoadCSVsIfExist() {
-            let loaded = false;
-            try {
-                const productResp = await fetch('./product.csv');
-                if (productResp.ok) {
-                    const text = await productResp.text();
-                    productDatabase = parseCSV(text);
-                    localStorage.setItem('productCsvUploaded', '1');
-                    loaded = true;
-                }
-            } catch(e) {}
-            try {
-                const customerResp = await fetch('./customer.csv');
-                if (customerResp.ok) {
-                    const text = await customerResp.text();
-                    customerDatabase = parseCustomerCSV(text);
-                    loaded = true;
-                }
-            } catch(e) {}
-            if (loaded) {
-                document.getElementById('firstTimeModal').classList.remove('show');
-                document.body.classList.remove('modal-open');
-                document.getElementById('formOverlay').style.display = 'none';
-            }
-            return loaded;
-        }
 
         document.addEventListener('DOMContentLoaded', async () => {
             document.getElementById('langToggle').addEventListener('click', toggleLang);
@@ -1843,7 +1945,7 @@
             quickEntryBtn.onclick = openQuickEntryModal;
             document.querySelector('.toolbar').insertBefore(quickEntryBtn, document.getElementById('downloadProductTemplate'));
             // QR code default value
-            document.getElementById('qrLink').value = 'https://lyrecohk-charleschan.github.io/paymentmethod/';
+            document.getElementById('qrLink').value = 'https://www.lyreco.com/group/hongkong/system/files/media-files/2021-04/Payment%20Methods.pdf';
             document.getElementById('qrLink').dispatchEvent(new Event('input'));
             // Product CSV upload check
             if (!localStorage.getItem('productCsvUploaded')) {
@@ -1881,7 +1983,6 @@
             const validUntil = new Date(today.getTime() + 30 * 24 * 60 * 60 * 1000);
             document.getElementById('validUntil').value = validUntil.toISOString().slice(0, 10);
 
-            let loaded = await autoLoadCSVsIfExist();
             // 停用自動彈出 firstTimeModal
             // if (!loaded && !localStorage.getItem('productCsvUploaded')) {
             //     showFirstTimeModal();
@@ -1944,6 +2045,124 @@
                     if (e.target === mgmtModal) closeCustomerMgmtModal();
                 });
             }
+            // --- Search Company Modal ---
+            (function setupSearchCompanyModal() {
+                const LOCAL_API_URL = "https://data.cr.gov.hk/cr/api/api/v1/api_builder/json/local/search";
+                const NON_LOCAL_API_URL = "https://data.cr.gov.hk/cr/api/api/v1/api_builder/json/non_local/search";
+                let lastCompanyResults = [];
+                function openSearchCompanyModal() {
+                    document.getElementById('searchCompanyModal').classList.add('show');
+                    document.getElementById('searchCompanyInput').value = '';
+                    document.getElementById('searchCompanyTableBody').innerHTML = '';
+                    document.getElementById('searchCompanyNoResult').classList.add('hidden');
+                    document.getElementById('searchCompanyLoading').classList.add('hidden');
+                    setTimeout(()=>document.getElementById('searchCompanyInput').focus(), 100);
+                }
+                window.closeSearchCompanyModal = function() {
+                    document.getElementById('searchCompanyModal').classList.remove('show');
+                };
+                document.getElementById('searchCompanyBtn').onclick = openSearchCompanyModal;
+                document.getElementById('searchCompanyGoBtn').onclick = doSearchCompany;
+                document.getElementById('searchCompanyInput').addEventListener('keydown', function(e){
+                    if(e.key==='Enter') doSearchCompany();
+                });
+                async function fetchCompanyData(apiUrl, key3) {
+                    const params = new URLSearchParams({
+                        "query[0][key1]": "Comp_name",
+                        "query[0][key2]": "begins_with",
+                        "query[0][key3]": key3,
+                        "format": "json"
+                    });
+                    try {
+                        const resp = await fetch(`${apiUrl}?${params.toString()}`);
+                        if (!resp.ok) return [];
+                        return await resp.json();
+                    } catch { return []; }
+                }
+                async function doSearchCompany() {
+                    const key3 = document.getElementById('searchCompanyInput').value.trim();
+                    if (!key3) return;
+                    document.getElementById('searchCompanyLoading').classList.remove('hidden');
+                    document.getElementById('searchCompanyTableBody').innerHTML = '';
+                    document.getElementById('searchCompanyNoResult').classList.add('hidden');
+                    // 並發查詢
+                    const [local, nonLocal] = await Promise.all([
+                        fetchCompanyData(LOCAL_API_URL, key3),
+                        fetchCompanyData(NON_LOCAL_API_URL, key3)
+                    ]);
+                    const results = [
+                        ...(local||[]).map(r=>({...r, type:'Local'})),
+                        ...(nonLocal||[]).map(r=>({...r, type:'Non-Local'}))
+                    ];
+                    lastCompanyResults = results;
+                    renderCompanyTable(results);
+                    document.getElementById('searchCompanyLoading').classList.add('hidden');
+                    document.getElementById('searchCompanyNoResult').classList.toggle('hidden', results.length>0);
+                }
+                function renderCompanyTable(results) {
+                    const tbody = document.getElementById('searchCompanyTableBody');
+                    tbody.innerHTML = '';
+                    results.forEach((r, idx) => {
+                        const tr = document.createElement('tr');
+                        tr.className = 'cursor-pointer hover:bg-blue-50';
+                        tr.title = 'Click to fill Company Name & Account No.';
+                        tr.onclick = function() {
+                            document.getElementById('companyName').value = r["Corporate Name"]||'';
+                            document.getElementById('accountNo').value = r.Brn||'';
+                            closeSearchCompanyModal();
+                        };
+                        tr.innerHTML = `
+                            <td>${r.Brn||''}</td>
+                            <td>${r["Corporate Name"]||''}</td>
+                            <td>${r["Other Corporate Name(s)"]||''}</td>
+                            <td>${r["Principal Place of Business in H.K."]||r["Address of Registered Office"]||''}</td>
+                            <td>${r["Company Type"]||''}</td>
+                            <td>${r["Date of Registration"]||r["Date of Incorporation"]||''}</td>
+                            <td>${r["Approved name for carrying on business in H.K.(Corporate)"]||''}</td>
+                            <td>${r["Place of Incorporation"]||''}</td>
+                            <td>${r["Approved name for carrying on business in H.K.(Other Corporate)"]||''}</td>
+                            <td>${r.type||''}</td>
+                        `;
+                        tbody.appendChild(tr);
+                    });
+                }
+                function exportCompany(format) {
+                    if (!lastCompanyResults.length) return;
+                    if (format==='csv') {
+                        const headers = ["BRN","Corporate Name","Other Corporate Name(s)","Address of Registered Office","Company Type","Date of Incorporation","Approved Name (Corporate)","Place of Incorporation","Approved Name (Other Corporate)","Local / Non-Local"];
+                        const rows = lastCompanyResults.map(r=>[
+                            r.Brn||'',r["Corporate Name"]||'',r["Other Corporate Name(s)"]||'',r["Principal Place of Business in H.K."]||r["Address of Registered Office"]||'',r["Company Type"]||'',r["Date of Registration"]||r["Date of Incorporation"]||'',r["Approved name for carrying on business in H.K.(Corporate)"]||'',r["Place of Incorporation"]||'',r["Approved name for carrying on business in H.K.(Other Corporate)"]||'',r.type||''
+                        ]);
+                        let csv = headers.join(',')+"\n"+rows.map(row=>row.map(x=>`"${String(x).replace(/"/g,'""')}"`).join(',')).join("\n");
+                        downloadFile(csv, 'company_results.csv', 'text/csv');
+                    } else if (format==='json') {
+                        downloadFile(JSON.stringify(lastCompanyResults,null,2), 'company_results.json', 'application/json');
+                    } else if (format==='xml') {
+                        let xml = '<companies>\n'+lastCompanyResults.map(r=>`
+<company><brn>${r.Brn||''}</brn><corporateName>${r["Corporate Name"]||''}</corporateName><otherCorporateNames>${r["Other Corporate Name(s)"]||''}</otherCorporateNames><address>${r["Principal Place of Business in H.K."]||r["Address of Registered Office"]||''}</address><companyType>${r["Company Type"]||''}</companyType><dateOfIncorporation>${r["Date of Registration"]||r["Date of Incorporation"]||''}</dateOfIncorporation><approvedNameCorporate>${r["Approved name for carrying on business in H.K.(Corporate)"]||''}</approvedNameCorporate><placeOfIncorporation>${r["Place of Incorporation"]||''}</placeOfIncorporation><approvedNameOtherCorporate>${r["Approved name for carrying on business in H.K.(Other Corporate)"]||''}</approvedNameOtherCorporate><localOrNonLocal>${r.type||''}</localOrNonLocal></company>`).join('\n')+'\n</companies>';
+                        downloadFile(xml, 'company_results.xml', 'application/xml');
+                    }
+                }
+                function downloadFile(data, filename, type) {
+                    const blob = new Blob([data], { type });
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement("a");
+                    a.href = url;
+                    a.download = filename;
+                    a.click();
+                    URL.revokeObjectURL(url);
+                }
+                document.getElementById('exportCompanyCSV').onclick = ()=>exportCompany('csv');
+                document.getElementById('exportCompanyJSON').onclick = ()=>exportCompany('json');
+                document.getElementById('exportCompanyXML').onclick = ()=>exportCompany('xml');
+                // Modal UX: ESC 關閉、遮罩點擊
+                document.addEventListener('keydown', function(e) {
+                    if (document.getElementById('searchCompanyModal').classList.contains('show') && e.key === 'Escape') closeSearchCompanyModal();
+                });
+                document.getElementById('searchCompanyModal').addEventListener('mousedown', function(e) {
+                    if (e.target === this) closeSearchCompanyModal();
+                });
+            })();
         });
 
         // First time modal logic
@@ -2291,7 +2510,6 @@
                 }
                 // 格式化
                 document.getElementById('calcCost').value = cost !== undefined ? to2(cost) : '';
-                document.getElementById('calcSP').value = sp !== undefined ? to2(sp) : '';
                 document.getElementById('calcMargin').value = margin !== undefined ? to2(margin) : '';
                 document.getElementById('calcMarkup').value = markup !== undefined ? to2(markup) : '';
                 document.getElementById('calcCashMargin').value = cashMargin !== undefined ? to2(cashMargin) : '';
@@ -2459,7 +2677,7 @@
             if (document.getElementById('businessEmail')) valid = validateField('businessEmail', 'email') && valid;
             if (zipEl) valid = validateField('zipCode', 'zip') && valid;
             return !!valid;
-        }
+        }5
 
         // 儲存/送出前加驗證
         var oldSaveDraft = saveDraft;
@@ -2490,15 +2708,15 @@
             }
         });
 
-        // Address 自動分行（每55字元）
+        // Address 自動分行（每4字元）
         (function setupAddressAutoWrap() {
             var addressEl = document.getElementById('address');
             if (!addressEl) return;
             addressEl.addEventListener('input', function(e) {
                 var val = addressEl.value.replace(/\r?\n/g, '');
                 var lines = [];
-                for (let i = 0; i < val.length; i += 55) {
-                    lines.push(val.slice(i, i + 55));
+                for (let i = 0; i < val.length; i += 45) {
+                    lines.push(val.slice(i, i + 45));
                 }
                 var joined = lines.join('\n');
                 if (addressEl.value !== joined) {
@@ -2556,8 +2774,6 @@
             const apiInputLabel = document.getElementById('apiInputLabel');
             const customerApiUrl = document.getElementById('customerApiUrl');
             let lastSource = localStorage.getItem('customerDataSourceType') || 'csv';
-            let lastApiUrl = localStorage.getItem('customerApiUrl') || '';
-            let lastCsv = localStorage.getItem('customerCsvData') || '';
             let lastJson = localStorage.getItem('customerJsonData') || '';
             // 預設值
             dataSourceType.value = lastSource;
@@ -2731,6 +2947,97 @@
                 if (e.target === mgmtModal) closeCustomerMgmtModal();
             });
         }
+
+        // Default freight remark
+        const DEFAULT_FREIGHT_REMARK = "Save exceptions, 50.00 HKD freight charges are applicable to orders below 200.00 HKD";
+        function wrapText40(str) {
+            const lines = [];
+            for (let i = 0; i < str.length; i += 43) {
+                lines.push(str.slice(i, i + 43));
+            }
+            return lines.join('\n');
+        }
+        // Auto-insert default remark if not present
+        (function ensureDefaultFreightRemark() {
+            const remarksEl = document.getElementById('remarks');
+            if (!remarksEl) return;
+            remarksEl.addEventListener('blur', function() {
+                let val = remarksEl.value || '';
+                if (!val.includes(DEFAULT_FREIGHT_REMARK)) {
+                    if (val.trim()) val += '\n';
+                    val += wrapText40(DEFAULT_FREIGHT_REMARK);
+                    remarksEl.value = val;
+                }
+            });
+            // On load, also check
+            if (!remarksEl.value.includes(DEFAULT_FREIGHT_REMARK)) {
+                if (remarksEl.value.trim()) remarksEl.value += '\n';
+                remarksEl.value += wrapText40(DEFAULT_FREIGHT_REMARK);
+            }
+        })();
+
+        // --- Logo/Watermark 本地上載功能 ---
+        let localLogoDataUrl = null;
+        let localWatermarkDataUrl = null;
+
+        function handleLogoFileUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                localLogoDataUrl = e.target.result;
+                document.getElementById('logoLinkPreview').src = localLogoDataUrl;
+                document.getElementById('logoLinkPreviewText').textContent = 'Local image loaded';
+            };
+            reader.readAsDataURL(file);
+        }
+        function handleWatermarkFileUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                localWatermarkDataUrl = e.target.result;
+                document.getElementById('watermarkLinkPreview').src = localWatermarkDataUrl;
+                document.getElementById('watermarkLinkPreviewText').textContent = 'Local image loaded';
+            };
+            reader.readAsDataURL(file);
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+            // ...existing code...
+            // Logo upload button
+            document.getElementById('logoFileBtn').onclick = function() {
+                document.getElementById('logoFileInput').click();
+            };
+            document.getElementById('logoFileInput').addEventListener('change', handleLogoFileUpload);
+            // Watermark upload button
+            document.getElementById('watermarkFileBtn').onclick = function() {
+                document.getElementById('watermarkFileInput').click();
+            };
+            document.getElementById('watermarkFileInput').addEventListener('change', handleWatermarkFileUpload);
+            // 預覽更新
+            document.getElementById('logoLink').addEventListener('input', function() {
+                document.getElementById('logoLinkPreview').src = this.value;
+                document.getElementById('logoLinkPreviewText').textContent = this.value;
+            });
+            document.getElementById('watermarkLink').addEventListener('input', function() {
+                document.getElementById('watermarkLinkPreview').src = this.value;
+                document.getElementById('watermarkLinkPreviewText').textContent = this.value;
+            });
+        });
+
+        function toggleValidUntilField() {
+            var formType = document.getElementById('formType').value;
+            var validUntilDiv = document.getElementById('validUntilField');
+            if (formType === 'QUOTATION') {
+                validUntilDiv.style.display = '';
+            } else {
+                validUntilDiv.style.display = 'none';
+            }
+        }
+        document.getElementById('formType').addEventListener('change', toggleValidUntilField);
+        document.addEventListener('DOMContentLoaded', function() {
+            toggleValidUntilField();
+        });
     </script>
     <div id="customerDataMgmtModal" class="modal">
         <div class="modal-content" style="max-width:700px;">
@@ -2756,6 +3063,42 @@
             </div>
             <div class="flex justify-end gap-2 mt-4">
                 <button class="btn btn-danger" onclick="closeCustomerMgmtModal()">Close</button>
+            </div>
+        </div>
+    </div>
+    <div id="searchCompanyModal" class="modal">
+        <div class="modal-content" style="max-width:900px;min-width:320px;">
+            <h2 class="text-lg font-semibold mb-4">Search Company</h2>
+            <div class="mb-4 flex gap-2 items-center">
+                <input type="text" id="searchCompanyInput" class="form-input" style="max-width:320px;" placeholder="Enter Company Name or BRN">
+                <button id="searchCompanyGoBtn" class="btn btn-primary">Search</button>
+                <span id="searchCompanyLoading" class="text-sm text-gray-400 hidden">Loading...</span>
+            </div>
+            <div id="searchCompanyResultWrap" class="overflow-x-auto" style="max-height:320px;">
+                <table class="table" id="searchCompanyTable" style="min-width:900px;">
+                    <thead>
+                        <tr>
+                            <th>BRN</th>
+                            <th>Corporate Name</th>
+                            <th>Other Corporate Name(s)</th>
+                            <th>Address of Registered Office</th>
+                            <th>Company Type</th>
+                            <th>Date of Incorporation</th>
+                            <th>Approved Name (Corporate)</th>
+                            <th>Place of Incorporation</th>
+                            <th>Approved Name (Other Corporate)</th>
+                            <th>Local / Non-Local</th>
+                        </tr>
+                    </thead>
+                    <tbody id="searchCompanyTableBody"></tbody>
+                </table>
+                <div id="searchCompanyNoResult" class="text-red-500 text-sm mt-2 hidden">No result found.</div>
+            </div>
+            <div class="flex gap-2 mt-4">
+                <button id="exportCompanyCSV" class="btn btn-primary">Export CSV</button>
+                <button id="exportCompanyJSON" class="btn btn-primary">Export JSON</button>
+                <button id="exportCompanyXML" class="btn btn-primary">Export XML</button>
+                <button class="btn btn-danger ml-auto" onclick="closeSearchCompanyModal()">Close</button>
             </div>
         </div>
     </div>
