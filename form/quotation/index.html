@@ -1534,72 +1534,57 @@
             showToast("Generating PDF...");
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF({ orientation: 'p', unit: 'mm', format: 'a4', encoding: 'UTF-8', compress: true });
+
             // --- Always use official Lyreco logo PNG ---
             const logoUrl = "https://raw.githubusercontent.com/lyrecohk-charleschan/paymentmethod/refs/heads/main/lyreco-logo.png";
             const logoImg = await compressImage(logoUrl, 'image/png', 0.9, 600);
             doc.addImage(logoImg, 'PNG', 10, 8, 50, 20, '', 'FAST');
+
             // --- Form Type at top right ---
             const formType = getField('formType') || 'QUOTATION';
             doc.setFontSize(14);
             doc.text(` ${formType}`, 160, 16);
+
             // --- Customer Info (left) & Quotation Info (right, vertical) ---
             doc.setFontSize(10);
-            // Lyreco company info block
-            let yCompany = 32;
-            doc.text("Lyreco (Hong Kong) Company Limited", 10, yCompany); yCompany += 6;
-            doc.text("16th Floor, 78 Hung To Road, Kwun Tong, Kowloon, Hong Kong", 10, yCompany); yCompany += 6;
-            doc.text("Hotline: (852) 29246 2233 ,FAX: (852) 2754 9866 ,Customer service: cs.hk@lyreco.com", 10, yCompany); yCompany += 6;
+            let y = 32;
+            doc.text("Lyreco (Hong Kong) Company Limited", 10, y); y += 6;
+            doc.text("16th Floor, 78 Hung To Road, Kwun Tong, Kowloon, Hong Kong", 10, y); y += 6;
+            doc.text("Tel: +852 2862 0333   Fax: +852 27549866   www.lyreco.com.hk", 10, y); y += 6;
+            doc.text(`Sales Rep: ${getField('salesRep')}   Tel: ${getField('salesrepPhone')}   Email: ${getField('salesrepEmail')}`, 10, y); y += 8;
+            doc.text(`Customer: ${getField('companyName')}`, 10, y); y += 6;
 
-            doc.text('Sales Representative', rightX, yStart);
-            doc.text('Name: ' + repName, rightX, yStart + 8);
-            doc.text('Phone: ' + repPhone, rightX, yStart + 16);
-            doc.text('Email: ' + repEmail, rightX, yStart + 24);
-
-            const salesRepHeight = 32; // 根據內容調整
-            const ySalesRep = yCompany + salesRepHeight;
-            
-            let yStart = Math.max(yCompany, 32);
-            let leftX = 10, rightX = 120;
-            let yL = yStart, yR = yStart;
-            // 左欄 Customer Info
-            doc.text("Customer:", leftX, yL); yL += 6;
-            doc.text(getField('companyName'), leftX, yL); yL += 6;
-            // Address 多行
+            // Address 自動分行（每行 45 字）
             const address = getField('address');
-            const addressLines = address.match(/.{1,35}/g) || [''];
+            const addressLines = address.match(/.{1,55}/g) || [''];
             addressLines.forEach(line => {
-                doc.text(line, leftX, yL);
-                yL += 6;
+                doc.text(`Address: ${line}`, 10, y);
+                y += 6;
             });
-            doc.text(`Contact: ${getField('firstName')} ${getField('lastName')}`, leftX, yL); yL += 6;
-            doc.text(`Phone: ${getField('businessPhone')}`, leftX, yL); yL += 6;
-            doc.text(`Email: ${getField('businessEmail')}`, leftX, yL); yL += 6;
-            doc.text(`Account No.: ${getField('accountNo')}`, leftX, yL); yL += 6;
-            doc.text(`Payment Terms: ${getField('paymentTerms')}`, leftX, yL); yL += 6;
-            // 右欄 Quotation Info（打直）
-            doc.text("Quotation Info:", rightX, yR); yR += 6;
-            doc.text(`Quotation No.: ${getField('quotationNo')}`, rightX, yR); yR += 6;
-            doc.text(`Date: ${getField('quotationDate')}`, rightX, yR); yR += 6;
-            doc.text(`Valid Until: ${getField('validUntil')}`, rightX, yR); yR += 6;
+            doc.text(`Contact: ${getField('firstName')} ${getField('lastName')} / ${getField('businessPhone')} / ${getField('businessEmail')}`, 10, y); y += 6;
+            doc.text(`Account No.: ${getField('accountNo')}`, 10, y); y += 6;
+            doc.text(`Quotation No.: ${getField('quotationNo')}   Date: ${getField('quotationDate')}   Valid Until: ${getField('validUntil')}`, 10, y); y += 6;
+            doc.text(`Payment Terms: ${getField('paymentTerms')}`, 10, y); y += 8;
 
-            // 取左右最大 y
-            let y = Math.max(yL, yR) + 2;
             // --- Table ---
             const headers = ["Item Code", "Product Image", "Description", "Unit", "Package Unit", "Qty", "Unit Price", "Amount", "Remarks"];
             const tableRows = Array.from(document.querySelectorAll('#quotationBody tr'));
+
             // 1. 收集所有圖片 URL
             const imageUrls = tableRows.map(row => {
                 const itemCode = row.querySelector('.item-code')?.value || '';
                 return itemCode ? `https://assets.lyreco.com/is/image/lyrecows/2018-${itemCode}?fmt=jpg&locale=HK_hk` : '';
             });
+
             // 2. 批量下載圖片並轉 base64
             async function fetchImageBase64(url) {
                 if (!url) return null;
                 try {
-                    return await compressImage(url, 'image/jpeg', 0.7, 40); // 40px 寬
+                    return await compressImage(url, 'image/jpeg', 0.85, 80); // 80px 寬
                 } catch (e) { return null; }
             }
             const imageBase64Arr = await Promise.all(imageUrls.map(fetchImageBase64));
+
             // 3. 準備 table body，圖片 cell 填空字串（不填 base64）
             const body = tableRows.map((row, idx) => {
                 const itemCode = row.querySelector('.item-code')?.value || '';
@@ -1615,7 +1600,8 @@
                     row.querySelector('.remarks')?.value || ''
                 ];
             });
-            // 4. 插入圖片或顯示 No Image
+
+            // 4. 插入圖片
             await doc.autoTable({
                 head: [headers],
                 body,
@@ -1624,7 +1610,6 @@
                 headStyles: { fillColor: [41, 128, 185], textColor: 255 },
                 margin: { left: 10, right: 10 },
                 didDrawCell: function (data) {
-                    // 只在 body 的第2欄（即圖片欄）插入圖片
                     if (data.section === 'body' && data.column.index === 1) {
                         const itemCode = body[data.row.index][0];
                         if (itemCode) {
@@ -1635,21 +1620,22 @@
                                 // 不顯示 No Image
                             }
                         }
-                        // 無 itemCode 亦不顯示任何內容
                     }
                 }
             });
+
             // --- Grand Total, Remarks, QR code ---
             let finalY = doc.lastAutoTable.finalY || y;
             doc.setFontSize(10);
-            doc.text('Subtotal: HKD ' + (document.getElementById('subtotal')?.textContent || ''), 10, finalY + 2);
             doc.text('Grand Total: HKD ' + (document.getElementById('grandTotal')?.textContent || ''), 10, finalY + 10);
             doc.text('Remarks: ' + (document.getElementById('remarks')?.value || ''), 10, finalY + 16);
+
             // QR code
             const qrCodeElement = document.querySelector('#qrcode canvas');
             if (qrCodeElement) {
                 doc.addImage(qrCodeElement.toDataURL(), 'PNG', 170, finalY + 2, 28, 28);
             }
+
             // Page numbers
             const pageCount = doc.internal.getNumberOfPages();
             for (let i = 1; i <= pageCount; i++) {
@@ -1657,6 +1643,7 @@
                 doc.setFontSize(9);
                 doc.text(`Page ${i} of ${pageCount}`, 200, 289, { align: 'right' });
             }
+
             // Download PDF
             const fileName = getExportFileName(formType) + '.pdf';
             doc.save(fileName);
